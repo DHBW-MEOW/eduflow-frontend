@@ -1,3 +1,8 @@
+# Basics
+- after cloning the repository execute ```npm install```
+- to start execute ```npm run dev```
+- to stop execute control+c
+
 # MEOW
 Most Efficient Organzier for Work
 
