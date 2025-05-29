@@ -1,18 +1,18 @@
 import React from "react";
 
-type InputDateProps = {
+type InputFieldProps = {
     label: string;
     name: string;
     value: string;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const InputDate: React.FC<InputDateProps> = ({label, name, value, onChange}) => {
+const InputField: React.FC<InputFieldProps> = ({label, name, value, onChange}) => {
     return (
         <div>
             <label htmlFor="name">{label}:</label>
             <input 
-             type="date" 
+             type="text" 
              id={name}
              name={name}
              value={value}
@@ -22,4 +22,4 @@ const InputDate: React.FC<InputDateProps> = ({label, name, value, onChange}) => 
     );
 }
 
-export default InputDate
+export default InputField

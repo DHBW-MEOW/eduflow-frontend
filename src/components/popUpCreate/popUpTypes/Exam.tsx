@@ -1,16 +1,59 @@
-import InputModule from "../inputOptions/InputModule.tsx";
-import InputTitle from "../inputOptions/InputTitle.tsx";
-import InputDate from "../inputOptions/InputDate.tsx";
+import React, { useState, useImperativeHandle, forwardRef } from 'react';
+import type { ExamData, ExamHandles } from '../types';
 
-function Exam() {
-    return (
-        <div>
-            <InputModule/>
-            <InputTitle/>
-            <InputDate/>
-        </div>
-        
-    )
+import InputField from '../inputOptions/InputField';
+import InputDate from '../inputOptions/InputDate';
+
+interface ExamProps {
+  initialData?: Partial<ExamData>;
 }
 
-export default Exam
+const Exam = forwardRef<ExamHandles, ExamProps>((props, ref) => {
+  const [formData, setFormData] = useState<ExamData>({
+    module: props.initialData?.module || '',
+    title: props.initialData?.title || '',
+    date: props.initialData?.date || '',
+  });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData(prevData => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  useImperativeHandle(ref, () => ({
+    getFormData: () => {
+      console.log('Form data from Exam:', formData);
+      return formData;
+    },
+  }));
+
+  return (
+    <div>
+      <InputField
+        label="Modul"
+        name="module"
+        value={formData.module}
+        onChange={handleChange}
+      />
+      <InputField
+        label="Titel der Prüfung"
+        name="title"
+        value={formData.title}
+        onChange={handleChange}
+      />
+      <InputDate
+        label="Prüfungsdatum"
+        name="date"
+        value={formData.date}
+        onChange={handleChange}
+      />
+    </div>
+  );
+});
+
+export default Exam;

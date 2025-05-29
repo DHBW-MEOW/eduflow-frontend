@@ -1,6 +1,7 @@
+import './PopUpDelete.css'
 import OptionButton from "../optionButtons/OptionButton";
 
-interface PopUpProps {
+type PopUpProps = {
     isOpen: boolean;
     content: string;
     onClickCancel: () => void;
@@ -13,8 +14,11 @@ const PopUpDelete: React.FC<PopUpProps> = ({isOpen, content, onClickCancel, onCl
     }
 
     return (
-        <div>
+        <div className='popup-content'>
             <p>{content}</p>
+            <button className='popup-close-button'>
+                &times;
+            </button>
             <OptionButton
              label="Abbrechen"
              onClick={onClickCancel}

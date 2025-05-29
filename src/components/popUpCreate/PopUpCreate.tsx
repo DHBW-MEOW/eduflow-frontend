@@ -1,7 +1,7 @@
 import './PopUpCreate.css'
 import OptionButton from '../optionButtons/OptionButton';
 
-interface PopUpProps {
+type PopUpProps = {
     isOpen: boolean
     label: string;
     children: React.ReactElement;
