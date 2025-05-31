@@ -1,0 +1,9 @@
+.box{
+    border: var(--color-border);
+    padding: 1rem;
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(116, 110, 110, 0.1);
+    transition: transform 0.2s ease;
+}

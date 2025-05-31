@@ -1,14 +1,16 @@
-type BoxProps = {
+import './Box.css'
+
+export type BoxProps = {
   title: string;
   // onDelete?: () => void;
   // onRename?: (newTitle: string) => void;
 };
 
-function Box({title}: BoxProps) {
+export function Box({title}: BoxProps) {
 
     return (
       <div>
-        <p>{title}</p>
+        <p className='box'>{title}</p>
       </div>
     )
   }
