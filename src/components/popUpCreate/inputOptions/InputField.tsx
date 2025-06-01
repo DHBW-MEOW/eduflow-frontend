@@ -1,4 +1,5 @@
 import React from "react";
+import './InputStyle.css';
 
 type InputFieldProps = {
     label: string;
@@ -9,14 +10,15 @@ type InputFieldProps = {
 
 const InputField: React.FC<InputFieldProps> = ({label, name, value, onChange}) => {
     return (
-        <div>
-            <label htmlFor="name">{label}:</label>
+        <div className="input-group">
+            <label htmlFor={name}>{label}</label>
             <input 
              type="text" 
              id={name}
              name={name}
              value={value}
              onChange={onChange}
+             className="input-field"
             />
         </div>
     );

@@ -1,5 +1,7 @@
 import React, { useState, useImperativeHandle, forwardRef } from 'react';
 import type { ExamData, ExamHandles } from '../types';
+import './popUpTypes.css';
+import '../inputOptions/InputStyle.css';
 
 import InputField from '../inputOptions/InputField';
 import InputDate from '../inputOptions/InputDate';
@@ -33,7 +35,7 @@ const Exam = forwardRef<ExamHandles, ExamProps>((props, ref) => {
   }));
 
   return (
-    <div>
+    <div className="popup-form">
       <InputField
         label="Modul"
         name="module"
@@ -41,7 +43,7 @@ const Exam = forwardRef<ExamHandles, ExamProps>((props, ref) => {
         onChange={handleChange}
       />
       <InputField
-        label="Titel der Prüfung"
+        label="Art der Prüfung"
         name="title"
         value={formData.title}
         onChange={handleChange}

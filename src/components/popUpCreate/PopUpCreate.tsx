@@ -11,22 +11,24 @@ type PopUpProps = {
 
 const PopUpCreate: React.FC<PopUpProps> = ({isOpen, label, children, onClickDiscard, onClickAdd}) => {
     if (!isOpen) {
-        return;
+        return null;
     }
     
     return (
-        <div>
-            <label>{label}</label>
-            {children}
-            <div>
-                <OptionButton
-                 label='Verwerfen'
-                 onClick={onClickDiscard}
-                 />
-                 <OptionButton
-                 label='Hinzufügen'
-                 onClick={onClickAdd}
-                 />
+        <div className="popup-overlay" onClick={onClickDiscard}>
+            <div className="popup-container" onClick={(e) => e.stopPropagation()}>
+                <div className="popup-header">{label}</div>
+                {children}
+                <div className="popup-buttons">
+                    <OptionButton
+                     label='Verwerfen'
+                     onClick={onClickDiscard}
+                     />
+                     <OptionButton
+                     label='Hinzufügen'
+                     onClick={onClickAdd}
+                     />
+                </div>
             </div>
         </div>
     )

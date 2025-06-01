@@ -1,8 +1,10 @@
 import React, { useState, useImperativeHandle, forwardRef } from 'react';
 import type { ToDoData, ToDoHandles } from '../types.tsx';
+import './popUpTypes.css';
 
 import InputField from '../inputOptions/InputField';
 import InputDate from '../inputOptions/InputDate';
+import InputDetails from '../inputOptions/InputDetails';
 
 interface ToDoProps {
   initialData?: Partial<ToDoData>;
@@ -33,9 +35,9 @@ const ToDo = forwardRef<ToDoHandles, ToDoProps>((props, ref) => {
   }));
 
   return (
-    <div>
+    <div className="popup-form">
       <InputField
-        label="Titel des ToDos"
+        label="ToDo"
         name="title"
         value={formData.title}
         onChange={handleChange}
@@ -46,11 +48,12 @@ const ToDo = forwardRef<ToDoHandles, ToDoProps>((props, ref) => {
         value={formData.date}
         onChange={handleChange}
       />
-      <InputField
+      <InputDetails
         label="Details"
         name="details"
         value={formData.details}
         onChange={handleChange}
+        placeholder="Zusätzliche Informationen..."
       />
     </div>
   );
