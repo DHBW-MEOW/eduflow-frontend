@@ -6,6 +6,11 @@
 # MEOW
 Most Efficient Organzier for Work
 
+# Dependencies
+
+npm i -D react-router-dom@latest 
+(react-router-dom)
+
 
 # React + TypeScript + Vite
 
