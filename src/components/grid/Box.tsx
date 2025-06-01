@@ -1,18 +1,34 @@
+import { useState } from 'react';
 import './Box.css'
 
-export type BoxProps = {
+export type BoxData = {
   title: string;
-  // onDelete?: () => void;
-  // onRename?: (newTitle: string) => void;
+  //content?: string; //INFO: if we need content in the box could this be a optional parameter
 };
 
-export function Box({title}: BoxProps) {
+export type BoxProps = BoxData & {
+  onDelete: () => void;
+  onRename: () => void;
+};
 
-    return (
+export function Box({title, onDelete, onRename}: BoxProps) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  return (
+    <div className="box">
       <div>
-        <p className='box'>{title}</p>
+        <h3>{title}</h3>
+        <button className="menu-button" onClick={() => setMenuOpen(!menuOpen)}>⋮</button>
       </div>
-    )
-  }
+
+      {menuOpen && (
+        <div className="context-menu">
+          <button onClick={onRename}>✏️ Umbenennen</button>
+          <button onClick={onDelete}>🗑️ Löschen</button>
+        </div>
+      )}
+
+    </div>
+  )
+}
   
   export default Box;

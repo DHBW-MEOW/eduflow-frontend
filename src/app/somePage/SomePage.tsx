@@ -1,18 +1,14 @@
+import { useState } from "react";
+import type { BoxData } from "../../components/grid/Box";
 import { Grid } from "../../components/grid/Grid";
 
-// just an example
-const data = [
-  { title: "Box 1"},
-  { title: "Box 2"},
-  { title: "Box 3"},
-];
-
 function SomePage() {
-  return (
-    <div>
-      <Grid items={data} />
-    </div>
-  )
+  const [items, setItems] = useState<BoxData[]>([
+    { title: "Box 1" },
+    { title: "Box 2" },
+  ]);
+
+  return <Grid items={items} setTitleFunction={setItems} />;
 }
 
 export default SomePage;

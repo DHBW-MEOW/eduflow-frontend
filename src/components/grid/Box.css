@@ -7,3 +7,53 @@
     box-shadow: 0 2px 5px rgba(116, 110, 110, 0.1);
     transition: transform 0.2s ease;
 }
+
+.box-real {/*TODO: für gescheites PopUp nötig*/
+  position: relative; /* wichtig für das Positionieren des Menüs */
+}
+
+.menu-button {
+  background: none;
+  border: none;
+  color: var(--color-text);
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.context-menu {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.context-menu-real {/*TODO: gescheites PopUp*/
+  position: absolute;
+  top: 0;
+  right: -120px; /* Abstand zur Box – je nach Bedarf anpassen */
+  background-color: var(--color-bg-2);
+  border: 1px solid var(--color-border);
+  padding: 0.5rem;
+  z-index: 10;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.context-menu button {
+  background: none;
+  border: none;
+  color: var(--color-text);
+  text-align: left;
+  cursor: pointer;
+  padding: 0.2rem 0.5rem;
+}
+
+.context-menu button:hover {
+  background-color: var(--color-hover);
+}
