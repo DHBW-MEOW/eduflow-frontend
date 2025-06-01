@@ -9,15 +9,16 @@ export type BoxData = {
 export type BoxProps = BoxData & {
   onDelete: () => void;
   onRename: () => void;
+  menuOpen: boolean;
+  onToggleMenu: () => void;
 };
 
-export function Box({title, onDelete, onRename}: BoxProps) {
-  const [menuOpen, setMenuOpen] = useState(false);
+export function Box({title, onDelete, onRename, menuOpen, onToggleMenu}: BoxProps) {
   return (
     <div className="box">
-      <div>
-        <h3>{title}</h3>
-        <button className="menu-button" onClick={() => setMenuOpen(!menuOpen)}>⋮</button>
+      <button className="menu-button" onClick={onToggleMenu}>⋮</button>
+      <div className="box-container">
+          <h3 className="box-title">{title}</h3>
       </div>
 
       {menuOpen && (

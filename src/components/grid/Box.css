@@ -1,18 +1,30 @@
 .box{
-    border: var(--color-border);
-    padding: 1rem;
-    background-color: var(--color-surface);
-    color: var(--color-text);
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(116, 110, 110, 0.1);
-    transition: transform 0.2s ease;
+  position: relative;
+  border: var(--color-border);
+  padding: 1rem;
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(116, 110, 110, 0.1);
+  transition: transform 0.2s ease;
 }
 
-.box-real {/*TODO: für gescheites PopUp nötig*/
-  position: relative; /* wichtig für das Positionieren des Menüs */
+.box-container{
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+}
+
+.box-title {
+  margin: 0 auto;
+  text-align: center;
 }
 
 .menu-button {
+  position: absolute;
+  top: -10%;
+  right: 60%;
   background: none;
   border: none;
   color: var(--color-text);
@@ -21,20 +33,10 @@
 }
 
 .context-menu {
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  padding: 0.5rem;
-  margin-top: 0.5rem;
-  border-radius: 6px;
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-}
-
-.context-menu-real {/*TODO: gescheites PopUp*/
   position: absolute;
   top: 0;
-  right: -120px; /* Abstand zur Box – je nach Bedarf anpassen */
+  left: 100%;
+  margin-left: 1px;
   background-color: var(--color-bg-2);
   border: 1px solid var(--color-border);
   padding: 0.5rem;

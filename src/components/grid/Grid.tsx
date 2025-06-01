@@ -1,5 +1,6 @@
 import "./Grid.css";
 import { Box, type BoxData } from "./Box.tsx";
+import { useState } from "react";
 
 type GridProps = {
   items: BoxData[];
@@ -8,6 +9,8 @@ type GridProps = {
 
 
 export function Grid({ items, setTitleFunction }: GridProps) {
+  const [openMenuIndex, setOpenMenuIndex] = useState<number | null>(null);
+  
   const handleDelete = (index: number) => {
     setTitleFunction((prev) => prev.filter((_, i) => i !== index));
   };
@@ -31,6 +34,8 @@ export function Grid({ items, setTitleFunction }: GridProps) {
           title={item.title}
           onDelete={() => handleDelete(idx)}
           onRename={() => handleRename(idx)}
+          menuOpen={openMenuIndex === idx}
+          onToggleMenu={() => setOpenMenuIndex(prev => (prev === idx ? null : idx))}
         />
       ))}
     </div>
