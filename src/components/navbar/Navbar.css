@@ -5,7 +5,7 @@
   padding-bottom: 15px;
   position: fixed;
   width: 100%;
-  background-color: red;
+  background-color: var(--color-bg-2);
   bottom: 0;
   left: 0;
 }
