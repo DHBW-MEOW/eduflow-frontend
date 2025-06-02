@@ -9,7 +9,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--color-bg-1);
   backdrop-filter: blur(5px);
   display: flex;
   justify-content: center;
@@ -22,10 +22,11 @@
     * Styles the background and layout of the popup
 */
 .popup-content {
-  background-color: white;
+  background-color: var(--color-white);
+  color: var(--color-text);
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 20px var(--color-shadow);
   max-width: 400px;
   width: 80%;
   height: fit-content;
@@ -45,7 +46,7 @@
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  color: #666;
+  color: var(--color-surface);
   transition: color 0.2s ease;
 }
 
@@ -54,13 +55,13 @@
     * not sure if this is needed
     */
 .popup-close-button:hover {
-  color: #333;
+  color: var(--color-hover);
 }
 
 .popup-content > div:first-of-type {
   margin-bottom: 2rem;
   font-size: 1.1rem;
-  color: #333;
+  color: var(--color-hover);
   text-align: left;
   line-height: 1.25;
 }

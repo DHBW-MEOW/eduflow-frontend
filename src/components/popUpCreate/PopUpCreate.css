@@ -38,6 +38,7 @@
     * Styles the header of the popup
 */
 .popup-header {
+  color: var(--color-text);
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 1.5rem;
@@ -49,6 +50,7 @@
     * Styles the buttons at the bottom of the popup
 */
 .popup-buttons {
+  color: var(--color-text);
   display: flex;
   gap: 1rem;
   justify-content: flex-end;
