@@ -1,12 +1,14 @@
 import './App.css'
 import Layout from './Layout.tsx'
-import SomePage from './somePage/SomePage.tsx'
+import Quicklinks from '../components/quicklinks/Quicklinks.tsx'
 
 function App() {
 
   return (
     <div>
-      <Layout>{SomePage()}</Layout>
+      <Layout>
+        <Quicklinks/>
+      </Layout>
     </div>
   )
 }
