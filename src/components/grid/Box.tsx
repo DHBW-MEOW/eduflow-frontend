@@ -1,35 +1,50 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './Box.css'
 
 export type BoxData = {
   title: string;
-  //content?: string; //INFO: if we need content in the box could this be a optional parameter
 };
 
 export type BoxProps = BoxData & {
   onDelete: () => void;
   onRename: () => void;
-  menuOpen: boolean;
-  onToggleMenu: () => void;
 };
 
-export function Box({title, onDelete, onRename, menuOpen, onToggleMenu}: BoxProps) {
+export function Box({ title, onDelete, onRename }: BoxProps) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const boxRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (boxRef.current && !boxRef.current.contains(event.target as Node)) {
+        setMenuOpen(false);
+      }
+    }
+
+    if (menuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [menuOpen]);
+
   return (
-    <div className="box">
-      <button className="menu-button" onClick={onToggleMenu}>⋮</button>
-      <div className="box-container">
-          <h3 className="box-title">{title}</h3>
+    <div className="box" ref={boxRef}>
+      <div>
+        <h3>{title}</h3>
+        <button className="menu-button" onClick={() => setMenuOpen(!menuOpen)}>⋮</button>
       </div>
 
       {menuOpen && (
         <div className="context-menu">
-          <button onClick={onRename}>Umbenennen</button>
-          <button onClick={onDelete}>Löschen</button>
+          <button onClick={() => { onRename(); setMenuOpen(false); }}>Umbenennen</button>
+          <button onClick={() => { onDelete(); setMenuOpen(false); }}>Löschen</button>
         </div>
       )}
-
     </div>
-  )
+  );
 }
-  
+
 export default Box;

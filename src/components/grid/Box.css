@@ -9,18 +9,6 @@
   transition: transform 0.2s ease;
 }
 
-.box-container{
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  position: relative;
-}
-
-.box-title {
-  margin: 0 auto;
-  text-align: center;
-}
-
 .menu-button {
   position: absolute;
   top: 0%;
