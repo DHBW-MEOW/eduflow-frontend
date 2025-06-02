@@ -1,0 +1,33 @@
+:root {
+  /* === Base === */
+  --color-black: #1f1f1f;
+  --color-white: #ffffff;
+
+  /* === Background Colors (Dark Theme) === */
+  --color-bg-1: #1e1e2f;   /* Haupt-Hintergrund */
+  --color-bg-2: #2a2a3d;   /* Sekundär (z. B. Panels, Cards) */
+  --color-surface: #323248; /* Boxen, Modale Fenster */
+
+  /* === Primary Colors (Blue Accent) === */
+  --color-primary: #3b82f6;        /* Blau – Hauptakzent */
+  --color-primary-dark: #2563eb;   /* Für Hover oder aktiven Zustand */
+  --color-primary-light: #60a5fa;  /* Dezenter Hintergrund oder Outline */
+
+  /* === Foreground / Text Colors === */
+  --color-text: #e5e7eb;           /* Primärer Text (hell) */
+  --color-text-light: #9ca3af;     /* Sekundär, z. B. für Platzhalter */
+  --color-heading: #f3f4f6;        /* Überschriften */
+
+  /* === Border / Divider === */
+  --color-border: #4b5563;
+  --color-border-light: #6b7280;
+
+  /* === Hover, Focus & Status === */
+  --color-hover: #374151;          /* Hover-Hintergrund */
+  --color-focus: #60a5fa;          /* Fokus-Ring */
+  --color-error: #ef4444;          /* Rot – Fehlermeldung */
+  --color-success: #22c55e;        /* Grün – Erfolg */
+
+  /* === Others === */
+  --color-muted: #6b7280;
+}
