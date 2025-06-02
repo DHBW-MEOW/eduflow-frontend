@@ -8,7 +8,7 @@ function Layout({
 }) {
   return (
     <div>
-      <Header/>
+      <Header button={{text: "", icon: "house-solid.svg", to: "/"}} text="Hello User!"/>
       {children}
       <Navbar/>
     </div>
