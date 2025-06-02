@@ -23,8 +23,8 @@ export function Box({title, onDelete, onRename, menuOpen, onToggleMenu}: BoxProp
 
       {menuOpen && (
         <div className="context-menu">
-          <button onClick={onRename}>✏️ Umbenennen</button>
-          <button onClick={onDelete}>🗑️ Löschen</button>
+          <button onClick={onRename}>Umbenennen</button>
+          <button onClick={onDelete}>Löschen</button>
         </div>
       )}
 
@@ -32,4 +32,4 @@ export function Box({title, onDelete, onRename, menuOpen, onToggleMenu}: BoxProp
   )
 }
   
-  export default Box;
+export default Box;

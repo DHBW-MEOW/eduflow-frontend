@@ -23,11 +23,13 @@
 
 .menu-button {
   position: absolute;
-  top: -10%;
-  right: 60%;
+  top: 0%;
+  left: 100%;
+  margin-left: -10px;
   background: none;
   border: none;
   color: var(--color-text);
+  padding: 0;
   font-size: 1.2rem;
   cursor: pointer;
 }

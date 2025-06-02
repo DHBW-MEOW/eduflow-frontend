@@ -5,7 +5,7 @@ import { Grid } from "../../components/grid/Grid";
 function SomePage() {
   const [items, setItems] = useState<BoxData[]>([
     { title: "Box 1" },
-    { title: "Box 2" },
+    { title: "Ein sehr sehr langer Titel" },
   ]);
 
   return <Grid items={items} setTitleFunction={setItems} />;
