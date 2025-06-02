@@ -10,7 +10,7 @@
 
 .input-group label {
   font-weight: 500;
-  color: #333;
+  color: var(--color-surface);
   font-size: 0.9rem;
   align-self: flex-start;
 }
@@ -23,7 +23,7 @@
 .input-date,
 .input-textarea {
   padding: 0.75rem;
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-border-light);
   border-radius: 4px;
   font-size: 1rem;
   width: 100%;
@@ -39,8 +39,8 @@
 .input-date:focus,
 .input-textarea:focus {
   outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+  border-color: var(--color-border);
+  box-shadow: 0 0 0 2px var(--color-shadow);
 }
 
 /* specific styling for the textarea (InputDetails) */

@@ -1,7 +1,7 @@
 :root {
   /* === Base === */
   --color-black: #1f1f1f;
-  --color-white: #ffffff;
+  --color-white: #f0f0f0;
 
   /* === Background Colors (Dark Theme) === */
   --color-bg-1: #1e1e2f;   /* Haupt-Hintergrund */
@@ -25,6 +25,7 @@
   /* === Hover, Focus & Status === */
   --color-hover: #374151;          /* Hover-Hintergrund */
   --color-focus: #60a5fa;          /* Fokus-Ring */
+  --color-shadow: rgba(0, 123, 255, 0.25)
   --color-error: #ef4444;          /* Rot – Fehlermeldung */
   --color-success: #22c55e;        /* Grün – Erfolg */
 

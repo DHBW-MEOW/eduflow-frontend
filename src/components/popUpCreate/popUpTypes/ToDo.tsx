@@ -1,6 +1,7 @@
 import React, { useState, useImperativeHandle, forwardRef } from 'react';
 import type { ToDoData, ToDoHandles } from '../types.tsx';
 import './popUpTypes.css';
+import '../../../colors.css'
 
 import InputField from '../inputOptions/InputField';
 import InputDate from '../inputOptions/InputDate';

@@ -1,4 +1,5 @@
 import './PopUpCreate.css'
+import '../../colors.css'
 import OptionButton from '../optionButtons/OptionButton';
 
 type PopUpProps = {
