@@ -1,0 +1,17 @@
+.header{
+  display: inline-flex;
+  background-color: var(--color-bg-2);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  padding: 25px;
+  justify-content: left;
+}
+
+.headerText {
+  display: flex;
+  align-items: center;
+  font-size: 16pt;
+  margin-left: 5%;
+}
