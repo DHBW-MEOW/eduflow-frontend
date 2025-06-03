@@ -17,7 +17,7 @@ const PopUpDelete: React.FC<PopUpProps> = ({isOpen, content, onClickCancel, onCl
         <div className="popup-overlay" onClick={onClickCancel}>
             <div className="popup-content" onClick={(e) => e.stopPropagation()}>
                 <button className="popup-close-button" onClick={onClickCancel}>
-                    &times; {/* Close button - Not sure if needed */}
+                    &times; {/* TODO: Close button - Not sure if needed */}
                 </button>
                 <div>{content}</div>
                 <div className="popup-buttons">
