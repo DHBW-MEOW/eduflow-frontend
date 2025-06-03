@@ -1,9 +1,10 @@
 import './App.css'
+import '../colors.css'
+
 import Layout from './Layout.tsx'
 import Quicklinks from '../components/quicklinks/Quicklinks.tsx'
 
-function App() {
-
+const App: React.FC = () => {
   return (
     <div>
       <Layout>
