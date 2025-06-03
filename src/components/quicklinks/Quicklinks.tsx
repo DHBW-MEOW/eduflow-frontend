@@ -5,7 +5,7 @@ function Quicklinks() {
     return (
         <div className='quicklinks-container'>
             <div className='learning-container'>
-                <h4>Lernplattformen</h4>
+                <h4>Materialien</h4>
                 <a href="https://www.studysmarter.de/">StudySmarter</a>
                 <a href="https://app.simpleclub.com/">SimpleClub</a>
                 <a href="https://studyflix.de/">StudyFlix</a>

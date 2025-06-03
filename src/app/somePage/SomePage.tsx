@@ -1,12 +1,12 @@
-
+import Quicklinks from '../../components/quicklinks/Quicklinks.tsx'
 
 // just an example
 
 function SomePage() {
   return (
-    <p>
-      Some main Page
-    </p>
+    <div>
+      <Quicklinks/>
+    </div>
   )
 }
 

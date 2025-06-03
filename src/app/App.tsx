@@ -2,13 +2,13 @@ import './App.css'
 import '../colors.css'
 
 import Layout from './Layout.tsx'
-import Quicklinks from '../components/quicklinks/Quicklinks.tsx'
+import SomePage from './somePage/SomePage.tsx'
 
 const App: React.FC = () => {
   return (
     <div>
       <Layout>
-        <Quicklinks/>
+        {SomePage()}
       </Layout>
     </div>
   )
