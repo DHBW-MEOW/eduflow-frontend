@@ -1,12 +1,30 @@
 .box{
   position: relative;
-  border: var(--color-border);
-  padding: 1rem;
+  user-select: none;
+
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 30%;
+
+  margin: 5px 10px;
+  min-height: 150px;
+  min-width: 44px;
+
   background-color: var(--color-surface);
   color: var(--color-text);
+  border: var(--color-border);
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(116, 110, 110, 0.1);
   transition: transform 0.2s ease;
+}
+
+.box:hover {
+  background-color: var(--color-hover);
+  border-color: var(--color-primary-light);
+}
+
+.box:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 4px;
 }
 
 .menu-button {
@@ -20,4 +38,12 @@
   padding: 0;
   font-size: 1.2rem;
   cursor: pointer;
+}
+
+@media (max-width: 480px) {
+  .box{
+    flex-basis: 45%;
+    margin: 5px 6px;
+    min-height: 100px;
+  }
 }

@@ -7,9 +7,10 @@ type GridProps = {
   setItems: React.Dispatch<React.SetStateAction<BoxData[]>>;
   onRename: (id: string, newTitle: string) => void;
   onDelete: (id: string) => void;
+  onClick: (id: string) => void;
 };
 
-export function Grid({ items, setItems, onRename, onDelete  }: GridProps) {
+export function Grid({ items, setItems, onRename, onDelete, onClick }: GridProps) {
 
   const handleRename = (id: string, newTitle: string) => {
     setItems((prev) =>
@@ -23,14 +24,19 @@ export function Grid({ items, setItems, onRename, onDelete  }: GridProps) {
     onDelete(id);
   };
 
+  const handleClick = (id: string) => {
+    onClick(id);
+  };
+
   return (
     <div className="grid-container">
       {items.map((item) => (
         <Box
           key={item.id}
           data={item}
-          onDelete={ handleDelete }
-          onRename={ handleRename }
+          onDelete={handleDelete}
+          onRename={handleRename} 
+          onClick={handleClick}        
         />
       ))}
     </div>

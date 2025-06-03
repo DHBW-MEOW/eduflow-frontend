@@ -20,6 +20,8 @@
   text-align: left;
   cursor: pointer;
   padding: 0.2rem 0.5rem;
+  min-height: 44px;
+  min-height: 44px;
 }
 
 .context-menu button:hover {

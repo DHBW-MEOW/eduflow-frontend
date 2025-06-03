@@ -21,12 +21,14 @@ function SomePage() {
 
   const handleRename = (id: string, newTitle: string) => {
     console.log(`Rename: ID=${id}, Neuer Titel=${newTitle}`);
-    // Hier z.B. POST/PUT an Backend
   };
 
   const handleDelete = (id: string) => {
     console.log(`Delete: ID=${id}`);
-    // Hier z.B. DELETE an Backend
+  };
+
+  const handleClick = (id: string) => {
+    console.log(`Clicked: ID=${id}`);
   };
 
   return (
@@ -37,6 +39,7 @@ function SomePage() {
         setItems={setItems}
         onRename={handleRename}
         onDelete={handleDelete}
+        onClick={handleClick}
       />
     </div>
   );

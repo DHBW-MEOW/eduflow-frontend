@@ -11,9 +11,10 @@ export type BoxProps = {
   data: BoxData;
   onRename: (id: string, newTitle: string) => void;
   onDelete: (id: string) => void;
+  onClick: (id: string) => void;
 };
 
-export function Box({ data, onDelete, onRename }: BoxProps) {
+export function Box({ data, onDelete, onRename, onClick }: BoxProps) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleRename = () => {
@@ -27,6 +28,10 @@ export function Box({ data, onDelete, onRename }: BoxProps) {
   const handleDelete = () => {
     onDelete(data.id);
     setMenuOpen(false);
+  };
+
+  const handleClick = () => {
+    onClick(data.id);
   };
 
   //menu disappears by mouse-click outside of the menu
@@ -48,7 +53,7 @@ export function Box({ data, onDelete, onRename }: BoxProps) {
   }, [menuOpen]);
 
   return (
-    <div className="box" ref={boxRef}>
+    <div className="box" onClick={handleClick} ref={boxRef}>
       <div>
         <h3>{data.title}</h3>
         <button className="menu-button" onClick={() => setMenuOpen(!menuOpen)}>⋮</button>
