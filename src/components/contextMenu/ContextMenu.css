@@ -19,7 +19,7 @@
   color: var(--color-text);
   text-align: left;
   cursor: pointer;
-  padding: 0.2rem 0.5rem;
+  padding: 0.2rem 0.0rem;
   min-height: 44px;
   min-height: 44px;
 }
