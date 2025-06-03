@@ -7,11 +7,11 @@ function Layout({
   children: React.ReactElement
 }) {
   return (
-    <p>
+    <div>
       <Header/>
       {children}
       <Navbar/>
-    </p>
+    </div>
   )
 }
 

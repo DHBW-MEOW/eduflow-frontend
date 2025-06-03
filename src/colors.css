@@ -18,6 +18,12 @@
   --color-text-light: #9ca3af;     /* Sekundär, z. B. für Platzhalter */
   --color-heading: #f3f4f6;        /* Überschriften */
 
+  /* === Link Color === */
+  --color-link: #6161f1;
+  --color-link-visited: #9c09a1;
+  --color-link-hover: var(--color-hover);
+  --color-link-active: var(--color-focus);
+
   /* === Border / Divider === */
   --color-border: #4b5563;
   --color-border-light: #6b7280;
