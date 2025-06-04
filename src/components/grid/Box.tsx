@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import ContextMenu from '../contextMenu/ContextMenu';
+import PopUpDelete from '../popUpDelete/PopUpDelete';
 import './Box.css'
 
 export type BoxData = {
@@ -16,6 +17,7 @@ export type BoxProps = {
 
 export function Box({ data, onDelete, onRename, onClick }: BoxProps) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [popupDeleteOpen, setPopupDeleteOpen] = useState(false);
 
   const handleRename = () => {
     const newTitle = prompt('Neuer Titel:', data.title);
@@ -29,6 +31,16 @@ export function Box({ data, onDelete, onRename, onClick }: BoxProps) {
     onDelete(data.id);
     setMenuOpen(false);
   };
+
+  const openPopUp = () => {
+    setPopupDeleteOpen(true);
+    setMenuOpen(false);
+  }
+
+  const closePopup = () => {
+    setPopupDeleteOpen(false);
+    setMenuOpen(false);
+  }
 
   const handleClick = () => {
     onClick(data.id);
@@ -55,18 +67,38 @@ export function Box({ data, onDelete, onRename, onClick }: BoxProps) {
   return (
     <div className="box" onClick={handleClick} ref={boxRef}>
       <div>
-        <h3>{data.title}</h3>
-        <button className="menu-button" onClick={() => setMenuOpen(!menuOpen)}>⋮</button>
+        <div className="header-container">
+            <h3>{data.title}</h3>
+        </div>
+        <button className="menu-button" onClick={(event) => {
+            event.stopPropagation();
+            setMenuOpen(!menuOpen);
+          }}
+        >⋮</button>
       </div>
 
       {menuOpen && (
         <ContextMenu
           actions={[
             { label: "Umbenennen", onClick: handleRename },
-            { label: "Löschen", onClick: handleDelete },
+            { label: "Löschen", onClick: openPopUp },
           ]}
         />
       )}
+
+      {
+        <PopUpDelete
+          isOpen={popupDeleteOpen}
+          content={
+            <>
+              Möchten Sie dieses Element wirklich löschen?<br />
+              Diese Aktion kann nicht mehr rückgängig gemacht werden.
+            </>
+          }
+          onClickCancel={closePopup}
+          onClickConfirm={handleDelete}
+        />
+      }
     </div>
   );
 }

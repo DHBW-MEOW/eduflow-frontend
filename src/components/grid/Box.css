@@ -27,6 +27,13 @@
   outline-offset: 4px;
 }
 
+.header-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20% 0%;
+}
+
 .menu-button {
   position: absolute;
   top: 0%;
