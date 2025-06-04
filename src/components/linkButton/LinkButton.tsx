@@ -1,15 +1,13 @@
-import "./NavbarButton.css"
+import "./LinkButton.css"
 import { NavLink } from "react-router-dom";
 
-function NavbarButton({
-  text,
-  icon,
-  to
-}: {
+export type LinkButtonProps = {
   text: string,
   icon: string,
   to: string
-}) {
+}
+
+const LinkButton: React.FC<LinkButtonProps> = ({text, icon, to }) => {
   return (
     <>
       <NavLink to={to} >
@@ -18,6 +16,7 @@ function NavbarButton({
       </NavLink>
     </>
   )
+
 }
 
-export default NavbarButton;
+export default LinkButton;
