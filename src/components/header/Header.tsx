@@ -1,5 +1,5 @@
 import "./Header.css"
-import NavbarButton from "../navbar/navbarButton/NavbarButton.tsx"
+import LinkButton from "../linkButton/LinkButton.tsx"
 
 function Header({
   button,
@@ -14,7 +14,7 @@ function Header({
 }) {
   return (
     <div className="header">
-      <NavbarButton to={button.to} text={button.text} icon={button.icon} />
+      <LinkButton to={button.to} text={button.text} icon={button.icon} />
       <div className="headerText">{text}</div>
     </div>
   )
