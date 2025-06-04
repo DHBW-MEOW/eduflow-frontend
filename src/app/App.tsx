@@ -2,13 +2,13 @@ import './App.css'
 import '../colors.css'
 
 import Layout from './Layout.tsx'
-import Calendar from '../components/calendar/Calendar.tsx';
+import SomePage from './somePage/SomePage.tsx';
 
 const App: React.FC = () => {
   return (
     <Layout>
       <div>
-        <Calendar/>
+        <SomePage/>
       </div>
     </Layout>
   );

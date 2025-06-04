@@ -26,7 +26,8 @@
   --color-hover: #e0e7ff;          /* Hover-Hintergrund (heller) */
   --color-focus: #60a5fa;          /* Fokus-Ring (bleibt gleich) */
   --color-shadow: rgba(0, 123, 255, 0.1); /* Weniger intensive Schatten */
-  --color-error: #ef4444;          /* Rot – Fehlermeldung (bleibt gleich) */
+  --color-error: #f45b5b;          /* Rot – Fehlermeldung (bleibt gleich) */
+  --color-warning: #fbe14e;        /* Gelb – Warnung */
   --color-success: #22c55e;        /* Grün – Erfolg (bleibt gleich) */
 
   /* === Others === */
@@ -61,8 +62,9 @@
   /* === Hover, Focus & Status === */
   --color-hover: #374151;          /* Hover-Hintergrund */
   --color-focus: #60a5fa;          /* Fokus-Ring */
-  --color-shadow: rgba(0, 123, 255, 0.25)
-  --color-error: #ef4444;          /* Rot – Fehlermeldung */
+  --color-shadow: rgba(0, 123, 255, 0.25);
+  --color-error: #e24444;          /* Rot – Fehlermeldung */
+  --color-warning: #f59e0b;        /* Gelb – Warnung */
   --color-success: #22c55e;        /* Grün – Erfolg */
 
   /* === Others === */
