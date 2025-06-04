@@ -13,7 +13,11 @@ export default function ContextMenu({ actions }: ContextMenuProps) {
   return (
     <div className="context-menu">
       {actions.map((action, i) => (
-        <button key={i} onClick={action.onClick}>
+        <button key={i} onClick={(event) => {
+            event.stopPropagation(); 
+            action.onClick();
+          }}
+        >
           {action.label}
         </button>
       ))}
