@@ -13,13 +13,15 @@
 @media (min-width: 480px) {
   .navbar{
     position: fixed;
+    gap: 50px;
     bottom: 0%;
     left: 0;
+    justify-content: flex-start;
     flex-direction: column;
-    width: 10%;
-    max-width: 100px;
-    height: calc(100vh - 90px);
-    padding-top: 0px;
+    width: var(--navbar-width);
+    max-width: var(--navbar-width);
+    height: calc(100% - 25px);
+    padding-top: 25px;
     padding-bottom: 0px;
   }
 }

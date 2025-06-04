@@ -12,6 +12,8 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
+  /* === Sizes === */
+  --navbar-width: 100px;
     /* === Base === */
   --color-black: #000000;
   --color-white: #ffffff;
