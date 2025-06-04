@@ -1,12 +1,12 @@
-
+import Calendar from "../../components/calendar/Calendar";
 
 // just an example
 
 function SomePage() {
   return (
-    <p>
-      Some main Page
-    </p>
+    <div>
+      <Calendar/>
+    </div>
   )
 }
 
