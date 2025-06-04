@@ -31,7 +31,9 @@
   position: absolute;
   top: 0%;
   left: 100%;
-  margin-left: -10px;
+  margin-left: -44px;
+  min-width: 44px;
+  min-height: 44px;
   background: none;
   border: none;
   color: var(--color-text);
