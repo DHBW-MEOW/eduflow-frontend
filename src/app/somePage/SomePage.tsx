@@ -4,9 +4,9 @@
 
 function SomePage() {
   return (
-    <p>
+    <div>
       Some main Page
-    </p>
+    </div>
   )
 }
 
