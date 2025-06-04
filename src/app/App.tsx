@@ -1,15 +1,15 @@
 import { Routes, Route } from 'react-router-dom'
 import './App.css'
-import Home from './home/Home.tsx'
+import '../colors.css'
 import Layout from './Layout.tsx'
+import Home from './home/Home.tsx'
 import Modules from './modules/Modules.tsx'
 import Studyplan from './studyplan/Studyplan.tsx'
 import Todo from './todo/Todo.tsx'
 //import React from 'react'
 //import ReactDOM from 'react-dom';
 
-function App() {
-
+const App: React.FC = () => {
   return (
     <Layout>
         <Routes>
