@@ -29,3 +29,11 @@ export interface ExamData {
 export interface ExamHandles {
   getFormData: () => ExamData;
 }
+
+export interface RenameData {
+  title: string;
+}
+
+export interface RenameHandles {
+  getFormData: () => RenameData;
+}
