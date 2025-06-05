@@ -10,7 +10,7 @@ function Quicklinks() {
                 <a href="https://app.simpleclub.com/">SimpleClub</a>
                 <a href="https://studyflix.de/">StudyFlix</a>
                 <a href="https://obsidian.md/">Obsidian</a>
-                <a href="https://apps.ankiweb.net/">Quizlet</a>
+                <a href="https://quizlet.com/de">Quizlet</a>
                 <a href="https://www.notion.com/de">Notion</a>
                 <a href="https://apps.ankiweb.net/">Anki</a>
             </div>
