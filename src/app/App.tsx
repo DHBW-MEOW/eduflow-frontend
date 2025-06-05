@@ -2,14 +2,16 @@ import './App.css'
 import '../colors.css'
 
 import Layout from './Layout.tsx'
-import PopUpExample from './popUpExamplePage/PopUpExample.tsx';
+import SomePage from './somePage/SomePage.tsx'
 
 const App: React.FC = () => {
   return (
-    <Layout>
-      <PopUpExample/>
-    </Layout>
-  );
-};
+    <div>
+      <Layout>
+        {SomePage()}
+      </Layout>
+    </div>
+  )
+}
 
 export default App
