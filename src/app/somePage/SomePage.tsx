@@ -5,7 +5,7 @@ import Quicklinks from '../../components/quicklinks/Quicklinks.tsx'
 function SomePage() {
   return (
     <div>
-      <Quicklinks/>
+      Some main Page
     </div>
   )
 }
