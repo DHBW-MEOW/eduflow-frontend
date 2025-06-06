@@ -1,7 +1,6 @@
 import React, { useState, useImperativeHandle, forwardRef } from 'react';
 import type { ExamData, ExamHandles } from '../types';
 import './popUpTypes.css';
-import '../../../colors.css'
 
 import InputField from '../inputOptions/InputField';
 import InputDate from '../inputOptions/InputDate';

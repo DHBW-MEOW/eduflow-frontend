@@ -1,7 +1,6 @@
 import React, { useState, useImperativeHandle, forwardRef } from "react";
 import type { LearningPlanData, LearningPlanHandles } from "../types.tsx";
 import './popUpTypes.css';
-import '../../../colors.css'
 
 import InputField from "../inputOptions/InputField.tsx";
 import InputDate from "../inputOptions/InputDate.tsx";

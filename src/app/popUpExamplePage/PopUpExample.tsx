@@ -3,7 +3,8 @@ import PopUpCreate from '../../components/popUpCreate/PopUpCreate.tsx'
 import LearningPlan from '../../components/popUpCreate/popUpTypes/LearningPlan.tsx'
 import Exam from '../../components/popUpCreate/popUpTypes/Exam.tsx';
 import ToDo from '../../components/popUpCreate/popUpTypes/ToDo.tsx';
-import type { LearningPlanHandles, LearningPlanData, ExamHandles, ExamData, ToDoHandles, ToDoData } from '../../components/popUpCreate/types.tsx'
+import Rename from '../../components/popUpCreate/popUpTypes/Rename.tsx';
+import type { LearningPlanHandles, LearningPlanData, ExamHandles, ExamData, ToDoHandles, ToDoData, RenameData, RenameHandles } from '../../components/popUpCreate/types.tsx'
 import OptionButton from '../../components/optionButtons/OptionButton.tsx';
 import PopUpDelete from '../../components/popUpDelete/PopUpDelete.tsx';
 
@@ -12,6 +13,7 @@ const PopupType = {
   LEARNING_PLAN: "LEARNING_PLAN",
   TODO: "TODO",
   EXAM: "EXAM",
+  RENAME: "RENAME",
   DELETE: "DELETE",
 } as const;
 
@@ -22,6 +24,7 @@ const PopUpExample: React.FC = () => {
   const learningPlanRef = useRef<LearningPlanHandles>(null);
   const toDoRef = useRef<ToDoHandles>(null);
   const examRef = useRef<ExamHandles>(null);
+  const renameRef = useRef<RenameHandles>(null);
 
   const closePopup = () => {
     setActivePopup(PopupType.NONE);
@@ -54,6 +57,15 @@ const PopUpExample: React.FC = () => {
     }
   };
 
+  // Handler for Rename
+  const handleAddRename = () => {
+    if (renameRef.current) {
+      const data: RenameData = renameRef.current.getFormData();
+      console.log('Umbenennanter Name:', data);
+      closePopup();
+    }
+  };
+
   // Handler for Delete
   const handleDelete = () => {
     console.log('Item wurde gelöscht');
@@ -81,6 +93,11 @@ const PopUpExample: React.FC = () => {
       popupContent = <Exam ref={examRef} />;
       onAddAction = handleAddExam;
       break;
+    case PopupType.RENAME:
+      popupLabel = "Umbennenen";
+      popupContent = <Rename ref={renameRef} />;
+      onAddAction = handleAddRename;
+      break;
   }
 
   return (
@@ -89,6 +106,7 @@ const PopUpExample: React.FC = () => {
       <OptionButton label="Lernplan erstellen" onClick={() => setActivePopup(PopupType.LEARNING_PLAN)} />
       <OptionButton label="ToDo erstellen" onClick={() => setActivePopup(PopupType.TODO)}/>
       <OptionButton label="Prüfung anlegen" onClick={() => setActivePopup(PopupType.EXAM)}/>
+      <OptionButton label="Umbennenen" onClick={() => setActivePopup(PopupType.RENAME)}/>
       <OptionButton label="Löschen" onClick={() => setActivePopup(PopupType.DELETE)} />
 
       {/* Creating the different PopUps */}
