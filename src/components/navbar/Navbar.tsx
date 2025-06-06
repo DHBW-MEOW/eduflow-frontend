@@ -1,5 +1,4 @@
 import LinkButton from "../linkButton/LinkButton.tsx";
-//import { LinkButtonProps } from "../linkButton/LinkButton.tsx"
 import "./Navbar.css"
 
 function Navbar() {
