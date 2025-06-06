@@ -22,7 +22,6 @@ const Rename = forwardRef<RenameHandles, RenameProps>((props, ref) => {
 
   useImperativeHandle(ref, () => ({
     getFormData: () => {
-      console.log('Form data from Rename:', formData);
       return formData;
     },
   }));

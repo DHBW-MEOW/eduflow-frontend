@@ -29,7 +29,6 @@ const ToDo = forwardRef<ToDoHandles, ToDoProps>((props, ref) => {
 
   useImperativeHandle(ref, () => ({
     getFormData: () => {
-      console.log('Form data from ToDo:', formData);
       return formData;
     },
   }));

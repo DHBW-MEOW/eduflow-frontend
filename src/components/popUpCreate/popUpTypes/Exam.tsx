@@ -28,7 +28,6 @@ const Exam = forwardRef<ExamHandles, ExamProps>((props, ref) => {
 
   useImperativeHandle(ref, () => ({
     getFormData: () => {
-      console.log('Form data from Exam:', formData);
       return formData;
     },
   }));

@@ -37,7 +37,6 @@ const LearningPlan = forwardRef<LearningPlanHandles, LearningPlanProps>((props, 
 
     useImperativeHandle(ref, () => ({
         getFormData: () => {
-            console.log('Form data from LearningPlan:', formData);
             return formData;
         }
     }))
