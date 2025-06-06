@@ -1,5 +1,6 @@
 import Header from "../components/header/Header.tsx"
 import Navbar from "../components/navbar/Navbar.tsx"
+import "../styles.css"
 
 function Layout({
   children
@@ -7,9 +8,9 @@ function Layout({
   children: React.ReactElement
 }) {
   return (
-    <div>
+    <div className="layout">
       <Header button={{text: "", icon: "house-solid.svg", to: "/"}} text="Hello User!"/>
-      {children}
+      <div className="page">{children}</div>
       <Navbar/>
     </div>
   )
