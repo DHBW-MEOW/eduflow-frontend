@@ -3,25 +3,18 @@
   justify-content: space-around;
   padding-top: 15px;
   padding-bottom: 15px;
-  width: 100%;
   background-color: var(--color-bg-2);
-  position: fixed;
-  bottom: 0;
-  left: 0;
 }
 
 @media (min-width: 480px) {
   .navbar{
-    position: fixed;
-    gap: 50px;
-    bottom: 0%;
-    left: 0;
+    text-align: center;
+    gap: 50px; /* Gap of the flex inside (not the css grid it is in) */
     justify-content: flex-start;
     flex-direction: column;
-    width: var(--navbar-width);
-    max-width: var(--navbar-width);
-    height: calc(100% - 25px);
     padding-top: 25px;
-    padding-bottom: 0px;
+
+    /* === Grid Properties === */
+    grid-row: 1 / span 2;
   }
 }
