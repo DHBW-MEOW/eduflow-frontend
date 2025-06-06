@@ -12,9 +12,7 @@ const Rename = forwardRef<RenameHandles, RenameProps>((props, ref) => {
     title: props.initialData?.title || '',
   });
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData(prevData => ({
       ...prevData,
@@ -33,7 +31,7 @@ const Rename = forwardRef<RenameHandles, RenameProps>((props, ref) => {
     <div className="popup-form">
       <InputField
         label="Umbenennen"
-        name="rename"
+        name="title"
         value={formData.title}
         onChange={handleChange}
       />
