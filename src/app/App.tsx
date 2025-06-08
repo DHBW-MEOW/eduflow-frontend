@@ -6,8 +6,7 @@ import Home from './home/Home.tsx'
 import Modules from './modules/Modules.tsx'
 import Studyplan from './studyplan/Studyplan.tsx'
 import Todo from './todo/Todo.tsx'
-//import React from 'react'
-//import ReactDOM from 'react-dom';
+import SomePage from './somePage/SomePage.tsx'
 
 const App: React.FC = () => {
   return (
@@ -17,6 +16,7 @@ const App: React.FC = () => {
           <Route path="/studyplan" element={Studyplan()} />
           <Route path="/todo" element={Todo()} />
           <Route path="/modules" element={Modules()} />
+          <Route path="/somepage" element={SomePage()} />
         </Routes>
     </Layout>
   )

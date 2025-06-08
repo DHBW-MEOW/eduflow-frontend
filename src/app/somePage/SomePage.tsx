@@ -1,4 +1,4 @@
-
+import Quicklinks from '../../components/quicklinks/Quicklinks.tsx'
 
 // just an example
 
