@@ -1,7 +1,6 @@
 import React, { useState, useImperativeHandle, forwardRef } from 'react';
 import type { ToDoData, ToDoHandles } from '../types.tsx';
 import './popUpTypes.css';
-import '../../../colors.css'
 
 import InputField from '../inputOptions/InputField';
 import InputDate from '../inputOptions/InputDate';
@@ -30,7 +29,6 @@ const ToDo = forwardRef<ToDoHandles, ToDoProps>((props, ref) => {
 
   useImperativeHandle(ref, () => ({
     getFormData: () => {
-      console.log('Form data from ToDo:', formData);
       return formData;
     },
   }));

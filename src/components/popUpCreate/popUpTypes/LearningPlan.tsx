@@ -1,7 +1,6 @@
 import React, { useState, useImperativeHandle, forwardRef } from "react";
 import type { LearningPlanData, LearningPlanHandles } from "../types.tsx";
 import './popUpTypes.css';
-import '../../../colors.css'
 
 import InputField from "../inputOptions/InputField.tsx";
 import InputDate from "../inputOptions/InputDate.tsx";
@@ -38,7 +37,6 @@ const LearningPlan = forwardRef<LearningPlanHandles, LearningPlanProps>((props, 
 
     useImperativeHandle(ref, () => ({
         getFormData: () => {
-            console.log('Form data from LearningPlan:', formData);
             return formData;
         }
     }))
