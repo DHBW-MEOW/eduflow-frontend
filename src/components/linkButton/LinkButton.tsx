@@ -1,16 +1,16 @@
 import "./LinkButton.css"
 import { NavLink } from "react-router-dom";
 
-export type LinkButtonProps = {
-  text: string,
-  icon: string,
-  to: string
+export interface LinkButtonProps {
+  text: string;
+  icon: string;
+  link: string;
 }
 
-const LinkButton: React.FC<LinkButtonProps> = ({text, icon, to }) => {
+const LinkButton: React.FC<LinkButtonProps> = ({text, icon, link }) => {
   return (
     <>
-      <NavLink to={to} >
+      <NavLink to={link} >
         <img src={"/" + icon} alt="" />
         <div className="buttonText">{text}</div>
       </NavLink>
