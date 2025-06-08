@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import ContextMenu from '../contextMenu/ContextMenu';
 import PopUpDelete from '../popUpDelete/PopUpDelete';
+import PopUpCreate from '../popUpCreate/PopUpCreate';
+import Rename from '../popUpCreate/popUpTypes/Rename';
+import type { RenameData, RenameHandles } from '../popUpCreate/types';
 import './Box.css'
 
 export type BoxData = {
@@ -18,29 +21,38 @@ export type BoxProps = {
 export function Box({ data, onDelete, onRename, onClick }: BoxProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [popupDeleteOpen, setPopupDeleteOpen] = useState(false);
+  const [popupRenameOpen, setPopupRenameOpen] = useState(false);
+  const renameRef = useRef<RenameHandles>(null);
 
   const handleRename = () => {
-    const newTitle = prompt('Neuer Titel:', data.title);
-    if (newTitle && newTitle !== data.title) {
-      onRename(data.id, newTitle);
+    if (renameRef.current) {
+      const newTitle: RenameData = renameRef.current.getFormData();
+      onRename(data.id, newTitle.title);
+      closePopupRename();
     }
-    setMenuOpen(false);
   };
 
   const handleDelete = () => {
     onDelete(data.id);
+  };
+
+  const openPopUpDelete = () => {
+    setPopupDeleteOpen(true);
     setMenuOpen(false);
   };
 
-  const openPopUp = () => {
-    setPopupDeleteOpen(true);
-    setMenuOpen(false);
-  }
-
-  const closePopup = () => {
+  const closePopupDelete = () => {
     setPopupDeleteOpen(false);
+  };
+
+  const openPopUpRename = () => {
+    setPopupRenameOpen(true);
     setMenuOpen(false);
-  }
+  };
+
+  const closePopupRename = () => {
+    setPopupRenameOpen(false);
+  };
 
   const handleClick = () => {
     onClick(data.id);
@@ -80,8 +92,8 @@ export function Box({ data, onDelete, onRename, onClick }: BoxProps) {
       {menuOpen && (
         <ContextMenu
           actions={[
-            { label: "Umbenennen", onClick: handleRename },
-            { label: "Löschen", onClick: openPopUp },
+            { label: "Umbenennen", onClick: openPopUpRename },
+            { label: "Löschen", onClick: openPopUpDelete },
           ]}
         />
       )}
@@ -95,9 +107,19 @@ export function Box({ data, onDelete, onRename, onClick }: BoxProps) {
               Diese Aktion kann nicht mehr rückgängig gemacht werden.
             </>
           }
-          onClickCancel={closePopup}
+          onClickCancel={closePopupDelete}
           onClickConfirm={handleDelete}
         />
+      }
+      {
+        <PopUpCreate 
+          isOpen={popupRenameOpen} 
+          label={"\"" + data.title + "\" umbenennen"} 
+          onClickDiscard={closePopupRename}
+          onClickAdd={handleRename}
+        >
+          <Rename ref={renameRef} />
+        </PopUpCreate>
       }
     </div>
   );
