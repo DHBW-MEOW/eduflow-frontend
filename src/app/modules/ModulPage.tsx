@@ -5,73 +5,37 @@ import type { BoxData } from "../../components/grid/Box";
 import { useNavigate } from "react-router-dom";
 
 function ModulPage() {
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
     const [items, setItems] = useState<BoxData[]>([]);
 
     const addItem = (newElement: BoxData) => {
         setItems(oldItems => [...oldItems, newElement]);
     };
 
-    const handleRename = async (id: number, newTitle: string) => {
-        try {
-            await fetchFromBackend<void>({
-                method: "POST",
-                endpoint: "data/course",
-                body: {
-                  id: id,
-                  name: newTitle,
-                },
-            });
-        } catch (err) {
-            console.error("Error while renaming:", err);
-        }
+    const handleRename = (id: number, newTitle: string) => {
+        console.log(`Rename: ID=${id}, Neuer Titel=${newTitle}`);
     };
 
-    const handleDelete = async (id: number) => {
-        try {
-            const topics = await fetchFromBackend<{ id: number }[]>({
-                method: "GET",
-                endpoint: `data/topic?course_id=${id}`,
-            });
-            for (const topic of topics) {
-                await fetchFromBackend<void>({
-                    method: "DELETE",
-                    endpoint: "data/topic",
-                    body: { id: topic.id },
-                });
-            };
-            await fetchFromBackend<void>({
-                method: "DELETE",
-                endpoint: "data/course",
-                body: { id: id },
-            });
-        } catch (err) {
-            console.error("Error while deleting:", err);
-        }
+    const handleDelete = (id: number) => {
+        console.log(`Delete: ID=${id}`);
     };  
 
     const handleClick = (id: number) => {
-        navigate(`/modules/${id}`);
+        //navigate(`/module/${id}`)
+        console.log(`Clicked: ID=${id}`);
     };
 
     useEffect(() => {
-        const loadData = async () => {
-            try {
-                const data = await fetchFromBackend<{ id: number; name: string; details: string }[]>({
-                    method: "GET",
-                    endpoint: "data/course",
-                });
-                setItems(data);
-            } catch (err) {
-                console.error("Error while loading the Courses:", err);
-            }
-        };    
-      loadData();
+        fetchFromBackend<{ id: number; name: string }[]>({
+            method: "GET",
+            endpoint: "data/course"
+        })
+        .then((data) => setItems(data))
+        .catch((err) => console.error(err));
     }, []);
 
     return (
         <div>
-            <h2>Module</h2>
             <Grid
                 items={items}
                 setItems={setItems}

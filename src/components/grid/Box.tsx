@@ -9,7 +9,6 @@ import './Box.css'
 export type BoxData = {
   id: number;
   name: string;
-  details: string;
 };
 
 export type BoxProps = {
