@@ -5,26 +5,26 @@ import "./Grid.css";
 type GridProps = {
   items: BoxData[];
   setItems: React.Dispatch<React.SetStateAction<BoxData[]>>;
-  onRename: (id: string, newTitle: string) => void;
-  onDelete: (id: string) => void;
-  onClick: (id: string) => void;
+  onRename: (id: number, newTitle: string) => void;
+  onDelete: (id: number) => void;
+  onClick: (id: number) => void;
 };
 
 export function Grid({ items, setItems, onRename, onDelete, onClick }: GridProps) {
 
-  const handleRename = (id: string, newTitle: string) => {
+  const handleRename = (id: number, newTitle: string) => {
     setItems((prev) =>
       prev.map((item) => (item.id === id ? { ...item, title: newTitle } : item))
     );
     onRename(id, newTitle);
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = (id: number) => {
     setItems((prev) => prev.filter((item) => item.id !== id));
     onDelete(id);
   };
 
-  const handleClick = (id: string) => {
+  const handleClick = (id: number) => {
     onClick(id);
   };
 

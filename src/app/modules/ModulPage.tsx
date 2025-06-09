@@ -1,31 +1,38 @@
-import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { fetchFromBackend } from "../../fetchBackend";
 import { Grid } from "../../components/grid/Grid";
 import type { BoxData } from "../../components/grid/Box";
+import { useNavigate } from "react-router-dom";
 
-function TopicPage() {
-    const { id } = useParams(); // Modul-ID from URL
-    const [items, setItems] = useState<BoxData[]>([
-        { id: "1", title: "Box 1" },
-        { id: "2", title: "Ein Titel" },
-    ]);
+function ModulPage() {
+    //const navigate = useNavigate();
+    const [items, setItems] = useState<BoxData[]>([]);
 
     const addItem = (newElement: BoxData) => {
         setItems(oldItems => [...oldItems, newElement]);
     };
 
-    const handleRename = (id: string, newTitle: string) => {
+    const handleRename = (id: number, newTitle: string) => {
         console.log(`Rename: ID=${id}, Neuer Titel=${newTitle}`);
     };
 
-    const handleDelete = (id: string) => {
+    const handleDelete = (id: number) => {
         console.log(`Delete: ID=${id}`);
     };  
 
-    const handleClick = (id: string) => {
+    const handleClick = (id: number) => {
         //navigate(`/module/${id}`)
         console.log(`Clicked: ID=${id}`);
     };
+
+    useEffect(() => {
+        fetchFromBackend<{ id: number; name: string }[]>({
+            method: "GET",
+            endpoint: "data/course"
+        })
+        .then((data) => setItems(data))
+        .catch((err) => console.error(err));
+    }, []);
 
     return (
         <div>
@@ -40,4 +47,4 @@ function TopicPage() {
     );
 }
 
-export default TopicPage;
+export default ModulPage;
