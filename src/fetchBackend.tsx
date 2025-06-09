@@ -1,0 +1,25 @@
+const API_URL = "http://localhost:3000";
+const TOKEN = "1_aN4DqUYP75U2nZmqO6OxO1FMd48T2d1E"; //TODO: only for Testing
+
+interface FetchOptions {
+  method: "GET" | "POST" | "DELETE";
+  endpoint: string;
+  body?: any;
+}
+
+export async function fetchFromBackend<T>({ method, endpoint, body }: FetchOptions): Promise<T> {
+  const response = await fetch(`${API_URL}/${endpoint}`, {
+    method,
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${TOKEN}`,
+    },
+    body: body ? JSON.stringify(body) : undefined,
+  });
+
+  if (!response.ok) {
+    throw new Error(`Fehler beim Abrufen (${method} ${endpoint}): ${response.status}`);
+  }
+
+  return response.json();
+}

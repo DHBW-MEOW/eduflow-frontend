@@ -1,41 +1,31 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useParams } from "react-router-dom";
 import { Grid } from "../../components/grid/Grid";
 import type { BoxData } from "../../components/grid/Box";
-import { useNavigate } from "react-router-dom";
 
-function ModulPage() {
-    const navigate = useNavigate();
+function TopicPage() {
+    const { id } = useParams(); // Modul-ID from URL
     const [items, setItems] = useState<BoxData[]>([
-        { id: "1", title: "Box 1" },
-        { id: "2", title: "Ein Titel" },
+        { id: 1, name: "Box 1" },
+        { id: 2, name: "Ein Titel" },
     ]);
 
     const addItem = (newElement: BoxData) => {
         setItems(oldItems => [...oldItems, newElement]);
     };
 
-    const handleRename = (id: string, newTitle: string) => {
+    const handleRename = (id: number, newTitle: string) => {
         console.log(`Rename: ID=${id}, Neuer Titel=${newTitle}`);
     };
 
-    const handleDelete = (id: string) => {
+    const handleDelete = (id: number) => {
         console.log(`Delete: ID=${id}`);
     };  
 
-    const handleClick = (id: string) => {
-        navigate(`/module/${id}`)
+    const handleClick = (id: number) => {
+        //navigate(`/module/${id}`)
         console.log(`Clicked: ID=${id}`);
     };
-
-    useEffect(() => {
-        fetch("/api/modules")
-        .then((res) => {
-        if (!res.ok) throw new Error("Fehler beim Abrufen");
-            return res.json();
-        })
-        .then((data) => setItems(data))
-        .catch((err) => console.error(err));
-    }, []);
 
     return (
         <div>
@@ -50,4 +40,4 @@ function ModulPage() {
     );
 }
 
-export default ModulPage;
+export default TopicPage;
