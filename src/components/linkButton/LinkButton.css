@@ -1,4 +1,27 @@
-img{
+.linkButton {
+  text-decoration: none !important;
+}
+
+img {
   width: 45px;
   height: 45px;
+}
+
+.linkButton:hover img {
+  filter: var(--filter-hover);
+}
+
+.linkButton:hover .buttonText{
+  color: var(--color-hover);
+}
+
+.buttonText {
+  color: black;
+}
+
+.buttonText:active,
+.buttonText:focus,
+.buttonText:visited {
+  color: black;
+  text-decoration: none;
 }

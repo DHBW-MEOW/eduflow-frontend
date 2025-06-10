@@ -72,6 +72,7 @@
 
   /* === Hover, Focus & Status === */
   --color-hover: #374151;          /* Hover-Hintergrund */
+  --filter-hover: invert(24%) sepia(8%) saturate(1067%) hue-rotate(190deg) brightness(97%) contrast(90%);
   --color-focus: #60a5fa;          /* Fokus-Ring */
   --color-shadow: rgba(0, 123, 255, 0.25)
   --color-error: #ef4444;          /* Rot – Fehlermeldung */
