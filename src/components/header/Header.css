@@ -1,0 +1,36 @@
+.header{
+  display: inline-flex;
+  background-color: var(--color-bg-2);
+  padding-bottom: 25px;
+  padding-top: 25px;
+  padding-left: 25px;
+  padding-right: 25px;
+  justify-content: space-between;
+}
+.headerLeft {
+  display: inline-flex;
+  justify-content: left;
+}
+.headerRight {
+  display: inline-flex;
+  justify-content: right;
+  display: inline-flex
+
+}
+
+.headerText {
+  padding-left: 25px;
+  display: flex;
+  align-items: center;
+  font-size: 16pt;
+  margin-left: 5%;
+}
+
+@media (min-width: 480px) {
+  .header{
+    display: inline-flex;
+    background-color: var(--color-bg-2);
+    justify-content: space-between;
+  }
+
+}
