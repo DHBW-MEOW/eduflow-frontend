@@ -3,7 +3,7 @@
   justify-content: space-around;
   padding-top: 15px;
   padding-bottom: 15px;
-  background-color: var(--color-bg-2);
+  background-color: var(--color-bars);
 }
 
 @media (min-width: 480px) {

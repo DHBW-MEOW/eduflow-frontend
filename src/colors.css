@@ -3,6 +3,9 @@
   --color-black: #1f1f1f;
   --color-white: #f0f0f0;
 
+  /* === Header/ Footer === */
+  --color-bars: #a4adcc;
+
   /* === Background Colors (Light Theme) === */
   --color-bg-1: #f9f9f9;   /* Haupt-Hintergrund */
   --color-bg-2: #f8f8f8;   /* Sekundär (z. B. Panels, Cards) */
@@ -31,9 +34,14 @@
   /* === Hover, Focus & Status === */
   --color-hover: #e0e7ff;          /* Hover-Hintergrund (heller) */
   --color-focus: #60a5fa;          /* Fokus-Ring (bleibt gleich) */
-  --color-shadow: rgba(0, 123, 255, 0.1); /* Weniger intensive Schatten */
+  --color-shadow: #007bff1a;       /* Weniger intensive Schatten */
   --color-error: #ef4444;          /* Rot – Fehlermeldung (bleibt gleich) */
   --color-success: #22c55e;        /* Grün – Erfolg (bleibt gleich) */
+
+  /* === Icons === */
+  --color-icon: var(--color-black);
+  --filter-icon: brightness(0.12);
+  --filter-icon-hover: invert(96%) sepia(20%) saturate(6000%) hue-rotate(180deg) brightness(100%) contrast(100%);
 
   /* === Others === */
   --color-muted: #9ca3af;
@@ -41,14 +49,14 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-  /* === Base === */
-  --color-black: #1f1f1f;
-  --color-white: #f0f0f0;
-
   /* === Background Colors (Dark Theme) === */
   --color-bg-1: #1e1e2f;   /* Haupt-Hintergrund */
   --color-bg-2: #2d2d3e;   /* Sekundär (z. B. Panels, Cards) */
   --color-surface: #3b3b4b; /* Boxen, Modale Fenster */
+
+  /* === Header/ Footer === */
+  --color-bars: #3a3c55;
+
 
   /* === Primary Colors (Blue Accent) === */
   --color-primary: #3b82f6;        /* Blau – Hauptakzent */
@@ -72,11 +80,15 @@
 
   /* === Hover, Focus & Status === */
   --color-hover: #374151;          /* Hover-Hintergrund */
-  --filter-hover: invert(24%) sepia(8%) saturate(1067%) hue-rotate(190deg) brightness(97%) contrast(90%);
   --color-focus: #60a5fa;          /* Fokus-Ring */
-  --color-shadow: rgba(0, 123, 255, 0.25)
+  --color-shadow: #007bff40;       /* Weniger intensive Schatten */
   --color-error: #ef4444;          /* Rot – Fehlermeldung */
   --color-success: #22c55e;        /* Grün – Erfolg */
+
+  /* === Icons === */
+  --color-icon: var(--color-white);
+  --filter-icon: invert(100%) brightness(0.94) contrast(0.98);
+  --filter-icon-hover: invert(24%) sepia(8%) saturate(1067%) hue-rotate(190deg) brightness(97%) contrast(90%);
 
   /* === Others === */
   --color-muted: #6b7280;

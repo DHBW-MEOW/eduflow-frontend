@@ -5,23 +5,22 @@
 img {
   width: 45px;
   height: 45px;
+
+  filter: var(--filter-icon);
 }
 
 .linkButton:hover img {
-  filter: var(--filter-hover);
+  filter: var(--filter-icon-hover);
 }
 
 .linkButton:hover .buttonText{
   color: var(--color-hover);
 }
 
-.buttonText {
-  color: black;
-}
-
+.buttonText,
 .buttonText:active,
 .buttonText:focus,
 .buttonText:visited {
-  color: black;
+  color: var(--color-icon);
   text-decoration: none;
 }
