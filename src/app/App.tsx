@@ -11,7 +11,7 @@ const App: React.FC = () => {
     <Layout>
         <Routes>
           <Route path="/" element={ModulPage()} />
-          <Route path="/modules/:id" element={TopicPage()} />
+          <Route path="/modules/:id" element={<TopicPage />} />
         </Routes>
     </Layout>
   )
