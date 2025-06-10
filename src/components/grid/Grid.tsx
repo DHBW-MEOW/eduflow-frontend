@@ -14,7 +14,7 @@ export function Grid({ items, setItems, onRename, onDelete, onClick }: GridProps
 
   const handleRename = (id: number, newTitle: string) => {
     setItems((prev) =>
-      prev.map((item) => (item.id === id ? { ...item, title: newTitle } : item))
+      prev.map((item) => (item.id === id ? { ...item, name: newTitle } : item))
     );
     onRename(id, newTitle);
   };
