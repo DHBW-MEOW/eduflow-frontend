@@ -4,10 +4,14 @@
 
   flex-grow: 0;
   flex-shrink: 0;
-  flex-basis: 30%;
+  flex-basis: 70%;
+  
+  margin: 1%;
 
-  margin: 5px 10px;
-  min-height: 150px;
+  max-width: 40%;
+  max-height: 5%;
+  
+  min-height: 44px;
   min-width: 44px;
 
   background-color: var(--color-surface);
@@ -19,7 +23,7 @@
 
 .box:hover {
   background-color: var(--color-hover);
-  border-color: var(--color-primary-light);
+  border-color: var(--color-border-light);
 }
 
 .box:focus-visible {
@@ -36,11 +40,12 @@
 
 .menu-button {
   position: absolute;
-  top: 0%;
-  left: 100%;
-  margin-left: -44px;
+  top: 0;
+  right: 0;
+
   min-width: 44px;
   min-height: 44px;
+
   background: none;
   border: none;
   color: var(--color-text);
@@ -49,10 +54,12 @@
   cursor: pointer;
 }
 
-@media (max-width: 480px) {
+@media (min-width: 480px) {
   .box{
-    flex-basis: 45%;
-    margin: 5px 6px;
-    min-height: 100px;
+    flex-basis: 50%;
+    width: 30%;
+
+    max-width: 15%;
+    max-height: 5%;
   }
 }

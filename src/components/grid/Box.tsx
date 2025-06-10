@@ -103,7 +103,7 @@ export function Box({ data, onDelete, onRename, onClick }: BoxProps) {
           isOpen={popupDeleteOpen}
           content={
             <>
-              Möchten Sie dieses Element wirklich löschen?<br />
+              Möchten Sie das Element "{data.id}" wirklich löschen?<br />
               Diese Aktion kann nicht mehr rückgängig gemacht werden.
             </>
           }
