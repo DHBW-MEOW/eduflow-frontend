@@ -7,17 +7,12 @@ import Modules from './modules/Modules.tsx'
 import Studyplan from './studyplan/Studyplan.tsx'
 import Todo from './todo/Todo.tsx'
 import SomePage from './somePage/SomePage.tsx'
+import { Children } from 'react'
 
 const App: React.FC = () => {
   return (
     <Layout>
-        <Routes>
-          <Route path="/" element={Home()} />
-          <Route path="/studyplan" element={Studyplan()} />
-          <Route path="/todo" element={Todo()} />
-          <Route path="/modules" element={Modules()} />
-          <Route path="/somepage" element={SomePage()} />
-        </Routes>
+      <h1>aöslkdjfaösldjf</h1>
     </Layout>
   )
 }
