@@ -3,11 +3,11 @@ import { Grid } from "../../components/grid/Grid";
 import type { BoxData } from "../../components/grid/Box";
 
 function GridExamplePage() {
-  const newElement: BoxData = { id: 5, name: "Box 3" };
+  const newElement: BoxData = { id: 5, name: "Box 3", details: "" };
 
   const [items, setItems] = useState<BoxData[]>([
-    { id: 1, name: "Box 1" },
-    { id: 2, name: "Ein sehr sehr langer Titel" },
+    { id: 1, name: "Box 1", details: "" },
+    { id: 2, name: "Ein sehr sehr langer Titel", details: "" },
   ]);
 
   const addItem = () => {

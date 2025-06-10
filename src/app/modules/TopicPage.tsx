@@ -1,11 +1,12 @@
 import { useEffect, useState, type JSX } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Grid } from "../../components/grid/Grid";
 import { fetchFromBackend } from "../../fetchBackend";
 import type { BoxData } from "../../components/grid/Box";
 
 function TopicPage(): JSX.Element {
-    const { id } = useParams<{ id: string }>();
+    const { moduleId } = useParams<{ moduleId: string }>();
+    const navigate = useNavigate();
     const [items, setItems] = useState<BoxData[]>([]);
    
     const addItem = (newElement: BoxData) => {
@@ -21,14 +22,15 @@ function TopicPage(): JSX.Element {
     };  
 
     const handleClick = (id: number) => {
-        //navigate(`/module/${id}`)
+        if (!id) return;
+        navigate(`/modules/${moduleId}/topics/${id}`);
         console.log(`Clicked: ID=${id}`);
     };
 
     useEffect(() => {
-        fetchFromBackend<{ id: number; name: string; }[]>({
+        fetchFromBackend<{ id: number; name: string; details: string }[]>({
             method: "GET",
-            endpoint: `data/topic?course_id=${id}`
+            endpoint: `data/topic?course_id=${moduleId}`
         })
         .then((data) => setItems(data))
         .catch((err) => console.error(err));
