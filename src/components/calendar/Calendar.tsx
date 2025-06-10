@@ -8,14 +8,15 @@ const Calendar = () => {
     const [year, setYear] = useState(today.getFullYear());
 
     type Event = { type: "deadline" | "exam"; title: string };
-    const events: { [date: string]: Event[] } = { // Examples and Placeholder for events from backend
+    const events: { [date: string]: Event[] } = {
         '2025-06-15': [{ type: 'deadline', title: 'Project Due' }],
         '2025-06-20': [
             { type: 'exam', title: 'Math Exam' },
-            { type: 'deadline', title: 'Project' }
+            { type: 'deadline', title: 'Project' },
+            { type: 'deadline', title: 'Project' },
         ],
         '2025-06-25': [{ type: 'deadline', title: 'Essay Due' }],
-    };
+    }; // Examples and Placeholder for events from backend
 
     const months = [
         "Januar", "Februar", "März", "April", "Mai", "Juni",
@@ -24,6 +25,9 @@ const Calendar = () => {
 
     const weekdays = [
         "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"
+    ];
+    const weekdaysShort = [
+        "Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"
     ];
 
     const generateCalendarDays = () => {
@@ -81,21 +85,24 @@ const Calendar = () => {
 
     return (
         <div className="calendar-container">
-            <h2>Kalender</h2>
-
-            {/* Headbar for the Calendar */}
-            <div className="calendar-headbar">
-                <button onClick={previousMonth}>&lt;&lt;</button>
-                <span>{months[month]} {year}</span>
-                <button onClick={nextMonth}>&gt;&gt;</button>
-            </div>
-            
-            {/* Weekdays */}
-            <div className='calendar-weekdays-container'>
-                <div className="calendar-weekdays">
-                    {weekdays.map((day, index) => (
-                        <span key={index}>{day}</span>
-                    ))}
+            <div className='header'>
+                {/* Navbar for the Calendar */}
+                <div className="calendar-navbar">
+                    <button className='navbar-button' onClick={previousMonth}>&lt;&lt;</button>
+                    <span>{months[month]} {year}</span>
+                    <button className='navbar-button' onClick={nextMonth}>&gt;&gt;</button>
+                </div>
+                
+                {/* Weekdays */}
+                <div className='calendar-weekdays-container'>
+                    <div className="calendar-weekdays">
+                        {weekdays.map((day, index) => (
+                            <span className="weekdays-full" key={index}>{day}</span>
+                        ))}
+                        {weekdaysShort.map((day, index) => (
+                            <span className="weekdays-short" key={index}>{day}</span>
+                        ))}
+                    </div>
                 </div>
             </div>
 
