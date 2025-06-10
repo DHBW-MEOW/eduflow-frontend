@@ -1,5 +1,5 @@
 const API_URL = "http://localhost:3000";
-const TOKEN = "1_UC9KTzb9PrVCQH9QtXx4LT7J6jq6pfFV"; //TODO: only for Testing
+const TOKEN = "1_4ALf8NHEKRoAfO54SXR89zJelvaYAAM8"; //TODO: only for Testing
 
 interface FetchOptions {
   method: "GET" | "POST" | "DELETE";
