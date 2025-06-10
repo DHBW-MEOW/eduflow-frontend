@@ -11,9 +11,12 @@ export default [
   route("/login", "./app/login/Login.tsx"),
   route("/register", "./app/register/Register.tsx"),
   layout("./app/AppLayout.tsx", [
+    route("/profile", "./app/profile/Profile.tsx"),
     route("/home", "./app/home/Home.tsx"),
     route("/modules", "./app/modules/Modules.tsx", [
-      //route(":moduleID", "./app/modules/TopicPage.tsx")
+//    route(":moduleID", "./app/modules/TopicPage.tsx", [
+//      route(":topicID", "./app/modules/TopicView.tsx") 
+//    ])
     ]),
     route("/studyplan", "./app/studyplan/Studyplan.tsx"),
     //route("/todo", "./app/todo/Todo.tsx"),
