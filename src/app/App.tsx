@@ -1,17 +1,6 @@
-import { Routes, Route } from 'react-router-dom'
 import './App.css'
 import '../colors.css'
 import Layout from './Layout.tsx'
-
-import Home from './home/Home.tsx'
-import Modules from './modules/Modules.tsx'
-import Studyplan from './studyplan/Studyplan.tsx'
-import Todo from './todo/Todo.tsx'
-import SomePage from './somePage/SomePage.tsx'
-import ModulPage from './modulPage/ModulPage.tsx'
-import TopicPage from './modules/TopicPage.tsx'
-import DetailPage from './modules/DetailPage.tsx'
-import { Children } from 'react'
 
 const App: React.FC = () => {
   return (
