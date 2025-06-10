@@ -1,6 +1,6 @@
 import './App.css'
 import '../colors.css'
-import Layout from './Layout.tsx'
+import AppLayout from './appLayout.tsx'
 import Home from './home/Home.tsx'
 import Modules from './modules/Modules.tsx'
 import Studyplan from './studyplan/Studyplan.tsx'
@@ -10,9 +10,7 @@ import { Children } from 'react'
 
 const App: React.FC = () => {
   return (
-    <Layout>
-      <h1>aöslkdjfaösldjf</h1>
-    </Layout>
+    <div>test</div>
   )
 }
 
