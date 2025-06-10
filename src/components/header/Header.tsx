@@ -1,6 +1,36 @@
-function Header() {
+import "./Header.css"
+import LinkButton from "../linkButton/LinkButton.tsx"
+
+function Header({
+  leftButton,
+  text,
+  rightButton
+}: {
+  leftButton: {
+    on: boolean,
+    text: string,
+    icon: string,
+    link: string
+  }, 
+  text: string,
+  rightButton: {
+    on: boolean,
+    text: string,
+    icon: string,
+    link: string
+  }
+}) {
+
   return (
-    <div>Header</div>
+    <div className="header">
+      <div className="headerLeft">
+        {leftButton.on && <LinkButton link={leftButton.link} text={leftButton.text} icon={leftButton.icon}/>}
+        {text}
+      </div>
+      <div className="headerRight">
+        {rightButton.on && <LinkButton link={rightButton.link} text={rightButton.text} icon={rightButton.icon}/>}
+      </div>
+    </div>
   )
 }
 

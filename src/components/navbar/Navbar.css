@@ -1,0 +1,20 @@
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background-color: var(--color-bars);
+}
+
+@media (min-width: 480px) {
+  .navbar{
+    text-align: center;
+    gap: 3%; /* Gap of the flex inside (not the css grid it is in) */
+    justify-content: flex-start;
+    flex-direction: column;
+    padding-top: 25px;
+
+    /* === Grid Properties === */
+    grid-row: 1 / span 2;
+  }
+}

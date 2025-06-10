@@ -1,0 +1,37 @@
+:root{
+  --navbar-width: 6%;
+  --navbar-min-width: 80px;
+  --header-height: 5%;
+  --header-min-height: 80px;
+
+  margin: 0;
+  padding: 0;
+}
+html, body{
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.layout{
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 1fr;
+  min-height: 100vh;
+}
+.page{
+  grid-row: 2;
+}
+@media (min-width: 480px) {
+  .layout{
+    display: grid;
+    grid-template-rows: minmax(var(--header-min-height), var(--header-height)) auto;
+    grid-template-columns: minmax(var(--navbar-min-width), var(--navbar-width)) auto;
+    min-height: 100vh;
+  }
+  .page{
+    grid-column: 2 / span 1;
+    grid-row: 2;
+  }
+
+}

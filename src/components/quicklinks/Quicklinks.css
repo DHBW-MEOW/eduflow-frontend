@@ -1,0 +1,71 @@
+/* TODO: set padding from root to 0 for mobile*/
+
+.quicklinks-container {
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+
+    padding: 3%;
+    gap: 3%;
+
+    width: 100%;
+
+    background-color: var(--color-bg-2);
+    border-radius: 8px;
+    border-color: var(--color-border);
+}
+
+.dhbw-container,
+.learning-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    padding: 3%;
+    margin-left: auto;
+    margin-right: auto;
+
+    width: 40%;
+    flex: 1;
+
+    background-color: var(--color-surface);
+    border-radius: 8px;
+    border-color: var(--color-border-light);
+}
+
+h4 {
+    margin-top: 0px;
+    margin-bottom: 8px;
+    color: var(--color-heading);
+}
+
+a:link {
+    color: var(--color-link);
+}
+
+a:visited {
+    color: var(--color-link-visited);
+}
+
+a:hover {
+    color: var(--color-link-hover);
+}
+
+a:active,
+a:visited:active {
+    color: var(--color-link-active);
+}
+
+@media (min-width: 480px) {
+	.quicklinks-container {
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+        box-sizing: border-box;
+    }
+
+    .dhbw-container,
+    .learning-container {
+        flex: 1;
+    }
+}
