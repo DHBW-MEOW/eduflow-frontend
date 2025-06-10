@@ -9,12 +9,7 @@ import {
 export default [
   layout("./app/Layout.tsx", [
     index("./app/home/Home.tsx"),
-
-    route("/modules", "./app/modules/ModulPage.tsx"),
-    route("/modules/:moduleId", "./app/modules/TopicPage.tsx"),
-    route("/modules/:moduleId/topics/:topicId", "./app/modules/DetailTopicPage.tsx"),
-    route("/modules/:moduleId/exams/:examId", "./app/modules/DetailExamPage.tsx"),
-
+    route("/modules", "./app/modules/Modules.tsx"),
     route("/studyplan", "./app/studyplan/Studyplan.tsx"),
     route("/todo", "./app/todo/Todo.tsx"),
   ])
