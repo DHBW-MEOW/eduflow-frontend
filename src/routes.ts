@@ -7,10 +7,15 @@ import {
 } from "@react-router/dev/routes";
 
 export default [
-  layout("./app/Layout.tsx", [
-    index("./app/home/Home.tsx"),
-    route("/modules", "./app/modules/Modules.tsx"),
+  index("./app/start/Start.tsx"),
+  layout("./app/appLayout.tsx", [
+    route("/home", "./app/home/Home.tsx"),
+    route("/login", "./app/login/Login.tsx"),
+    route("/register", "./app/register/Register.tsx"),
+    route("/modules", "./app/modules/Modules.tsx", [
+      //route(":moduleID", "./app/modules/TopicPage.tsx")
+    ]),
     route("/studyplan", "./app/studyplan/Studyplan.tsx"),
-    route("/todo", "./app/todo/Todo.tsx"),
+    //route("/todo", "./app/todo/Todo.tsx"),
   ])
 ] satisfies RouteConfig;
