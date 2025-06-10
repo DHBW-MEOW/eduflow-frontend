@@ -1,6 +1,6 @@
 import './App.css'
 import '../colors.css'
-import AppLayout from './appLayout.tsx'
+import AppLayout from './AppLayout.tsx'
 import Home from './home/Home.tsx'
 import Modules from './modules/Modules.tsx'
 import Studyplan from './studyplan/Studyplan.tsx'
