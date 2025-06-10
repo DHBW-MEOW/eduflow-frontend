@@ -11,6 +11,7 @@ import SomePage from './somePage/SomePage.tsx'
 import ModulPage from './modulPage/ModulPage.tsx'
 import TopicPage from './modules/TopicPage.tsx'
 import DetailPage from './modules/DetailPage.tsx'
+import { Children } from 'react'
 
 const App: React.FC = () => {
   return (
@@ -24,6 +25,7 @@ const App: React.FC = () => {
           <Route path="/modules/:moduleId" element={<TopicPage />} />
           <Route path="/modules/:moduleId/topics/:topicId" element={<DetailPage />} />
         </Routes>
+      <h1>aöslkdjfaösldjf</h1>
     </Layout>
   )
 }
