@@ -10,6 +10,7 @@ import Todo from './todo/Todo.tsx'
 import SomePage from './somePage/SomePage.tsx'
 import ModulPage from './modulPage/ModulPage.tsx'
 import TopicPage from './modules/TopicPage.tsx'
+import DetailPage from './modules/DetailPage.tsx'
 
 const App: React.FC = () => {
   return (
@@ -20,7 +21,8 @@ const App: React.FC = () => {
           <Route path="/todo" element={Todo()} />
           <Route path="/modules" element={ModulPage()} />
           <Route path="/somepage" element={SomePage()} />
-          <Route path="/module/:id" element={TopicPage()} />
+          <Route path="/modules/:moduleId" element={<TopicPage />} />
+          <Route path="/modules/:moduleId/topics/:topicId" element={<DetailPage />} />
         </Routes>
     </Layout>
   )
