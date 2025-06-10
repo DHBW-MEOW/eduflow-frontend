@@ -4,24 +4,24 @@
   padding: 20px;
   justify-content: space-between;
 }
+
 .headerLeft {
   display: inline-flex;
   justify-content: left;
-}
-.headerRight {
-  display: inline-flex;
-  justify-content: right;
-  display: inline-flex
+  width: max-content;
 
-}
-
-.headerText {
-  padding-left: 25px;
-  display: flex;
   align-items: center;
   color: var(--color-heading);
   font-size: 16pt;
-  margin-left: 5%;
+  gap: 5%;
+  width: 80%;
+}
+
+.headerRight {
+  display: inline-flex;
+  justify-content: right;
+  display: inline-flex;
+  width: 45px;
 }
 
 @media (min-width: 480px) {
