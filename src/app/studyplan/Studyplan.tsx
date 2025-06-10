@@ -1,8 +1,12 @@
+import Calendar from "../../components/calendar/Calendar";
+
 function Studyplan() {
   return (
-    <>
-      This is the Studyplan Page
-    </>
+    <div className="studyplan-container">
+      <div className="studyplan-calendar">
+        <Calendar/>
+      </div>
+    </div>
   )
 }
 

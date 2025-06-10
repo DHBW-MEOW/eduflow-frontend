@@ -85,7 +85,7 @@ const Calendar = () => {
 
     return (
         <div className="calendar-container">
-            <div className='header'>
+            <div className='calendar-header'>
                 {/* Navbar for the Calendar */}
                 <div className="calendar-navbar">
                     <button className='navbar-button' onClick={previousMonth}>&lt;&lt;</button>
