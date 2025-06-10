@@ -5,7 +5,7 @@ import type { BoxData } from "../../components/grid/Box";
 import { useNavigate } from "react-router-dom";
 
 function ModulPage() {
-    //const navigate = useNavigate();
+    const navigate = useNavigate();
     const [items, setItems] = useState<BoxData[]>([]);
 
     const addItem = (newElement: BoxData) => {
@@ -21,12 +21,12 @@ function ModulPage() {
     };  
 
     const handleClick = (id: number) => {
-        //navigate(`/module/${id}`)
+        navigate(`/modules/${id}`);
         console.log(`Clicked: ID=${id}`);
     };
 
     useEffect(() => {
-        fetchFromBackend<{ id: number; name: string }[]>({
+        fetchFromBackend<{ id: number; name: string; details: string }[]>({
             method: "GET",
             endpoint: "data/course"
         })
