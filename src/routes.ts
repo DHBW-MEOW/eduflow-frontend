@@ -8,10 +8,10 @@ import {
 
 export default [
   index("./app/start/Start.tsx"),
+  route("/login", "./app/login/Login.tsx"),
+  route("/register", "./app/register/Register.tsx"),
   layout("./app/AppLayout.tsx", [
     route("/home", "./app/home/Home.tsx"),
-    route("/login", "./app/login/Login.tsx"),
-    route("/register", "./app/register/Register.tsx"),
     route("/modules", "./app/modules/Modules.tsx", [
       //route(":moduleID", "./app/modules/TopicPage.tsx")
     ]),
