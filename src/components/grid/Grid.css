@@ -1,0 +1,6 @@
+.grid-container {
+  display: flex;
+  justify-content: start;
+  align-items: stretch;
+  flex-wrap: wrap;
+}
