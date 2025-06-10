@@ -7,15 +7,15 @@ import type { RenameData, RenameHandles } from '../popUpCreate/types';
 import './Box.css'
 
 export type BoxData = {
-  id: string;
-  title: string;
+  id: number;
+  name: string;
 };
 
 export type BoxProps = {
   data: BoxData;
-  onRename: (id: string, newTitle: string) => void;
-  onDelete: (id: string) => void;
-  onClick: (id: string) => void;
+  onRename: (id: number, newTitle: string) => void;
+  onDelete: (id: number) => void;
+  onClick: (id: number) => void;
 };
 
 export function Box({ data, onDelete, onRename, onClick }: BoxProps) {
@@ -80,7 +80,7 @@ export function Box({ data, onDelete, onRename, onClick }: BoxProps) {
     <div className="box" onClick={handleClick} ref={boxRef}>
       <div>
         <div className="header-container">
-            <h3>{data.title}</h3>
+            <h3>{data.name}</h3>
         </div>
         <button className="menu-button" onClick={(event) => {
             event.stopPropagation();
@@ -103,7 +103,7 @@ export function Box({ data, onDelete, onRename, onClick }: BoxProps) {
           isOpen={popupDeleteOpen}
           content={
             <>
-              Möchten Sie das Element "{data.id}" wirklich löschen?<br />
+              Möchten Sie das Element "{data.name}" wirklich löschen?<br />
               Diese Aktion kann nicht mehr rückgängig gemacht werden.
             </>
           }
@@ -114,7 +114,7 @@ export function Box({ data, onDelete, onRename, onClick }: BoxProps) {
       {
         <PopUpCreate 
           isOpen={popupRenameOpen} 
-          label={"\"" + data.title + "\" umbenennen"} 
+          label={"\"" + data.name + "\" umbenennen"} 
           onClickDiscard={closePopupRename}
           onClickAdd={handleRename}
         >
