@@ -75,6 +75,17 @@ function TopicPage(): JSX.Element {
 
     const handleDeleteTopic = async (id: number) => {
         try {
+            const study_goals = await fetchFromBackend<{ id: number }[]>({
+                method: "GET",
+                endpoint: `data/study_goal?topic_id=${id}`,
+            });
+            for (const study_goal of study_goals) {
+                await fetchFromBackend<void>({
+                    method: "DELETE",
+                    endpoint: "data/study_goal",
+                    body: { id: study_goal.id },
+                });
+            };
             await fetchFromBackend<void>({
                 method: "DELETE",
                 endpoint: "data/topic",
