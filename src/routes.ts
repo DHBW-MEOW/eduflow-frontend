@@ -13,10 +13,12 @@ export default [
   layout("./app/AppLayout.tsx", [
     route("/profile", "./app/profile/Profile.tsx"),
     route("/home", "./app/home/Home.tsx"),
-    route("/modules", "./app/modules/Modules.tsx", [
-//    route(":moduleID", "./app/modules/TopicPage.tsx", [
-//      route(":topicID", "./app/modules/TopicView.tsx") 
-//    ])
+    
+    route("/modules", "./app/modules/ModulPage.tsx", [
+      route("/:moduleId", "./app/modules/TopicPage.tsx", [
+        route("/topics/:topicId", "./app/modules/DetailTopicPage.tsx"),
+        route("/exams/:examId", "./app/modules/DetailExamPage.tsx"),
+      ]),
     ]),
     route("/studyplan", "./app/studyplan/Studyplan.tsx"),
     //route("/todo", "./app/todo/Todo.tsx"),
