@@ -10,12 +10,12 @@ const Calendar = () => {
     type Event = { type: "deadline" | "exam"; title: string };
     const events: { [date: string]: Event[] } = {
         '2025-06-15': [{ type: 'deadline', title: 'Project Due' }],
-        '2025-06-20': [
+        '2025-06-25': [
             { type: 'exam', title: 'Math Exam' },
             { type: 'deadline', title: 'Project' },
             { type: 'deadline', title: 'Project' },
         ],
-        '2025-06-25': [{ type: 'deadline', title: 'Essay Due' }],
+        '2025-06-20': [{ type: 'deadline', title: 'Essay Due' }],
     }; // Examples and Placeholder for events from backend
 
     const months = [
@@ -70,7 +70,6 @@ const Calendar = () => {
         } else {
             setMonth(month + 1);
         }
-        console.log(`Next Month: ${months[month === 11 ? 0 : month + 1]} ${month === 11 ? year + 1 : year}`);
     };
 
     const previousMonth = () => {
@@ -80,7 +79,6 @@ const Calendar = () => {
         } else {
             setMonth(month - 1);
         }
-        console.log(`Previous Month: ${months[month === 0 ? 11 : month - 1]} ${month === 0 ? year - 1 : year}`);
     };
 
     return (
