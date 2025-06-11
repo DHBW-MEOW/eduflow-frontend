@@ -15,37 +15,33 @@ export type DetailProps = {
   onClick: (id: number) => void;
 };
 
-function DetailExamPage() {
+function DetailPage() {
   const { moduleId, examId } = useParams();
   const [ date, setDate ] = useState<Date>();
   const [ name, setName ] = useState<string>("");
   
   useEffect(() => {
-    const loadData = async () => {
-        try {
-          const data = await fetchFromBackend<{ id: number; name: string; date: Date }[]>({
-            method: "GET",
-            endpoint: `data/exam?id=${examId}&course_id=${moduleId}`,
-          })
-          if (data.length > 0) {
-            setDate(data[0].date);
-            setName(data[0].name);
-          }else{
-            console.log("No Exam was found");
-          }
-        } catch (err) {
-          console.error("Error while loading the Exam:", err);
+    fetchFromBackend<{ id: number; name: string; date: Date }[]>({
+      method: "GET",
+      endpoint: `data/exam?id=${examId}&course_id=${moduleId}`,
+    })
+      .then((data) => {
+        if (data.length > 0) {
+          setDate(data[0].date);
+          setName(data[0].name);
+        }else{
+            console.log("ERRROR");
         }
-      };    
-    loadData();
+      })
+      .catch((err) => console.error(err));
   }, [moduleId, examId]);
 
   return (
     <div>
       <h2>Details zur Exam {name}</h2>
-      <p>Datum: {date?.toString()}</p>
+      <p>Datum: {date?.getDate()}</p>
     </div>
   );
 }
 
-export default DetailExamPage;
+export default DetailPage;
