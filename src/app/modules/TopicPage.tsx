@@ -3,15 +3,59 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Grid } from "../../components/grid/Grid";
 import { fetchFromBackend } from "../../fetchBackend";
 import type { BoxData } from "../../components/grid/Box";
+import type { DetailData } from "./DetailExamPage";
 
 function TopicPage(): JSX.Element {
     const { moduleId } = useParams<{ moduleId: string }>();
     const navigate = useNavigate();
     const [ topics, setTopics] = useState<BoxData[]>([]);
     const [ exams, setExams] = useState<BoxData[]>([]);
+    const [ examsInfo, setExamsInfo] = useState<DetailData[]>([]);
    
     const addItem = (newElement: BoxData) => {
         setTopics(oldItems => [...oldItems, newElement]);
+    };
+
+    const handleRenameExam = async (id: number, newTitle: string) => {
+        const item = examsInfo.find(item => item.id === id);
+        if (!item) {
+            console.error(`No Exam found with ID=${id}`);
+            return;
+        }
+        try {
+            await fetchFromBackend<void>({
+                method: "POST",
+                endpoint: "data/exam",
+                body: {
+                  id: id,
+                  course_id: Number(moduleId),
+                  name: newTitle,
+                  data: item.date
+                },
+            });
+        } catch (err) {
+            console.error("Fehler beim Umbenennen:", err);
+        }
+        console.log(`Rename: ID=${id}, Neuer Titel=${newTitle}, Details=${item.date}`);
+    };
+
+    const handleDeleteExam = async (id: number) => {
+        try {
+            await fetchFromBackend<void>({
+                method: "DELETE",
+                endpoint: "data/exam",
+                body: { id: id },
+            });
+        } catch (err) {
+            console.error("Fehler beim Löschen:", err);
+        }
+        console.log(`Delete: ID=${id}`);
+    };  
+
+    const handleClickExam = (id: number) => {
+        if (!id) return;
+        navigate(`/modules/${moduleId}/exams/${id}`);
+        console.log(`Clicked: ID=${id}`);
     };
 
     const handleRenameTopic = async (id: number, newTitle: string) => {
@@ -59,16 +103,23 @@ function TopicPage(): JSX.Element {
     useEffect(() => {
         const loadData = async () => {
             try {
-                const dataTopic = await fetchFromBackend<{ id: number; name: string; details: string }[]>({
-                    method: "GET",
-                    endpoint: `data/topic?course_id=${moduleId}`
-                });
-                setTopics(dataTopic);
-                const dataExams = await fetchFromBackend<{ id: number; name: string; details: string }[]>({
-                    method: "GET",
-                    endpoint: `data/exam?course_id=${moduleId}`
-                });
+                const [dataTopics, dataExams, dataExamsInfo] = await Promise.all([
+                    fetchFromBackend<{ id: number; name: string; details: string }[]>({
+                        method: "GET",
+                        endpoint: `data/topic?course_id=${moduleId}`
+                    }),
+                    fetchFromBackend<{ id: number; name: string; details: string }[]>({
+                        method: "GET",
+                        endpoint: `data/exam?course_id=${moduleId}`
+                    }),
+                    fetchFromBackend<{ id: number; name: string; date: Date }[]>({
+                        method: "GET",
+                        endpoint: `data/exam?course_id=${moduleId}`
+                    })
+                ]);
+                setTopics(dataTopics);
                 setExams(dataExams);
+                setExamsInfo(dataExamsInfo);
             } catch (err) {
                 console.error("Fehler beim Laden der Kurse:", err);
             }
@@ -82,9 +133,9 @@ function TopicPage(): JSX.Element {
             <Grid
                 items={exams}
                 setItems={setExams}
-                onRename={handleRenameTopic}
-                onDelete={handleDeleteTopic}
-                onClick={handleClickTopic}
+                onRename={handleRenameExam}
+                onDelete={handleDeleteExam}
+                onClick={handleClickExam}
             />
             <h2>Topics</h2>
             <Grid
