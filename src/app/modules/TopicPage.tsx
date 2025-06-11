@@ -7,43 +7,92 @@ import type { BoxData } from "../../components/grid/Box";
 function TopicPage(): JSX.Element {
     const { moduleId } = useParams<{ moduleId: string }>();
     const navigate = useNavigate();
-    const [items, setItems] = useState<BoxData[]>([]);
+    const [ topics, setTopics] = useState<BoxData[]>([]);
+    const [ exams, setExams] = useState<BoxData[]>([]);
    
     const addItem = (newElement: BoxData) => {
-        setItems(oldItems => [...oldItems, newElement]);
+        setTopics(oldItems => [...oldItems, newElement]);
     };
 
-    const handleRename = (id: number, newTitle: string) => {
-        console.log(`Rename: ID=${id}, Neuer Titel=${newTitle}`);
+    const handleRenameTopic = async (id: number, newTitle: string) => {
+        const item = topics.find(item => item.id === id);
+        if (!item) {
+            console.error(`No Topic found with ID=${id}`);
+            return;
+        }
+        try {
+            await fetchFromBackend<void>({
+                method: "POST",
+                endpoint: "data/topic",
+                body: {
+                  id: id,
+                  course_id: Number(moduleId),
+                  name: newTitle,
+                  details: item.details
+                },
+            });
+        } catch (err) {
+            console.error("Fehler beim Umbenennen:", err);
+        }
+        console.log(`Rename: ID=${id}, Neuer Titel=${newTitle}, Details=${item.details}`);
     };
 
-    const handleDelete = (id: number) => {
+    const handleDeleteTopic = async (id: number) => {
+        try {
+            await fetchFromBackend<void>({
+                method: "DELETE",
+                endpoint: "data/topic",
+                body: { id: id },
+            });
+        } catch (err) {
+            console.error("Fehler beim Löschen:", err);
+        }
         console.log(`Delete: ID=${id}`);
     };  
 
-    const handleClick = (id: number) => {
+    const handleClickTopic = (id: number) => {
         if (!id) return;
         navigate(`/modules/${moduleId}/topics/${id}`);
         console.log(`Clicked: ID=${id}`);
     };
 
     useEffect(() => {
-        fetchFromBackend<{ id: number; name: string; details: string }[]>({
-            method: "GET",
-            endpoint: `data/topic?course_id=${moduleId}`
-        })
-        .then((data) => setItems(data))
-        .catch((err) => console.error(err));
+        const loadData = async () => {
+            try {
+                const dataTopic = await fetchFromBackend<{ id: number; name: string; details: string }[]>({
+                    method: "GET",
+                    endpoint: `data/topic?course_id=${moduleId}`
+                });
+                setTopics(dataTopic);
+                const dataExams = await fetchFromBackend<{ id: number; name: string; details: string }[]>({
+                    method: "GET",
+                    endpoint: `data/exam?course_id=${moduleId}`
+                });
+                setExams(dataExams);
+            } catch (err) {
+                console.error("Fehler beim Laden der Kurse:", err);
+            }
+        };    
+      loadData();
     }, []);
 
     return (
         <div>
+            <h2>Exams</h2>
             <Grid
-                items={items}
-                setItems={setItems}
-                onRename={handleRename}
-                onDelete={handleDelete}
-                onClick={handleClick}
+                items={exams}
+                setItems={setExams}
+                onRename={handleRenameTopic}
+                onDelete={handleDeleteTopic}
+                onClick={handleClickTopic}
+            />
+            <h2>Topics</h2>
+            <Grid
+                items={topics}
+                setItems={setTopics}
+                onRename={handleRenameTopic}
+                onDelete={handleDeleteTopic}
+                onClick={handleClickTopic}
             />
         </div>
     );
