@@ -8,17 +8,23 @@ function DetailTopicPage() {
   const [ name, setName ] = useState<string>("");
   
   useEffect(() => {
-    fetchFromBackend<{ id: number; name: string; details: string }[]>({
-      method: "GET",
-      endpoint: `data/topic?id=${topicId}&course_id=${moduleId}`,
-    })
-      .then((data) => {
+    const loadData = async () => {
+      try {
+        const data = await fetchFromBackend<{ id: number; name: string; details: string }[]>({
+          method: "GET",
+          endpoint: `data/topic?id=${topicId}&course_id=${moduleId}`,
+        })
         if (data.length > 0) {
           setDetails(data[0].details);
           setName(data[0].name);
+        }else{
+          console.log("No Topic was found");
         }
-      })
-      .catch((err) => console.error(err));
+      } catch (err) {
+        console.error("Error while loading the Topic:", err);
+      }
+    };    
+    loadData();
   }, [moduleId, topicId]);
 
   return (
