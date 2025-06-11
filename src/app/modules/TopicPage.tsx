@@ -11,11 +11,7 @@ function TopicPage(): JSX.Element {
     const [ topics, setTopics] = useState<BoxData[]>([]);
     const [ exams, setExams] = useState<BoxData[]>([]);
     const [ examsInfo, setExamsInfo] = useState<DetailData[]>([]);
-   
-    const addItem = (newElement: BoxData) => {
-        setTopics(oldItems => [...oldItems, newElement]);
-    };
-
+    
     const handleRenameExam = async (id: number, newTitle: string) => {
         const item = examsInfo.find(item => item.id === id);
         if (!item) {
@@ -30,13 +26,12 @@ function TopicPage(): JSX.Element {
                   id: id,
                   course_id: Number(moduleId),
                   name: newTitle,
-                  data: item.date
+                  date: item.date
                 },
             });
         } catch (err) {
-            console.error("Fehler beim Umbenennen:", err);
+            console.error("Error while renaming:", err);
         }
-        console.log(`Rename: ID=${id}, Neuer Titel=${newTitle}, Details=${item.date}`);
     };
 
     const handleDeleteExam = async (id: number) => {
@@ -47,15 +42,13 @@ function TopicPage(): JSX.Element {
                 body: { id: id },
             });
         } catch (err) {
-            console.error("Fehler beim Löschen:", err);
+            console.error("Error while deleting:", err);
         }
-        console.log(`Delete: ID=${id}`);
     };  
 
     const handleClickExam = (id: number) => {
         if (!id) return;
         navigate(`/modules/${moduleId}/exams/${id}`);
-        console.log(`Clicked: ID=${id}`);
     };
 
     const handleRenameTopic = async (id: number, newTitle: string) => {
@@ -76,9 +69,8 @@ function TopicPage(): JSX.Element {
                 },
             });
         } catch (err) {
-            console.error("Fehler beim Umbenennen:", err);
+            console.error("Error while renaming:", err);
         }
-        console.log(`Rename: ID=${id}, Neuer Titel=${newTitle}, Details=${item.details}`);
     };
 
     const handleDeleteTopic = async (id: number) => {
@@ -89,15 +81,13 @@ function TopicPage(): JSX.Element {
                 body: { id: id },
             });
         } catch (err) {
-            console.error("Fehler beim Löschen:", err);
+            console.error("Error while deleting:", err);
         }
-        console.log(`Delete: ID=${id}`);
     };  
 
     const handleClickTopic = (id: number) => {
         if (!id) return;
         navigate(`/modules/${moduleId}/topics/${id}`);
-        console.log(`Clicked: ID=${id}`);
     };
 
     useEffect(() => {
@@ -121,7 +111,7 @@ function TopicPage(): JSX.Element {
                 setExams(dataExams);
                 setExamsInfo(dataExamsInfo);
             } catch (err) {
-                console.error("Fehler beim Laden der Kurse:", err);
+                console.error("Error while loading the Topics and Exams:", err);
             }
         };    
       loadData();

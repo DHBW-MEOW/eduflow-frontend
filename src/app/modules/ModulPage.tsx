@@ -22,9 +22,8 @@ function ModulPage() {
                   name: newTitle,
                 },
             });
-            console.log(`Rename: ID=${id}, Neuer Titel=${newTitle}`);
         } catch (err) {
-            console.error("Fehler beim Umbenennen:", err);
+            console.error("Error while renaming:", err);
         }
     };
 
@@ -46,26 +45,14 @@ function ModulPage() {
                 endpoint: "data/course",
                 body: { id: id },
             });
-            console.log(`Delete: ID=${id}`);
         } catch (err) {
-            console.error("Fehler beim Löschen:", err);
+            console.error("Error while deleting:", err);
         }
     };  
 
     const handleClick = (id: number) => {
         navigate(`/modules/${id}`);
-        console.log(`Clicked: ID=${id}`);
     };
-
-    //TODO: zuerst habe ich mit .then().catch() gemacht, allerdings ist async/await besser -> schauen, ob alles noch gleich funktioniert
-    /*useEffect(() => {
-        fetchFromBackend<{ id: number; name: string; details: string }[]>({
-            method: "GET",
-            endpoint: "data/course"
-        })
-        .then((data) => setItems(data))
-        .catch((err) => console.error(err));
-    }, []);*/
 
     useEffect(() => {
         const loadData = async () => {
@@ -76,7 +63,7 @@ function ModulPage() {
                 });
                 setItems(data);
             } catch (err) {
-                console.error("Fehler beim Laden der Kurse:", err);
+                console.error("Error while loading the Courses:", err);
             }
         };    
       loadData();
