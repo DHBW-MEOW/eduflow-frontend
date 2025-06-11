@@ -4,20 +4,9 @@ import { fetchFromBackend } from "../../fetchBackend";
 import type { BoxData } from "../../components/grid/Box";
 
 function DetailPage() {
-    const { moduleId, topicId } = useParams();
-    const [details, setDetails] = useState<string>("");
-    const [items, setItems] = useState<BoxData[]>([]);
-
-    /*useEffect(() => {
-        console.log(moduleId + "-" + topicId)
-    fetchFromBackend<{ id: number; name: string; details: string }[]>({
-        method: "GET",
-        endpoint: `data/topic?id=${topicId}&course_id=${moduleId}`,
-    })
-    .then((data) => setItems(data))
-    .catch((err) => console.error(err));
-  }, [moduleId, topicId]);*/
-
+  const { moduleId, topicId } = useParams();
+  const [details, setDetails] = useState<string>("");
+  const [items, setItems] = useState<BoxData[]>([]);
   
   useEffect(() => {
     console.log(moduleId + "-" + topicId)
