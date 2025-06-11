@@ -23,10 +23,12 @@ const PopUpCreate: React.FC<PopUpProps> = ({isOpen, label, children, onClickDisc
                 <div className="popup-buttons">
                     <OptionButton
                      label='Verwerfen'
+                     buttonType='optionButton'
                      onClick={onClickDiscard}
                      />
                      <OptionButton
                      label='Hinzufügen'
+                     buttonType='optionButton'
                      onClick={onClickAdd}
                      />
                 </div>

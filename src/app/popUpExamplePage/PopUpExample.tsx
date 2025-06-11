@@ -103,11 +103,11 @@ const PopUpExample: React.FC = () => {
   return (
     <div>
       <h1>Meine App</h1>
-      <OptionButton label="Lernplan erstellen" onClick={() => setActivePopup(PopupType.LEARNING_PLAN)} />
-      <OptionButton label="ToDo erstellen" onClick={() => setActivePopup(PopupType.TODO)}/>
-      <OptionButton label="Prüfung anlegen" onClick={() => setActivePopup(PopupType.EXAM)}/>
-      <OptionButton label="Umbennenen" onClick={() => setActivePopup(PopupType.RENAME)}/>
-      <OptionButton label="Löschen" onClick={() => setActivePopup(PopupType.DELETE)} />
+      <OptionButton label="Lernplan erstellen" buttonType='optionButton' onClick={() => setActivePopup(PopupType.LEARNING_PLAN)} />
+      <OptionButton label="ToDo erstellen" buttonType='optionButton' onClick={() => setActivePopup(PopupType.TODO)}/>
+      <OptionButton label="Prüfung anlegen" buttonType='optionButton' onClick={() => setActivePopup(PopupType.EXAM)}/>
+      <OptionButton label="Umbennenen" buttonType='optionButton' onClick={() => setActivePopup(PopupType.RENAME)}/>
+      <OptionButton label="Löschen" buttonType='optionButton' onClick={() => setActivePopup(PopupType.DELETE)} />
 
       {/* Creating the different PopUps */}
       {activePopup !== PopupType.NONE && activePopup !== PopupType.DELETE && popupContent && (

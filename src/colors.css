@@ -39,6 +39,10 @@
   --color-error: #ef4444;          /* Rot – Fehlermeldung (bleibt gleich) */
   --color-success: #22c55e;        /* Grün – Erfolg (bleibt gleich) */
 
+  /* === Buttons === */
+  --color-button: var(--color-bg-1);
+  --color-button-light: var(--color-bg-2);
+
   /* === Icons === */
   --color-icon: var(--color-black);
   --filter-icon: brightness(0.12);
@@ -86,6 +90,10 @@
   --color-shadow: #007bff40;       /* Weniger intensive Schatten */
   --color-error: #ef4444;          /* Rot – Fehlermeldung */
   --color-success: #22c55e;        /* Grün – Erfolg */
+
+  /* === Buttons === */
+  --color-button: var(--color-bg-1);
+  --color-button-light: var(--color-bg-2);
 
   /* === Icons === */
   --color-icon: var(--color-white);

@@ -2,6 +2,8 @@ import './Studyplan.css'
 
 import Calendar from "../../components/calendar/Calendar";
 import StudyGoals from "../../components/studyGoals/StudyGoals";
+import OptionButton from '../../components/optionButtons/OptionButton';
+
 import type { ItemData, StudyGoalData, CourseData, TopicData, ExamDateData } from './types';
 import { useEffect, useState } from 'react';
 import { fetchFromBackend } from "../../fetchBackend";
@@ -91,6 +93,18 @@ function Studyplan() {
 
   return (
     <div className="studyplan-container">
+        <div className='studyplan-createButtons'>
+            <OptionButton
+                label= '+ Lernziel erstellen'
+                buttonType='createDataButton'
+                onClick={() => console.log("Lernziel erstellen")}
+            />
+            <OptionButton
+                label= '+ Klausur erstellen'
+                buttonType='createDataButton'
+                onClick={() => console.log("Klausure erstellen")}
+            />
+        </div>
       <h2>Kalender</h2>
       <div className="studyplan-calendar">
         <Calendar studygoals={{ studygoals: studygoals }} exams={{exams: exams}}/>

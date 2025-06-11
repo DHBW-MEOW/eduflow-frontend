@@ -23,10 +23,12 @@ const PopUpDelete: React.FC<PopUpProps> = ({isOpen, content, onClickCancel, onCl
                 <div className="popup-buttons">
                     <OptionButton
                      label="Abbrechen"
+                     buttonType='optionButton'
                      onClick={onClickCancel}
                     />
                     <OptionButton
                      label="Bestätigen"
+                     buttonType='optionButton'
                      onClick={onClickConfirm}
                     />
                 </div>
