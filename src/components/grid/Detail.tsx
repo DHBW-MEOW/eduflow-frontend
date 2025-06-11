@@ -1,4 +1,6 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import ContextMenu from '../contextMenu/ContextMenu';
+import PopUpDelete from '../popUpDelete/PopUpDelete';
 import PopUpCreate from '../popUpCreate/PopUpCreate';
 import Rename from '../popUpCreate/popUpTypes/Rename';
 import type { RenameData, RenameHandles } from '../popUpCreate/types';
