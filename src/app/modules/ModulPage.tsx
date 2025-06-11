@@ -71,7 +71,7 @@ function ModulPage() {
 
     return (
         <div>
-            <p>Module</p>
+            <h2>Module</h2>
             <Grid
                 items={items}
                 setItems={setItems}
