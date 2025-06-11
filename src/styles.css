@@ -1,7 +1,7 @@
 :root{
-  --navbar-width: 6%;
+  --navbar-width: 6vw;
   --navbar-min-width: 80px;
-  --header-height: 5%;
+  --header-height: 5vh;
   --header-min-height: 80px;
 
   margin: 0;
