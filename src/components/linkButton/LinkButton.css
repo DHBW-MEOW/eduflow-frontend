@@ -1,4 +1,26 @@
-img{
+.linkButton {
+  text-decoration: none !important;
+}
+
+img {
   width: 45px;
   height: 45px;
+
+  filter: var(--filter-icon);
+}
+
+.linkButton:hover img {
+  filter: var(--filter-icon-hover);
+}
+
+.linkButton:hover .buttonText{
+  color: var(--color-hover);
+}
+
+.buttonText,
+.buttonText:active,
+.buttonText:focus,
+.buttonText:visited {
+  color: var(--color-icon);
+  text-decoration: none;
 }

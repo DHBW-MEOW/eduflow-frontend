@@ -11,7 +11,7 @@ function Layout({
   children: React.ReactNode
 }) {
   const [rightButtonState, setRightButtonState] = useState({on: true, text:"", icon:"user-regular.svg", link:"/profile"});
-  const [leftButtonState, setLeftButtonState] = useState({on: true, text: "", icon: "house-solid.svg", link: "/"})
+  const [leftButtonState, setLeftButtonState] = useState({on: true, text: "", icon: "Logo.svg", link: "/"})
   const [textState, setTextState] = useState("Hello User!")
 
   return (
