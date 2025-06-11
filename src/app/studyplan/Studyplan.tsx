@@ -2,30 +2,14 @@ import './Studyplan.css'
 
 import Calendar from "../../components/calendar/Calendar";
 import StudyGoals from "../../components/studyGoals/StudyGoals";
-import type { ItemData } from '../../components/studyGoals/ListItem';
+import type { ItemData, StudyGoalData, CourseData, TopicData, ExamDateData } from './types';
 import { useEffect, useState } from 'react';
 import { fetchFromBackend } from "../../fetchBackend";
 
-type StudyGoalData = {
-    id: number;
-    topic_id: number;
-    deadline: string;
-};
-
-type CourseData = {
-    id: number;
-    name: string;
-};
-
-type TopicData = {
-    id: number;
-    course_id: number;
-    name: string;
-};
-
-
 function Studyplan() {
     const [items, setListItems] = useState<ItemData[]>([]);
+    const [studygoals, setStudyGoals] = useState<StudyGoalData[]>([]);
+    const [exams, setExams] = useState<ExamDateData[]>([]);
 
     const loadData = async () => {
         try {
@@ -33,6 +17,7 @@ function Studyplan() {
                 method: "GET",
                 endpoint: "data/study_goal",
             });
+            setStudyGoals(studyGoals);
 
             const topics: TopicData[] = await Promise.all(studyGoals.map(async goal => {
                 const response = await fetchFromBackend<{id: number; course_id: number; name: string}[]>({
@@ -62,6 +47,12 @@ function Studyplan() {
             }
             setListItems(itemList);
 
+            const allExams: ExamDateData[] = await fetchFromBackend<{ id: number; date: string }[]>({
+                method: "GET",
+                endpoint: "data/exam",
+            });
+            setExams(allExams)
+
             } catch (err) {
                 console.error("Error while loading Study-Goals:", err);
         }
@@ -76,7 +67,7 @@ function Studyplan() {
     <div className="studyplan-container">
       <h2>Kalender</h2>
       <div className="studyplan-calendar">
-        <Calendar/>
+        <Calendar studygoals={{ studygoals: studygoals }} exams={{exams: exams}}/>
       </div>
       <h2>Meine Lernziele</h2>
       <div className="studyplan-studygoals">

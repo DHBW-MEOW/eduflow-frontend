@@ -1,22 +1,12 @@
 import './Calender.css'
 import { useState } from 'react';
 import Cell from "./Cell";
+import type { CalendarProps, ExamDateData, StudyGoalData } from '../../app/studyplan/types';
 
-const Calendar = () => {
+const Calendar = ({studygoals, exams}:CalendarProps) => {
     const today = new Date();
     const [month, setMonth] = useState(today.getMonth());
     const [year, setYear] = useState(today.getFullYear());
-
-    type Event = { type: "deadline" | "exam"; title: string };
-    const events: { [date: string]: Event[] } = {
-        '2025-06-15': [{ type: 'deadline', title: 'Project Due' }],
-        '2025-06-25': [
-            { type: 'exam', title: 'Math Exam' },
-            { type: 'deadline', title: 'Project' },
-            { type: 'deadline', title: 'Project' },
-        ],
-        '2025-06-20': [{ type: 'deadline', title: 'Essay Due' }],
-    }; // Examples and Placeholder for events from backend
 
     const months = [
         "Januar", "Februar", "März", "April", "Mai", "Juni",
@@ -46,8 +36,27 @@ const Calendar = () => {
 
         // Fill the calendar with the days of the month
         for (let day = 0; day < daysInMonth; day++) {
-            const dateString = `${year}-${String(month + 1).padStart(2, '0')}-${String(day + 1).padStart(2, '0')}`;
-            cells.push(<Cell key={day} day={day + 1} events={events[dateString]} />);
+            const currentDay = day + 1;
+            const dateString = `${year}-${String(month + 1).padStart(2, '0')}-${String(currentDay).padStart(2, '0')}`;
+
+            // Filter StudyGoals for correct date
+            const dailyStudyGoals = studygoals.studygoals.filter((goal: StudyGoalData) => {
+                return goal.deadline === dateString;
+            });
+
+            // Filter StudyGoals for correct date
+            const dailyExams = exams.exams.filter((exam: ExamDateData) => {
+                return exam.date === dateString;
+            });
+
+            cells.push(
+                <Cell
+                    key={currentDay}
+                    day={currentDay}
+                    studygoals={dailyStudyGoals}
+                    exams={dailyExams}
+                />
+            );
         }
 
         // Fill the remaining cells. Add Logik if one more row is needed

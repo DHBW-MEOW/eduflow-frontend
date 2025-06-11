@@ -1,11 +1,6 @@
 import './ListItem.css'
+import type { ItemData } from '../../app/studyplan/types';
 
-export type ItemData = {
-    key: number;
-    course: string;
-    topic: string;
-    deadline: string;
-};
 
 const ListItem = ({course, topic, deadline}: ItemData) => {
 

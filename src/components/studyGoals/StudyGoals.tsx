@@ -1,12 +1,10 @@
 import './StudyGoals.css'
 import ListItem from './ListItem';
-import type { ItemData } from './ListItem';
+import type { ItemProps } from '../../app/studyplan/types';
 
-interface StudyGoalsProps {
-    items: ItemData[];
-}
 
-const StudyGoals = ({items}: StudyGoalsProps) => {
+
+const StudyGoals = ({items}: ItemProps) => {
 
     return (
         <div className='studyGoals'>
