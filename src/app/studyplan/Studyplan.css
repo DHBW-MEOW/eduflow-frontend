@@ -1,7 +1,14 @@
 .studyplan-container {
-
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .studyplan-calendar {
     max-width: 50%;
+    margin-bottom: 100px;
+}
+
+.studyplan-studygoals {
+    margin-top: 100px;
 }

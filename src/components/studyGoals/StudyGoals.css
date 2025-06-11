@@ -1,0 +1,17 @@
+.studyGoals {
+    display: flex;
+    flex-direction: column;
+    gap: 5%;
+    padding: 1%;
+    border-radius: 8px;
+    background-color: var(--color-bg-2);
+    box-sizing: border-box;
+
+    width: 80%;
+}
+
+@media (min-width: 480px) {
+    .studyGoals {
+        width: 60%;
+    }
+}

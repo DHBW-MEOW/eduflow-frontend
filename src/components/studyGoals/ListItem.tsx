@@ -12,9 +12,13 @@ const ListItem = ({course, topic, deadline}: ItemData) => {
 
     return (
         <div className='listItem'>
-            <div className='listItem-topic'>{topic}</div>
-            <div className='listItem-course'>{course}</div>
-            <div className='listItem-deadline'>{deadline}</div>
+            <div className='listItem-titels'>
+                <span>{topic}</span>
+                <span id='courseLabel'>{course}</span>
+                </div>
+            <div className='listItem-deadline'>
+                <span>{deadline}</span>
+            </div>
         </div>
     )
 };

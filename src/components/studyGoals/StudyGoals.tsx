@@ -71,7 +71,6 @@ const StudyGoals = () => {
 
     return (
         <div className='studyGoals'>
-            <h2>Deine Lernziele</h2>
             {items.length > 0 ? (
                 items.map((item) => (
                     <ListItem
@@ -82,7 +81,7 @@ const StudyGoals = () => {
                     />
                 ))
             ) : (
-                <p>Keine Lernziele vorhanden.</p>
+                <p>Lernziele werden geladen.</p>
             )}
         </div>
     )
