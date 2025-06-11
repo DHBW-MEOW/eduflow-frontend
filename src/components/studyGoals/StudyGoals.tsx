@@ -32,45 +32,33 @@ const StudyGoals = () => {
                 endpoint: "data/study_goal",
             });
 
-            const courses: CourseData[] = await fetchFromBackend<{id: number; name: string}[]>({
-                method: "GET",
-                endpoint: "data/course"
-            })
+            const topics: TopicData[] = await Promise.all(studyGoals.map(async goal => {
+                const response = await fetchFromBackend<{id: number; course_id: number; name: string}[]>({
+                    method: "GET",
+                    endpoint: `data/topic?id=${goal.topic_id}`
+                })
+                return response[0]
+            }));
 
-            const topics: TopicData[] = await fetchFromBackend<{id: number; course_id: number; name: string}[]>({
-                method: "GET",
-                endpoint: "data/topic"
-            })
+            const courses: CourseData[] = await Promise.all(topics.map(async topic => {
+                const response = await fetchFromBackend<{id: number; name: string}[]>({
+                    method: "GET",
+                    endpoint: `data/course?id=${topic.course_id}`
+                })
+                return response[0]
+            }));
 
-            const mappedItems: ItemData[] = studyGoals.map(goal => {
-                // Find Topic by ID
-                const topic = topics.find(t => t.id === goal.topic_id);
-
-                if (!topic) {
-                    console.warn(`Topic not found for topic_id: ${goal.topic_id}`);
-                    return {
-                        key: goal.id,
-                        course: "Unknown Course",
-                        topic: "Unknown Topic",
-                        deadline: goal.deadline,
-                    };
-                }
-
-                // Find Course by Topic ID
-                const course = courses.find(c => c.id === topic.course_id);
-
-                if (!course) {
-                    console.warn(`Course not found for course_id: ${topic.course_id} (Topic: ${topic.name})`);
-                }
-                return {
-                    key: goal.id,
-                    topic: topic.name,
-                    course: course ? course.name : "Unknown Course",
-                    deadline: goal.deadline,
-                };
-            });
-
-            setListItems(mappedItems);
+            const itemList: ItemData[] = [];
+            for (let index=0; index < studyGoals.length; index++) {
+                itemList.push(
+                    {key: studyGoals[index].id,
+                        course: courses[index].name,
+                        topic: topics[index].name,
+                        deadline: studyGoals[index].deadline,
+                    })
+                
+            }
+            setListItems(itemList);
 
             } catch (err) {
                 console.error("Error while loading Study-Goals:", err);
