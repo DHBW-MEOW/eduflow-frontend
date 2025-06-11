@@ -18,9 +18,11 @@ html, body{
   grid-template-rows: auto 1fr auto;
   grid-template-columns: 1fr;
   min-height: 100vh;
+  height: 100vh;
 }
 .page{
   grid-row: 2;
+  overflow: auto;
 }
 @media (min-width: 480px) {
   .layout{
@@ -30,6 +32,7 @@ html, body{
     min-height: 100vh;
   }
   .page{
+    overflow: auto;
     grid-column: 2 / span 1;
     grid-row: 2;
   }
