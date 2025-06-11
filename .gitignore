@@ -24,6 +24,5 @@ dist-ssr
 *.sw?
 package-lock.json
 
-# Custom
-# React-router
-.react-router/
+# Router
+.react-router
