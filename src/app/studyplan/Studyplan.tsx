@@ -1,3 +1,5 @@
+import './Studyplan.css'
+
 import Calendar from "../../components/calendar/Calendar";
 import StudyGoals from "../../components/studyGoals/StudyGoals";
 

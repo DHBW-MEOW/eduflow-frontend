@@ -81,7 +81,7 @@ const StudyGoals = () => {
                     />
                 ))
             ) : (
-                <p>Lernziele werden geladen.</p>
+                <span>Lernziele werden geladen.</span>
             )}
         </div>
     )
