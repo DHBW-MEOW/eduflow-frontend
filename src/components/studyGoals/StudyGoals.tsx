@@ -1,32 +1,101 @@
 import './StudyGoals.css'
 import ListItem from './ListItem';
+import { useEffect, useState } from "react";
+import { fetchFromBackend } from "../../fetchBackend";
+import type { ItemData } from './ListItem';
 
-type Goal = {topic: String, modul: String};
-const goals: { [date: string]: Goal[] } = {
-        '2025-06-15': [{ topic: 'topic0', modul: 'module0' }],
-        '2025-06-20': [
-            { topic: 'topic1', modul: 'module1' },
-            { topic: 'topic2', modul: 'module2' },
-            { topic: 'topic3', modul: 'module3' },
-        ],
-        '2025-06-25': [{ topic: 'topic4', modul: 'module4' }],
-    }; // Examples and Placeholder for events from backend
+type StudyGoalData = {
+    id: number;
+    topic_id: number;
+    deadline: string;
+};
+
+type CourseData = {
+    id: number;
+    name: string;
+};
+
+type TopicData = {
+    id: number;
+    course_id: number;
+    name: string;
+};
+
 
 const StudyGoals = () => {
-    const generateListItems = () => {
-        // const listItems = [];
+    const [items, setListItems] = useState<ItemData[]>([]);
 
-        // for (let i=0; i < goals.length; i++) {
-        //     listItems.push(<ListItem key={i} topic={goals.topic}/>)
-        // }
+    const loadData = async () => {
+        try {
+            const studyGoals: StudyGoalData[] = await fetchFromBackend<{ id: number; topic_id: number; deadline: string }[]>({
+                method: "GET",
+                endpoint: "data/study_goal",
+            });
 
+            const courses: CourseData[] = await fetchFromBackend<{id: number; name: string}[]>({
+                method: "GET",
+                endpoint: "data/course"
+            })
 
-        // return listItems;
+            const topics: TopicData[] = await fetchFromBackend<{id: number; course_id: number; name: string}[]>({
+                method: "GET",
+                endpoint: "data/topic"
+            })
+
+            const mappedItems: ItemData[] = studyGoals.map(goal => {
+                // Find Topic by ID
+                const topic = topics.find(t => t.id === goal.topic_id);
+
+                if (!topic) {
+                    console.warn(`Topic not found for topic_id: ${goal.topic_id}`);
+                    return {
+                        key: goal.id,
+                        course: "Unknown Course",
+                        topic: "Unknown Topic",
+                        deadline: goal.deadline,
+                    };
+                }
+
+                // Find Course by Topic ID
+                const course = courses.find(c => c.id === topic.course_id);
+
+                if (!course) {
+                    console.warn(`Course not found for course_id: ${topic.course_id} (Topic: ${topic.name})`);
+                }
+                return {
+                    key: goal.id,
+                    topic: topic.name,
+                    course: course ? course.name : "Unknown Course",
+                    deadline: goal.deadline,
+                };
+            });
+
+            setListItems(mappedItems);
+
+            } catch (err) {
+                console.error("Error while loading Study-Goals:", err);
+        }
     };
+
+    useEffect(() => {
+        loadData();
+    }, []);
 
     return (
         <div className='studyGoals'>
-            {/*generateListItems()*/}
+            <h2>Deine Lernziele</h2>
+            {items.length > 0 ? (
+                items.map((item) => (
+                    <ListItem
+                        key={item.key}
+                        course={item.course}
+                        topic={item.topic}
+                        deadline={item.deadline}
+                    />
+                ))
+            ) : (
+                <p>Keine Lernziele vorhanden.</p>
+            )}
         </div>
     )
 };

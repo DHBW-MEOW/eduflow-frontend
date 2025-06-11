@@ -1,17 +1,20 @@
 import './ListItem.css'
 
-type ItemProps = {
-    topic: String;
-    modul: String;
-    date: String;
+export type ItemData = {
+    key: number;
+    course: string;
+    topic: string;
+    deadline: string;
 };
 
-const ListItem = ({topic, modul, date}: ItemProps) => {
+const ListItem = ({course, topic, deadline}: ItemData) => {
+
+
     return (
         <div className='listItem'>
             <div className='listItem-topic'>{topic}</div>
-            <div className='listItem-modul'>{modul}</div>
-            <div className='listItem-data'>{date}</div>
+            <div className='listItem-course'>{course}</div>
+            <div className='listItem-deadline'>{deadline}</div>
         </div>
     )
 };
