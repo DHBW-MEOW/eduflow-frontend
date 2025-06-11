@@ -12,51 +12,72 @@ function Studyplan() {
     const [exams, setExams] = useState<ExamDateData[]>([]);
 
     const loadData = async () => {
-        try {
-            const studyGoals: StudyGoalData[] = await fetchFromBackend<{ id: number; topic_id: number; deadline: string }[]>({
+    try {
+        const studygoals: StudyGoalData[] = await fetchFromBackend<{ id: number; topic_id: number; deadline: string }[]>({
+            method: "GET",
+            endpoint: "data/study_goal",
+        });
+        setStudyGoals(studygoals);
+
+        const getTopics = await Promise.all(studygoals.map(async goal => {
+            const response = await fetchFromBackend<{id: number; course_id: number; name: string}[]>({
                 method: "GET",
-                endpoint: "data/study_goal",
-            });
-            setStudyGoals(studyGoals);
+                endpoint: `data/topic?id=${goal.topic_id}`
+            })
+            return response.length > 0 ? response[0] : null;
+        }));
+        
+        const topics: TopicData[] = getTopics.filter((topic): topic is TopicData => topic !== null);
+        const topicMap = new Map<number, TopicData>();
+        topics.forEach(topic => topicMap.set(topic.id, topic));
 
-            const topics: TopicData[] = await Promise.all(studyGoals.map(async goal => {
-                const response = await fetchFromBackend<{id: number; course_id: number; name: string}[]>({
-                    method: "GET",
-                    endpoint: `data/topic?id=${goal.topic_id}`
-                })
-                return response[0]
-            }));
+        const getCourses = await Promise.all(topics.map(async topic => {
+            const response = await fetchFromBackend<{id: number; name: string}[]>({
+                method: "GET",
+                endpoint: `data/course?id=${topic.course_id}`
+            })
+            return response.length > 0 ? response[0] : null;
+        }));
 
-            const courses: CourseData[] = await Promise.all(topics.map(async topic => {
-                const response = await fetchFromBackend<{id: number; name: string}[]>({
-                    method: "GET",
-                    endpoint: `data/course?id=${topic.course_id}`
-                })
-                return response[0]
-            }));
+        const courses: CourseData[] = getCourses.filter((course): course is CourseData => course !== null);
+        const courseMap = new Map<number, CourseData>();
+        courses.forEach(course => courseMap.set(course.id, course));
 
-            const itemList: ItemData[] = [];
-            for (let index=0; index < studyGoals.length; index++) {
+        const itemList: ItemData[] = [];
+        for (const goal of studygoals) {
+            const topic = topicMap.get(goal.topic_id);
+            const course = topic ? courseMap.get(topic.course_id) : undefined;
+
+
+            if (!topic) 
+                console.warn(`Topic with ID ${goal.topic_id} not found for Study Goal ${goal.id}`);
+            if (topic && !course) 
+                console.warn(`Course with ID ${topic.course_id} not found for Topic ${topic.name} (Study Goal ${goal.id})`);
+
+            if (topic && course) {
                 itemList.push(
-                    {key: studyGoals[index].id,
-                        course: courses[index].name,
-                        topic: topics[index].name,
-                        deadline: studyGoals[index].deadline,
-                    })
-                
+                    {
+                        key: goal.id,
+                        course: course ? course.name : "Unbekannter Kurs",
+                        topic: topic ? topic.name : "Unbekanntes Thema",
+                        deadline: goal.deadline,
+                    }
+                );
             }
-            setListItems(itemList);
-
-            const allExams: ExamDateData[] = await fetchFromBackend<{ id: number; date: string }[]>({
-                method: "GET",
-                endpoint: "data/exam",
-            });
-            setExams(allExams)
-
-            } catch (err) {
-                console.error("Error while loading Study-Goals:", err);
+            
         }
-    };
+        setListItems(itemList);
+
+        const allExams: ExamDateData[] = await fetchFromBackend<{ id: number; date: string }[]>({
+            method: "GET",
+            endpoint: "data/exam",
+        });
+        setExams(allExams)
+
+    } catch (err) {
+        console.error("Error while loading Data:", err);
+    }
+};
 
     useEffect(() => {
         loadData();
