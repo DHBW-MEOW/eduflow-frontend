@@ -19,6 +19,7 @@
   /* === Foreground / Text Colors === */
   --color-text: #374151;           /* Primärer Text (dunkel) */
   --color-text-light: #6b7280;     /* Sekundär, z. B. für Platzhalter */
+  --color-text-popup: var(--color-text);
   --color-heading: #1f2937;        /* Überschriften */
 
   /* === Link Color === */
@@ -40,6 +41,7 @@
 
   /* === Icons === */
   --color-icon: var(--color-black);
+  --color-icon-close: var(--color-text-popup);
   --filter-icon: brightness(0.12);
   --filter-icon-hover: invert(96%) sepia(20%) saturate(6000%) hue-rotate(180deg) brightness(100%) contrast(100%);
 
@@ -66,6 +68,7 @@
   /* === Foreground / Text Colors === */
   --color-text: #e5e7eb;           /* Primärer Text (hell) */
   --color-text-light: #9ca3af;     /* Sekundär, z. B. für Platzhalter */
+  --color-text-popup: var(--color-black);
   --color-heading: #f3f4f6;        /* Überschriften */
 
   /* === Link Color === */
@@ -87,6 +90,7 @@
 
   /* === Icons === */
   --color-icon: var(--color-white);
+  --color-icon-close: var(--color-text-popup);
   --filter-icon: invert(100%) brightness(0.94) contrast(0.98);
   --filter-icon-hover: invert(24%) sepia(8%) saturate(1067%) hue-rotate(190deg) brightness(97%) contrast(90%);
 
