@@ -1,4 +1,5 @@
 import './ListItem.css'
+import { formatDate } from './utils/formatDate';
 import type { ItemData } from '../../app/studyplan/types';
 
 
@@ -12,7 +13,7 @@ const ListItem = ({course, topic, deadline}: ItemData) => {
                 <span id='courseLabel'>{course}</span>
                 </div>
             <div className='listItem-deadline'>
-                <span>{deadline}</span>
+                <span>{formatDate(deadline)}</span>
             </div>
         </div>
     )
