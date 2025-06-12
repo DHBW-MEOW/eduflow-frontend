@@ -5,13 +5,9 @@ import "../styles.css"
 
 import {useState} from 'react'
 
-function Layout({
-  children
-}: {
-  children: React.ReactNode
-}) {
+function AppLayout() {
   const [rightButtonState, setRightButtonState] = useState({on: true, text:"", icon:"user-regular.svg", link:"/profile"});
-  const [leftButtonState, setLeftButtonState] = useState({on: true, text: "", icon: "Logo.svg", link: "/"})
+  const [leftButtonState, setLeftButtonState] = useState({on: true, text: "", icon: "Logo.svg", link: "/home"})
   const [textState, setTextState] = useState("Hello User!")
 
   return (
@@ -23,4 +19,4 @@ function Layout({
   )
 }
 
-export default Layout;
+export default AppLayout;
