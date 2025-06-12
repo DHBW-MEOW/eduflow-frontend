@@ -19,8 +19,8 @@ const PopUpDelete: React.FC<PopUpProps> = ({isOpen, content, onClickCancel, onCl
                 <button className="popup-close-button" onClick={onClickCancel}>
                     &times; {/* TODO: Close button - Not sure if needed */}
                 </button>
-                <div>{content}</div>
-                <div className="popup-buttons">
+                <div className='delete-popup-content'>{content}</div>
+                <div className="delete-popup-buttons">
                     <OptionButton
                      label="Abbrechen"
                      buttonType='optionButton'
