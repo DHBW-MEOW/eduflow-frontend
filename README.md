@@ -10,6 +10,7 @@ Most Efficient Organzier for Work
 
 npm i -D react-router-dom@latest 
 (react-router-dom)
+npm install -D @react-router/dev
 
 
 # React + TypeScript + Vite
