@@ -8,11 +8,15 @@ import type { ItemData, StudyGoalData, ExamDateData } from './types';
 import { useEffect, useState } from 'react';
 import { fetchStudyGoalData } from './api/fetchStudyGoalData';
 import { fetchExamData } from './api/fetchExamData';
+import { StudyplanButtonHandler } from './utils/StudyplanButtonHandler';
+
+type ActivePopupType = 'StudyGoal' | 'Exam' | null;
 
 function Studyplan() {
     const [items, setListItems] = useState<ItemData[]>([]);
     const [studygoals, setStudyGoals] = useState<StudyGoalData[]>([]);
     const [exams, setExams] = useState<ExamDateData[]>([]);
+    const [activePopup, setActivePopup] = useState<ActivePopupType>(null);
 
     const loadPageData = async () => {
             try {
@@ -34,6 +38,15 @@ function Studyplan() {
         loadPageData();
     }, [])
 
+    const handleOpenPopup = (type: ActivePopupType) => {
+        setActivePopup(type);
+    };
+
+    const handleClosePopup = () => {
+        setActivePopup(null);
+    };
+
+
 
   return (
     <div className="studyplan-container">
@@ -41,12 +54,12 @@ function Studyplan() {
             <OptionButton
                 label= '+ Lernziel erstellen'
                 buttonType='createDataButton'
-                onClick={() => console.log("Lernziel erstellen")}
+                onClick={() => handleOpenPopup("StudyGoal")} 
             />
             <OptionButton
-                label= '+ Klausur erstellen'
+                label= '+ Klausur hinzufügen'
                 buttonType='createDataButton'
-                onClick={() => console.log("Klausure erstellen")}
+                onClick={() => handleOpenPopup("Exam")} 
             />
         </div>
       <h2>Kalender</h2>
@@ -57,6 +70,13 @@ function Studyplan() {
       <div className="studyplan-studygoals">
         <StudyGoals items={items}/>
       </div>
+
+      {activePopup && (
+          <StudyplanButtonHandler 
+              popUpType={activePopup}
+              onClose={handleClosePopup}
+          />
+      )}
     </div>
   )
 }

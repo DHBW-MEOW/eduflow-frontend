@@ -1,5 +1,5 @@
 import './ListItem.css'
-import { formatDate } from './utils/formatDate';
+import { formatDate } from '../../app/studyplan/utils/formatDate';
 import type { ItemData } from '../../app/studyplan/types';
 
 
