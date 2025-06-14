@@ -6,7 +6,7 @@ import {useState} from 'react'
 
 function StartLayout() {
   const [leftButtonState, setLeftButtonState] = useState({on: true, text: "", icon: "Logo.svg", link: "/"})
-  const [textState, setTextState] = useState("Hello User!")
+  const [textState, setTextState] = useState("EduFlow")
 
   return (
     <div className="startLayout">
