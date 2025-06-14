@@ -7,9 +7,11 @@ import {
 } from "@react-router/dev/routes";
 
 export default [
-  index("./app/start/Start.tsx"),
-  route("/login", "./app/login/Login.tsx"),
-  route("/register", "./app/register/Register.tsx"),
+  layout("./app/StartLayout.tsx", [
+    index("./app/start/Start.tsx"),
+    route("/login", "./app/login/Login.tsx"),
+    route("/register", "./app/register/Register.tsx"),
+  ]),
   layout("./app/AppLayout.tsx", [
     route("/profile", "./app/profile/Profile.tsx"),
     route("/home", "./app/home/Home.tsx"),
