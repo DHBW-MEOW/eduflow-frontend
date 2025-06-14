@@ -11,9 +11,9 @@ function AppLayout() {
   const [textState, setTextState] = useState("Hello User!")
 
   return (
-    <div className="layout">
+    <div className="appLayout">
       <Header leftButton={leftButtonState} text={textState} rightButton={rightButtonState}/>
-      <div className="page"><Outlet /></div>
+      <div className="appPage"><Outlet /></div>
       <Navbar/>
     </div>
   )
