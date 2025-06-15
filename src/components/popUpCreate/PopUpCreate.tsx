@@ -1,20 +1,22 @@
-import './PopUpCreate.css'
-import '../../colors.css'
+import React from 'react';
 import OptionButton from '../optionButtons/OptionButton';
 import type { PopUpProps } from './types';
+import './PopUpCreate.css'
 
-
-
-const PopUpCreate: React.FC<PopUpProps> = ({isOpen, label, children, isAddButtonDisabled, onClickDiscard, onClickAdd}) => {
+const PopUpCreate: React.FC<PopUpProps> = ({isOpen, label, children, comboboxOptions, onClickDiscard, onClickAdd}) => {
     if (!isOpen) {
         return null;
     }
+
+    const childrenWithProps = React.cloneElement(children as React.ReactElement<any>, {
+        moduleOptions: comboboxOptions 
+    });
     
     return (
         <div className="popup-overlay" onClick={onClickDiscard}>
             <div className="popup-container" onClick={(e) => e.stopPropagation()}>
                 <div className="popup-header">{label}</div>
-                {children}
+                {childrenWithProps}
                 <div className="popup-buttons">
                     <OptionButton
                      label='Verwerfen'
@@ -25,7 +27,6 @@ const PopUpCreate: React.FC<PopUpProps> = ({isOpen, label, children, isAddButton
                      label='Hinzufügen'
                      buttonType='optionButton'
                      onClick={onClickAdd}
-                     isDisabled={isAddButtonDisabled}
                      />
                 </div>
             </div>

@@ -2,6 +2,7 @@ import React, { useState, useImperativeHandle, forwardRef, useEffect } from "rea
 import type { LearningPlanData, LearningPlanHandles, FormComponentProps } from "../types.tsx";
 import './popUpTypes.css';
 
+import InputCombobox from "../inputOptions/InputCombobox.tsx";
 import InputField from "../inputOptions/InputField.tsx";
 import InputDate from "../inputOptions/InputDate.tsx";
 import InputDetails from "../inputOptions/InputDetails.tsx";
@@ -10,9 +11,11 @@ import { validateDate } from '../utils/validateDate';
 import { validateModul } from '../utils/validateModul';
 import { validateTopic } from "../utils/validateTopic.tsx";
 
-interface LearningPlanProps extends FormComponentProps<LearningPlanData> {}
+interface LearningPlanProps extends FormComponentProps<LearningPlanData> {
+    moduleOptions?: string[];
+}
 
-const LearningPlan = forwardRef<LearningPlanHandles, LearningPlanProps>(({ initialData, onValidityChange }, ref) => {
+const LearningPlan = forwardRef<LearningPlanHandles, LearningPlanProps>(({ initialData, onValidityChange, moduleOptions }, ref) => {
     const [formData, setFormData] = useState<LearningPlanData>({
         date: initialData?.date || '',
         topic: initialData?.topic || '',
@@ -80,10 +83,11 @@ const LearningPlan = forwardRef<LearningPlanHandles, LearningPlanProps>(({ initi
 
     return (
         <div className="popup-form">
-            <InputField
+            <InputCombobox
                 label="Modul"
                 name="module"
                 value={formData.module}
+                options={moduleOptions || []}
                 isInvalid={!!errors.module}
                 errorMessage={errors.module}
                 onChange={handleChange}

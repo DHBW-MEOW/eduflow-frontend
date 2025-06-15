@@ -2,6 +2,7 @@ import React, { useState, useImperativeHandle, forwardRef, useEffect } from 'rea
 import type { ExamData, ExamHandles, FormComponentProps } from '../types';
 import './popUpTypes.css';
 
+import InputCombobox from '../inputOptions/InputCombobox';
 import InputField from '../inputOptions/InputField';
 import InputDate from '../inputOptions/InputDate';
 
@@ -9,9 +10,11 @@ import { validateDate } from '../utils/validateDate';
 import { validateModul } from '../utils/validateModul';
 import { validateTitle } from '../utils/validateTitle';
 
-interface ExamProps extends FormComponentProps<ExamData> {}
+interface ExamProps extends FormComponentProps<ExamData> {
+  moduleOptions?: string[];
+}
 
-const Exam = forwardRef<ExamHandles, ExamProps>(({ initialData, onValidityChange }, ref) => {
+const Exam = forwardRef<ExamHandles, ExamProps>(({ initialData, onValidityChange, moduleOptions }, ref) => {
   const [formData, setFormData] = useState<ExamData>({
     module: initialData?.module || '',
     title: initialData?.title || '',
@@ -72,10 +75,11 @@ const Exam = forwardRef<ExamHandles, ExamProps>(({ initialData, onValidityChange
 
   return (
     <div className="popup-form">
-      <InputField
+      <InputCombobox
         label="Modul"
         name="module"
         value={formData.module}
+        options={moduleOptions || []}
         isInvalid={!!errors.module}
         errorMessage={errors.module}
         onChange={handleChange}

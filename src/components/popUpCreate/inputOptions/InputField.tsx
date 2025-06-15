@@ -1,6 +1,5 @@
 import React from "react";
 import './InputStyle.css';
-import '../../../colors.css'
 
 type InputFieldProps = {
     label: string;

@@ -41,7 +41,7 @@ export type PopUpProps = {
     isOpen: boolean
     label: string;
     children: React.ReactElement;
-    isAddButtonDisabled?: boolean;
+    comboboxOptions?: string[];
     onClickDiscard: () => void;
     onClickAdd: () => void;
 }
