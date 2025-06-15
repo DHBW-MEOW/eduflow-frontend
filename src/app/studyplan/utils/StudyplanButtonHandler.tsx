@@ -1,16 +1,21 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import type { LearningPlanHandles, ExamHandles } from "../../../components/popUpCreate/types";
-import type { CourseData, StudyplanButtonProps } from "../types";
+import type { TopicData, CourseData, StudyplanButtonProps } from "../types";
 
-import { getCourseNames } from "./getCourseNames";
 import { createNewExam } from "../api/createNewExam";
 import { createNewModul } from "../api/createNewModul";
+import { createNewStudyGoal } from "../api/createNewStudyplan";
+import { fetchCourses } from "../api/fetchCourses";
+import { getCourseNames } from "./getCourseNames";
 import { getCourseID } from "./getCourseID";
 
 import PopUpCreate from "../../../components/popUpCreate/PopUpCreate";
 import LearningPlan from "../../../components/popUpCreate/popUpTypes/LearningPlan";
 import Exam from "../../../components/popUpCreate/popUpTypes/Exam";
-import { fetchCourses } from "../api/fetchCourses";
+import { getTopicID } from "./getTopicID";
+import { fetchTopics } from "../api/fetchTopics";
+import { createNewTopic } from "../api/createNewTopic";
+import { getTopicNames } from "./getTopicNames";
 
 export const StudyplanButtonHandler = ( {popUpType, onClose}: StudyplanButtonProps ) => {
     const learningPlanRef = useRef<LearningPlanHandles>(null);
@@ -19,6 +24,8 @@ export const StudyplanButtonHandler = ( {popUpType, onClose}: StudyplanButtonPro
     const [isCurrentFormValid, setIsCurrentFormValid] = useState(false);
     const [courseOptions, setCourseOptions] = useState<string[]>([]);
     const [courses, setCourses] = useState<CourseData[]>([]);
+    const [topicOptions, setTopicOptions] = useState<string[]>([]);
+    const [topics, setTopics] = useState<TopicData[]>([]);
 
     const isLearningPlanPopUpOpen = popUpType === "StudyGoal";
     const isExamPopUpOpen = popUpType === "Exam";
@@ -27,8 +34,13 @@ export const StudyplanButtonHandler = ( {popUpType, onClose}: StudyplanButtonPro
         try {
             const allCourses = await fetchCourses();
             setCourses(allCourses);
-            const names = getCourseNames(courses);
-            setCourseOptions(names);
+            const courseNames = getCourseNames(courses);
+            setCourseOptions(courseNames);
+            const allTopics = await fetchTopics();
+            setTopics(allTopics);
+            const topicNames = getTopicNames(topics); // TODO: only topics for course_id
+            setTopicOptions(topicNames);
+
         } catch (error) {
             console.error("Error while Loading Course-Names:", error);
         }
@@ -47,7 +59,7 @@ export const StudyplanButtonHandler = ( {popUpType, onClose}: StudyplanButtonPro
         setIsCurrentFormValid(false);
     }
 
-    const handleAddLearningPlan = () => {
+    const handleAddLearningPlan = async () => {
         if (learningPlanRef.current) {
             const data = learningPlanRef.current.getFormData();
 
@@ -55,6 +67,25 @@ export const StudyplanButtonHandler = ( {popUpType, onClose}: StudyplanButtonPro
                 console.log('Lernplan Daten:', data.data);
                 onClose();
                 setIsCurrentFormValid(false);
+
+                let courseID = getCourseID(data.data.module, courses)
+                if( courseID === null) {
+                    courseID = await createNewModul(data.data.module);
+                    await loadOptions();
+                }
+
+                if (typeof courseID === 'number') {
+                    let topicID = getTopicID(courseID, data.data.topic, topics)
+                    if( topicID === null) {
+                        topicID = await createNewTopic(courseID, data.data.topic, data.data.details);
+                        await loadOptions();
+                    }
+                    if (typeof topicID === 'number') {
+                        await createNewStudyGoal(topicID, data.data.date)
+                        onClose();
+                        setIsCurrentFormValid(false);
+                    }
+                }
             }
         }
     }
@@ -64,20 +95,15 @@ export const StudyplanButtonHandler = ( {popUpType, onClose}: StudyplanButtonPro
             const data = examRef.current.getFormData();
 
             if (data.isValid) {
-                console.log('Prüfungsdaten:', data.data);
-
                 let courseID = getCourseID(data.data.module, courses)
                 if( courseID === null) {
                     courseID = await createNewModul(data.data.module);
                     await loadOptions();
                 }
-                console.log(courseID, typeof courseID)
                 if (typeof courseID === 'number') {
                     await createNewExam(courseID, data.data.title, data.data.date)
                     onClose();
                     setIsCurrentFormValid(false);
-                } else {
-                    console.error("Fehler: Kurs-ID konnte nicht ermittelt werden, selbst nach Erstellung des Moduls.");
                 }
             }
         }
@@ -92,7 +118,8 @@ export const StudyplanButtonHandler = ( {popUpType, onClose}: StudyplanButtonPro
                     label="Lernziel erstellen"
                     onClickAdd={handleAddLearningPlan}
                     onClickDiscard={handleDiscard}
-                    comboboxOptions={courseOptions}
+                    modulOptions={courseOptions}
+                    topicOptions={topicOptions}
                 >
                     <LearningPlan 
                         ref={learningPlanRef}
@@ -108,7 +135,7 @@ export const StudyplanButtonHandler = ( {popUpType, onClose}: StudyplanButtonPro
                     label="Klausur hinzufügen"
                     onClickAdd={handleAddExam}
                     onClickDiscard={handleDiscard}
-                    comboboxOptions={courseOptions}
+                    modulOptions={courseOptions}
                 >
                     <Exam 
                         ref={examRef}

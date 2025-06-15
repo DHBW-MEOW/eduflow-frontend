@@ -1,16 +1,16 @@
 import type { CourseData } from "../types";
 
-export function getCourseNames(coursesArray: CourseData[]): string[] {
-    if (!Array.isArray(coursesArray)) {
-        console.error("Error: Expected an array for coursesArray in getCourseNames.");
+export function getCourseNames(courses: CourseData[]): string[] {
+    if (!Array.isArray(courses)) {
+        console.error("Error: Expected an array for courses in getCourseNames.");
         return [];
     }
 
     const courseNames: string[] = [];
 
-    for (let i = 0; i < coursesArray.length; i++) {
-        if (coursesArray[i] && typeof coursesArray[i].name === 'string') {
-            courseNames.push(coursesArray[i].name);
+    for (let i = 0; i < courses.length; i++) {
+        if (courses[i] && typeof courses[i].name === 'string') {
+            courseNames.push(courses[i].name);
         }
     }
 

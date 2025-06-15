@@ -41,7 +41,8 @@ export type PopUpProps = {
     isOpen: boolean
     label: string;
     children: React.ReactElement;
-    comboboxOptions?: string[];
+    modulOptions?: string[];
+    topicOptions?: string[];
     onClickDiscard: () => void;
     onClickAdd: () => void;
 }

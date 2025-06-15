@@ -3,7 +3,6 @@ import type { LearningPlanData, LearningPlanHandles, FormComponentProps } from "
 import './popUpTypes.css';
 
 import InputCombobox from "../inputOptions/InputCombobox.tsx";
-import InputField from "../inputOptions/InputField.tsx";
 import InputDate from "../inputOptions/InputDate.tsx";
 import InputDetails from "../inputOptions/InputDetails.tsx";
 
@@ -13,9 +12,10 @@ import { validateTopic } from "../utils/validateTopic.tsx";
 
 interface LearningPlanProps extends FormComponentProps<LearningPlanData> {
     moduleOptions?: string[];
+    topicOptions?: string[];
 }
 
-const LearningPlan = forwardRef<LearningPlanHandles, LearningPlanProps>(({ initialData, onValidityChange, moduleOptions }, ref) => {
+const LearningPlan = forwardRef<LearningPlanHandles, LearningPlanProps>(({ initialData, onValidityChange, moduleOptions, topicOptions }, ref) => {
     const [formData, setFormData] = useState<LearningPlanData>({
         date: initialData?.date || '',
         topic: initialData?.topic || '',
@@ -92,10 +92,11 @@ const LearningPlan = forwardRef<LearningPlanHandles, LearningPlanProps>(({ initi
                 errorMessage={errors.module}
                 onChange={handleChange}
             />
-            <InputField
+            <InputCombobox
                 label="Thema"
                 name="topic"
                 value={formData.topic}
+                options={topicOptions || []}
                 isInvalid={!!errors.topic}
                 errorMessage={errors.topic}
                 onChange={handleChange}

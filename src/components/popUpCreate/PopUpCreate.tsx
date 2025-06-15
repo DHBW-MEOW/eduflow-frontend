@@ -3,13 +3,14 @@ import OptionButton from '../optionButtons/OptionButton';
 import type { PopUpProps } from './types';
 import './PopUpCreate.css'
 
-const PopUpCreate: React.FC<PopUpProps> = ({isOpen, label, children, comboboxOptions, onClickDiscard, onClickAdd}) => {
+const PopUpCreate: React.FC<PopUpProps> = ({isOpen, label, children, modulOptions, topicOptions, onClickDiscard, onClickAdd}) => {
     if (!isOpen) {
         return null;
     }
 
     const childrenWithProps = React.cloneElement(children as React.ReactElement<any>, {
-        moduleOptions: comboboxOptions 
+        moduleOptions: modulOptions,
+        topicOptions: topicOptions
     });
     
     return (

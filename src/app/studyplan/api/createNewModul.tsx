@@ -16,6 +16,7 @@ export const createNewModul = async (name: string): Promise<number> => {
             });
 
             if (typeof response.id === 'number') {
+                console.log('Created new Modul')
                 return response.id;
             } else {
                 throw new Error("No valid output from backend");

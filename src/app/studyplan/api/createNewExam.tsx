@@ -12,7 +12,7 @@ export const createNewExam = async (course_id: number , name: string, date: stri
                   date: date
                 },
             });
-            console.log('Create new Exam');
+            console.log('Created new Exam');
         } catch (err) {
             console.error("Error while creating new Exam", err);
         }

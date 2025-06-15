@@ -1,8 +1,12 @@
 import { fetchFromBackend } from "../../../fetchBackend";
 
-export const createNewTopic = async (course_id: number, name: string, details: string) => {
+interface NewTopicResponse {
+    id: number;
+}
+
+export const createNewTopic = async (course_id: number, name: string, details: string): Promise<number> => {
     try {
-            await fetchFromBackend<void>({
+            const response = await fetchFromBackend<NewTopicResponse>({
                 method: "POST",
                 endpoint: "data/topic",
                 body: {
@@ -12,8 +16,17 @@ export const createNewTopic = async (course_id: number, name: string, details: s
                   details: details
                 },
             });
-            console.log('Create new Topic');
+
+            if (typeof response.id === 'number') {
+                console.log('Created new Topic')
+                console.log(response)
+                return response.id;
+            } else {
+                throw new Error("No valid output from backend");
+            }
+
         } catch (err) {
             console.error("Error while creating new Topic", err);
+            throw err;
         }
 }
