@@ -19,7 +19,9 @@
   /* === Foreground / Text Colors === */
   --color-text: #374151;           /* Primärer Text (dunkel) */
   --color-text-light: #6b7280;     /* Sekundär, z. B. für Platzhalter */
+  --color-text-inputFiled: var(--color-text);
   --color-heading: #1f2937;        /* Überschriften */
+  --color-heading-popup: #f3f4f6;
 
   /* === Link Color === */
   --color-link: #4c4cff;
@@ -71,7 +73,9 @@
   /* === Foreground / Text Colors === */
   --color-text: #e5e7eb;           /* Primärer Text (hell) */
   --color-text-light: #9ca3af;     /* Sekundär, z. B. für Platzhalter */
+  --color-text-input-field: var(--color-surface);
   --color-heading: #f3f4f6;        /* Überschriften */
+  --color-heading-popup: #1f2937;
 
   /* === Link Color === */
   --color-link: #6161f1;

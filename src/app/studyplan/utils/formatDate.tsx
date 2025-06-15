@@ -1,4 +1,4 @@
-export function formatDate(date: string)  {
+export function formatDate(date: string) {
     const dateString = String(date);
     const splittedDate = dateString.split('-');
 

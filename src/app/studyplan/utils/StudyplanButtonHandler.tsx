@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useState, useRef, useCallback } from "react";
 import type { LearningPlanHandles, ExamHandles } from "../../../components/popUpCreate/types";
 import type { StudyplanButtonProps } from "../types";
 
@@ -10,14 +10,46 @@ export const StudyplanButtonHandler = ( {popUpType, onClose}: StudyplanButtonPro
     const learningPlanRef = useRef<LearningPlanHandles>(null);
     const examRef = useRef<ExamHandles>(null);
 
+    const [isCurrentFormValid, setIsCurrentFormValid] = useState(false);
     const isLearningPlanPopUpOpen = popUpType === "StudyGoal";
     const isExamPopUpOpen = popUpType === "Exam";
 
+    const handleValidityChange = useCallback((isValid: boolean) => {
+        setIsCurrentFormValid(isValid);
+    }, []); 
+
     const handleDiscard = () => {
         onClose();
+        setIsCurrentFormValid(false);
     }
 
-    
+    const handleAddLearningPlan = () => {
+        if (learningPlanRef.current) {
+            const data = learningPlanRef.current.getFormData();
+
+            if (data.isValid) {
+                console.log('Lernplan Daten:', data.data);
+                onClose();
+                setIsCurrentFormValid(false);
+            } else {
+                console.log('Lernplan Formular ist ungültig. Fehler:', data.errors);
+            }
+        }
+    }
+
+    const handleAddExam = () => {
+        if (examRef.current) {
+            const data = examRef.current.getFormData();
+
+            if (data.isValid) {
+                console.log('Prüfungsdaten:', data.data);
+                onClose();
+                setIsCurrentFormValid(false);
+            } else {
+                console.log('Prüfungsformular ist ungültig. Fehler:', data.errors);
+            }
+        }
+    }
     
 
     return (
@@ -27,10 +59,13 @@ export const StudyplanButtonHandler = ( {popUpType, onClose}: StudyplanButtonPro
                 <PopUpCreate
                     isOpen={true}
                     label="Lernziel erstellen"
-                    onClickAdd={() => { console.log("Test create LeraningPlan"); handleDiscard} }
+                    onClickAdd={handleAddLearningPlan}
                     onClickDiscard={handleDiscard}
                 >
-                    <LearningPlan ref={learningPlanRef}/>
+                    <LearningPlan 
+                        ref={learningPlanRef}
+                        onValidityChange={handleValidityChange}
+                    />
                 </PopUpCreate>
             )}
 
@@ -39,10 +74,13 @@ export const StudyplanButtonHandler = ( {popUpType, onClose}: StudyplanButtonPro
                 <PopUpCreate
                     isOpen={true}
                     label="Klausur hinzufügen"
-                    onClickAdd={() => { console.log("Test add Exam"); handleDiscard} }
+                    onClickAdd={handleAddExam}
                     onClickDiscard={handleDiscard}
                 >
-                    <Exam ref={examRef}/>
+                    <Exam 
+                        ref={examRef}
+                        onValidityChange={handleValidityChange}
+                    />
                 </PopUpCreate>
             )}
             
