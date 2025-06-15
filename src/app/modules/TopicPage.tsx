@@ -3,14 +3,14 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Grid } from "../../components/grid/Grid";
 import { fetchFromBackend } from "../../fetchBackend";
 import type { BoxData } from "../../components/grid/Box";
-import type { DetailData } from "./DetailExamPage";
+import type { DetailBaseData } from "../../components/grid/Detail";
 
 function TopicPage(): JSX.Element {
     const { moduleId } = useParams<{ moduleId: string }>();
     const navigate = useNavigate();
     const [ topics, setTopics] = useState<BoxData[]>([]);
     const [ exams, setExams] = useState<BoxData[]>([]);
-    const [ examsInfo, setExamsInfo] = useState<DetailData[]>([]);
+    const [ examsInfo, setExamsInfo] = useState<DetailBaseData[]>([]);
     
     const handleRenameExam = async (id: number, newTitle: string) => {
         const item = examsInfo.find(item => item.id === id);
@@ -26,7 +26,7 @@ function TopicPage(): JSX.Element {
                   id: id,
                   course_id: Number(moduleId),
                   name: newTitle,
-                  date: item.date
+                  date: item.value
                 },
             });
         } catch (err) {
@@ -113,7 +113,7 @@ function TopicPage(): JSX.Element {
                         method: "GET",
                         endpoint: `data/exam?course_id=${moduleId}`
                     }),
-                    fetchFromBackend<{ id: number; name: string; date: Date }[]>({
+                    fetchFromBackend<{ id: number; name: string; value: Date }[]>({
                         method: "GET",
                         endpoint: `data/exam?course_id=${moduleId}`
                     })

@@ -1,11 +1,11 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchFromBackend } from "../../fetchBackend";
+import { Detail, type DetailBaseData } from "../../components/grid/Detail";
 
 function DetailTopicPage() {
   const { moduleId, topicId } = useParams();
-  const [ details, setDetails ] = useState<string>("");
-  const [ name, setName ] = useState<string>("");
+  const [ topic, setTopic] = useState<DetailBaseData<string>>();
   
   useEffect(() => {
     const loadData = async () => {
@@ -15,8 +15,11 @@ function DetailTopicPage() {
           endpoint: `data/topic?id=${topicId}&course_id=${moduleId}`,
         })
         if (data.length > 0) {
-          setDetails(data[0].details);
-          setName(data[0].name);
+          setTopic({
+            id: data[0].id,
+            name: data[0].name,
+            value: data[0].details,
+          });
         }else{
           console.log("No Topic was found");
         }
@@ -27,10 +30,33 @@ function DetailTopicPage() {
     loadData();
   }, [moduleId, topicId]);
 
+  const handleEdit = async (updated: DetailBaseData) => {
+      try {
+        await fetchFromBackend<void>({
+          method: "POST",
+          endpoint: "data/topic",
+          body: {
+            id: updated.id,
+            course_id: Number(moduleId),
+            name: updated.name,
+            details: updated.value
+          },
+        });
+        setTopic(updated);
+      } catch (err) {
+        console.error("Error while renaming:", err);
+      }
+  };
+
   return (
     <div>
-      <h2>Details zur Topic {name}</h2>
-      <p>Details: {details}</p>
+      {topic && (
+          <Detail<DetailBaseData<string>>
+            data={topic}
+            onEdit={handleEdit}
+          />
+        )
+      }
     </div>
   );
 }

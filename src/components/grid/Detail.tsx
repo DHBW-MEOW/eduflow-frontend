@@ -4,51 +4,40 @@ import Rename from '../popUpCreate/popUpTypes/Rename';
 import type { RenameData, RenameHandles } from '../popUpCreate/types';
 import './Detail.css'
 
-export type DetailData = {
-    id: number;
-    course_id: number;
-    name: string;
-    date: Date;
+export interface DetailBaseData<T = any> {
+  id: number;
+  name: string;
+  value: T;
+}
+
+export type DetailProps<T extends DetailBaseData> = {
+  data: T;
+  onEdit: (updated: T) => void;
+  popUpType?: "rename" | "datepicker";
 };
 
-export type DetailProps = {
-  data: DetailData;
-  onEdit: (id: number, newContent: string) => void;
-};
-
-export function Detail({ data, onEdit }: DetailProps) {
+export function Detail<T extends DetailBaseData>({ data, onEdit, popUpType = "rename" }: DetailProps<T>) {
   const [popupOpen, setPopupOpen] = useState(false);
   const renameRef = useRef<RenameHandles>(null);
 
+  const openPopUp = () => setPopupOpen(true);
+  const closePopup = () => setPopupOpen(false);
+
   const handleEdit = () => {
     if (renameRef.current) {
-      const newTitle: RenameData = renameRef.current.getFormData();
-      onEdit(data.id, newTitle.title);
+      const formData: RenameData = renameRef.current.getFormData();
+      onEdit({ ...data, value: formData.title });
       closePopup();
     }
   };
 
-  const openPopUp = () => {
-    setPopupOpen(true);
-  };
-
-  const closePopup = () => {
-    setPopupOpen(false);
-  };
-
   return (
     <div className="detail">
-      <div>
-        <div className="header-container">
-            <h3>{data.name}</h3>
-        </div>
-        <button className="edit-button" onClick={() => {
-            openPopUp();
-          }}
-        >Edit</button>
-      </div>
+      <h3>{data.name}</h3>
+      <p>{data.value}</p>
+      <button onClick={openPopUp}>Edit</button>
 
-      {
+      {popUpType == "rename" &&
         <PopUpCreate 
           isOpen={popupOpen} 
           label={"\"" + data.name + "\" editieren"} 
@@ -57,6 +46,9 @@ export function Detail({ data, onEdit }: DetailProps) {
         >
           <Rename ref={renameRef} />
         </PopUpCreate>
+      }
+      {popUpType == "datepicker" && popupOpen && 
+        <div>Not available yet</div>
       }
     </div>
   );
