@@ -37,12 +37,6 @@ export const fetchStudyGoalData = async () => {
             const topic = topicMap.get(goal.topic_id);
             const course = topic ? courseMap.get(topic.course_id) : undefined;
 
-
-            if (!topic) 
-                console.warn(`Topic with ID ${goal.topic_id} not found for Study Goal ${goal.id}`);
-            if (topic && !course) 
-                console.warn(`Course with ID ${topic.course_id} not found for Topic ${topic.name} (Study Goal ${goal.id})`);
-
             if (topic && course) {
                 itemList.push(
                     {

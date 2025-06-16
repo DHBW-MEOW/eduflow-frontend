@@ -38,10 +38,6 @@ export const StudyplanButtonHandler = ( {popUpType, onClose, onDataAdded}: Study
             const fetchedTopics = await fetchTopics();
             setTopics(fetchedTopics);
 
-            console.log('Initial Data fetched:');
-            console.log("Courses:", fetchedCourses);
-            console.log("Topics:", fetchedTopics);
-
         } catch (error) {
             console.error("Error while Loading initial Data:", error);
         }
