@@ -18,3 +18,24 @@
     margin: 3%;
 }
 
+.studyplan-createButtons {
+    display: flex;
+    flex-direction: column;
+    
+    min-width: 44px;
+    min-height: 44px;
+
+    width: 40%;
+}
+
+.studyplan-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media (min-width: 480px) {
+    .studyplan-createButtons {
+    width: 25%;
+    }
+}

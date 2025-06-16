@@ -53,34 +53,37 @@ function Studyplan() {
 
   return (
     <div className="studyplan-container">
-        <div className='studyplan-createButtons'>
-            <OptionButton
-                label= '+ Lernziel erstellen'
-                buttonType='createDataButton'
-                onClick={() => handleOpenPopup("StudyGoal")} 
-            />
-            <OptionButton
-                label= '+ Klausur hinzufügen'
-                buttonType='createDataButton'
-                onClick={() => handleOpenPopup("Exam")} 
-            />
+        <div className='studyplan-header'>
+            <h2>Kalender</h2>
+            <div className='studyplan-createButtons'>
+                <OptionButton
+                    label= '+ Lernziel erstellen'
+                    buttonType='createDataButton'
+                    onClick={() => handleOpenPopup("StudyGoal")}
+                />
+                <OptionButton
+                    label= '+ Klausur hinzufügen'
+                    buttonType='createDataButton'
+                    onClick={() => handleOpenPopup("Exam")}
+                />
+            </div>
         </div>
-      <h2>Kalender</h2>
-      <div className="studyplan-calendar">
-        <Calendar studygoals={{ studygoals: studygoals }} exams={{exams: exams}}/>
-      </div>
-      <h2>Meine Lernziele</h2>
-      <div className="studyplan-studygoals">
-        <StudyGoals items={items}/>
-      </div>
+        
+        <div className="studyplan-calendar">
+            <Calendar studygoals={{ studygoals: studygoals }} exams={{exams: exams}}/>
+        </div>
+        <h2>Meine Lernziele</h2>
+        <div className="studyplan-studygoals">
+            <StudyGoals items={items}/>
+        </div>
 
-      {activePopup && (
-          <StudyplanButtonHandler 
-              popUpType={activePopup}
-              onClose={handleClosePopup}
-              onDataAdded={handleDataAdded}
-          />
-      )}
+        {activePopup && (
+            <StudyplanButtonHandler 
+                popUpType={activePopup}
+                onClose={handleClosePopup}
+                onDataAdded={handleDataAdded}
+            />
+        )}
     </div>
   )
 }
