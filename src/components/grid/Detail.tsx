@@ -34,7 +34,7 @@ export function Detail<T extends DetailBaseData>({ data, onEdit, editable = true
   return (
     <div className="detail">
       <div className='detail-header'>
-        <h3>{data.name}</h3>
+        <h2>{data.name}</h2>
         {editable == true &&
           <button className="detail-button" onClick={openPopUp}>Edit</button>
         }

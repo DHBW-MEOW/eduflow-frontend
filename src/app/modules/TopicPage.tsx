@@ -129,7 +129,7 @@ function TopicPage(): JSX.Element {
 
     return (
         <div>
-            <h2>Exams</h2>
+            <h2>Prüfungsleistungen</h2>
             <Grid
                 items={exams}
                 setItems={setExams}
@@ -137,7 +137,7 @@ function TopicPage(): JSX.Element {
                 onDelete={handleDeleteExam}
                 onClick={handleClickExam}
             />
-            <h2>Topics</h2>
+            <h2>Themen</h2>
             <Grid
                 items={topics}
                 setItems={setTopics}
