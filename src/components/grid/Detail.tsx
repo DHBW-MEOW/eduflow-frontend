@@ -13,10 +13,10 @@ export interface DetailBaseData<T = any> {
 export type DetailProps<T extends DetailBaseData> = {
   data: T;
   onEdit: (updated: T) => void;
-  popUpType?: "rename" | "datepicker";
+  editable?: boolean;
 };
 
-export function Detail<T extends DetailBaseData>({ data, onEdit, popUpType = "rename" }: DetailProps<T>) {
+export function Detail<T extends DetailBaseData>({ data, onEdit, editable = true }: DetailProps<T>) {
   const [popupOpen, setPopupOpen] = useState(false);
   const renameRef = useRef<RenameHandles>(null);
 
@@ -33,23 +33,22 @@ export function Detail<T extends DetailBaseData>({ data, onEdit, popUpType = "re
 
   return (
     <div className="detail">
-      <h3>{data.name}</h3>
+      <div className='detail-header'>
+        <h3>{data.name}</h3>
+        {editable == true &&
+          <button className="detail-button" onClick={openPopUp}>Edit</button>
+        }
+      </div>
       <p>{data.value}</p>
-      <button onClick={openPopUp}>Edit</button>
 
-      {popUpType == "rename" &&
-        <PopUpCreate 
-          isOpen={popupOpen} 
-          label={"\"" + data.name + "\" editieren"} 
-          onClickDiscard={closePopup}
-          onClickAdd={handleEdit}
-        >
-          <Rename ref={renameRef} />
-        </PopUpCreate>
-      }
-      {popUpType == "datepicker" && popupOpen && 
-        <div>Not available yet</div>
-      }
+      <PopUpCreate 
+        isOpen={popupOpen} 
+        label={"\"" + data.name + "\" editieren"} 
+        onClickDiscard={closePopup}
+        onClickAdd={handleEdit}
+      >
+        <Rename ref={renameRef} />
+      </PopUpCreate>
     </div>
   );
 }

@@ -53,7 +53,7 @@ function DetailExamPage() {
           <Detail<DetailBaseData<Date>>
             data={exam}
             onEdit={handleEdit}
-            popUpType="datepicker"
+            editable={false}
           />
         )
       }
