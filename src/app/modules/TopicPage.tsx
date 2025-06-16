@@ -3,17 +3,15 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Grid } from "../../components/grid/Grid";
 import { fetchFromBackend } from "../../fetchBackend";
 import type { BoxData } from "../../components/grid/Box";
-import type { DetailBaseData } from "../../components/grid/Detail";
 
 function TopicPage(): JSX.Element {
     const { moduleId } = useParams<{ moduleId: string }>();
     const navigate = useNavigate();
     const [ topics, setTopics] = useState<BoxData[]>([]);
     const [ exams, setExams] = useState<BoxData[]>([]);
-    const [ examsInfo, setExamsInfo] = useState<DetailBaseData[]>([]);
     
     const handleRenameExam = async (id: number, newTitle: string) => {
-        const item = examsInfo.find(item => item.id === id);
+        const item = exams.find(item => item.id === id);
         if (!item) {
             console.error(`No Exam found with ID=${id}`);
             return;
@@ -26,7 +24,7 @@ function TopicPage(): JSX.Element {
                   id: id,
                   course_id: Number(moduleId),
                   name: newTitle,
-                  date: item.value
+                  date: item.details
                 },
             });
         } catch (err) {
@@ -109,19 +107,19 @@ function TopicPage(): JSX.Element {
                         method: "GET",
                         endpoint: `data/topic?course_id=${moduleId}`
                     }),
-                    fetchFromBackend<{ id: number; name: string; details: string }[]>({
+                    fetchFromBackend<{ id: number; name: string; date: string }[]>({
                         method: "GET",
                         endpoint: `data/exam?course_id=${moduleId}`
                     })
                 ]);
                 setTopics(dataTopics);
-                setExams(dataExams);
-                const dataExamInfo: DetailBaseData[] = dataExams.map(({ id, name, details }) => ({
+
+                const dataExamConverted: BoxData[] = dataExams.map(({ id, name, date }) => ({
                     id,
                     name,
-                    value: new Date(details),
+                    details: date,
                 }));
-                setExamsInfo(dataExamInfo);
+                setExams(dataExamConverted);
             } catch (err) {
                 console.error("Error while loading the Topics and Exams:", err);
             }
