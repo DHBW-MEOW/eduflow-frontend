@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import type { LearningPlanHandles, ExamHandles } from "../../../components/popUpCreate/types";
 import type { TopicData, CourseData, StudyplanButtonProps } from "../types";
 
@@ -17,7 +17,7 @@ import { fetchTopics } from "../api/fetchTopics";
 import { createNewTopic } from "../api/createNewTopic";
 import { getTopicNames } from "./getTopicNames";
 
-export const StudyplanButtonHandler = ( {popUpType, onClose}: StudyplanButtonProps ) => {
+export const StudyplanButtonHandler = ( {popUpType, onClose, onDataAdded}: StudyplanButtonProps ) => {
     const learningPlanRef = useRef<LearningPlanHandles>(null);
     const examRef = useRef<ExamHandles>(null);
 
@@ -29,7 +29,7 @@ export const StudyplanButtonHandler = ( {popUpType, onClose}: StudyplanButtonPro
     const isLearningPlanPopUpOpen = popUpType === "StudyGoal";
     const isExamPopUpOpen = popUpType === "Exam";
 
-    const loadOptions = async () => {
+    const loadOptions = useCallback(async () => {
         try {
             const allCourses = await fetchCourses();
             setCourses(allCourses);
@@ -43,7 +43,7 @@ export const StudyplanButtonHandler = ( {popUpType, onClose}: StudyplanButtonPro
         } catch (error) {
             console.error("Error while Loading Course-Names:", error);
         }
-    };
+    }, []);
 
     useEffect(() => {
         loadOptions();
@@ -72,7 +72,7 @@ export const StudyplanButtonHandler = ( {popUpType, onClose}: StudyplanButtonPro
                     }
                     if (typeof topicID === 'number') {
                         await createNewStudyGoal(topicID, data.data.date)
-                        onClose();
+                        onDataAdded();
                     }
                 }
             }
@@ -91,7 +91,7 @@ export const StudyplanButtonHandler = ( {popUpType, onClose}: StudyplanButtonPro
                 }
                 if (typeof courseID === 'number') {
                     await createNewExam(courseID, data.data.title, data.data.date)
-                    onClose();
+                    onDataAdded();
                 }
             }
         }

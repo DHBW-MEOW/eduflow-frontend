@@ -5,7 +5,7 @@ import StudyGoals from "../../components/studyGoals/StudyGoals";
 import OptionButton from '../../components/optionButtons/OptionButton';
 
 import type { ItemData, StudyGoalData, ExamDateData } from './types';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { fetchStudyGoalData } from './api/fetchStudyGoalData';
 import { fetchExamData } from './api/fetchExamData';
 import { StudyplanButtonHandler } from './utils/StudyplanButtonHandler';
@@ -18,7 +18,7 @@ function Studyplan() {
     const [exams, setExams] = useState<ExamDateData[]>([]);
     const [activePopup, setActivePopup] = useState<ActivePopupType>(null);
 
-    const loadPageData = async () => {
+    const loadPageData = useCallback( async () => {
             try {
                 const studyplanData = await fetchStudyGoalData();
                 const examData = await fetchExamData();
@@ -32,11 +32,11 @@ function Studyplan() {
             } catch (err) {
                 console.error("Error while loading Data:", err);
             }
-        };
+    }, []);
 
     useEffect(() => {
         loadPageData();
-    }, [])
+    }, [loadPageData])
 
     const handleOpenPopup = (type: ActivePopupType) => {
         setActivePopup(type);
@@ -46,7 +46,10 @@ function Studyplan() {
         setActivePopup(null);
     };
 
-
+    const handleDataAdded = () => {
+        handleClosePopup();
+        loadPageData();
+    };
 
   return (
     <div className="studyplan-container">
@@ -75,6 +78,7 @@ function Studyplan() {
           <StudyplanButtonHandler 
               popUpType={activePopup}
               onClose={handleClosePopup}
+              onDataAdded={handleDataAdded}
           />
       )}
     </div>

@@ -18,7 +18,6 @@ export const createNewTopic = async (course_id: number, name: string, details: s
             });
 
             if (typeof response.id === 'number') {
-                console.log(response)
                 return response.id;
             } else {
                 throw new Error("No valid output from backend");

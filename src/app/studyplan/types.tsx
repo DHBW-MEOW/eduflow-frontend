@@ -47,4 +47,5 @@ export interface CalendarProps {
 export interface StudyplanButtonProps {
     popUpType: 'StudyGoal' | 'Exam' | null;
     onClose: () => void;
+    onDataAdded: () => void;
 }
