@@ -104,7 +104,7 @@ function TopicPage(): JSX.Element {
     useEffect(() => {
         const loadData = async () => {
             try {
-                const [dataTopics, dataExams, dataExamsInfo] = await Promise.all([
+                const [dataTopics, dataExams] = await Promise.all([
                     fetchFromBackend<{ id: number; name: string; details: string }[]>({
                         method: "GET",
                         endpoint: `data/topic?course_id=${moduleId}`
@@ -112,15 +112,16 @@ function TopicPage(): JSX.Element {
                     fetchFromBackend<{ id: number; name: string; details: string }[]>({
                         method: "GET",
                         endpoint: `data/exam?course_id=${moduleId}`
-                    }),
-                    fetchFromBackend<{ id: number; name: string; value: Date }[]>({
-                        method: "GET",
-                        endpoint: `data/exam?course_id=${moduleId}`
                     })
                 ]);
                 setTopics(dataTopics);
                 setExams(dataExams);
-                setExamsInfo(dataExamsInfo);
+                const dataExamInfo: DetailBaseData[] = dataExams.map(({ id, name, details }) => ({
+                    id,
+                    name,
+                    value: new Date(details),
+                }));
+                setExamsInfo(dataExamInfo);
             } catch (err) {
                 console.error("Error while loading the Topics and Exams:", err);
             }
