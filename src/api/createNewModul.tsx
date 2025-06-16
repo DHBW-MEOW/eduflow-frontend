@@ -1,4 +1,4 @@
-import { fetchFromBackend } from "../../../fetchBackend";
+import { fetchFromBackend } from "../fetchBackend";
 
 interface NewModuleResponse {
     id: number;

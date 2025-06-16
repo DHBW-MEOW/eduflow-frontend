@@ -1,4 +1,4 @@
-import React, { useState, useImperativeHandle, forwardRef, useEffect } from "react";
+import React, { useState, useImperativeHandle, forwardRef, useEffect, useCallback } from "react";
 import type { LearningPlanData, LearningPlanHandles } from "../types.tsx";
 import './popUpTypes.css';
 
@@ -14,9 +14,11 @@ interface LearningPlanProps {
     moduleOptions?: string[];
     topicOptions?: string[];
     initialData?: LearningPlanData;
+    onModuleChange?: (moduleName: string) => void;
 }
 
-const LearningPlan = forwardRef<LearningPlanHandles, LearningPlanProps>(({ initialData, moduleOptions, topicOptions }, ref) => {
+const LearningPlan = forwardRef<LearningPlanHandles, LearningPlanProps>(({ initialData, moduleOptions, topicOptions, onModuleChange }, ref) => {
+    const [errors, setErrors] = useState<Partial<Record<keyof LearningPlanData, string>>>({});
     const [formData, setFormData] = useState<LearningPlanData>({
         date: initialData?.date || '',
         topic: initialData?.topic || '',
@@ -24,40 +26,62 @@ const LearningPlan = forwardRef<LearningPlanHandles, LearningPlanProps>(({ initi
         details: initialData?.details || '',
     });
 
-    const [errors, setErrors] = useState<Partial<Record<keyof LearningPlanData, string>>>({});
     const [hasAttemptedSubmit, setHasAttemptedSubmit] = useState(false);
       
-    const validate = (data: LearningPlanData) => {
-    let newErrors: Partial<Record<keyof LearningPlanData, string>> = {};
+    const getErrors = useCallback((data: LearningPlanData) => {
+        let newErrors: Partial<Record<keyof LearningPlanData, string>> = {};
 
-    const moduleError = validateModul(data.module);
-    if (moduleError) 
-        newErrors.module = moduleError;
+        const moduleError = validateModul(data.module);
+        if (moduleError) 
+            newErrors.module = moduleError;
+        const topicError = validateTopic(data.topic);
+        if (topicError)
+            newErrors.topic = topicError;
+        const dateError = validateDate(data.date);
+        if (dateError) 
+            newErrors.date = dateError;
 
-    const topicError = validateTopic(data.topic);
-    if (topicError) 
-        newErrors.topic = topicError;
+        return newErrors;
+    },[topicOptions]);
 
-    const dateError = validateDate(data.date);
-    if (dateError) 
-        newErrors.date = dateError;
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;;
-    };
+    useEffect(() => {
+        if (onModuleChange) {
+            onModuleChange(formData.module);
+        }
+    }, [formData.module, onModuleChange]);
     
     useEffect(() => {
         if (hasAttemptedSubmit) {
-            validate(formData);
+            const currentErrors = getErrors(formData);
+            if (JSON.stringify(currentErrors) !== JSON.stringify(errors)) {
+                setErrors(currentErrors);
+            }
         }
-    }, [formData, hasAttemptedSubmit]);
+    }, [formData, hasAttemptedSubmit, getErrors]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        setFormData(prevData => ({
-            ...prevData,
-            [name]: value,
-        }));
+        setFormData(prevData => {
+            const newData = {
+                ...prevData,
+                [name]: value,
+            };
+            
+            if (name === "module" && (prevData.module !== value)) {
+                newData.topic = '';
+            }
+            return newData;
+        });
+
+        if (hasAttemptedSubmit) {
+            const newErrors = getErrors({ ...formData, [name]: value } as LearningPlanData);
+            if (newErrors[name as keyof LearningPlanData] !== errors[name as keyof LearningPlanData]) {
+                setErrors(prevErrors => ({
+                    ...prevErrors,
+                    [name as keyof LearningPlanData]: newErrors[name as keyof LearningPlanData]
+                }));
+            }
+        }
     };
 
     const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -66,20 +90,32 @@ const LearningPlan = forwardRef<LearningPlanHandles, LearningPlanProps>(({ initi
             ...prevData,
             [name]: value,
         }));
+
+        if (hasAttemptedSubmit) {
+            const newErrors = getErrors({ ...formData, [name]: value } as LearningPlanData);
+            if (newErrors[name as keyof LearningPlanData] !== errors[name as keyof LearningPlanData]) {
+                setErrors(prevErrors => ({
+                    ...prevErrors,
+                    [name as keyof LearningPlanData]: newErrors[name as keyof LearningPlanData]
+                }));
+            }
+        }
     };
 
     useImperativeHandle(ref, () => ({
         getFormData: () => {
-          setHasAttemptedSubmit(true);
-          const isValid = validate(formData);
-    
-          return {
-            data: formData,
-            errors: errors,
-            isValid: isValid,
-          };
+            setHasAttemptedSubmit(true);
+            const currentErrors = getErrors(formData);
+            setErrors(currentErrors);
+            const isValid = Object.keys(currentErrors).length === 0;
+
+            return {
+                data: formData,
+                errors: currentErrors,
+                isValid: isValid,
+            };
         },
-      }));
+    }), [formData, getErrors]);
 
     return (
         <div className="popup-form">
@@ -88,7 +124,7 @@ const LearningPlan = forwardRef<LearningPlanHandles, LearningPlanProps>(({ initi
                 name="module"
                 value={formData.module}
                 options={moduleOptions || []}
-                isInvalid={!!errors.module}
+                isInvalid={hasAttemptedSubmit && !!errors.module}
                 errorMessage={errors.module}
                 onChange={handleChange}
             />
@@ -97,7 +133,7 @@ const LearningPlan = forwardRef<LearningPlanHandles, LearningPlanProps>(({ initi
                 name="topic"
                 value={formData.topic}
                 options={topicOptions || []}
-                isInvalid={!!errors.topic}
+                isInvalid={hasAttemptedSubmit && !!errors.module}
                 errorMessage={errors.topic}
                 onChange={handleChange}
             />
@@ -105,7 +141,7 @@ const LearningPlan = forwardRef<LearningPlanHandles, LearningPlanProps>(({ initi
                 label="Deadline"
                 name="date"
                 value={formData.date}
-                isInvalid={!!errors.date}
+                isInvalid={hasAttemptedSubmit && !!errors.module}
                 errorMessage={errors.date}
                 onChange={handleChange}
             />

@@ -1,5 +1,5 @@
-import type { TopicData } from "../types";
-import { fetchFromBackend } from "../../../fetchBackend";
+import type { TopicData } from "../app/studyplan/types";
+import { fetchFromBackend } from "../fetchBackend";
 
 export const fetchTopics = async () => {
     try {

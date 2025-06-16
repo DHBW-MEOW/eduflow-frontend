@@ -6,8 +6,8 @@ import OptionButton from '../../components/optionButtons/OptionButton';
 
 import type { ItemData, StudyGoalData, ExamDateData } from './types';
 import { useCallback, useEffect, useState } from 'react';
-import { fetchStudyGoalData } from './api/fetchStudyGoalData';
-import { fetchExamData } from './api/fetchExamData';
+import { fetchStudyGoalData } from '../../api/fetchStudyGoalData';
+import { fetchExamData } from '../../api/fetchExamData';
 import { StudyplanButtonHandler } from './utils/StudyplanButtonHandler';
 
 type ActivePopupType = 'StudyGoal' | 'Exam' | null;

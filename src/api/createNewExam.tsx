@@ -1,4 +1,4 @@
-import { fetchFromBackend } from "../../../fetchBackend";
+import { fetchFromBackend } from "../fetchBackend";
 
 export const createNewExam = async (course_id: number , name: string, date: string) => {
     try {

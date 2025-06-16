@@ -1,5 +1,5 @@
-import type { CourseData } from "../types";
-import { fetchFromBackend } from "../../../fetchBackend";
+import type { CourseData } from "../app/studyplan/types";
+import { fetchFromBackend } from "../fetchBackend";
 
 export const fetchCourses = async () => {
     try {

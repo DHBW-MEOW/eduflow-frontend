@@ -2,10 +2,10 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import type { LearningPlanHandles, ExamHandles } from "../../../components/popUpCreate/types";
 import type { TopicData, CourseData, StudyplanButtonProps } from "../types";
 
-import { createNewExam } from "../api/createNewExam";
-import { createNewModul } from "../api/createNewModul";
-import { createNewStudyGoal } from "../api/createNewStudyplan";
-import { fetchCourses } from "../api/fetchCourses";
+import { createNewExam } from "../../../api/createNewExam";
+import { createNewModul } from "../../../api/createNewModul";
+import { createNewStudyGoal } from "../../../api/createNewStudyplan";
+import { fetchCourses } from "../../../api/fetchCourses";
 import { getCourseNames } from "./getCourseNames";
 import { getCourseID } from "./getCourseID";
 
@@ -13,8 +13,8 @@ import PopUpCreate from "../../../components/popUpCreate/PopUpCreate";
 import LearningPlan from "../../../components/popUpCreate/popUpTypes/LearningPlan";
 import Exam from "../../../components/popUpCreate/popUpTypes/Exam";
 import { getTopicID } from "./getTopicID";
-import { fetchTopics } from "../api/fetchTopics";
-import { createNewTopic } from "../api/createNewTopic";
+import { fetchTopics } from "../../../api/fetchTopics";
+import { createNewTopic } from "../../../api/createNewTopic";
 import { getTopicNames } from "./getTopicNames";
 
 export const StudyplanButtonHandler = ( {popUpType, onClose, onDataAdded}: StudyplanButtonProps ) => {
@@ -23,25 +23,27 @@ export const StudyplanButtonHandler = ( {popUpType, onClose, onDataAdded}: Study
 
     const [courseOptions, setCourseOptions] = useState<string[]>([]);
     const [courses, setCourses] = useState<CourseData[]>([]);
-    const [topicOptions, setTopicOptions] = useState<string[]>([]);
+    const [filteredTopicOptions, setFilteredTopicOptions] = useState<string[]>([]);
     const [topics, setTopics] = useState<TopicData[]>([]);
+    const [selectedModule, setSelectedModule] = useState<string | null>(null);
 
     const isLearningPlanPopUpOpen = popUpType === "StudyGoal";
     const isExamPopUpOpen = popUpType === "Exam";
 
     const loadOptions = useCallback(async () => {
         try {
-            const allCourses = await fetchCourses();
-            setCourses(allCourses);
-            const courseNames = getCourseNames(courses);
-            setCourseOptions(courseNames);
-            const allTopics = await fetchTopics();
-            setTopics(allTopics);
-            const topicNames = getTopicNames(topics); // TODO: only topics for course_id
-            setTopicOptions(topicNames);
+            const fetchedCourses = await fetchCourses();
+            setCourses(fetchedCourses);
+            
+            const fetchedTopics = await fetchTopics();
+            setTopics(fetchedTopics);
+
+            console.log('Initial Data fetched:');
+            console.log("Courses:", fetchedCourses);
+            console.log("Topics:", fetchedTopics);
 
         } catch (error) {
-            console.error("Error while Loading Course-Names:", error);
+            console.error("Error while Loading initial Data:", error);
         }
     }, []);
 
@@ -49,8 +51,39 @@ export const StudyplanButtonHandler = ( {popUpType, onClose, onDataAdded}: Study
         loadOptions();
     }, [loadOptions]);
 
+    useEffect(() => {
+        if (courses.length > 0) {
+            const courseNames = getCourseNames(courses);
+            setCourseOptions(courseNames);
+        } else {
+            setCourseOptions([]);
+        }
+    }, [courses]);
+
+    useEffect(() => {
+        if (selectedModule) {
+            const currentCourseID = getCourseID(selectedModule, courses);
+            if (typeof currentCourseID === 'number') {
+                const topicsForSelectedModule = topics.filter(
+                    topic => topic.course_id === currentCourseID
+                );
+                const names = getTopicNames(topicsForSelectedModule);
+                setFilteredTopicOptions(names);
+            } else {
+                setFilteredTopicOptions([]); 
+            }
+        } else {
+            setFilteredTopicOptions([]); 
+        }
+    }, [selectedModule, topics, courses]);
+
+    const handleModuleChangeInLearningPlan = useCallback((moduleName: string) => {
+        setSelectedModule(moduleName);
+    }, []);
+
     const handleDiscard = () => {
         onClose();
+        setSelectedModule(null);
     }
 
     const handleAddLearningPlan = async () => {
@@ -73,6 +106,7 @@ export const StudyplanButtonHandler = ( {popUpType, onClose, onDataAdded}: Study
                     if (typeof topicID === 'number') {
                         await createNewStudyGoal(topicID, data.data.date)
                         onDataAdded();
+                        setSelectedModule(null);
                     }
                 }
             }
@@ -107,10 +141,11 @@ export const StudyplanButtonHandler = ( {popUpType, onClose, onDataAdded}: Study
                     onClickAdd={handleAddLearningPlan}
                     onClickDiscard={handleDiscard}
                     modulOptions={courseOptions}
-                    topicOptions={topicOptions}
+                    topicOptions={filteredTopicOptions}
                 >
                     <LearningPlan 
                         ref={learningPlanRef}
+                        onModuleChange={handleModuleChangeInLearningPlan}
                     />
                 </PopUpCreate>
             )}
