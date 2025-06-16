@@ -21,6 +21,8 @@ export default [
     route("/modules/:moduleId", "./app/modules/TopicPage.tsx"),
     route("/modules/:moduleId/topics/:topicId", "./app/modules/DetailTopicPage.tsx"),
     route("/modules/:moduleId/exams/:examId", "./app/modules/DetailExamPage.tsx"),
+
+    route("/error", "./app/ErrorPageTest.tsx"), //TODO only for testing
   ]),
   //route("/todo", "./app/todo/Todo.tsx"),
 ] satisfies RouteConfig;
