@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import type { LearningPlanHandles, ExamHandles } from "../../../components/popUpCreate/types";
 import type { TopicData, CourseData, StudyplanButtonProps } from "../types";
 
@@ -21,7 +21,6 @@ export const StudyplanButtonHandler = ( {popUpType, onClose}: StudyplanButtonPro
     const learningPlanRef = useRef<LearningPlanHandles>(null);
     const examRef = useRef<ExamHandles>(null);
 
-    const [isCurrentFormValid, setIsCurrentFormValid] = useState(false);
     const [courseOptions, setCourseOptions] = useState<string[]>([]);
     const [courses, setCourses] = useState<CourseData[]>([]);
     const [topicOptions, setTopicOptions] = useState<string[]>([]);
@@ -50,13 +49,8 @@ export const StudyplanButtonHandler = ( {popUpType, onClose}: StudyplanButtonPro
         loadOptions();
     }, [loadOptions]);
 
-    const handleValidityChange = useCallback((isValid: boolean) => {
-        setIsCurrentFormValid(isValid);
-    }, []); 
-
     const handleDiscard = () => {
         onClose();
-        setIsCurrentFormValid(false);
     }
 
     const handleAddLearningPlan = async () => {
@@ -64,10 +58,6 @@ export const StudyplanButtonHandler = ( {popUpType, onClose}: StudyplanButtonPro
             const data = learningPlanRef.current.getFormData();
 
             if (data.isValid) {
-                console.log('Lernplan Daten:', data.data);
-                onClose();
-                setIsCurrentFormValid(false);
-
                 let courseID = getCourseID(data.data.module, courses)
                 if( courseID === null) {
                     courseID = await createNewModul(data.data.module);
@@ -83,7 +73,6 @@ export const StudyplanButtonHandler = ( {popUpType, onClose}: StudyplanButtonPro
                     if (typeof topicID === 'number') {
                         await createNewStudyGoal(topicID, data.data.date)
                         onClose();
-                        setIsCurrentFormValid(false);
                     }
                 }
             }
@@ -103,7 +92,6 @@ export const StudyplanButtonHandler = ( {popUpType, onClose}: StudyplanButtonPro
                 if (typeof courseID === 'number') {
                     await createNewExam(courseID, data.data.title, data.data.date)
                     onClose();
-                    setIsCurrentFormValid(false);
                 }
             }
         }
@@ -123,7 +111,6 @@ export const StudyplanButtonHandler = ( {popUpType, onClose}: StudyplanButtonPro
                 >
                     <LearningPlan 
                         ref={learningPlanRef}
-                        onValidityChange={handleValidityChange}
                     />
                 </PopUpCreate>
             )}
@@ -139,7 +126,6 @@ export const StudyplanButtonHandler = ( {popUpType, onClose}: StudyplanButtonPro
                 >
                     <Exam 
                         ref={examRef}
-                        onValidityChange={handleValidityChange}
                     />
                 </PopUpCreate>
             )}

@@ -3,6 +3,8 @@ export interface LearningPlanData {
   topic: string;
   module: string;
   details: string;
+  moduleOptions?: string[];
+  topicOptions?: string[];
 }
 
 export interface LearningPlanHandles {

@@ -1,12 +1,14 @@
 import React, { useState, useImperativeHandle, forwardRef, useEffect } from "react";
-import type { RenameData, RenameHandles, FormComponentProps } from "../types";
+import type { RenameData, RenameHandles } from "../types";
 import InputField from '../inputOptions/InputField';
 import { validateTitle } from "../utils/validateTitle";
 import './popUpTypes.css';
 
-interface RenameProps extends FormComponentProps<RenameData> {}
+interface RenameProps {
+  initialData?: RenameData
+}
 
-const Rename = forwardRef<RenameHandles, RenameProps>(({ initialData, onValidityChange }, ref) => {
+const Rename = forwardRef<RenameHandles, RenameProps>(({ initialData }, ref) => {
   const [formData, setFormData] = useState<RenameData>({
     title: initialData?.title || '',
   });
@@ -43,7 +45,6 @@ const Rename = forwardRef<RenameHandles, RenameProps>(({ initialData, onValidity
       getFormData: () => {
         setHasAttemptedSubmit(true);
         const isValid = validate(formData);
-        onValidityChange(isValid);
   
         return {
           data: formData,

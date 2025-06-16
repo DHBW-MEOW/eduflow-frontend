@@ -1,5 +1,5 @@
 import React, { useState, useImperativeHandle, forwardRef, useEffect } from "react";
-import type { LearningPlanData, LearningPlanHandles, FormComponentProps } from "../types.tsx";
+import type { LearningPlanData, LearningPlanHandles } from "../types.tsx";
 import './popUpTypes.css';
 
 import InputCombobox from "../inputOptions/InputCombobox.tsx";
@@ -10,12 +10,13 @@ import { validateDate } from '../utils/validateDate';
 import { validateModul } from '../utils/validateModul';
 import { validateTopic } from "../utils/validateTopic.tsx";
 
-interface LearningPlanProps extends FormComponentProps<LearningPlanData> {
+interface LearningPlanProps {
     moduleOptions?: string[];
     topicOptions?: string[];
+    initialData?: LearningPlanData;
 }
 
-const LearningPlan = forwardRef<LearningPlanHandles, LearningPlanProps>(({ initialData, onValidityChange, moduleOptions, topicOptions }, ref) => {
+const LearningPlan = forwardRef<LearningPlanHandles, LearningPlanProps>(({ initialData, moduleOptions, topicOptions }, ref) => {
     const [formData, setFormData] = useState<LearningPlanData>({
         date: initialData?.date || '',
         topic: initialData?.topic || '',
@@ -71,7 +72,6 @@ const LearningPlan = forwardRef<LearningPlanHandles, LearningPlanProps>(({ initi
         getFormData: () => {
           setHasAttemptedSubmit(true);
           const isValid = validate(formData);
-          onValidityChange(isValid);
     
           return {
             data: formData,

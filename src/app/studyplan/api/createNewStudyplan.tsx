@@ -11,7 +11,6 @@ export const createNewStudyGoal = async (topic_id: number, deadline: string) => 
                   deadline: deadline
                 },
             });
-            console.log('Created new StudyGoal');
         } catch (err) {
             console.error("Error while creating new StudyGoal", err);
         }

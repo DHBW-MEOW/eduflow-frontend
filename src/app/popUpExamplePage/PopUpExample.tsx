@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef } from 'react';
 import PopUpCreate from '../../components/popUpCreate/PopUpCreate.tsx'
 import LearningPlan from '../../components/popUpCreate/popUpTypes/LearningPlan.tsx'
 import Exam from '../../components/popUpCreate/popUpTypes/Exam.tsx';
@@ -21,7 +21,6 @@ type PopupType = typeof PopupType[keyof typeof PopupType];
 
 const PopUpExample: React.FC = () => {
   const [activePopup, setActivePopup] = useState<PopupType>(PopupType.NONE);
-  const [isCurrentFormValid, setIsCurrentFormValid] = useState(false);
   
   const learningPlanRef = useRef<LearningPlanHandles>(null);
   const toDoRef = useRef<ToDoHandles>(null);
@@ -30,13 +29,7 @@ const PopUpExample: React.FC = () => {
 
   const closePopup = () => {
     setActivePopup(PopupType.NONE);
-    setIsCurrentFormValid(false);
   };
-
-  // Handler for Validity
-  const handleValidityChange = useCallback((isValid: boolean) => {
-    setIsCurrentFormValid(isValid);
-  }, []);
 
   // Handler for LearningPlan
   const handleAddLearningPlan = () => {
@@ -104,7 +97,7 @@ const PopUpExample: React.FC = () => {
   switch (activePopup) {
     case PopupType.LEARNING_PLAN:
       popupLabel = "Neuen Lernplan erstellen";
-      popupContent = <LearningPlan ref={learningPlanRef} onValidityChange={handleValidityChange} />;
+      popupContent = <LearningPlan ref={learningPlanRef} />;
       onAddAction = handleAddLearningPlan;
       break;
     case PopupType.TODO:
@@ -114,12 +107,12 @@ const PopUpExample: React.FC = () => {
       break;
     case PopupType.EXAM:
       popupLabel = "Neue Prüfung anlegen";
-      popupContent = <Exam ref={examRef} onValidityChange={handleValidityChange} />;
+      popupContent = <Exam ref={examRef} />;
       onAddAction = handleAddExam;
       break;
     case PopupType.RENAME:
       popupLabel = "Umbennenen";
-      popupContent = <Rename ref={renameRef} onValidityChange={handleValidityChange} />;
+      popupContent = <Rename ref={renameRef} />;
       onAddAction = handleAddRename;
       break;
   }
@@ -140,7 +133,6 @@ const PopUpExample: React.FC = () => {
           label={popupLabel}
           onClickDiscard={closePopup}
           onClickAdd={onAddAction}
-          isAddButtonDisabled={!isCurrentFormValid}
         >
           {popupContent}
         </PopUpCreate>

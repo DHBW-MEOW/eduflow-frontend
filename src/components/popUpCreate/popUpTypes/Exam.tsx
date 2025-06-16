@@ -1,5 +1,5 @@
 import React, { useState, useImperativeHandle, forwardRef, useEffect } from 'react';
-import type { ExamData, ExamHandles, FormComponentProps } from '../types';
+import type { ExamData, ExamHandles } from '../types';
 import './popUpTypes.css';
 
 import InputCombobox from '../inputOptions/InputCombobox';
@@ -10,11 +10,12 @@ import { validateDate } from '../utils/validateDate';
 import { validateModul } from '../utils/validateModul';
 import { validateTitle } from '../utils/validateTitle';
 
-interface ExamProps extends FormComponentProps<ExamData> {
+interface ExamProps {
   moduleOptions?: string[];
+  initialData?: ExamData;
 }
 
-const Exam = forwardRef<ExamHandles, ExamProps>(({ initialData, onValidityChange, moduleOptions }, ref) => {
+const Exam = forwardRef<ExamHandles, ExamProps>(({ initialData, moduleOptions }, ref) => {
   const [formData, setFormData] = useState<ExamData>({
     module: initialData?.module || '',
     title: initialData?.title || '',
@@ -63,7 +64,6 @@ const Exam = forwardRef<ExamHandles, ExamProps>(({ initialData, onValidityChange
     getFormData: () => {
       setHasAttemptedSubmit(true);
       const isValid = validate(formData);
-      onValidityChange(isValid);
 
       return {
         data: formData,
