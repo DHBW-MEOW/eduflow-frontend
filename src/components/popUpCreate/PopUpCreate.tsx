@@ -3,7 +3,7 @@ import OptionButton from '../optionButtons/OptionButton';
 import type { PopUpProps } from './types';
 import './PopUpCreate.css'
 
-const PopUpCreate: React.FC<PopUpProps> = ({isOpen, label, children, modulOptions, topicOptions, onClickDiscard, onClickAdd}) => {
+const PopUpCreate: React.FC<PopUpProps> = ({isOpen, label, children, modulOptions, topicOptions, isAddButtonDisabled, onClickDiscard, onClickAdd}) => {
     if (!isOpen) {
         return null;
     }
@@ -28,6 +28,7 @@ const PopUpCreate: React.FC<PopUpProps> = ({isOpen, label, children, modulOption
                      label='Hinzufügen'
                      buttonType='optionButton'
                      onClick={onClickAdd}
+                     isDisabled={isAddButtonDisabled}
                      />
                 </div>
             </div>

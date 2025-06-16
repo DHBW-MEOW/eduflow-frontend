@@ -26,6 +26,7 @@ export const StudyplanButtonHandler = ( {popUpType, onClose, onDataAdded}: Study
     const [filteredTopicOptions, setFilteredTopicOptions] = useState<string[]>([]);
     const [topics, setTopics] = useState<TopicData[]>([]);
     const [selectedModule, setSelectedModule] = useState<string | null>(null);
+    const [isFormValid, setIsFormValid] = useState(false);
 
     const isLearningPlanPopUpOpen = popUpType === "StudyGoal";
     const isExamPopUpOpen = popUpType === "Exam";
@@ -75,6 +76,10 @@ export const StudyplanButtonHandler = ( {popUpType, onClose, onDataAdded}: Study
 
     const handleModuleChangeInLearningPlan = useCallback((moduleName: string) => {
         setSelectedModule(moduleName);
+    }, []);
+
+    const handleValidationChange = useCallback((isValid: boolean) => {
+        setIsFormValid(isValid);
     }, []);
 
     const handleDiscard = () => {
@@ -138,10 +143,12 @@ export const StudyplanButtonHandler = ( {popUpType, onClose, onDataAdded}: Study
                     onClickDiscard={handleDiscard}
                     modulOptions={courseOptions}
                     topicOptions={filteredTopicOptions}
+                    isAddButtonDisabled={!isFormValid}
                 >
                     <LearningPlan 
                         ref={learningPlanRef}
                         onModuleChange={handleModuleChangeInLearningPlan}
+                        onValidationChange={handleValidationChange}
                     />
                 </PopUpCreate>
             )}
@@ -154,9 +161,11 @@ export const StudyplanButtonHandler = ( {popUpType, onClose, onDataAdded}: Study
                     onClickAdd={handleAddExam}
                     onClickDiscard={handleDiscard}
                     modulOptions={courseOptions}
+                    isAddButtonDisabled={!isFormValid}
                 >
                     <Exam 
                         ref={examRef}
+                        onValidationChange={handleValidationChange}
                     />
                 </PopUpCreate>
             )}

@@ -45,6 +45,7 @@ export type PopUpProps = {
     children: React.ReactElement;
     modulOptions?: string[];
     topicOptions?: string[];
+    isAddButtonDisabled?: boolean;
     onClickDiscard: () => void;
     onClickAdd: () => void;
 }

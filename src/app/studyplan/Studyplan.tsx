@@ -62,7 +62,7 @@ function Studyplan() {
                     onClick={() => handleOpenPopup("StudyGoal")}
                 />
                 <OptionButton
-                    label= '+ Klausur hinzufügen'
+                    label= '+ Prüfungsleistung hinzufügen'
                     buttonType='createDataButton'
                     onClick={() => handleOpenPopup("Exam")}
                 />

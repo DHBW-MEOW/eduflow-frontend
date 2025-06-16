@@ -15,9 +15,10 @@ interface LearningPlanProps {
     topicOptions?: string[];
     initialData?: LearningPlanData;
     onModuleChange?: (moduleName: string) => void;
+    onValidationChange?: (isValid: boolean) => void;
 }
 
-const LearningPlan = forwardRef<LearningPlanHandles, LearningPlanProps>(({ initialData, moduleOptions, topicOptions, onModuleChange }, ref) => {
+const LearningPlan = forwardRef<LearningPlanHandles, LearningPlanProps>(({ initialData, moduleOptions, topicOptions, onModuleChange, onValidationChange }, ref) => {
     const [errors, setErrors] = useState<Partial<Record<keyof LearningPlanData, string>>>({});
     const [formData, setFormData] = useState<LearningPlanData>({
         date: initialData?.date || '',
@@ -58,6 +59,14 @@ const LearningPlan = forwardRef<LearningPlanHandles, LearningPlanProps>(({ initi
             }
         }
     }, [formData, hasAttemptedSubmit, getErrors]);
+
+    useEffect(() => {
+        if (onValidationChange) {
+            const currentErrors = getErrors(formData);
+            const isValid = Object.keys(currentErrors).length === 0;
+            onValidationChange(isValid);
+        }
+    }, [formData, getErrors, onValidationChange]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;

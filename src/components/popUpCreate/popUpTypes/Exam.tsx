@@ -1,4 +1,4 @@
-import React, { useState, useImperativeHandle, forwardRef, useEffect } from 'react';
+import React, { useState, useImperativeHandle, forwardRef, useEffect, useCallback } from 'react';
 import type { ExamData, ExamHandles } from '../types';
 import './popUpTypes.css';
 
@@ -13,9 +13,10 @@ import { validateTitle } from '../utils/validateTitle';
 interface ExamProps {
   moduleOptions?: string[];
   initialData?: ExamData;
+  onValidationChange?: (isValid: boolean) => void;
 }
 
-const Exam = forwardRef<ExamHandles, ExamProps>(({ initialData, moduleOptions }, ref) => {
+const Exam = forwardRef<ExamHandles, ExamProps>(({ initialData, moduleOptions, onValidationChange }, ref) => {
   const [formData, setFormData] = useState<ExamData>({
     module: initialData?.module || '',
     title: initialData?.title || '',
@@ -25,7 +26,7 @@ const Exam = forwardRef<ExamHandles, ExamProps>(({ initialData, moduleOptions },
   const [errors, setErrors] = useState<Partial<Record<keyof ExamData, string>>>({});
   const [hasAttemptedSubmit, setHasAttemptedSubmit] = useState(false);
   
-  const validate = (data: ExamData) => {
+  const getErrors = useCallback ((data: ExamData) => {
     let newErrors: Partial<Record<keyof ExamData, string>> = {};
 
     const moduleError = validateModul(data.module);
@@ -40,15 +41,25 @@ const Exam = forwardRef<ExamHandles, ExamProps>(({ initialData, moduleOptions },
     if (dateError) 
       newErrors.date = dateError;
 
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;;
-  };
+    return newErrors;
+  },[]);
 
   useEffect(() => {
-      if (hasAttemptedSubmit) {
-          validate(formData);
-      }
-  }, [formData, hasAttemptedSubmit]);
+          if (hasAttemptedSubmit) {
+              const currentErrors = getErrors(formData);
+              if (JSON.stringify(currentErrors) !== JSON.stringify(errors)) {
+                  setErrors(currentErrors);
+              }
+          }
+      }, [formData, hasAttemptedSubmit, getErrors]);
+
+  useEffect(() => {
+        if (onValidationChange) {
+            const currentErrors = getErrors(formData);
+            const isValid = Object.keys(currentErrors).length === 0;
+            onValidationChange(isValid);
+        }
+    }, [formData, getErrors, onValidationChange]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -58,12 +69,24 @@ const Exam = forwardRef<ExamHandles, ExamProps>(({ initialData, moduleOptions },
       ...prevData,
       [name]: value,
     }));
+
+    if (hasAttemptedSubmit) {
+        const newErrors = getErrors({ ...formData, [name]: value } as ExamData);
+        if (newErrors[name as keyof ExamData] !== errors[name as keyof ExamData]) {
+            setErrors(prevErrors => ({
+                ...prevErrors,
+                [name as keyof ExamData]: newErrors[name as keyof ExamData]
+            }));
+        }
+    }
   };
 
   useImperativeHandle(ref, () => ({
     getFormData: () => {
       setHasAttemptedSubmit(true);
-      const isValid = validate(formData);
+      const currentErrors = getErrors(formData);
+      setErrors(currentErrors);
+      const isValid = Object.keys(currentErrors).length === 0;
 
       return {
         data: formData,
