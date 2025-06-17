@@ -27,6 +27,7 @@ export const StudyplanButtonHandler = ( {popUpType, onClose, onDataAdded}: Study
     const [topics, setTopics] = useState<TopicData[]>([]);
     const [selectedModule, setSelectedModule] = useState<string | null>(null);
     const [isFormValid, setIsFormValid] = useState(false);
+    const [isDisabled, setIsDisbled] = useState(false);
 
     const isLearningPlanPopUpOpen = popUpType === "StudyGoal";
     const isExamPopUpOpen = popUpType === "Exam";
@@ -88,10 +89,12 @@ export const StudyplanButtonHandler = ( {popUpType, onClose, onDataAdded}: Study
     }
 
     const handleAddLearningPlan = async () => {
+        setIsDisbled(false);
         if (learningPlanRef.current) {
             const data = learningPlanRef.current.getFormData();
 
             if (data.isValid) {
+                setIsDisbled(true);
                 let courseID = getCourseID(data.data.module, courses)
                 if( courseID === null) {
                     courseID = await createNewModul(data.data.module);
@@ -115,10 +118,12 @@ export const StudyplanButtonHandler = ( {popUpType, onClose, onDataAdded}: Study
     }
 
     const handleAddExam = async () => {
+        setIsDisbled(false);
         if (examRef.current) {
             const data = examRef.current.getFormData();
 
             if (data.isValid) {
+                setIsDisbled(true);
                 let courseID = getCourseID(data.data.module, courses)
                 if( courseID === null) {
                     courseID = await createNewModul(data.data.module);
@@ -143,7 +148,7 @@ export const StudyplanButtonHandler = ( {popUpType, onClose, onDataAdded}: Study
                     onClickDiscard={handleDiscard}
                     modulOptions={courseOptions}
                     topicOptions={filteredTopicOptions}
-                    isAddButtonDisabled={!isFormValid}
+                    isAddButtonDisabled={isDisabled}
                 >
                     <LearningPlan 
                         ref={learningPlanRef}
@@ -161,7 +166,7 @@ export const StudyplanButtonHandler = ( {popUpType, onClose, onDataAdded}: Study
                     onClickAdd={handleAddExam}
                     onClickDiscard={handleDiscard}
                     modulOptions={courseOptions}
-                    isAddButtonDisabled={!isFormValid}
+                    isAddButtonDisabled={isDisabled}
                 >
                     <Exam 
                         ref={examRef}
