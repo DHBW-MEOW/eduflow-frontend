@@ -8,45 +8,39 @@ type CellProps = {
 };
 
 const Cell = ({day, studygoals, exams}: CellProps) => {
-    const MAX_DOTS_FOR_EXAMS = 3;
-    const MAX_DOTS_FOR_STUDYGOALS = 3;
+    const hasStudygoals = studygoals && studygoals.length > 0;
+    const hasExams = exams && exams.length > 0;
+    const totalEvents = (studygoals?.length || 0) + (exams?.length || 0);
+    
+    const showDeadlineDot = hasStudygoals;
+    const showExamDot = hasExams;
+    const showPlus = totalEvents > 2;
 
     return (
         <div className="calendar-cell">
             {day && <span className="cell-day">{day}</span>}
 
-            {studygoals && studygoals.length > 0 && (
-                <div className="exams-container">
-                    {studygoals.map((studygoal, index) => (
-                        <div 
-                            key={index}
-                            className={'event-dot.deadline'} 
-                        />
-                    ))}
-                </div>
-            )}
+            <div className="events-container">
+                {showDeadlineDot && (
+                    <div
+                        className="event-dot deadline"
+                        title={`${studygoals?.length} Deadline${studygoals?.length !== 1 ? 's' : ''}`}
+                    />
+                )}
 
-            {studygoals && studygoals.length > 0 && (
-                <div className="exams-container">
-                    {studygoals.slice(0, MAX_DOTS_FOR_STUDYGOALS).map((studygoal) => (
-                        <div
-                            key={studygoal.id}
-                            className={'event-dot deadline'}
-                        />
-                    ))}
-                </div>
-            )}
+                {showExamDot && (
+                    <div
+                        className="event-dot exam"
+                        title={`${exams?.length} Prüfung${exams?.length !== 1 ? 'en' : ''}`}
+                    />
+                )}
 
-            {exams && exams.length > 0 && (
-                <div className="exams-container">
-                    {exams.slice(0, MAX_DOTS_FOR_EXAMS).map((exam) => (
-                        <div
-                            key={exam.id}
-                            className={'event-dot exam'}
-                        />
-                    ))}
-                </div>
-            )}
+                {showPlus && (
+                    <span className="event-plus" title={`${totalEvents} Events total`}>
+                        +
+                    </span>
+                )}
+            </div>
         </div>
     )
 };

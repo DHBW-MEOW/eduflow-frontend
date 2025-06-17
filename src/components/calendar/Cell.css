@@ -6,7 +6,6 @@
 
     border-radius: 8px;
     background-color: var(--color-muted);
-    cursor: pointer;
 
     min-height: 40px;
     width: 100%;
@@ -14,10 +13,6 @@
     
     box-sizing: border-box;
     overflow: hidden;
-}
-
-.calendar-cell:hover {
-    background-color: var(--color-hover);
 }
 
 .cell-day {
@@ -30,8 +25,9 @@
 .events-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 1px;
+    gap: 2px;
     justify-content: center;
+    align-items: center;
     margin-top: 2px;
     width: 100%;
 }
@@ -51,6 +47,16 @@
     background-color: #ff4444;
 }
 
+.event-plus {
+    font-size: 0.6rem;
+    font-weight: bold;
+
+    color: var(--color-text);
+    
+    margin-left: 1px;
+    line-height: 1;
+}
+
 @media (min-width: 480px) {
     .calendar-cell {
         padding: 6px 4px;
@@ -67,7 +73,12 @@
     }
     
     .events-container {
-        gap: 2px;
+        gap: 3px;
+    }
+    
+    .event-plus {
+        font-size: 0.7rem;
+        margin-left: 2px;
     }
 }
 
@@ -84,5 +95,9 @@
     .event-dot {
         width: 7px;
         height: 7px;
+    }
+    
+    .event-plus {
+        font-size: 0.8rem;
     }
 }
