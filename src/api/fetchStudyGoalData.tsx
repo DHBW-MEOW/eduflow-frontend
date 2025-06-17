@@ -33,11 +33,17 @@ export const fetchStudyGoalData = async () => {
         courses.forEach(course => courseMap.set(course.id, course));
 
         const itemList: ItemData[] = [];
+        const today: Date = new Date();
+        const year = today.getFullYear();
+        const month = (today.getMonth() + 1).toString().padStart(2, '0');
+        const day = today.getDate().toString().padStart(2, '0');
+        const formattedDate = `${year}-${month}-${day}`;
+
         for (const goal of studygoals) {
             const topic = topicMap.get(goal.topic_id);
             const course = topic ? courseMap.get(topic.course_id) : undefined;
 
-            if (topic && course) {
+            if (topic && course && goal.deadline >= formattedDate) {
                 itemList.push(
                     {
                         key: goal.id,
