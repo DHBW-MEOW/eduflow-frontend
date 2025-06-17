@@ -1,0 +1,23 @@
+.parent-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    font-size: 2vh;
+}
+
+.heading {
+    font-size: 4vh;
+    text-align: center;
+}
+
+.text {
+    font-size: 3vh;
+    text-align: center;
+}
