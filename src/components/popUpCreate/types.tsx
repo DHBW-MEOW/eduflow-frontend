@@ -37,3 +37,11 @@ export interface RenameData {
 export interface RenameHandles {
   getFormData: () => RenameData;
 }
+
+export interface EditData {
+  details: string;
+}
+
+export interface EditHandles {
+  getFormData: () => EditData;
+}

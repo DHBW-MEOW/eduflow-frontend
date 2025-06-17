@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import PopUpCreate from '../popUpCreate/PopUpCreate';
-import Rename from '../popUpCreate/popUpTypes/Rename';
-import type { RenameData, RenameHandles } from '../popUpCreate/types';
+import Edit from '../popUpCreate/popUpTypes/Edit';
+import type { EditData, EditHandles } from '../popUpCreate/types';
 import './Detail.css'
 
 export interface DetailBaseData<T = any> {
@@ -18,15 +18,15 @@ export type DetailProps<T extends DetailBaseData> = {
 
 export function Detail<T extends DetailBaseData>({ data, onEdit, editable = true }: DetailProps<T>) {
   const [popupOpen, setPopupOpen] = useState(false);
-  const renameRef = useRef<RenameHandles>(null);
+  const EditRef = useRef<EditHandles>(null);
 
   const openPopUp = () => setPopupOpen(true);
   const closePopup = () => setPopupOpen(false);
 
   const handleEdit = () => {
-    if (renameRef.current) {
-      const formData: RenameData = renameRef.current.getFormData();
-      onEdit({ ...data, value: formData.title });
+    if (EditRef.current) {
+      const formData: EditData = EditRef.current.getFormData();
+      onEdit({ ...data, value: formData.details });
       closePopup();
     }
   };
@@ -47,7 +47,7 @@ export function Detail<T extends DetailBaseData>({ data, onEdit, editable = true
         onClickDiscard={closePopup}
         onClickAdd={handleEdit}
       >
-        <Rename ref={renameRef} />
+        <Edit ref={EditRef} />
       </PopUpCreate>
     </div>
   );
