@@ -18,7 +18,7 @@ const StudyGoals = ({items}: ItemProps) => {
                     />
                 ))
             ) : (
-                <span>Lernziele werden geladen, falls vorhanden.</span>
+                <span>Keine Lernziele vorhanden...</span>
             )}
         </div>
     )
