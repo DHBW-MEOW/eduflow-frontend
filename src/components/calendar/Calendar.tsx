@@ -14,9 +14,6 @@ const Calendar = ({studygoals, exams}:CalendarProps) => {
     ];
 
     const weekdays = [
-        "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"
-    ];
-    const weekdaysShort = [
         "Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"
     ];
 
@@ -104,10 +101,7 @@ const Calendar = ({studygoals, exams}:CalendarProps) => {
                 <div className='calendar-weekdays-container'>
                     <div className="calendar-weekdays">
                         {weekdays.map((day, index) => (
-                            <span className="weekdays-full" key={index}>{day}</span>
-                        ))}
-                        {weekdaysShort.map((day, index) => (
-                            <span className="weekdays-short" key={index}>{day}</span>
+                            <span key={index}>{day}</span>
                         ))}
                     </div>
                 </div>

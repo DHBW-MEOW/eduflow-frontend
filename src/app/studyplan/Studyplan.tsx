@@ -53,29 +53,35 @@ function Studyplan() {
 
   return (
     <div className="studyplan-container">
-        <div className='studyplan-header'>
-            <h2>Kalender</h2>
-            <div className='studyplan-createButtons'>
-                <OptionButton
-                    label= '+ Lernziel erstellen'
-                    buttonType='createDataButton'
-                    onClick={() => handleOpenPopup("StudyGoal")}
-                />
-                <OptionButton
-                    label= '+ Prüfungsleistung hinzufügen'
-                    buttonType='createDataButton'
-                    onClick={() => handleOpenPopup("Exam")}
-                />
+        <div className='studyplan-left-items'>
+            <div className='studyplan-header'>
+                <h2>Kalender</h2>
+                <div className='studyplan-createButtons'>
+                    <OptionButton
+                        label= '+ Lernziel erstellen'
+                        buttonType='createDataButton'
+                        onClick={() => handleOpenPopup("StudyGoal")}
+                    />
+                    <OptionButton
+                        label= '+ Prüfungsleistung hinzufügen'
+                        buttonType='createDataButton'
+                        onClick={() => handleOpenPopup("Exam")}
+                    />
+                </div>
+            </div>
+
+            <div className="studyplan-calendar">
+                <Calendar studygoals={{ studygoals: studygoals }} exams={{exams: exams}}/>
             </div>
         </div>
         
-        <div className="studyplan-calendar">
-            <Calendar studygoals={{ studygoals: studygoals }} exams={{exams: exams}}/>
+        <div className='studyplan-right-items'>
+            <h2>Meine Lernziele</h2>
+            <div className="studyplan-studygoals">
+                <StudyGoals items={items}/>
+            </div>
         </div>
-        <h2>Meine Lernziele</h2>
-        <div className="studyplan-studygoals">
-            <StudyGoals items={items}/>
-        </div>
+        
 
         {activePopup && (
             <StudyplanButtonHandler 
