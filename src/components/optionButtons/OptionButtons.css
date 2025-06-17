@@ -2,8 +2,6 @@ button{
   min-width: 44px;
   min-height: 44px;
 
-  width: fit-content;
-
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
