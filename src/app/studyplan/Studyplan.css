@@ -93,18 +93,21 @@
     }
 
     .studyplan-calendar {
-        width: 100%;
+        width: 95%;
+        height: 70%;
         flex: 1;
         margin: 0;
+        margin-left: 5%;
         display: flex;
         flex-direction: column;
     }
 
     .studyplan-studygoals {
-        width: 100%;
+        width: 95%;
         flex: 1;
         margin: 0;
         margin-top: 20px;
+        margin-left: 5%;
         display: flex;
         flex-direction: column;
     }

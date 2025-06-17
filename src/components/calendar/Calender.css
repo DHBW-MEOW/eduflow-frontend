@@ -65,21 +65,21 @@
 
 .calendar-legend {
     display: flex;
-    justify-content: flex-end;
-    gap: 15px;
+    justify-content: center;
+    gap: 10px;
     margin-bottom: 10px;
 }
 
 .legend-item {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 3px;
     color: var(--color-text);
 }
 
 .legend-item .event-dot {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
     flex-shrink: 0;
 }
@@ -101,6 +101,11 @@
     .calendar-weekdays {
         gap: 4px;
     }
+    
+    .legend-item .event-dot {
+        width: 8px;
+        height: 8px;
+    }
 }
 
 @media (min-width: 768px) {
@@ -112,27 +117,9 @@
         height: 500px;
         gap: 5px;
     }
-}
-
-@media (min-width: 900px) {
-    .calendar-cell-grid {
-        height: 600px;
-    }
-}
-
-@media (max-width: 480px) {
-    .calendar-legend {
-        justify-content: center;
-        gap: 10px;
-        margin-bottom: 8px;
-    }
-    
-    .legend-item {
-        gap: 3px;
-    }
     
     .legend-item .event-dot {
-        width: 6px;
-        height: 6px;
+        width: 9px;
+        height: 9px;
     }
 }

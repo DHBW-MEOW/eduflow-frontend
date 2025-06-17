@@ -6,16 +6,8 @@
     border-radius: 8px;
     background-color: var(--color-bg-2);
     box-sizing: border-box;
-
-    width: 80%;
 }
 
 span {
     color: var(--color-text);
-}
-
-@media (min-width: 480px) {
-    .studyGoals {
-        width: 60%;
-    }
 }
