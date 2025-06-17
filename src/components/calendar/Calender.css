@@ -63,6 +63,35 @@
     max-width: 100%;
 }
 
+.calendar-legend {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--color-text);
+}
+
+.legend-item .event-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.legend-item .event-dot.deadline {
+    background-color: #ffd700;
+}
+
+.legend-item .event-dot.exam {
+    background-color: #ff4444;
+}
+
 @media (min-width: 480px) {
     .calendar-cell-grid {
         height: 400px;
@@ -88,5 +117,22 @@
 @media (min-width: 900px) {
     .calendar-cell-grid {
         height: 600px;
+    }
+}
+
+@media (max-width: 480px) {
+    .calendar-legend {
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 8px;
+    }
+    
+    .legend-item {
+        gap: 3px;
+    }
+    
+    .legend-item .event-dot {
+        width: 6px;
+        height: 6px;
     }
 }

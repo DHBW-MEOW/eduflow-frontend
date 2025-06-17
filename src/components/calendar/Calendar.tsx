@@ -97,6 +97,18 @@ const Calendar = ({studygoals, exams}:CalendarProps) => {
                     <button className='navbar-button' onClick={nextMonth}>&gt;&gt;</button>
                 </div>
                 
+                {/* Legend */}
+                <div className="calendar-legend">
+                    <div className="legend-item">
+                        <div className="event-dot deadline"></div>
+                        <span>Deadline</span>
+                    </div>
+                    <div className="legend-item">
+                        <div className="event-dot exam"></div>
+                        <span>Prüfung</span>
+                    </div>
+                </div>
+                
                 {/* Weekdays */}
                 <div className='calendar-weekdays-container'>
                     <div className="calendar-weekdays">
