@@ -13,25 +13,47 @@ html, body{
   margin: 0;
 }
 
-.layout{
+.startLayout{
   display: grid;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: minmax(var(--header-min-height), var(--header-height)) 1fr;
   grid-template-columns: 1fr;
   min-height: 100vh;
   height: 100vh;
 }
-.page{
+.startPage{
+  grid-row: 2;
+  overflow: auto;
+}
+
+.appLayout{
+  display: grid;
+  grid-template-rows: minmax(var(--header-min-height), var(--header-height)) 1fr auto;
+  grid-template-columns: 1fr;
+  min-height: 100vh;
+  height: 100vh;
+}
+.appPage{
   grid-row: 2;
   overflow: auto;
 }
 @media (min-width: 480px) {
-  .layout{
+  .startLayout{
+    display: grid;
+    grid-template-rows: minmax(var(--header-min-height), var(--header-height)) auto;
+  }
+  .startPage{
+    overflow: auto;
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .appLayout{
     display: grid;
     grid-template-rows: minmax(var(--header-min-height), var(--header-height)) auto;
     grid-template-columns: minmax(var(--navbar-min-width), var(--navbar-width)) auto;
     min-height: 100vh;
   }
-  .page{
+  .appPage{
     overflow: auto;
     grid-column: 2 / span 1;
     grid-row: 2;

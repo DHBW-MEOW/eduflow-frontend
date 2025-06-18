@@ -1,0 +1,13 @@
+.studyGoals {
+    display: flex;
+    flex-direction: column;
+    gap: 5%;
+    padding: 3%;
+    border-radius: 8px;
+    background-color: var(--color-bg-2);
+    box-sizing: border-box;
+}
+
+span {
+    color: var(--color-text);
+}

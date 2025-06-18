@@ -1,0 +1,35 @@
+.listItem {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+
+    padding: 1%;
+    margin: 1%;
+    border-radius: 8px;
+    border-color: var(--color-border);
+
+    background-color: var(--color-muted);
+    color: var(--color-text);
+}
+
+.listItem-titels {
+    display: flex;
+    flex-direction: column;
+
+    margin-left: 1%;
+    width: 50%;
+}
+
+.listItem-deadline {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    margin-right: 1%;
+    width: 40%;
+}
+
+#courseLabel {
+    font-size: small;
+}

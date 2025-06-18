@@ -27,19 +27,52 @@ function ModulPage() {
         }
     };
 
+    const deleteStudyGoals = async (topicId: number) => {
+        const study_goals = await fetchFromBackend<{ id: number }[]>({
+            method: "GET",
+            endpoint: `data/study_goal?topic_id=${topicId}`,
+        });
+        await Promise.all(
+            study_goals.map(goal =>
+                fetchFromBackend<void>({
+                    method: "DELETE",
+                    endpoint: "data/study_goal",
+                    body: { id: goal.id },
+                })
+            )
+        );
+    };
+
     const handleDelete = async (id: number) => {
         try {
+            //Deleting Exams
+            const exams = await fetchFromBackend<{ id: number }[]>({
+                method: "GET",
+                endpoint: `data/exam?course_id=${id}`
+            });
+            await Promise.all(
+                exams.map(exam =>
+                    fetchFromBackend<void>({
+                        method: "DELETE",
+                        endpoint: "data/exam",
+                        body: { id: exam.id },
+                    })
+                )
+            );
+            //Deleting Topics with study_goals
             const topics = await fetchFromBackend<{ id: number }[]>({
                 method: "GET",
                 endpoint: `data/topic?course_id=${id}`,
             });
             for (const topic of topics) {
+                await deleteStudyGoals(topic.id);
                 await fetchFromBackend<void>({
                     method: "DELETE",
                     endpoint: "data/topic",
                     body: { id: topic.id },
-                });
-            };
+              });
+            }
+            //Deleting Courses
             await fetchFromBackend<void>({
                 method: "DELETE",
                 endpoint: "data/course",
