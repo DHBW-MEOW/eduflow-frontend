@@ -16,12 +16,17 @@ export default function Start() {
   return (
     <div className="center-container">
       <div className="parent-container">
+        <div>
         <h2 className="heading-desktop">
-          Willkommen bei EduFlow! <br/> Dein Weg zu organisiertem und erfolgreichem Lernen beginnt hier.
+          Willkommen bei EduFlow!
         </h2>
+        <h3 className="subheading-desktop">
+          Dein Weg zu organisiertem und erfolgreichem Lernen beginnt hier.
+        </h3>
         <h2 className="heading-mobile">
           Willkommen bei EduFlow!
         </h2>
+        </div>
 
         <div className='div-image'>
           <img src="/Roboter.png" alt="Bild eines Roboters, der Bücher in der Hand hält."/>

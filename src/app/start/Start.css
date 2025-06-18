@@ -27,6 +27,12 @@
     display: none;
 }
 
+.subheading-desktop {
+    font-size: 3.5vh;
+    text-align: center;
+    display: none;
+}
+
 .heading-mobile {
     font-size: 4vh;
     text-align: center;
@@ -59,6 +65,10 @@
     }
 
     .heading-desktop {
+        display: block;
+    }
+
+    .subheading-desktop {
         display: block;
     }
     
