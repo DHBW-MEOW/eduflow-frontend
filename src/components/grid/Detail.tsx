@@ -3,6 +3,7 @@ import PopUpCreate from '../popUpCreate/PopUpCreate';
 import Edit from '../popUpCreate/popUpTypes/Edit';
 import type { EditData, EditHandles } from '../popUpCreate/types';
 import './Detail.css'
+import OptionButton from '../optionButtons/OptionButton';
 
 export interface DetailBaseData<T = any> {
   id: number;
@@ -36,7 +37,11 @@ export function Detail<T extends DetailBaseData>({ data, onEdit, editable = true
       <div className='detail-header'>
         <h2>{data.name}</h2>
         {editable == true &&
-          <button className="detail-button" onClick={openPopUp}>Edit</button>
+          <OptionButton
+            label='Bearbeiten'
+            buttonType='optionButton'
+            onClick={openPopUp}
+          />
         }
       </div>
       <p>{data.value}</p>
