@@ -1,8 +1,17 @@
+.center-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
 .parent-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-around;
+    align-items: stretch;
+    width: 80%;
+    height: 100%;
 }
 
 .button-container {
@@ -20,4 +29,8 @@
 .text {
     font-size: 3vh;
     text-align: center;
+}
+
+@media (prefers-color-scheme: dark) {
+    
 }
