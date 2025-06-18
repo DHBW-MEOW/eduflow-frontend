@@ -1,8 +1,9 @@
 import { useRef, useState } from 'react';
 import PopUpCreate from '../popUpCreate/PopUpCreate';
-import Rename from '../popUpCreate/popUpTypes/Rename';
-import type { RenameData, RenameHandles } from '../popUpCreate/types';
+import Edit from '../popUpCreate/popUpTypes/Edit';
+import type { EditData, EditHandles } from '../popUpCreate/types';
 import './Detail.css'
+import OptionButton from '../optionButtons/OptionButton';
 
 export interface DetailBaseData<T = any> {
   id: number;
@@ -18,15 +19,15 @@ export type DetailProps<T extends DetailBaseData> = {
 
 export function Detail<T extends DetailBaseData>({ data, onEdit, editable = true }: DetailProps<T>) {
   const [popupOpen, setPopupOpen] = useState(false);
-  const renameRef = useRef<RenameHandles>(null);
+  const renameRef = useRef<EditHandles>(null);
 
   const openPopUp = () => setPopupOpen(true);
   const closePopup = () => setPopupOpen(false);
 
   const handleEdit = () => {
     if (renameRef.current) {
-      const formData: RenameData = renameRef.current.getFormData();
-      onEdit({ ...data, value: formData.title });
+      const formData: EditData = renameRef.current.getFormData();
+      onEdit({ ...data, value: formData.details });
       closePopup();
     }
   };
@@ -36,7 +37,11 @@ export function Detail<T extends DetailBaseData>({ data, onEdit, editable = true
       <div className='detail-header'>
         <h2>{data.name}</h2>
         {editable == true &&
-          <button className="detail-button" onClick={openPopUp}>Edit</button>
+          <OptionButton
+            label='Bearbeiten'
+            buttonType='optionButton'
+            onClick={openPopUp}
+          />
         }
       </div>
       <p>{data.value}</p>
@@ -47,7 +52,7 @@ export function Detail<T extends DetailBaseData>({ data, onEdit, editable = true
         onClickDiscard={closePopup}
         onClickAdd={handleEdit}
       >
-        <Rename ref={renameRef} />
+        <Edit ref={renameRef} />
       </PopUpCreate>
     </div>
   );
