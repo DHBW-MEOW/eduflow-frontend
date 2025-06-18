@@ -39,6 +39,14 @@ export interface RenameHandles {
   getFormData: () => FormDataAndValidity<RenameData>;
 }
 
+export interface EditData {
+  details: string;
+}
+
+export interface EditHandles {
+  getFormData: () => EditData;
+}
+
 export type PopUpProps = {
     isOpen: boolean
     label: string;
