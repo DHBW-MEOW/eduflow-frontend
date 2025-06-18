@@ -1,33 +1,34 @@
-import './PopUpCreate.css'
-import '../../colors.css'
+import React from 'react';
 import OptionButton from '../optionButtons/OptionButton';
+import type { PopUpProps } from './types';
+import './PopUpCreate.css'
 
-type PopUpProps = {
-    isOpen: boolean
-    label: string;
-    children: React.ReactElement;
-    onClickDiscard: () => void;
-    onClickAdd: () => void;
-}
-
-const PopUpCreate: React.FC<PopUpProps> = ({isOpen, label, children, onClickDiscard, onClickAdd}) => {
+const PopUpCreate: React.FC<PopUpProps> = ({isOpen, label, children, modulOptions, topicOptions, isAddButtonDisabled, onClickDiscard, onClickAdd}) => {
     if (!isOpen) {
         return null;
     }
+
+    const childrenWithProps = React.cloneElement(children as React.ReactElement<any>, {
+        moduleOptions: modulOptions,
+        topicOptions: topicOptions
+    });
     
     return (
         <div className="popup-overlay" onClick={onClickDiscard}>
             <div className="popup-container" onClick={(e) => e.stopPropagation()}>
                 <div className="popup-header">{label}</div>
-                {children}
+                {childrenWithProps}
                 <div className="popup-buttons">
                     <OptionButton
                      label='Verwerfen'
+                     buttonType='optionButton'
                      onClick={onClickDiscard}
                      />
                      <OptionButton
                      label='Hinzufügen'
+                     buttonType='optionButton'
                      onClick={onClickAdd}
+                     isDisabled={isAddButtonDisabled}
                      />
                 </div>
             </div>

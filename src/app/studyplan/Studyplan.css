@@ -1,0 +1,118 @@
+.studyplan-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.studyplan-container h2 {
+    color: var(--color-text);
+    width: fit-content;
+    margin: 5%;
+}
+
+.studyplan-left-items {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.studyplan-right-items {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.studyplan-calendar {
+    margin: 3%;
+}
+
+.studyplan-studygoals {
+    margin: 3%;
+}
+
+.studyplan-createButtons {
+    display: flex;
+    flex-direction: column;
+    min-width: 44px;
+    min-height: 44px;
+    width: 50%;
+}
+
+.studyplan-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-right: 3%;
+}
+
+@media (min-width: 480px) {
+    .studyplan-createButtons {
+        width: 30%;
+    }
+}
+
+@media (min-width: 768px) {
+    .studyplan-container {
+        flex-direction: row;
+        align-items: stretch;
+        justify-content: space-between;
+        height: 100vh;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .studyplan-left-items {
+        width: 50%;
+        margin-right: 2%;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .studyplan-right-items {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .studyplan-header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        gap: 20px;
+        margin-right: 0;
+        margin-bottom: 20px;
+        flex-shrink: 0;
+    }
+
+    .studyplan-createButtons {
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 10px;
+        width: auto;
+        margin: 0;
+    }
+
+    .studyplan-calendar {
+        width: 95%;
+        height: 70%;
+        flex: 1;
+        margin: 0;
+        margin-left: 5%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .studyplan-studygoals {
+        width: 95%;
+        flex: 1;
+        margin: 0;
+        margin-top: 20px;
+        margin-left: 5%;
+        display: flex;
+        flex-direction: column;
+    }
+}

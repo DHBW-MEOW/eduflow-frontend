@@ -3,7 +3,7 @@ import ContextMenu from '../contextMenu/ContextMenu';
 import PopUpDelete from '../popUpDelete/PopUpDelete';
 import PopUpCreate from '../popUpCreate/PopUpCreate';
 import Rename from '../popUpCreate/popUpTypes/Rename';
-import type { RenameData, RenameHandles } from '../popUpCreate/types';
+import type { FormDataAndValidity, RenameData, RenameHandles } from '../popUpCreate/types';
 import './Box.css'
 
 export type BoxData = {
@@ -27,9 +27,11 @@ export function Box({ data, onDelete, onRename, onClick }: BoxProps) {
 
   const handleRename = () => {
     if (renameRef.current) {
-      const newTitle: RenameData = renameRef.current.getFormData();
-      onRename(data.id, newTitle.title);
-      closePopupRename();
+      const result: FormDataAndValidity<RenameData> = renameRef.current.getFormData(); 
+      if (result.isValid) {
+        onRename(data.id, result.data.title);
+        closePopupRename();
+      }
     }
   };
 
