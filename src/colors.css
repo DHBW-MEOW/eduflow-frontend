@@ -49,6 +49,14 @@
   --color-muted: #9ca3af;
 }
 
+*{
+  color: var(--color-text);
+}
+
+h1, h2, h3{
+  color: var(--color-heading);
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
   /* === Background Colors (Dark Theme) === */
