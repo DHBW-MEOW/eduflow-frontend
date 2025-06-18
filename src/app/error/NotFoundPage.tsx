@@ -14,7 +14,7 @@ export default function NotFoundPage() {
         <img src="/Logo.svg" alt="Eduflow logo" className="errorImage"/>
       </NavLink>
       <div className="errorText">
-        <div>404 Error</div>
+        <h2 className="errorNumber">404 Error</h2>
         <div>Ups... Sorry, irgendwas stört deinen Flow.</div>
         <div className="homeButton">
           <OptionButton 

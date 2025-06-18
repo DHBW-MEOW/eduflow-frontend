@@ -16,6 +16,9 @@
   gap: 3vh;
   align-items: center;
 }
+.errorNumber{
+  margin: 0;
+}
 .errorImage {
   padding: 5vw;
   width: clamp(1px, 50vw, 200px);
