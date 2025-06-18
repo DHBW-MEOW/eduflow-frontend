@@ -21,9 +21,16 @@
     font-size: 2vh;
 }
 
-.heading {
+.heading-desktop {
     font-size: 4vh;
     text-align: center;
+    display: none;
+}
+
+.heading-mobile {
+    font-size: 4vh;
+    text-align: center;
+    display: block;
 }
 
 .text {
@@ -50,6 +57,15 @@
     .div-image img {
         width: 30%;
     }
+
+    .heading-desktop {
+        display: block;
+    }
+    
+    .heading-mobile {
+        display: none;
+    }
+    
 }
 
 @media (min-width: 768px) {
