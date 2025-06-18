@@ -15,10 +15,10 @@ export default function NotFoundPage() {
       </NavLink>
       <div className="errorText">
         <div>404 Error</div>
-        <div>Ups... Sorry, irgendwas stört deinen flow.</div>
+        <div>Ups... Sorry, irgendwas stört deinen Flow.</div>
         <div className="homeButton">
           <OptionButton 
-            label="Return to the flow" 
+            label="Zurück zum Flow" 
             onClick={handleClick} 
           />
         </div>
