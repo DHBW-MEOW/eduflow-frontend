@@ -44,7 +44,16 @@ export function Detail<T extends DetailBaseData>({ data, onEdit, editable = true
           />
         }
       </div>
-      <p>{data.value}</p>
+      <div>
+        {
+          data.value.split('\n').map((line: string, index: string) => (
+            <span key={index}>
+              {line}
+              <br />
+            </span>
+          ))
+        }
+      </div>
 
       <PopUpCreate 
         isOpen={popupOpen} 
