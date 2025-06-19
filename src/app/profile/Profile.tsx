@@ -5,10 +5,6 @@ import './Profile.css'
 export default function Profile() {
   const username: string = "Placeholder for Username from Cache"
 
-  const handleClick = () => {
-      logout();
-  }
-
   return (
     <div className="profile-component">
       <div className="user-div">
@@ -20,7 +16,7 @@ export default function Profile() {
         <OptionButton
           label="Abmelden"
           buttonType="optionButton"
-          onClick={handleClick}
+          onClick={logout}
         />
       </div>
     </div>
