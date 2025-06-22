@@ -18,6 +18,7 @@ export default function NotFoundPage() {
         <div>Ups... Sorry, irgendwas stört deinen Flow.</div>
         <div className="homeButton">
           <OptionButton 
+            buttonType="optionButton"
             label="Zurück zum Flow" 
             onClick={handleClick} 
           />
