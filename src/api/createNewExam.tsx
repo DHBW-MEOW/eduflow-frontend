@@ -1,6 +1,6 @@
-import { fetchFromBackend } from "../fetchBackend";
+import type { FetchFromBackendType } from "./createFetcher";
 
-export const createNewExam = async (course_id: number , name: string, date: string) => {
+export const createNewExam = async (course_id: number , name: string, date: string, fetchFromBackend: FetchFromBackendType) => {
     try {
             await fetchFromBackend<void>({
                 method: "POST",

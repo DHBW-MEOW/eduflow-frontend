@@ -1,6 +1,6 @@
-import { fetchFromBackend } from "../fetchBackend";
+import type { FetchFromBackendType } from "./createFetcher";
 
-export const createNewStudyGoal = async (topic_id: number, deadline: string) => {
+export const createNewStudyGoal = async (topic_id: number, deadline: string, fetchFromBackend: FetchFromBackendType) => {
     try {
             await fetchFromBackend<void>({
                 method: "POST",

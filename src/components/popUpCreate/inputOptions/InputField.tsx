@@ -5,12 +5,13 @@ type InputFieldProps = {
     label: string;
     name: string;
     value: string;
+    isPassword?: boolean;
     isInvalid?: boolean;
     errorMessage?: string;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const InputField: React.FC<InputFieldProps> = ({label, name, value, isInvalid, errorMessage, onChange}) => {
+const InputField: React.FC<InputFieldProps> = ({label, name, value, isPassword, isInvalid, errorMessage, onChange}) => {
     const labelClass = `input-label ${isInvalid ? 'invalid-label' : ''}`;
     const inputClass = `input-field ${isInvalid ? 'input-invalid' : ''}`;
 
@@ -18,7 +19,7 @@ const InputField: React.FC<InputFieldProps> = ({label, name, value, isInvalid, e
         <div className="input-group">
             <label htmlFor={name} className={labelClass}>{label}</label>
             <input 
-             type="text" 
+             type={isPassword ? "password" : "text"}
              id={name}
              name={name}
              value={value}

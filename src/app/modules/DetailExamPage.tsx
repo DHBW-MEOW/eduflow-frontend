@@ -1,12 +1,18 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { fetchFromBackend } from "../../fetchBackend";
+import { useContext, useEffect, useState } from "react";
+import { useAuth } from "../../app/AuthContext";
 import { Detail, type DetailBaseData } from "../../components/grid/Detail";
+
+import HeaderContext from "../../app/HeaderContext";
 
 function DetailExamPage() {
   const navigate = useNavigate();
   const { moduleId, examId } = useParams();
   const [ exam, setExam] = useState<DetailBaseData<Date>>();
+
+  const { fetchFromBackend } = useAuth();
+  const headerSetter = useContext(HeaderContext);
+
   useEffect(() => {
     const loadData = async () => {
         try {
@@ -28,8 +34,25 @@ function DetailExamPage() {
           console.error("Error while loading the Exam:", err);
         }
       };    
+    const setHeader = async () => {
+      try {
+        const modulData = await fetchFromBackend({
+          method: "GET",
+          endpoint: `data/course?id=${moduleId}`
+        }) as { id: number; name: string }[];
+        if (modulData.length === 0) {
+            navigate("/404", { replace: true });
+            return;
+        }
+        headerSetter?.setTextState(modulData[0].name);
+        headerSetter?.setLeftButtonState({on: true, text: "", icon: "circle-arrow-left-solid.svg", link: `/modules/${moduleId}`});
+      } catch (err) {
+          console.error("Error while loading the Modul for header:", err);
+      }
+    }
     loadData();
-  }, [moduleId, examId]);
+    setHeader();
+  }, [moduleId, examId, fetchFromBackend]);
 
   const handleEdit = async (updated: DetailBaseData) => {
       try {

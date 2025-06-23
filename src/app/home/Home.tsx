@@ -4,6 +4,7 @@ import { fetchStudyGoalData } from "../../api/fetchStudyGoalData.tsx";
 import StudyGoals from "../../components/studyGoals/StudyGoals.tsx";
 import type { ItemData } from "../studyplan/types.tsx";
 import Quicklinks from '../../components/quicklinks/Quicklinks.tsx';
+import { useAuth } from "../../app/AuthContext.tsx";
 
 export async function clientLoader() {
   return {
@@ -13,10 +14,11 @@ export async function clientLoader() {
 
 export default function Home() {
   const [items, setListItems] = useState<ItemData[]>([]);
+  const { fetchFromBackend } = useAuth();
 
   const loadPageData = useCallback(async () => {
     try {
-      const studyplanData = await fetchStudyGoalData();
+      const studyplanData = await fetchStudyGoalData(fetchFromBackend);
 
       if (studyplanData != undefined) {
         setListItems(studyplanData.itemList);
@@ -24,11 +26,11 @@ export default function Home() {
     } catch (err) {
       console.error("Error while loading Data:", err);
     }
-  }, []);
+  }, [fetchFromBackend]);
 
   useEffect(() => {
       loadPageData();
-  }, [loadPageData])
+  }, [loadPageData, fetchFromBackend])
 
   return (
     <div className="home-container">

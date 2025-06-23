@@ -9,10 +9,12 @@ import { useCallback, useEffect, useState } from 'react';
 import { fetchStudyGoalData } from '../../api/fetchStudyGoalData';
 import { fetchExamData } from '../../api/fetchExamData';
 import { StudyplanButtonHandler } from './utils/StudyplanButtonHandler';
+import { useAuth } from '../../app/AuthContext';
 
 type ActivePopupType = 'StudyGoal' | 'Exam' | null;
 
 function Studyplan() {
+    const {fetchFromBackend} = useAuth();
     const [items, setListItems] = useState<ItemData[]>([]);
     const [studygoals, setStudyGoals] = useState<StudyGoalData[]>([]);
     const [exams, setExams] = useState<ExamDateData[]>([]);
@@ -20,8 +22,8 @@ function Studyplan() {
 
     const loadPageData = useCallback( async () => {
             try {
-                const studyplanData = await fetchStudyGoalData();
-                const examData = await fetchExamData();
+                const studyplanData = await fetchStudyGoalData(fetchFromBackend);
+                const examData = await fetchExamData(fetchFromBackend);
 
                 if ( studyplanData != undefined && examData != undefined ) {
                     setListItems(studyplanData.itemList);
@@ -32,7 +34,7 @@ function Studyplan() {
             } catch (err) {
                 console.error("Error while loading Data:", err);
             }
-    }, []);
+    }, [fetchFromBackend]);
 
     useEffect(() => {
         loadPageData();
