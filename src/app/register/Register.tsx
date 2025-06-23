@@ -10,10 +10,21 @@ export default function Register() {
 
   const handleRegister = () => {
     console.log("Register button clicked");
-    // Here you would typically send the username and password to your backend
-    // for registration, e.g., using fetch or axios.
   };
 
+  const validateData = (username: string, password: string): boolean => {
+    // Check that not both are 0
+    if (!username || !password) {
+      setIsInvalid(true);
+      return false;
+    }
+    if (password.length < 8) { 
+      setIsInvalid(true);
+      return false;
+    }
+    setIsInvalid(false);
+    return true;
+  }
 
   return (
     <div className="registerPage">
@@ -21,7 +32,7 @@ export default function Register() {
       <form onSubmit={(e) => {
         // Prevent default form submission reloading the page
         e.preventDefault();
-        if (username && password) {
+        if (validateData(username, password)) { 
           handleRegister();
           setIsInvalid(false);
         } else {
