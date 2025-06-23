@@ -1,9 +1,10 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchFromBackend } from "../../fetchBackend";
 import { Detail, type DetailBaseData } from "../../components/grid/Detail";
 
 function DetailTopicPage() {
+  const navigate = useNavigate();
   const { moduleId, topicId } = useParams();
   const [ topic, setTopic] = useState<DetailBaseData<string>>();
   
@@ -21,7 +22,8 @@ function DetailTopicPage() {
             value: data[0].details,
           });
         }else{
-          console.log("No Topic was found");
+          navigate("/404", { replace: true });
+          return;
         }
       } catch (err) {
         console.error("Error while loading the Topic:", err);
