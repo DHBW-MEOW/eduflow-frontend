@@ -21,10 +21,6 @@
   transition: transform 0.2s ease;
 }
 
-.header-child {
-  text-align: center;
-}
-
 .box:hover {
   background-color: var(--color-hover);
   border-color: var(--color-border-light);
@@ -40,6 +36,15 @@
   justify-content: center;
   align-items: center;
   padding: 20% 0%;
+}
+
+.header-child {
+  text-align: center;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  
+  max-width: 90%;
 }
 
 .menu-button {
