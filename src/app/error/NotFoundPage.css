@@ -1,0 +1,49 @@
+.notFoundPage{
+  display: flex;
+  flex: content;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100%;
+}
+.errorText{
+  color: var(--color-text);
+  padding: 5vw;
+  font-size: clamp(2px, 5vh, 50px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 3vh;
+  align-items: center;
+}
+.errorNumber{
+  margin: 0;
+}
+.errorImage {
+  padding: 5vw;
+  width: clamp(1px, 50vw, 200px);
+  height: auto;
+  filter: var(--filter-icon);
+}
+.errorImage:hover {
+  filter: var(--filter-icon-hover);
+}
+
+.homeButton{
+  transform: scale(0.8);
+  transform-origin: center;
+}
+@media (min-width: 480px) {
+  .errorText{
+    align-items: start;
+  }
+  .homeButton{
+    transform-origin:left;
+  }
+  .notFoundPage{
+    flex-direction: row;
+  }
+  .errorImage{
+    width: 30vw;
+  }
+}

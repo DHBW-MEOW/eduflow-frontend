@@ -19,8 +19,10 @@
   /* === Foreground / Text Colors === */
   --color-text: #374151;           /* Primärer Text (dunkel) */
   --color-text-light: #6b7280;     /* Sekundär, z. B. für Platzhalter */
+  --color-text-inputFiled: var(--color-text);
   --color-text-popup: var(--color-text);
   --color-heading: #1f2937;        /* Überschriften */
+  --color-heading-popup: #f3f4f6;
 
   /* === Link Color === */
   --color-link: #4c4cff;
@@ -35,9 +37,14 @@
   /* === Hover, Focus & Status === */
   --color-hover: #e0e7ff;          /* Hover-Hintergrund (heller) */
   --color-focus: #60a5fa;          /* Fokus-Ring (bleibt gleich) */
+  --color-warning: #fbe14e;        /* Gelb – Warnung */
   --color-shadow: #007bff1a;       /* Weniger intensive Schatten */
   --color-error: #ef4444;          /* Rot – Fehlermeldung (bleibt gleich) */
   --color-success: #22c55e;        /* Grün – Erfolg (bleibt gleich) */
+
+  /* === Buttons === */
+  --color-button: var(--color-bg-1);
+  --color-button-light: var(--color-bg-2);
 
   /* === Icons === */
   --color-icon: var(--color-black);
@@ -47,6 +54,14 @@
 
   /* === Others === */
   --color-muted: #9ca3af;
+}
+
+*{
+  color: var(--color-text);
+}
+
+h1, h2, h3{
+  color: var(--color-heading);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -68,8 +83,10 @@
   /* === Foreground / Text Colors === */
   --color-text: #e5e7eb;           /* Primärer Text (hell) */
   --color-text-light: #9ca3af;     /* Sekundär, z. B. für Platzhalter */
+  --color-text-input-field: var(--color-surface);
   --color-text-popup: var(--color-black);
   --color-heading: #f3f4f6;        /* Überschriften */
+  --color-heading-popup: #1f2937;
 
   /* === Link Color === */
   --color-link: #6161f1;
@@ -84,9 +101,14 @@
   /* === Hover, Focus & Status === */
   --color-hover: #374151;          /* Hover-Hintergrund */
   --color-focus: #60a5fa;          /* Fokus-Ring */
+  --color-warning: #f59e0b;        /* Gelb – Warnung */
   --color-shadow: #007bff40;       /* Weniger intensive Schatten */
   --color-error: #ef4444;          /* Rot – Fehlermeldung */
   --color-success: #22c55e;        /* Grün – Erfolg */
+
+  /* === Buttons === */
+  --color-button: var(--color-bg-1);
+  --color-button-light: var(--color-bg-2);
 
   /* === Icons === */
   --color-icon: var(--color-white);

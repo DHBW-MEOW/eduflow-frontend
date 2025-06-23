@@ -1,4 +1,4 @@
-.box{
+.box {
   position: relative;
   user-select: none;
 
@@ -36,6 +36,15 @@
   justify-content: center;
   align-items: center;
   padding: 20% 0%;
+}
+
+.header-child {
+  text-align: center;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  
+  max-width: 90%;
 }
 
 .menu-button {

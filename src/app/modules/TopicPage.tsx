@@ -3,17 +3,15 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Grid } from "../../components/grid/Grid";
 import { fetchFromBackend } from "../../fetchBackend";
 import type { BoxData } from "../../components/grid/Box";
-import type { DetailData } from "./DetailExamPage";
 
 function TopicPage(): JSX.Element {
     const { moduleId } = useParams<{ moduleId: string }>();
     const navigate = useNavigate();
     const [ topics, setTopics] = useState<BoxData[]>([]);
     const [ exams, setExams] = useState<BoxData[]>([]);
-    const [ examsInfo, setExamsInfo] = useState<DetailData[]>([]);
     
     const handleRenameExam = async (id: number, newTitle: string) => {
-        const item = examsInfo.find(item => item.id === id);
+        const item = exams.find(item => item.id === id);
         if (!item) {
             console.error(`No Exam found with ID=${id}`);
             return;
@@ -26,7 +24,7 @@ function TopicPage(): JSX.Element {
                   id: id,
                   course_id: Number(moduleId),
                   name: newTitle,
-                  date: item.date
+                  date: item.details
                 },
             });
         } catch (err) {
@@ -104,23 +102,24 @@ function TopicPage(): JSX.Element {
     useEffect(() => {
         const loadData = async () => {
             try {
-                const [dataTopics, dataExams, dataExamsInfo] = await Promise.all([
+                const [dataTopics, dataExams] = await Promise.all([
                     fetchFromBackend<{ id: number; name: string; details: string }[]>({
                         method: "GET",
                         endpoint: `data/topic?course_id=${moduleId}`
                     }),
-                    fetchFromBackend<{ id: number; name: string; details: string }[]>({
-                        method: "GET",
-                        endpoint: `data/exam?course_id=${moduleId}`
-                    }),
-                    fetchFromBackend<{ id: number; name: string; date: Date }[]>({
+                    fetchFromBackend<{ id: number; name: string; date: string }[]>({
                         method: "GET",
                         endpoint: `data/exam?course_id=${moduleId}`
                     })
                 ]);
                 setTopics(dataTopics);
-                setExams(dataExams);
-                setExamsInfo(dataExamsInfo);
+
+                const dataExamConverted: BoxData[] = dataExams.map(({ id, name, date }) => ({
+                    id,
+                    name,
+                    details: date,
+                }));
+                setExams(dataExamConverted);
             } catch (err) {
                 console.error("Error while loading the Topics and Exams:", err);
             }
@@ -130,7 +129,7 @@ function TopicPage(): JSX.Element {
 
     return (
         <div>
-            <h2>Exams</h2>
+            <h2>Prüfungsleistungen</h2>
             <Grid
                 items={exams}
                 setItems={setExams}
@@ -138,7 +137,7 @@ function TopicPage(): JSX.Element {
                 onDelete={handleDeleteExam}
                 onClick={handleClickExam}
             />
-            <h2>Topics</h2>
+            <h2>Themen</h2>
             <Grid
                 items={topics}
                 setItems={setTopics}

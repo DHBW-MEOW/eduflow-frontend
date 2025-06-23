@@ -1,63 +1,68 @@
 import { useRef, useState } from 'react';
 import PopUpCreate from '../popUpCreate/PopUpCreate';
-import Rename from '../popUpCreate/popUpTypes/Rename';
-import type { RenameData, RenameHandles } from '../popUpCreate/types';
+import Edit from '../popUpCreate/popUpTypes/Edit';
+import type { EditData, EditHandles } from '../popUpCreate/types';
 import './Detail.css'
+import OptionButton from '../optionButtons/OptionButton';
 
-export type DetailData = {
-    id: number;
-    course_id: number;
-    name: string;
-    date: Date;
+export interface DetailBaseData<T = any> {
+  id: number;
+  name: string;
+  value: T;
+}
+
+export type DetailProps<T extends DetailBaseData> = {
+  data: T;
+  onEdit: (updated: T) => void;
+  editable?: boolean;
 };
 
-export type DetailProps = {
-  data: DetailData;
-  onEdit: (id: number, newContent: string) => void;
-};
-
-export function Detail({ data, onEdit }: DetailProps) {
+export function Detail<T extends DetailBaseData>({ data, onEdit, editable = true }: DetailProps<T>) {
   const [popupOpen, setPopupOpen] = useState(false);
-  const renameRef = useRef<RenameHandles>(null);
+  const renameRef = useRef<EditHandles>(null);
+
+  const openPopUp = () => setPopupOpen(true);
+  const closePopup = () => setPopupOpen(false);
 
   const handleEdit = () => {
     if (renameRef.current) {
-      const newTitle: RenameData = renameRef.current.getFormData();
-      onEdit(data.id, newTitle.title);
+      const formData: EditData = renameRef.current.getFormData();
+      onEdit({ ...data, value: formData.details });
       closePopup();
     }
   };
 
-  const openPopUp = () => {
-    setPopupOpen(true);
-  };
-
-  const closePopup = () => {
-    setPopupOpen(false);
-  };
-
   return (
     <div className="detail">
+      <div className='detail-header'>
+        <h2>{data.name}</h2>
+        {editable == true &&
+          <OptionButton
+            label='Bearbeiten'
+            buttonType='optionButton'
+            onClick={openPopUp}
+          />
+        }
+      </div>
       <div>
-        <div className="header-container">
-            <h3>{data.name}</h3>
-        </div>
-        <button className="edit-button" onClick={() => {
-            openPopUp();
-          }}
-        >Edit</button>
+        {
+          data.value.split('\n').map((line: string, index: string) => (
+            <span key={index}>
+              {line}
+              <br />
+            </span>
+          ))
+        }
       </div>
 
-      {
-        <PopUpCreate 
-          isOpen={popupOpen} 
-          label={"\"" + data.name + "\" editieren"} 
-          onClickDiscard={closePopup}
-          onClickAdd={handleEdit}
-        >
-          <Rename ref={renameRef} />
-        </PopUpCreate>
-      }
+      <PopUpCreate 
+        isOpen={popupOpen} 
+        label={"\"" + data.name + "\" editieren"} 
+        onClickDiscard={closePopup}
+        onClickAdd={handleEdit}
+      >
+        <Edit ref={renameRef} />
+      </PopUpCreate>
     </div>
   );
 }

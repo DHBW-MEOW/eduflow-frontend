@@ -1,25 +1,11 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchFromBackend } from "../../fetchBackend";
-
-export type DetailData = {
-  id: number;
-  name: string;
-  date: Date;
-};
-
-export type DetailProps = {
-  data: DetailData;
-  onRename: (id: number, newTitle: string) => void;
-  onDelete: (id: number) => void;
-  onClick: (id: number) => void;
-};
+import { Detail, type DetailBaseData } from "../../components/grid/Detail";
 
 function DetailExamPage() {
   const { moduleId, examId } = useParams();
-  const [ date, setDate ] = useState<Date>();
-  const [ name, setName ] = useState<string>("");
-  
+  const [ exam, setExam] = useState<DetailBaseData<Date>>();
   useEffect(() => {
     const loadData = async () => {
         try {
@@ -28,8 +14,11 @@ function DetailExamPage() {
             endpoint: `data/exam?id=${examId}&course_id=${moduleId}`,
           })
           if (data.length > 0) {
-            setDate(data[0].date);
-            setName(data[0].name);
+            setExam({
+              id: data[0].id,
+              name: data[0].name,
+              value: data[0].date,
+            });
           }else{
             console.log("No Exam was found");
           }
@@ -40,10 +29,34 @@ function DetailExamPage() {
     loadData();
   }, [moduleId, examId]);
 
+  const handleEdit = async (updated: DetailBaseData) => {
+      try {
+        await fetchFromBackend<void>({
+          method: "POST",
+          endpoint: "data/exam",
+          body: {
+            id: updated.id,
+            course_id: Number(moduleId),
+            name: updated.name,
+            date: updated.value
+          },
+        });
+        setExam(updated);
+      } catch (err) {
+        console.error("Error while renaming:", err);
+      }
+  };
+
   return (
     <div>
-      <h2>Details zur Exam {name}</h2>
-      <p>Datum: {date?.toString()}</p>
+      {exam && (
+          <Detail<DetailBaseData<Date>>
+            data={exam}
+            onEdit={handleEdit}
+            editable={false}
+          />
+        )
+      }
     </div>
   );
 }
