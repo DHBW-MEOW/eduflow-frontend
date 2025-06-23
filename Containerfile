@@ -1,4 +1,4 @@
-FROM node:24-alpine
+FROM node:24-alpine AS builder
 
 WORKDIR /app
 
@@ -11,5 +11,10 @@ COPY . .
 
 EXPOSE 5173
 
-# pffffffff it seems like the project is unbuildable...
-ENTRYPOINT [ "npm", "run", "dev"]
+# build will be at /build/client
+RUN npm run build
+
+FROM nginx:latest
+
+COPY --from=builder /app/build/client /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
