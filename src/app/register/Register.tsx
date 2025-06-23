@@ -41,75 +41,33 @@ export default function Register() {
 
   const handleRegister = async (username: string, password: string) => {
     console.log("Register button clicked");
-    console.log("Uesrname:", username, "Password:", password);
-
-    const response = await unsafeFetchFromBackend({
-      method: "POST",
-      endpoint: "auth/register",
-      body: {
-        username: username,
-        password: password 
-      }
-    })
-    console.log("Response:", response); 
-    if (response.status === 200){
-      const data = await response.json();
-      const registerToken = data.token;
-      setIsAuthenticated(true);
-      localStorage.setItem("token", registerToken);
-      localStorage.setItem("username", username);
-      setUsername(username);
-      setToken(registerToken)
-      console.log("New state token" + token);
-      navigate("/home");
-    }else if (response.status === 409) {
-      console.error("Username already taken");
-      setUserTaken(true);
-    }else {
-      throw new Error(`Error when calling (POST auth/register): ${response.status}`);
-    }
   };
 
-  const validateData = (username: string, passwordOne: string, passwordTwo: string): boolean => {
-    let valid = true;
-    if (!username) {
-      setUsernameValidity({ valid: false, message: "Benutzername darf nicht leer sein" });
-      valid = false;
-    }else{
-      setUsernameValidity({ valid: true, message: "" });
+  const validateData = (username: string, password: string): boolean => {
+    // Check that not both are 0
+    if (!username || !password) {
+      setIsInvalid(true);
+      return false;
     }
-    
-    const password = passwordOne;
-    if (passwordOne !== passwordTwo) {
-      setPasswordValidity({ valid: false, message: "Kennwörter müssen übereinstimmen" });
-      valid = false;
+    if (password.length < 8) { 
+      setIsInvalid(true);
+      return false;
     }
-    else if(!password) {
-      setPasswordValidity({ valid: false, message: "Kennwort darf nicht leer sein" });
-      valid = false;
-    }
-    else if (password.length < 8) { 
-      setPasswordValidity({ valid: false, message: "Das Kennwort muss mindestens 8 Zeichen lang sein" });
-      valid = false;
-    }
-    else {
-      setPasswordValidity({ valid: true, message: "" });
-    }
-    return valid;
+    setIsInvalid(false);
+    return true;
   }
 
   return (
     <div className="registerPage">
-      <h2>Registrierung</h2>
-      { !successfullyRegistered &&
-        <form onSubmit={(e) => {
-          console.log("Form submitted");
-          // Prevent default form submission reloading the page
-          e.preventDefault();
-          if (validateData(localUsername, passwordOne, passwordTwo)) { 
-            console.log("Data is valid, proceeding with registration");
-            handleRegister(localUsername, passwordOne);
-          }
+      <div>Hier können Sie sich registrieren.</div>
+      <form onSubmit={(e) => {
+        // Prevent default form submission reloading the page
+        e.preventDefault();
+        if (validateData(username, password)) { 
+          handleRegister();
+          setIsInvalid(false);
+        } else {
+          setIsInvalid(true);
         }
         }>
           <InputField
