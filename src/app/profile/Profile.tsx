@@ -1,9 +1,16 @@
+import { useNavigate } from "react-router-dom";
 import { logout } from "../../api/logout";
 import OptionButton from "../../components/optionButtons/OptionButton";
 import './Profile.css'
 
 export default function Profile() {
+  const navigate = useNavigate();
   const username: string = "Placeholder for Username from Cache"
+
+  const logoutHandel = () => {
+    logout;
+    navigate('/');
+  }
 
   return (
     <div className="profile-component">
@@ -16,7 +23,7 @@ export default function Profile() {
         <OptionButton
           label="Abmelden"
           buttonType="optionButton"
-          onClick={logout}
+          onClick={logoutHandel}
         />
       </div>
     </div>
