@@ -28,7 +28,8 @@
 
 .studyplan-studygoals {
     margin: 3%;
-    overflow: auto;
+    border-radius: 8px;
+    overflow-y: scroll;
     max-height: 40vh;
 }
 
@@ -120,7 +121,7 @@
         margin-top: 20px;
         margin-left: 5%;
 
-        overflow: auto;
+        overflow-y: scroll;
         min-height: 0;
         max-height: none;
     }
