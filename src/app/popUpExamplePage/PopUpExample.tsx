@@ -4,7 +4,7 @@ import LearningPlan from '../../components/popUpCreate/popUpTypes/LearningPlan.t
 import Exam from '../../components/popUpCreate/popUpTypes/Exam.tsx';
 import ToDo from '../../components/popUpCreate/popUpTypes/ToDo.tsx';
 import Rename from '../../components/popUpCreate/popUpTypes/Rename.tsx';
-import type { LearningPlanHandles, LearningPlanData, ExamHandles, ExamData, ToDoHandles, ToDoData, RenameData, RenameHandles } from '../../components/popUpCreate/types.tsx'
+import type { LearningPlanHandles, LearningPlanData, ExamHandles, ExamData, ToDoHandles, ToDoData, RenameData, RenameHandles, FormDataAndValidity } from '../../components/popUpCreate/types.tsx'
 import OptionButton from '../../components/optionButtons/OptionButton.tsx';
 import PopUpDelete from '../../components/popUpDelete/PopUpDelete.tsx';
 
@@ -21,6 +21,7 @@ type PopupType = typeof PopupType[keyof typeof PopupType];
 
 const PopUpExample: React.FC = () => {
   const [activePopup, setActivePopup] = useState<PopupType>(PopupType.NONE);
+  
   const learningPlanRef = useRef<LearningPlanHandles>(null);
   const toDoRef = useRef<ToDoHandles>(null);
   const examRef = useRef<ExamHandles>(null);
@@ -33,36 +34,52 @@ const PopUpExample: React.FC = () => {
   // Handler for LearningPlan
   const handleAddLearningPlan = () => {
     if (learningPlanRef.current) {
-      const data: LearningPlanData = learningPlanRef.current.getFormData();
-      console.log('Lernplan Daten:', data);
-      closePopup();
+      const formDataAndValidity: FormDataAndValidity<LearningPlanData> = learningPlanRef.current.getFormData();
+      if (formDataAndValidity.isValid) {
+        console.log('Lernplan Daten:', formDataAndValidity.data);
+        closePopup();
+      } else {
+        console.log('Lernplan Formular ist ungültig. Fehler:', formDataAndValidity.errors);
+      }
     }
   };
 
   // Handler for ToDo
   const handleAddToDo = () => {
     if (toDoRef.current) {
-      const data: ToDoData = toDoRef.current.getFormData();
-      console.log('ToDo Daten:', data);
-      closePopup();
+      const formDataAndValidity: FormDataAndValidity<ToDoData> = toDoRef.current.getFormData();
+      if (formDataAndValidity.isValid) {
+        console.log('ToDo Daten:', formDataAndValidity.data);
+        closePopup();
+      } else {
+        console.log('ToDo Formular ist ungültig. Fehler:', formDataAndValidity.errors);
+      }
     }
   };
 
   // Handler for Exam
   const handleAddExam = () => {
     if (examRef.current) {
-      const data: ExamData = examRef.current.getFormData();
-      console.log('Prüfungsdaten:', data);
-      closePopup();
+      const formDataAndValidity: FormDataAndValidity<ExamData> = examRef.current.getFormData();
+      if (formDataAndValidity.isValid) {
+        console.log('Prüfungsdaten:', formDataAndValidity.data);
+        closePopup();
+      } else {
+        console.log('Prüfungsformular ist ungültig. Fehler:', formDataAndValidity.errors);
+      }
     }
   };
 
   // Handler for Rename
   const handleAddRename = () => {
     if (renameRef.current) {
-      const data: RenameData = renameRef.current.getFormData();
-      console.log('Umbenennanter Name:', data);
-      closePopup();
+      const formDataAndValidity: FormDataAndValidity<RenameData> = renameRef.current.getFormData();
+      if (formDataAndValidity.isValid) {
+        console.log('Umbenennanter Name:', formDataAndValidity.data);
+        closePopup();
+      } else {
+        console.log('Umbenennen Formular ist ungültig. Fehler:', formDataAndValidity.errors);
+      }
     }
   };
 
@@ -103,11 +120,11 @@ const PopUpExample: React.FC = () => {
   return (
     <div>
       <h1>Meine App</h1>
-      <OptionButton label="Lernplan erstellen" onClick={() => setActivePopup(PopupType.LEARNING_PLAN)} />
-      <OptionButton label="ToDo erstellen" onClick={() => setActivePopup(PopupType.TODO)}/>
-      <OptionButton label="Prüfung anlegen" onClick={() => setActivePopup(PopupType.EXAM)}/>
-      <OptionButton label="Umbennenen" onClick={() => setActivePopup(PopupType.RENAME)}/>
-      <OptionButton label="Löschen" onClick={() => setActivePopup(PopupType.DELETE)} />
+      <OptionButton label="Lernplan erstellen" buttonType='optionButton' onClick={() => setActivePopup(PopupType.LEARNING_PLAN)} />
+      <OptionButton label="ToDo erstellen" buttonType='optionButton' onClick={() => setActivePopup(PopupType.TODO)}/>
+      <OptionButton label="Prüfung anlegen" buttonType='optionButton' onClick={() => setActivePopup(PopupType.EXAM)}/>
+      <OptionButton label="Umbennenen" buttonType='optionButton' onClick={() => setActivePopup(PopupType.RENAME)}/>
+      <OptionButton label="Löschen" buttonType='optionButton' onClick={() => setActivePopup(PopupType.DELETE)} />
 
       {/* Creating the different PopUps */}
       {activePopup !== PopupType.NONE && activePopup !== PopupType.DELETE && popupContent && (
@@ -137,4 +154,4 @@ const PopUpExample: React.FC = () => {
   );
 };
 
-export default PopUpExample
+export default PopUpExample;

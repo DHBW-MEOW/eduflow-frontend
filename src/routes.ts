@@ -24,5 +24,6 @@ export default [
 
     route("/404", "./app/ErrorPageTest.tsx"), //TODO only for testing
   ]),
+  route("*", "./app/error/NotFoundPage.tsx"),
   //route("/todo", "./app/todo/Todo.tsx"),
 ] satisfies RouteConfig;
