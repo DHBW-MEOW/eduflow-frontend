@@ -6,12 +6,14 @@ import StartLayout from './app/StartLayout';
 
 import './colors.css';
 import './index.css';
+import Login from './app/login/Login';
 
 createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
     <Routes>
         <Route element={<StartLayout />}>
             <Route path="/" element={<Start />} />
+            <Route path="/login" element={<Login />} />
         </Route>
     </Routes>
   </BrowserRouter>
