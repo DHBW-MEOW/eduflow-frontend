@@ -8,6 +8,7 @@
     box-sizing: border-box;
 }
 
-span {
+.studyGoals span {
     color: var(--color-text);
+    margin: 0;
 }
