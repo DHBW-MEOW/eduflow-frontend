@@ -23,6 +23,8 @@ html, body{
 .startPage{
     grid-row: 2;
     overflow: auto;
+
+    padding: 5%;
 }
 
 .appLayout{
@@ -45,7 +47,6 @@ html, body{
         grid-template-rows: minmax(var(--header-min-height), var(--header-height)) auto;
     }
     .startPage{
-        overflow: auto;
         grid-column: 1;
         grid-row: 2;
     }
@@ -57,7 +58,6 @@ html, body{
         min-height: 100vh;
     }
     .appPage{
-        overflow: auto;
         grid-column: 2 / span 1;
         grid-row: 2;
     }
