@@ -7,9 +7,11 @@
 }
 
 .detail-edit {
-  width: fit-content;
+  display: flex;
+  flex-direction: column;
+
+  width: 30%;
   margin-top: 0.75em;
-  margin-right: 3%;
 }
 
 .detail-header {
@@ -28,6 +30,8 @@
 @media (min-width: 480px) {
   .detail-edit {
     margin-right: 8%;
+
+    max-width: 250px;
   }
 
   .detail-content {
