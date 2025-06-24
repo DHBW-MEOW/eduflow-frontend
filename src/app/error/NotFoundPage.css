@@ -16,6 +16,11 @@
   gap: 3vh;
   align-items: center;
 }
+
+.errorText p {
+  margin: 0;;
+}
+
 .errorNumber{
   margin: 0;
 }
