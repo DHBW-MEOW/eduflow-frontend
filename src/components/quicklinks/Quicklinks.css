@@ -38,22 +38,7 @@ h4 {
     color: var(--color-heading);
 }
 
-a:link {
-    color: var(--color-link);
-}
 
-a:visited {
-    color: var(--color-link-visited);
-}
-
-a:hover {
-    color: var(--color-link-hover);
-}
-
-a:active,
-a:visited:active {
-    color: var(--color-link-active);
-}
 
 @media (min-width: 480px) {
 	.quicklinks-container {

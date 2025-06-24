@@ -13,3 +13,20 @@ h1, h2, h3, h4, h4, h6{
 h2 {
     padding-left: 1%;
 }
+
+a:link {
+    color: var(--color-link);
+}
+
+a:visited {
+    color: var(--color-link-visited);
+}
+
+a:hover {
+    color: var(--color-link-hover);
+}
+
+a:active,
+a:visited:active {
+    color: var(--color-link-active);
+}

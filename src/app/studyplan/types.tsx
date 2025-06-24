@@ -28,6 +28,7 @@ export type ItemData = {
 
 export interface ItemProps {
     items: ItemData[];
+    limit?: number;
 };
 
 export type ExamDateData = {

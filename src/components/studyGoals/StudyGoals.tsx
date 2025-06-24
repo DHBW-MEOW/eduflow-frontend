@@ -4,12 +4,15 @@ import type { ItemProps } from '../../app/studyplan/types';
 
 
 
-const StudyGoals = ({items}: ItemProps) => {
+const StudyGoals = ({items, limit}: ItemProps) => {
+    if (limit === undefined) {
+        limit = items.length;
+    }
 
     return (
         <div className='studyGoals'>
             {items.length > 0 ? (
-                items.map((item) => (
+                items.slice(0, limit).map((item) => (
                     <ListItem
                         key={item.key}
                         course={item.course}

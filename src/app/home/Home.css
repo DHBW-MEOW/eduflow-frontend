@@ -43,6 +43,18 @@
     max-height: 40vh;
 }
 
+.home-more {
+    text-align: center;
+    margin-bottom: 2%;
+}
+
+a:hover,
+a:visited,
+a:active,
+a:visited:active {
+    color: var(--color-link);
+}
+
 @media (min-width: 480px) {
 
 }
