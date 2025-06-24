@@ -11,7 +11,7 @@ COPY . .
 
 EXPOSE 5173
 
-# build will be at /build/client
+# build will be at /app/dist
 RUN npm run build
 
 FROM nginx:latest
