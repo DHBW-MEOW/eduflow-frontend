@@ -1,5 +1,5 @@
 const API_URL = "http://localhost:3000";
-const TOKEN = "1_4ALf8NHEKRoAfO54SXR89zJelvaYAAM8"; //TODO: only for Testing
+//const TOKEN = "1_4ALf8NHEKRoAfO54SXR89zJelvaYAAM8"; //TODO: only for Testing
 
 interface FetchOptions {
   method: "GET" | "POST" | "DELETE";
@@ -8,11 +8,16 @@ interface FetchOptions {
 }
 
 export async function fetchFromBackend<T>({ method, endpoint, body }: FetchOptions): Promise<T> {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    throw new Error("No authentication token found");
+  }
+
   const response = await fetch(`${API_URL}/${endpoint}`, {
     method,
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${TOKEN}`,
+      "Authorization": `Bearer ${token}`,
     },
     body: body ? JSON.stringify(body) : undefined,
   });
