@@ -28,6 +28,9 @@
 
 .studyplan-studygoals {
     margin: 3%;
+    border-radius: 8px;
+    overflow-y: scroll;
+    max-height: 40vh;
 }
 
 .studyplan-createButtons {
@@ -50,6 +53,10 @@
     .studyplan-createButtons {
         width: 30%;
     }
+
+    .studyplan-studygoals {
+        max-height: 40vh;
+    }
 }
 
 @media (min-width: 768px) {
@@ -57,7 +64,7 @@
         flex-direction: row;
         align-items: stretch;
         justify-content: space-between;
-        height: 100vh;
+        height: calc(100vh - 40px);
         padding: 20px;
         box-sizing: border-box;
     }
@@ -67,14 +74,12 @@
         margin-right: 2%;
         display: flex;
         flex-direction: column;
-        height: 100%;
     }
 
     .studyplan-right-items {
         width: 50%;
         display: flex;
         flex-direction: column;
-        height: 100%;
     }
 
     .studyplan-header {
@@ -97,22 +102,27 @@
     }
 
     .studyplan-calendar {
-        width: 95%;
-        height: 70%;
-        flex: 1;
-        margin: 0;
-        margin-left: 5%;
         display: flex;
         flex-direction: column;
+        flex: 1;
+
+        width: 95%;
+        margin: 0;
+        margin-left: 5%;
     }
 
     .studyplan-studygoals {
-        width: 95%;
+        display: flex;
+        flex-direction: column;
         flex: 1;
+
+        width: 95%;
         margin: 0;
         margin-top: 20px;
         margin-left: 5%;
-        display: flex;
-        flex-direction: column;
+
+        overflow-y: scroll;
+        min-height: 0;
+        max-height: none;
     }
 }

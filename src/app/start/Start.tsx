@@ -37,8 +37,8 @@ export default function Start() {
         </p>
 
         <div className="button-container">
-          <OptionButton label={"Anmelden"} onClick={handleLogin}></OptionButton>
-          <OptionButton label={"Registrieren"} onClick={handleRegister}></OptionButton>
+          <OptionButton label={"Anmelden"} buttonType='optionButton' onClick={handleLogin}></OptionButton>
+          <OptionButton label={"Registrieren"} buttonType='optionButton' onClick={handleRegister}></OptionButton>
         </div>
       </div>
     </div>

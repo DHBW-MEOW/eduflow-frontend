@@ -24,6 +24,7 @@ const InputField: React.FC<InputFieldProps> = ({label, name, value, isInvalid, e
              value={value}
              onChange={onChange}
              className={inputClass}
+             maxLength={25}
             />
             {isInvalid && errorMessage && <span className="error-message">{errorMessage}</span>}
         </div>
