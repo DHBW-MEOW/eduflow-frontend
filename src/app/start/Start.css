@@ -19,6 +19,7 @@
     flex-direction: column;
     gap: 1em;
     font-size: 2vh;
+    margin-bottom: 3%;
 }
 
 .heading-desktop {
