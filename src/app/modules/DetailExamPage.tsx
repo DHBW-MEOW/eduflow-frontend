@@ -1,9 +1,10 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchFromBackend } from "../../fetchBackend";
 import { Detail, type DetailBaseData } from "../../components/grid/Detail";
 
 function DetailExamPage() {
+  const navigate = useNavigate();
   const { moduleId, examId } = useParams();
   const [ exam, setExam] = useState<DetailBaseData<Date>>();
   useEffect(() => {
@@ -20,7 +21,8 @@ function DetailExamPage() {
               value: data[0].date,
             });
           }else{
-            console.log("No Exam was found");
+            navigate("/404", { replace: true });
+            return;
           }
         } catch (err) {
           console.error("Error while loading the Exam:", err);
