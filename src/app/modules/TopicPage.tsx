@@ -102,7 +102,7 @@ function TopicPage(): JSX.Element {
     useEffect(() => {
         const loadData = async () => {
             try {
-                const [dataTopics, dataExams] = await Promise.all([
+                const [dataTopics, dataExams, dataModule] = await Promise.all([
                     fetchFromBackend<{ id: number; name: string; details: string }[]>({
                         method: "GET",
                         endpoint: `data/topic?course_id=${moduleId}`
@@ -110,10 +110,20 @@ function TopicPage(): JSX.Element {
                     fetchFromBackend<{ id: number; name: string; date: string }[]>({
                         method: "GET",
                         endpoint: `data/exam?course_id=${moduleId}`
+                    }),
+                    fetchFromBackend<{ id: number; name: string; }[]>({
+                        method: "GET",
+                        endpoint: `data/course?id=${moduleId}`
                     })
                 ]);
-                setTopics(dataTopics);
 
+                if (dataModule.length === 0) {
+                    navigate("/404", { replace: true });
+                    return;
+                }
+
+                setTopics(dataTopics);
+                
                 const dataExamConverted: BoxData[] = dataExams.map(({ id, name, date }) => ({
                     id,
                     name,

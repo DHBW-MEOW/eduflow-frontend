@@ -27,6 +27,7 @@ const InputCombobox: React.FC<InputComboboxProps> = ({label, name, value, option
              list={datalistId}
              onChange={onChange}
              className={inputClass}
+             maxLength={25}
             />
 
             {options && (
