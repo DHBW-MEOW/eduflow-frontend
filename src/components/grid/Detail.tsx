@@ -37,14 +37,17 @@ export function Detail<T extends DetailBaseData>({ data, onEdit, editable = true
       <div className='detail-header'>
         <h2>{data.name}</h2>
         {editable == true &&
-          <OptionButton
-            label='Bearbeiten'
-            buttonType='optionButton'
-            onClick={openPopUp}
-          />
+          <div className='detail-edit'>
+            <OptionButton
+              label='Bearbeiten'
+              buttonType='optionButton'
+              onClick={openPopUp}
+            />
+          </div>
+          
         }
       </div>
-      <div>
+      <div className='detail-content'>
         {
           data.value.split('\n').map((line: string, index: string) => (
             <span key={index}>
