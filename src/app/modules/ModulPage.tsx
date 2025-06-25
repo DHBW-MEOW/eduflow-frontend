@@ -102,7 +102,7 @@ function ModulPage() {
             }
         };    
       loadData();
-    }, []);
+    }, [fetchFromBackend]);
 
     return (
         <div>

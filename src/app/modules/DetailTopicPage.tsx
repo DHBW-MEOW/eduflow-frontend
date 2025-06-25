@@ -32,7 +32,7 @@ function DetailTopicPage() {
       }
     };    
     loadData();
-  }, [moduleId, topicId]);
+  }, [moduleId, topicId, fetchFromBackend]);
 
   const handleEdit = async (updated: DetailBaseData) => {
       try {

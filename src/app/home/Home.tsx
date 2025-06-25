@@ -26,11 +26,11 @@ export default function Home() {
     } catch (err) {
       console.error("Error while loading Data:", err);
     }
-  }, []);
+  }, [fetchFromBackend]);
 
   useEffect(() => {
       loadPageData();
-  }, [loadPageData])
+  }, [loadPageData, fetchFromBackend])
 
   return (
     <div className="home-container">
