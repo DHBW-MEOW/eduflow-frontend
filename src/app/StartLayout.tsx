@@ -19,7 +19,9 @@ function StartLayout() {
   useEffect(() => {
     if(isAuthenticated) {
       console.log("User is authenticated, navigating to home page");
-      navigate("/home");
+      if(location.pathname === "/" || location.pathname === "/login" || location.pathname === "/register") {
+        navigate("/home");
+      }
     } 
   }, [isAuthenticated]);
 
