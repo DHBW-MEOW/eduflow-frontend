@@ -50,7 +50,6 @@ function DetailTopicPage() {
       }
     }
     loadData();
-    setHeader();
   }, [moduleId, topicId, fetchFromBackend]);
 
   const handleEdit = async (updated: DetailBaseData) => {

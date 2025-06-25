@@ -141,7 +141,6 @@ function TopicPage(): JSX.Element {
             }
         };    
       loadData();
-
     }, [fetchFromBackend]);
 
     return (
