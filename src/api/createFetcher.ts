@@ -27,11 +27,7 @@ export const createFetcher = (token: string | null, navigate: NavigateFunction) 
            },
            body: body ? JSON.stringify(body) : undefined,
          });
-         if (response.status === 401) {
-           console.error("Unauthorized access - token may be invalid or expired.");
-           navigate("/login");
-           throw new Error("Unauthorized access - redirecting to login.");
-         }else if (!response.ok) {
+         if (!response.ok) {
            throw new Error(`Error when calling (${method} ${endpoint}): ${response.status}`);
          }
 
