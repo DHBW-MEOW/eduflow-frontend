@@ -8,7 +8,7 @@ type UnsafeFetchFromBackendType = ReturnType<typeof createFetcher>["unsafeFetchF
 
 interface AuthContextType {
     token: string | null;
-    setToken: (token: string) => void;
+    setToken: (token: string | null) => void;
     username: string | null;
     setUsername: (username: string) => void;
     isAuthenticated: boolean | null;
