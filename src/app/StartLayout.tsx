@@ -10,20 +10,20 @@ function StartLayout() {
   const {isAuthenticated, checkAuthentication, isLoaded} = useAuth();
   const [leftButtonState, setLeftButtonState] = useState({on: true, text: "", icon: "Logo.svg", link: "/"})
   const [textState, setTextState] = useState("EduFlow")
-  useEffect(() => {
-    if(isLoaded){
-      console.log("Checking authentication in AppLayout");
-      checkAuthentication();
-    }
-  },[isLoaded, navigate]);
-  useEffect(() => {
-    if(isAuthenticated) {
-      console.log("User is authenticated, navigating to home page");
-      if(location.pathname === "/" || location.pathname === "/login" || location.pathname === "/register") {
-        navigate("/home");
-      }
-    } 
-  }, [isAuthenticated]);
+  //useEffect(() => {
+  //  if(isLoaded){
+  //    console.log("Checking authentication in AppLayout");
+  //    checkAuthentication();
+  //  }
+  //},[isLoaded, navigate]);
+  //useEffect(() => {
+  //  if(isAuthenticated) {
+  //    console.log("User is authenticated, navigating to home page");
+  //    if(location.pathname === "/" || location.pathname === "/login" || location.pathname === "/register") {
+  //      navigate("/home");
+  //    }
+  //  } 
+  //}, [isAuthenticated]);
 
   return (
     <div className="startLayout">
