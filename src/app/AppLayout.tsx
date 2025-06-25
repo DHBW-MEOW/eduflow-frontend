@@ -19,16 +19,16 @@ function AppLayout() {
   const location = useLocation();
   //const match = useMatch();
 
-  useEffect(() => {
-    if(isLoaded){
-      console.log("Checking authentication in AppLayout, Token:", token);
-      checkAuthentication();
-      if(!isAuthenticated) {
-        console.log("User is not authenticated, navigating to login page, is loaded and is not authenticated");
-        navigate("/");
-      }
-    }
-  },[isLoaded, isAuthenticated, navigate]);
+  //useEffect(() => {
+  //  if(isLoaded){
+  //    console.log("Checking authentication in AppLayout, Token:", token);
+  //    checkAuthentication();
+  //    if(!isAuthenticated) {
+  //      console.log("User is not authenticated, navigating to login page, is loaded and is not authenticated");
+  //      navigate("/");
+  //    }
+  //  }
+  //},[isLoaded, isAuthenticated, navigate]);
   // useEffect(() => { / I think not needed?
   //   if(!isAuthenticated) {
   //     console.log("User is not authenticated, navigating to start page");
