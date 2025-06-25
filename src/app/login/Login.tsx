@@ -2,6 +2,8 @@ import OptionButton from "../../components/optionButtons/OptionButton";
 import InputField from "../../components/popUpCreate/inputOptions/InputField";
 import "./Login.css";
 import { useState } from "react";
+import { useNavigate } from "react-router"; 
+import { useAuth } from "../../app/AuthContext";
 
 
 export default function Login() {
@@ -9,8 +11,38 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [isInvalid, setIsInvalid] = useState(false);
 
-  const handleLogin = () => {
+  const navigate = useNavigate();
+  const { unsafeFetchFromBackend, setToken } = useAuth()
+
+  const handleLogin = async (username: string, password: string) => {
     console.log("Login button clicked");
+    console.log("Username:", username, "Password:", password);
+
+   const response = await unsafeFetchFromBackend({
+      method: "POST",
+      endpoint: "auth/login",
+      body: {
+        username: username,
+        password: password
+      }
+    });
+    console.log("Response:", response);
+    if (response.status === 200) {
+      const data = await response.json();
+      const loginToken = data.token;
+      localStorage.setItem("token", loginToken);
+      localStorage.setItem("username", username);
+      setToken(loginToken);
+      console.log("New state token" + loginToken);
+      navigate("/home");
+    }else if(response.status === 401){
+      setIsInvalid(true);
+      console.error("Login failed: Invalid credentials");
+      username = "";
+      password = "";
+    }else {
+      throw new Error(`Error when calling (POST auth/login): ${response.status}`);
+    }
   };
 
   return (
@@ -19,7 +51,7 @@ export default function Login() {
         // Prevent default form submission reloading the page
         e.preventDefault();
         if (username && password) {
-          handleLogin();
+          handleLogin(username, password);
           setIsInvalid(false);
         } else {
           setIsInvalid(true);
@@ -45,7 +77,7 @@ export default function Login() {
         <OptionButton
           label="Anmelden"
           buttonType="optionButton"
-          onClick={handleLogin}
+          onClick={() => {}}
         />
       </form>
       <div className="registerLink">
