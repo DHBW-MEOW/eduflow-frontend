@@ -15,7 +15,7 @@ export default function Login() {
   const [usernameValidity, setUsernameValidity] = useState({ valid: true, message: "" });
 
   const navigate = useNavigate();
-  const { unsafeFetchFromBackend, setToken, setUsername } = useAuth()
+  const { unsafeFetchFromBackend, setToken } = useAuth()
 
   const handleLogin = async (username: string, password: string) => {
     console.log("Login button clicked");
@@ -36,7 +36,6 @@ export default function Login() {
       localStorage.setItem("token", loginToken);
       localStorage.setItem("username", username);
       setToken(loginToken);
-      setUsername(username);
       console.log("New state token" + loginToken);
       navigate("/home");
     }else if(response.status === 401){
@@ -54,17 +53,8 @@ export default function Login() {
       <form onSubmit={(e) => {
         // Prevent default form submission reloading the page
         e.preventDefault();
-        if (!(localUsername) && !(password)) {
-          setUsernameValidity({ valid: false, message: "Bitte geben Sie einen Benutzernamen ein." });
-          setPasswordValidity({ valid: false, message: "Bitte geben Sie ein Kennwort ein." });
-          setIsInvalid(false);
-        } else if(!(localUsername) && password) {
-          setUsernameValidity({ valid: false, message: "Bitte geben Sie einen Benutzernamen ein." });
-          setPasswordValidity({ valid: true, message: "" });
-          setIsInvalid(false);
-        } else if(localUsername && !(password)) {
-          setUsernameValidity({ valid: true, message: "" });
-          setPasswordValidity({ valid: false, message: "Bitte geben Sie ein Kennwort ein." });
+        if (username && password) {
+          handleLogin(username, password);
           setIsInvalid(false);
         } else {
           setUsernameValidity({ valid: true, message: "" });
