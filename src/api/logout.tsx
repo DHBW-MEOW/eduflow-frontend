@@ -1,7 +1,6 @@
 import type { FetchFromBackendType } from "./createFetcher";
 
-export const logout = async (unsafeFetchFromBackend: FetchFromBackendType) => {
-    console.log("Logging out...");
+export const logout = async (fetchFromBackend: FetchFromBackendType) => {
     try {
             await unsafeFetchFromBackend({
                 method: "POST",
