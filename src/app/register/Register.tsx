@@ -1,9 +1,10 @@
 import InputField from "../../components/popUpCreate/inputOptions/InputField";
 import OptionButton from "../../components/optionButtons/OptionButton";
 import "./Register.css";
-import { useState } from "react";
-import { fetchFromBackend } from "../../fetchBackend";
+import { useEffect, useState } from "react";
+//import { fetchFromBackend } from "../../fetchBackend";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../app/AuthContext";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -14,36 +15,55 @@ export default function Register() {
   const [userTaken, setUserTaken] = useState(false);  
   const [successfullyRegistered, setSuccessfullyRegistered] = useState(false);
 
-  const handleNavigation = () =>{
+  const { token, setToken, setIsAuthenticated, fetchFromBackend, unsafeFetchFromBackend} = useAuth();
+
+  //useEffect(() => {
+  //  const verifyToken = async () => {
+  //      const response = await unsafeFetchFromBackend({
+  //        method: "GET",
+  //        endpoint: "auth/verify-token",
+  //      });
+  //      if(response.status === 200) {
+  //        console.log("User is authenticated and cant register");
+  //        setIsAuthenticated(true);
+  //        navigate("/home");
+  //      }
+  //  }
+  //  verifyToken();
+  //}, [navigate]);
+
+  const handleNavigation = ()   =>{
     console.log("Navigating to login page");
-    navigate("/login");
+    navigate("/login"  );
   }
 
   const handleRegister = async (username: string, password: string) => {
     console.log("Register button clicked");
     console.log("Uesrname:", username, "Password:", password);
 
-    try {
-      const response = await fetchFromBackend({
-        method: "POST",
-        endpoint: "auth/register",
-        body: {
-          username: username,
-          password: password
-        }
-      })
-      console.log("Response from backend:", response);
-      console.log("Successfully registered");
-      setSuccessfullyRegistered(true);
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        if(error.message.includes("409")){
-          console.error("Username already taken");
-          setUserTaken(true);
-        }
-      } else {
-        throw error
+    const response = await unsafeFetchFromBackend({
+      method: "POST",
+      endpoint: "auth/register",
+      body: {
+        username: username,
+        password: password
       }
+    })
+    console.log("Response:", response); 
+    if (response.status === 200){
+      const data = await response.json();
+      const registerToken = data.token;
+      setIsAuthenticated(true);
+      localStorage.setItem("token", registerToken);
+      localStorage.setItem("username", username);
+      setToken(registerToken)
+      console.log("New state token" + token);
+      navigate("/home");
+    }else if (response.status === 409) {
+      console.error("Username already taken");
+      setUserTaken(true);
+    }else {
+      throw new Error(`Error when calling (POST auth/register): ${response.status}`);
     }
   };
 
