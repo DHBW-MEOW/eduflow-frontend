@@ -10,7 +10,6 @@ function TopicPage(): JSX.Element {
     const navigate = useNavigate();
     const [ topics, setTopics] = useState<BoxData[]>([]);
     const [ exams, setExams] = useState<BoxData[]>([]);
-    const headerSetter = useContext(HeaderContext);
 
     const { fetchFromBackend } = useAuth();
     
