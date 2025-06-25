@@ -16,6 +16,7 @@ interface AuthContextType {
     checkAuthentication: () => void;
     fetchFromBackend: FetchFromBackendType;
     unsafeFetchFromBackend: UnsafeFetchFromBackendType;
+    isLoaded: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -23,35 +24,47 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const navigate = useNavigate();
 
+    const [isLoaded, setIsLoaded] = React.useState<boolean>(false);
+
     const [token, setToken] = React.useState<string | null>(null);
     const [username, setUsername] = React.useState<string | null>(null);
     const [isAuthenticated, setIsAuthenticated] = React.useState<boolean>(false);
     
 
     const {fetchFromBackend, unsafeFetchFromBackend} = useMemo(() => createFetcher(token, navigate), [token, navigate])
-    if(token === null){
-        const storedToken = localStorage.getItem("token");
-        console.log("Stored Token:", storedToken);
-        setToken(storedToken)
-    }
-    if(username === null){
-        const storedUsername = localStorage.getItem("username");
-        console.log("Stored Username:", storedUsername);
-        setUsername(storedUsername)
-    }
-
+    
     useEffect(() => {
-        if(token && username){
-            console.log("Token and Username are set, checking authentication");
-            checkAuthentication();
+        const initializeAuth = () => {
+            if(token === null){
+                const storedToken = localStorage.getItem("token");
+                console.log("Stored Token:", storedToken);
+                setToken(storedToken)
+            }
+            if(username === null){
+                const storedUsername = localStorage.getItem("username");
+                console.log("Stored Username:", storedUsername);
+                setUsername(storedUsername)
+            }
+            setIsLoaded(true);
+            console.log("Loading complete")
         }
-    }, [])
-    useEffect(() => {
-        if(isAuthenticated){
-            console.log("User is authenticated, navigating to home");
-            navigate("/home");
+        if (!isLoaded){
+            initializeAuth();
+            setIsLoaded(true);
         }
-    }, [isAuthenticated, navigate])
+    });
+    // useEffect(() => {
+    //     if(token){
+    //         console.log("Token and Username are set, checking authentication");
+    //         checkAuthentication();
+    //     }
+    // }, [navigate])
+    // useEffect(() => {
+    //     if(isAuthenticated){
+    //         console.log("User is authenticated, navigating to home");
+    //         navigate("/home");
+    //     }
+    // }, [isAuthenticated, navigate])
 
     const checkAuthentication = useCallback(() => {
         console.log("Checking authentication with token:", token);
@@ -65,7 +78,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
                     setIsAuthenticated(true);
                 }else if(response.status === 401){
                     console.log("User is not authenticated");
-                    navigate("/");
+                    //navigate("/");
                     setToken(null);
                     setUsername(null);
                     setIsAuthenticated(false);
@@ -84,8 +97,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setIsAuthenticated,
         checkAuthentication,
         fetchFromBackend,
-        unsafeFetchFromBackend
-    }), [token, username, isAuthenticated, fetchFromBackend, unsafeFetchFromBackend]);
+        unsafeFetchFromBackend,
+        isLoaded
+    }), [token, username, isAuthenticated, fetchFromBackend, unsafeFetchFromBackend, isLoaded]);
 
     return (
         <AuthContext.Provider
