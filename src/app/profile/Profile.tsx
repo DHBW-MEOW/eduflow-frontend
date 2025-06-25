@@ -6,13 +6,11 @@ import './Profile.css'
 
 export default function Profile() {
   const navigate = useNavigate();
-  const { unsafeFetchFromBackend, setIsAuthenticated, setToken, username, setUsername } = useAuth();
+  const username: string = "Placeholder for Username from Cache"
+  const { fetchFromBackend } = useAuth();
 
   const logoutHandel = () => {
-    logout(unsafeFetchFromBackend);
-    setToken(null);
-    setUsername("");
-    setIsAuthenticated(false);
+    logout(fetchFromBackend);
     navigate('/');
   }
 
