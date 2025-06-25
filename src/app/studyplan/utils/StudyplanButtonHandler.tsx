@@ -16,10 +16,13 @@ import { getTopicID } from "./getTopicID";
 import { fetchTopics } from "../../../api/fetchTopics";
 import { createNewTopic } from "../../../api/createNewTopic";
 import { getTopicNames } from "./getTopicNames";
+import { useAuth } from "../../../app/AuthContext";
 
 export const StudyplanButtonHandler = ( {popUpType, onClose, onDataAdded}: StudyplanButtonProps ) => {
     const learningPlanRef = useRef<LearningPlanHandles>(null);
     const examRef = useRef<ExamHandles>(null);
+
+    const { fetchFromBackend } = useAuth();
 
     const [courseOptions, setCourseOptions] = useState<string[]>([]);
     const [courses, setCourses] = useState<CourseData[]>([]);
@@ -34,10 +37,10 @@ export const StudyplanButtonHandler = ( {popUpType, onClose, onDataAdded}: Study
 
     const loadOptions = useCallback(async () => {
         try {
-            const fetchedCourses = await fetchCourses();
+            const fetchedCourses = await fetchCourses(fetchFromBackend);
             setCourses(fetchedCourses);
             
-            const fetchedTopics = await fetchTopics();
+            const fetchedTopics = await fetchTopics(fetchFromBackend);
             setTopics(fetchedTopics);
 
         } catch (error) {
@@ -97,18 +100,18 @@ export const StudyplanButtonHandler = ( {popUpType, onClose, onDataAdded}: Study
                 setIsDisbled(true);
                 let courseID = getCourseID(data.data.module, courses)
                 if( courseID === null) {
-                    courseID = await createNewModul(data.data.module);
+                    courseID = await createNewModul(data.data.module, fetchFromBackend);
                     await loadOptions();
                 }
 
                 if (typeof courseID === 'number') {
                     let topicID = getTopicID(courseID, data.data.topic, topics)
                     if( topicID === null) {
-                        topicID = await createNewTopic(courseID, data.data.topic, data.data.details);
+                        topicID = await createNewTopic(courseID, data.data.topic, data.data.details, fetchFromBackend);
                         await loadOptions();
                     }
                     if (typeof topicID === 'number') {
-                        await createNewStudyGoal(topicID, data.data.date)
+                        await createNewStudyGoal(topicID, data.data.date, fetchFromBackend);
                         onDataAdded();
                         setSelectedModule(null);
                     }
@@ -126,11 +129,11 @@ export const StudyplanButtonHandler = ( {popUpType, onClose, onDataAdded}: Study
                 setIsDisbled(true);
                 let courseID = getCourseID(data.data.module, courses)
                 if( courseID === null) {
-                    courseID = await createNewModul(data.data.module);
+                    courseID = await createNewModul(data.data.module, fetchFromBackend);
                     await loadOptions();
                 }
                 if (typeof courseID === 'number') {
-                    await createNewExam(courseID, data.data.title, data.data.date)
+                    await createNewExam(courseID, data.data.title, data.data.date, fetchFromBackend)
                     onDataAdded();
                 }
             }

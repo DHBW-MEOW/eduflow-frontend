@@ -2,7 +2,7 @@ import InputField from "../../components/popUpCreate/inputOptions/InputField";
 import OptionButton from "../../components/optionButtons/OptionButton";
 import "./Register.css";
 import { useEffect, useState } from "react";
-//import { fetchFromBackend } from "../../fetchBackend";
+//import { useAuth } from "../../app/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../app/AuthContext";
 

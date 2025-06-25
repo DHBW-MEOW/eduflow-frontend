@@ -1,12 +1,14 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { fetchFromBackend } from "../../fetchBackend";
+import { useAuth } from "../../app/AuthContext";
 import { Detail, type DetailBaseData } from "../../components/grid/Detail";
 
 function DetailTopicPage() {
   const navigate = useNavigate();
   const { moduleId, topicId } = useParams();
   const [ topic, setTopic] = useState<DetailBaseData<string>>();
+
+  const { fetchFromBackend } = useAuth();
   
   useEffect(() => {
     const loadData = async () => {

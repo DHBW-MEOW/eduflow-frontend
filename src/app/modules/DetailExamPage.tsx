@@ -1,12 +1,15 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { fetchFromBackend } from "../../fetchBackend";
+import { useAuth } from "../../app/AuthContext";
 import { Detail, type DetailBaseData } from "../../components/grid/Detail";
 
 function DetailExamPage() {
   const navigate = useNavigate();
   const { moduleId, examId } = useParams();
   const [ exam, setExam] = useState<DetailBaseData<Date>>();
+
+  const { fetchFromBackend } = useAuth();
+
   useEffect(() => {
     const loadData = async () => {
         try {

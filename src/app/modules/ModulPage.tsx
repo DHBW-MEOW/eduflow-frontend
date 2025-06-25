@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchFromBackend } from "../../fetchBackend";
+import { useAuth } from "../../app/AuthContext";
 import { Grid } from "../../components/grid/Grid";
 import type { BoxData } from "../../components/grid/Box";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 function ModulPage() {
     const navigate = useNavigate();
     const [items, setItems] = useState<BoxData[]>([]);
+
+    const { fetchFromBackend } = useAuth();
 
     const addItem = (newElement: BoxData) => {
         setItems(oldItems => [...oldItems, newElement]);

@@ -1,7 +1,7 @@
 import { useEffect, useState, type JSX } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Grid } from "../../components/grid/Grid";
-import { fetchFromBackend } from "../../fetchBackend";
+import { useAuth } from "../../app/AuthContext";
 import type { BoxData } from "../../components/grid/Box";
 
 function TopicPage(): JSX.Element {
@@ -9,6 +9,8 @@ function TopicPage(): JSX.Element {
     const navigate = useNavigate();
     const [ topics, setTopics] = useState<BoxData[]>([]);
     const [ exams, setExams] = useState<BoxData[]>([]);
+
+    const { fetchFromBackend } = useAuth();
     
     const handleRenameExam = async (id: number, newTitle: string) => {
         const item = exams.find(item => item.id === id);

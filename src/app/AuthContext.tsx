@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useMemo, createContext } from "react";
-//import { fetchFromBackend } from "../fetchBackend";
+//import { useAuth } from "../../app/AuthContext";
 import { useNavigate } from "react-router";
 import { createFetcher } from "../api/createFetcher";
 
