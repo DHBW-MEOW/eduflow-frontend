@@ -34,7 +34,7 @@ function Studyplan() {
             } catch (err) {
                 console.error("Error while loading Data:", err);
             }
-    }, []);
+    }, [fetchFromBackend]);
 
     useEffect(() => {
         loadPageData();
