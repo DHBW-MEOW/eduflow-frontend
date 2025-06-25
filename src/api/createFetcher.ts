@@ -12,9 +12,6 @@ async function fetchAPIURL(): Promise<string> {
   return response.text();
 }
 
-
-export type FetchFromBackendType = ReturnType<typeof createFetcher>["fetchFromBackend"];
-
 export const createFetcher = (token: string | null, navigate: NavigateFunction) => {
     async function fetchFromBackend<T>({ method, endpoint, body }: FetchOptions): Promise<T> {
         const api = await fetchAPIURL();
@@ -27,7 +24,11 @@ export const createFetcher = (token: string | null, navigate: NavigateFunction) 
            },
            body: body ? JSON.stringify(body) : undefined,
          });
-         if (!response.ok) {
+         if (response.status === 401) {
+           console.error("Unauthorized access - token may be invalid or expired.");
+           navigate("/login");
+           throw new Error("Unauthorized access - redirecting to login.");
+         }else if (!response.ok) {
            throw new Error(`Error when calling (${method} ${endpoint}): ${response.status}`);
          }
 
