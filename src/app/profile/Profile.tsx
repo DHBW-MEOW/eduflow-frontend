@@ -7,10 +7,12 @@ import './Profile.css'
 export default function Profile() {
   const navigate = useNavigate();
   const username: string = "Placeholder for Username from Cache"
-  const { fetchFromBackend } = useAuth();
+  const { fetchFromBackend, setIsAuthenticated, setToken } = useAuth();
 
   const logoutHandel = () => {
     logout(fetchFromBackend);
+    setToken(null);
+    setIsAuthenticated(false);
     navigate('/');
   }
 
