@@ -88,7 +88,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             console.log("Token and Username are set, checking authentication");
             checkAuthentication();
         }
-    }, [location.pathname, isLoaded])
+    }, [location.pathname, isLoaded]) // maybe add token here
 
     //ROUTING LOGIK
     useEffect(() => {
