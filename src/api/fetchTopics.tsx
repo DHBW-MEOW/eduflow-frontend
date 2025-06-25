@@ -1,7 +1,7 @@
 import type { TopicData } from "../app/studyplan/types";
-import { fetchFromBackend } from "../fetchBackend";
+import type { FetchFromBackendType } from "./createFetcher";
 
-export const fetchTopics = async () => {
+export const fetchTopics = async (fetchFromBackend: FetchFromBackendType) => {
     try {
         const allTopics: TopicData[] = await fetchFromBackend<{ id: number; course_id: number; name: string }[]>({
             method: "GET",

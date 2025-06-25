@@ -1,10 +1,10 @@
-import { fetchFromBackend } from "../fetchBackend";
+import type { FetchFromBackendType } from "./createFetcher";
 
 interface NewModuleResponse {
     id: number;
 }
 
-export const createNewModul = async (name: string): Promise<number> => {
+export const createNewModul = async (name: string, fetchFromBackend: FetchFromBackendType): Promise<number> => {
     try {
             const response = await fetchFromBackend<NewModuleResponse>({
                 method: "POST",

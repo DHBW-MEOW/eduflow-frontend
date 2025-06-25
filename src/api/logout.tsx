@@ -1,6 +1,6 @@
-import { fetchFromBackend } from "../fetchBackend";
+import type { FetchFromBackendType } from "./createFetcher";
 
-export const logout = async () => {
+export const logout = async (fetchFromBackend: FetchFromBackendType) => {
     try {
             await fetchFromBackend({
                 method: "POST",
