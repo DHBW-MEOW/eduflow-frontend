@@ -1,6 +1,7 @@
 import OptionButton from "../../components/optionButtons/OptionButton";
 import InputField from "../../components/popUpCreate/inputOptions/InputField";
 import "./Login.css";
+import "../../components/popUpCreate/inputOptions/InputStyle.css";
 import { useState } from "react";
 import { useNavigate } from "react-router"; 
 import { useAuth } from "../../app/AuthContext";
@@ -10,6 +11,8 @@ export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isInvalid, setIsInvalid] = useState(false);
+  const [passwordValidity, setPasswordValidity] = useState({ valid: true, message: "" });
+  const [usernameValidity, setUsernameValidity] = useState({ valid: true, message: "" });
 
   const navigate = useNavigate();
   const { unsafeFetchFromBackend, setToken } = useAuth()
@@ -50,11 +53,23 @@ export default function Login() {
       <form onSubmit={(e) => {
         // Prevent default form submission reloading the page
         e.preventDefault();
-        if (username && password) {
-          handleLogin(username, password);
+        if (!(username) && !(password)) {
+          setUsernameValidity({ valid: false, message: "Bitte geben Sie einen Benutzernamen ein." });
+          setPasswordValidity({ valid: false, message: "Bitte geben Sie ein Kennwort ein." });
+          setIsInvalid(false);
+        } else if(!(username) && password) {
+          setUsernameValidity({ valid: false, message: "Bitte geben Sie einen Benutzernamen ein." });
+          setPasswordValidity({ valid: true, message: "" });
+          setIsInvalid(false);
+        } else if(username && !(password)) {
+          setUsernameValidity({ valid: true, message: "" });
+          setPasswordValidity({ valid: false, message: "Bitte geben Sie ein Kennwort ein." });
           setIsInvalid(false);
         } else {
-          setIsInvalid(true);
+          setUsernameValidity({ valid: true, message: "" });
+          setPasswordValidity({ valid: true, message: "" });
+          setIsInvalid(false);
+          handleLogin(username, password);
         }
       }
       }>
@@ -62,18 +77,19 @@ export default function Login() {
           label="Benutzername"
           name="username"
           value={username}
-          isInvalid={isInvalid}
-          errorMessage={isInvalid ? "Bitte geben Sie einen Benutzernamen ein." : ""}
+          isInvalid={(!usernameValidity.valid) || isInvalid}
+          errorMessage={usernameValidity.message}
           onChange={(e) => setUsername(e.target.value)}
         />
         <InputField
           label="Kennwort"
           name="password"
           value={password} 
-          isInvalid={isInvalid}
-          errorMessage={isInvalid ? "Bitte geben Sie ein Kennwort ein." : ""}
+          isInvalid={(!passwordValidity.valid) || isInvalid}
+          errorMessage={passwordValidity.message}
           onChange={(e) => setPassword(e.target.value)}
         />
+        {isInvalid && <p className="error-message">Benutzername oder Kennwort ungültig</p>}
         <OptionButton
           label="Anmelden"
           buttonType="optionButton"
