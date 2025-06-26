@@ -10,8 +10,11 @@ export default function Register() {
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [isInvalid, setIsInvalid] = useState(false);
+  const [passwordOne, setPasswordOne] = useState("");
+  const [passwordTwo, setPasswordTwo] = useState("");
+  const [passwordValidity, setPasswordValidity] = useState({ valid: true, message: "" });
+  const [usernameValidity, setUsernameValidity] = useState({ valid: true, message: "" });
+  const [dataValidity, setDataValidity] = useState(false);
   const [userTaken, setUserTaken] = useState(false);  
   const [successfullyRegistered, setSuccessfullyRegistered] = useState(false);
 
@@ -46,7 +49,7 @@ export default function Register() {
       endpoint: "auth/register",
       body: {
         username: username,
-        password: password
+        password: password 
       }
     })
     console.log("Response:", response); 
@@ -67,18 +70,32 @@ export default function Register() {
     }
   };
 
-  const validateData = (username: string, password: string): boolean => {
-    // Check that not both are 0
-    if (!username || !password) {
-      setIsInvalid(true);
-      return false;
+  const validateData = (username: string, passwordOne: string, passwordTwo: string): boolean => {
+    let valid = true;
+    if (!username) {
+      setUsernameValidity({ valid: false, message: "Benutzername darf nicht leer sein" });
+      valid = false;
+    }else{
+      setUsernameValidity({ valid: true, message: "" });
     }
-    if (password.length < 8) { 
-      setIsInvalid(true);
-      return false;
+    
+    const password = passwordOne;
+    if (passwordOne !== passwordTwo) {
+      setPasswordValidity({ valid: false, message: "Kennwörter müssen übereinstimmen" });
+      valid = false;
     }
-    setIsInvalid(false);
-    return true;
+    else if(!password) {
+      setPasswordValidity({ valid: false, message: "Kennwort darf nicht leer sein" });
+      valid = false;
+    }
+    else if (password.length < 8) { 
+      setPasswordValidity({ valid: false, message: "Das Kennwort muss mindestens 8 Zeichen lang sein" });
+      valid = false;
+    }
+    else {
+      setPasswordValidity({ valid: true, message: "" });
+    }
+    return valid;
   }
 
   return (
@@ -89,11 +106,9 @@ export default function Register() {
           console.log("Form submitted");
           // Prevent default form submission reloading the page
           e.preventDefault();
-          if (validateData(username, password)) { 
-            handleRegister(username, password);
-            setIsInvalid(false);
-          } else {
-            setIsInvalid(true);
+          if (validateData(username, passwordOne, passwordTwo)) { 
+            console.log("Data is valid, proceeding with registration");
+            handleRegister(username, passwordOne);
           }
         }
         }>
@@ -101,17 +116,25 @@ export default function Register() {
             label="Benutzername"
             name="username"
             value={username}
-            isInvalid={isInvalid}
-            errorMessage={isInvalid ? "Bitte geben Sie einen Benutzernamen ein." : ""}
+            isInvalid={!usernameValidity.valid}
+            errorMessage={usernameValidity.message}
             onChange={(e) => setUsername(e.target.value)}
           />
           <InputField
             label="Kennwort"
-            name="password"
-            value={password}
-            isInvalid={isInvalid}
-            errorMessage={isInvalid ? "Bitte geben Sie ein Kennwort ein." : ""}
-            onChange={(e) => setPassword(e.target.value)}
+            name="passwordOne"
+            value={passwordOne}
+            isInvalid={!passwordValidity.valid}
+            errorMessage={passwordValidity.message}
+            onChange={(e) => setPasswordOne(e.target.value)}
+          />
+          <InputField
+            label="Kennwort wiederholen"
+            name="passwordTwo"
+            value={passwordTwo}
+            isInvalid={!passwordValidity.valid}
+            errorMessage={passwordValidity.message}
+            onChange={(e) => setPasswordTwo(e.target.value)}
           />
           {
             userTaken && <div className="error-message">Dieser Benutzername ist leider schon vergeben.</div>
