@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useAuth } from "../../app/AuthContext";
 import { Detail, type DetailBaseData } from "../../components/grid/Detail";
 
@@ -11,6 +11,7 @@ function DetailTopicPage() {
   const [ topic, setTopic] = useState<DetailBaseData<string>>();
 
   const { fetchFromBackend } = useAuth();
+  const headerSetter = useContext(HeaderContext);
   
   useEffect(() => {
     const loadData = async () => {
@@ -50,6 +51,7 @@ function DetailTopicPage() {
       }
     }
     loadData();
+    setHeader();
   }, [moduleId, topicId, fetchFromBackend]);
 
   const handleEdit = async (updated: DetailBaseData) => {

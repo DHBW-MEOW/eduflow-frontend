@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useAuth } from "../../app/AuthContext";
 import { Detail, type DetailBaseData } from "../../components/grid/Detail";
 
@@ -11,6 +11,7 @@ function DetailExamPage() {
   const [ exam, setExam] = useState<DetailBaseData<Date>>();
 
   const { fetchFromBackend } = useAuth();
+  const headerSetter = useContext(HeaderContext);
 
   useEffect(() => {
     const loadData = async () => {
