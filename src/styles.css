@@ -53,12 +53,14 @@ html, body{
 
     .appLayout{
         display: grid;
-        grid-template-rows: minmax(var(--header-min-height), var(--header-height)) auto;
-        grid-template-columns: minmax(var(--navbar-min-width), var(--navbar-width)) auto;
+        grid-template-rows: minmax(var(--header-min-height), var(--header-height)) 1fr;
+        grid-template-columns: auto 1fr;
         min-height: 100vh;
+        height: 100vh;
+        gap: 0;
     }
     .appPage{
-        grid-column: 2 / span 1;
+        grid-column: 2;
         grid-row: 2;
     }
 
