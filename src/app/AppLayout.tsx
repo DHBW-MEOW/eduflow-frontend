@@ -48,7 +48,11 @@ function AppLayout() {
       setLeftButtonState({on: false, text: "", icon: "Logo.svg", link: "/home"});
       setTextState("Module");
     }
-  }, [location.pathname, username]);
+    if(location.pathname === "/profile") {
+      setLeftButtonState({on: true, text: "", icon: "Logo.svg", link: "/home"});
+      setTextState("Profil");
+    }
+  }, [location.pathname, username,]);
 
   return (
     <div className="appLayout">
