@@ -14,7 +14,6 @@ export default function Register() {
   const [passwordTwo, setPasswordTwo] = useState("");
   const [passwordValidity, setPasswordValidity] = useState({ valid: true, message: "" });
   const [usernameValidity, setUsernameValidity] = useState({ valid: true, message: "" });
-  const [dataValidity, setDataValidity] = useState(false);
   const [userTaken, setUserTaken] = useState(false);  
   const [successfullyRegistered, setSuccessfullyRegistered] = useState(false);
 
