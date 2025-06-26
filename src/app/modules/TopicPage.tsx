@@ -50,7 +50,6 @@ function TopicPage(): JSX.Element {
 
     const handleClickExam = (id: number) => {
         if (!id) return;
-        headerSetter?.setLeftButtonState({on: true, text: "", icon: "circle-arrow-left-solid.svg", link: `/modules/${moduleId}`});
         navigate(`/modules/${moduleId}/exams/${id}`);
     };
 
@@ -101,7 +100,6 @@ function TopicPage(): JSX.Element {
 
     const handleClickTopic = (id: number) => {
         if (!id) return;
-        headerSetter?.setLeftButtonState({on: true, text: "", icon: "circle-arrow-left-solid.svg", link: `/modules/${moduleId}`});
         navigate(`/modules/${moduleId}/topics/${id}`);
     };
 
