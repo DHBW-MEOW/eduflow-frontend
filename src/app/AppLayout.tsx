@@ -1,9 +1,10 @@
 import { useMatch, useLocation, useNavigate, Outlet, createCookie } from "react-router-dom"
 import Header from "../components/header/Header.tsx"
 import Navbar from "../components/navbar/Navbar.tsx"
+import HeaderContext from "../app/HeaderContext.tsx"
 import "../styles.css"
 
-import {use, useEffect, useState} from 'react'
+import {use, useEffect, useState, createContext} from 'react'
 
 import { useAuth } from "./AuthContext.tsx";
 
@@ -55,11 +56,13 @@ function AppLayout() {
   }, [location.pathname, username,]);
 
   return (
-    <div className="appLayout">
-      <Header leftButton={leftButtonState} text={textState} rightButton={rightButtonState}/>
-      <div className="appPage"><Outlet /></div>
-      <Navbar/>
-    </div>
+    <HeaderContext value={{setLeftButtonState, setTextState}}>
+      <div className="appLayout">
+        <Header leftButton={leftButtonState} text={textState} rightButton={rightButtonState}/>
+        <div className="appPage"><Outlet /></div>
+        <Navbar/>
+      </div>
+    </HeaderContext>
   )
 }
 

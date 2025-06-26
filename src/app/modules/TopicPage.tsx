@@ -1,5 +1,6 @@
-import { useEffect, useState, type JSX } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState, type JSX, useContext } from "react";
+import HeaderContext from "../../app/HeaderContext";
+import { data, useNavigate, useParams } from "react-router-dom";
 import { Grid } from "../../components/grid/Grid";
 import { useAuth } from "../../app/AuthContext";
 import type { BoxData } from "../../components/grid/Box";
@@ -9,6 +10,7 @@ function TopicPage(): JSX.Element {
     const navigate = useNavigate();
     const [ topics, setTopics] = useState<BoxData[]>([]);
     const [ exams, setExams] = useState<BoxData[]>([]);
+    const headerSetter = useContext(HeaderContext);
 
     const { fetchFromBackend } = useAuth();
     
@@ -48,6 +50,7 @@ function TopicPage(): JSX.Element {
 
     const handleClickExam = (id: number) => {
         if (!id) return;
+        headerSetter?.setLeftButtonState({on: true, text: "", icon: "circle-arrow-left-solid.svg", link: `/modules/${moduleId}`});
         navigate(`/modules/${moduleId}/exams/${id}`);
     };
 
@@ -98,6 +101,7 @@ function TopicPage(): JSX.Element {
 
     const handleClickTopic = (id: number) => {
         if (!id) return;
+        headerSetter?.setLeftButtonState({on: true, text: "", icon: "circle-arrow-left-solid.svg", link: `/modules/${moduleId}`});
         navigate(`/modules/${moduleId}/topics/${id}`);
     };
 
@@ -124,6 +128,9 @@ function TopicPage(): JSX.Element {
                     return;
                 }
 
+                headerSetter?.setTextState(dataModule[0].name);
+                headerSetter?.setLeftButtonState({on: true, text: "", icon: "circle-arrow-left-solid.svg", link: "/modules"});
+
                 setTopics(dataTopics);
                 
                 const dataExamConverted: BoxData[] = dataExams.map(({ id, name, date }) => ({
@@ -137,6 +144,7 @@ function TopicPage(): JSX.Element {
             }
         };    
       loadData();
+
     }, [fetchFromBackend]);
 
     return (
