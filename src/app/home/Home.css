@@ -39,7 +39,7 @@
 
 .home-studygoals {
     border-radius: 8px;
-    overflow-y: scroll;
+    overflow: auto;
     max-height: 40vh;
 }
 
@@ -94,7 +94,7 @@ a:visited:active {
 
         width: 95%;
 
-        overflow-y: scroll;
+        overflow: auto;
         min-height: 0;
         max-height: none;
     }

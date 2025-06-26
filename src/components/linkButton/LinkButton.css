@@ -1,11 +1,18 @@
 .linkButton {
-  text-decoration: none !important;
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  gap: 2px;
+  padding: 6px 4px;
+  border-radius: 6px;
+
+  text-decoration: none;
 }
 
-img {
-  width: 45px;
-  height: 45px;
-
+.linkButton img {
+  width: 24px;
+  height: 24px;
   filter: var(--filter-icon);
 }
 
@@ -13,14 +20,45 @@ img {
   filter: var(--filter-icon-hover);
 }
 
-.linkButton:hover .buttonText{
-  color: var(--color-hover);
+.linkButton:hover .buttonText {
+  color: var(--color-primary2);
 }
 
-.buttonText,
+.linkButton.active img {
+  filter: var(--filter-icon-hover);
+}
+
+.linkButton.active .buttonText {
+  color: var(--color-white);
+}
+
+.buttonText {
+  text-decoration: none;
+  text-align: center;
+}
+
 .buttonText:active,
 .buttonText:focus,
 .buttonText:visited {
-  color: var(--color-icon);
   text-decoration: none;
+}
+
+@media (min-width: 480px) {
+  .linkButton {
+    width: 100%;
+    padding: 12px 4px;
+    border-radius: 8px;
+  }
+
+  .linkButton img {
+    width: 28px;
+    height: 28px;
+    margin-bottom: 4px;
+  }
+
+  .buttonText {
+    font-size: 10px;
+    color: var(--color-text);
+    font-weight: 500;
+  }
 }

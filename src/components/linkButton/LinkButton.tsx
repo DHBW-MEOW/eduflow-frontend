@@ -9,14 +9,12 @@ export interface LinkButtonProps {
 
 const LinkButton: React.FC<LinkButtonProps> = ({text, icon, link }) => {
   return (
-    <>
-      <NavLink to={link} className={"linkButton"}>
-        <img src={"/" + icon} alt="" />
-        <div className="buttonText">{text}</div>
-      </NavLink>
-    </>
+    <NavLink to={link} className={({ isActive }) => 
+        isActive ? "linkButton active" : "linkButton"}>
+      <img src={"/" + icon} alt={text} />
+      <div className="buttonText">{text}</div>
+    </NavLink>
   )
-
 }
 
 export default LinkButton;
