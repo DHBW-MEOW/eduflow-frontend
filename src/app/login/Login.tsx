@@ -76,9 +76,8 @@ export default function Login() {
           label="Kennwort"
           name="password"
           value={password} 
-          isPassword={true}
-          isInvalid={(!passwordValidity.valid) || isInvalid}
-          errorMessage={passwordValidity.message}
+          isInvalid={isInvalid}
+          errorMessage={isInvalid ? "Bitte geben Sie ein Kennwort ein." : ""}
           onChange={(e) => setPassword(e.target.value)}
         />
         {isInvalid && <p className="error-message">Benutzername oder Kennwort ungültig</p>}
