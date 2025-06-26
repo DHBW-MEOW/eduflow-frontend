@@ -19,7 +19,6 @@ interface LearningPlanProps {
 }
 
 const LearningPlan = forwardRef<LearningPlanHandles, LearningPlanProps>(({ initialData, moduleOptions, topicOptions, onModuleChange, onValidationChange }, ref) => {
-    const [errors, setErrors] = useState<Partial<Record<keyof LearningPlanData, string>>>({});
     const [formData, setFormData] = useState<LearningPlanData>({
         date: initialData?.date || '',
         topic: initialData?.topic || '',
@@ -27,6 +26,7 @@ const LearningPlan = forwardRef<LearningPlanHandles, LearningPlanProps>(({ initi
         details: initialData?.details || '',
     });
 
+    const [errors, setErrors] = useState<Partial<Record<keyof LearningPlanData, string>>>({});
     const [hasAttemptedSubmit, setHasAttemptedSubmit] = useState(false);
       
     const getErrors = useCallback((data: LearningPlanData) => {
@@ -35,15 +35,17 @@ const LearningPlan = forwardRef<LearningPlanHandles, LearningPlanProps>(({ initi
         const moduleError = validateModul(data.module);
         if (moduleError) 
             newErrors.module = moduleError;
+
         const topicError = validateTopic(data.topic);
         if (topicError)
             newErrors.topic = topicError;
+
         const dateError = validateDate(data.date);
         if (dateError) 
             newErrors.date = dateError;
 
         return newErrors;
-    },[topicOptions]);
+    },[]);
 
     useEffect(() => {
         if (onModuleChange) {
@@ -75,10 +77,6 @@ const LearningPlan = forwardRef<LearningPlanHandles, LearningPlanProps>(({ initi
                 ...prevData,
                 [name]: value,
             };
-            
-            if (name === "module" && (prevData.module !== value)) {
-                newData.topic = '';
-            }
             return newData;
         });
 
