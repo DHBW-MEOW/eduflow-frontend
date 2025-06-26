@@ -53,31 +53,40 @@ export default function Login() {
       <form onSubmit={(e) => {
         // Prevent default form submission reloading the page
         e.preventDefault();
-        if (username && password) {
-          handleLogin(username, password);
+        if (!(username) && !(password)) {
+          setUsernameValidity({ valid: false, message: "Bitte geben Sie einen Benutzernamen ein." });
+          setPasswordValidity({ valid: false, message: "Bitte geben Sie ein Kennwort ein." });
+          setIsInvalid(false);
+        } else if(!(username) && password) {
+          setUsernameValidity({ valid: false, message: "Bitte geben Sie einen Benutzernamen ein." });
+          setPasswordValidity({ valid: true, message: "" });
+          setIsInvalid(false);
+        } else if(username && !(password)) {
+          setUsernameValidity({ valid: true, message: "" });
+          setPasswordValidity({ valid: false, message: "Bitte geben Sie ein Kennwort ein." });
           setIsInvalid(false);
         } else {
           setUsernameValidity({ valid: true, message: "" });
           setPasswordValidity({ valid: true, message: "" });
           setIsInvalid(false);
-          handleLogin(localUsername, password);
+          handleLogin(username, password);
         }
       }
       }>
         <InputField
           label="Benutzername"
           name="username"
-          value={localUsername}
+          value={username}
           isInvalid={(!usernameValidity.valid) || isInvalid}
           errorMessage={usernameValidity.message}
-          onChange={(e) => setLocalUsername(e.target.value)}
+          onChange={(e) => setUsername(e.target.value)}
         />
         <InputField
           label="Kennwort"
           name="password"
           value={password} 
-          isInvalid={isInvalid}
-          errorMessage={isInvalid ? "Bitte geben Sie ein Kennwort ein." : ""}
+          isInvalid={(!passwordValidity.valid) || isInvalid}
+          errorMessage={passwordValidity.message}
           onChange={(e) => setPassword(e.target.value)}
         />
         {isInvalid && <p className="error-message">Benutzername oder Kennwort ungültig</p>}
