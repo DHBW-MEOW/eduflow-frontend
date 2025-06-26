@@ -1,17 +1,19 @@
+@font-face {
+  font-family: 'SourceSans3';
+  src: local('SourceSans3'), url(fonts/SourceSans3-VariableFont_wght.ttf) format('truetype');
+}
+
 :root {
     background-color: var(--color-bg-1);
 }
 
 *{
     color: var(--color-text);
+    font-family: 'SourceSans3', sans-serif;
 }
 
 h1, h2, h3, h4, h4, h6{
     color: var(--color-heading);
-}
-
-h2 {
-    padding-left: 1%;
 }
 
 a:link {
