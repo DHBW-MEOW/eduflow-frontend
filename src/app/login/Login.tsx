@@ -8,14 +8,14 @@ import { useAuth } from "../../app/AuthContext";
 
 
 export default function Login() {
-  const [username, setUsername] = useState("");
+  const [localUsername, setLocalUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isInvalid, setIsInvalid] = useState(false);
   const [passwordValidity, setPasswordValidity] = useState({ valid: true, message: "" });
   const [usernameValidity, setUsernameValidity] = useState({ valid: true, message: "" });
 
   const navigate = useNavigate();
-  const { unsafeFetchFromBackend, setToken } = useAuth()
+  const { unsafeFetchFromBackend, setToken, setUsername } = useAuth()
 
   const handleLogin = async (username: string, password: string) => {
     console.log("Login button clicked");
@@ -36,6 +36,7 @@ export default function Login() {
       localStorage.setItem("token", loginToken);
       localStorage.setItem("username", username);
       setToken(loginToken);
+      setUsername(username);
       console.log("New state token" + loginToken);
       navigate("/home");
     }else if(response.status === 401){
@@ -53,15 +54,15 @@ export default function Login() {
       <form onSubmit={(e) => {
         // Prevent default form submission reloading the page
         e.preventDefault();
-        if (!(username) && !(password)) {
+        if (!(localUsername) && !(password)) {
           setUsernameValidity({ valid: false, message: "Bitte geben Sie einen Benutzernamen ein." });
           setPasswordValidity({ valid: false, message: "Bitte geben Sie ein Kennwort ein." });
           setIsInvalid(false);
-        } else if(!(username) && password) {
+        } else if(!(localUsername) && password) {
           setUsernameValidity({ valid: false, message: "Bitte geben Sie einen Benutzernamen ein." });
           setPasswordValidity({ valid: true, message: "" });
           setIsInvalid(false);
-        } else if(username && !(password)) {
+        } else if(localUsername && !(password)) {
           setUsernameValidity({ valid: true, message: "" });
           setPasswordValidity({ valid: false, message: "Bitte geben Sie ein Kennwort ein." });
           setIsInvalid(false);
@@ -69,17 +70,17 @@ export default function Login() {
           setUsernameValidity({ valid: true, message: "" });
           setPasswordValidity({ valid: true, message: "" });
           setIsInvalid(false);
-          handleLogin(username, password);
+          handleLogin(localUsername, password);
         }
       }
       }>
         <InputField
           label="Benutzername"
           name="username"
-          value={username}
+          value={localUsername}
           isInvalid={(!usernameValidity.valid) || isInvalid}
           errorMessage={usernameValidity.message}
-          onChange={(e) => setUsername(e.target.value)}
+          onChange={(e) => setLocalUsername(e.target.value)}
         />
         <InputField
           label="Kennwort"
