@@ -86,6 +86,7 @@ export default function Login() {
           label="Kennwort"
           name="password"
           value={password} 
+          isPassword={true}
           isInvalid={(!passwordValidity.valid) || isInvalid}
           errorMessage={passwordValidity.message}
           onChange={(e) => setPassword(e.target.value)}
