@@ -69,7 +69,7 @@ export default function Login() {
         <InputField
           label="Kennwort"
           name="password"
-          value={password}
+          value={password} 
           isInvalid={isInvalid}
           errorMessage={isInvalid ? "Bitte geben Sie ein Kennwort ein." : ""}
           onChange={(e) => setPassword(e.target.value)}

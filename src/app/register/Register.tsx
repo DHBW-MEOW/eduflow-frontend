@@ -109,6 +109,7 @@ export default function Register() {
             label="Kennwort"
             name="password"
             value={password}
+            isPassword={true}
             isInvalid={isInvalid}
             errorMessage={isInvalid ? "Bitte geben Sie ein Kennwort ein." : ""}
             onChange={(e) => setPassword(e.target.value)}
