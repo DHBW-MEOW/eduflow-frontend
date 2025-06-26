@@ -95,8 +95,8 @@ export function Box({ data, onDelete, onRename, onClick }: BoxProps) {
       {menuOpen && (
         <ContextMenu
           actions={[
-            { label: "✎ Umbenennen", onClick: openPopUpRename },
-            { label: "🗑 Löschen", onClick: openPopUpDelete },
+            { icon: "✎", label: "Umbenennen", onClick: openPopUpRename },
+            { icon: "🗑", label: "Löschen", onClick: openPopUpDelete },
           ]}
         />
       )}

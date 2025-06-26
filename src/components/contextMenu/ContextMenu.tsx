@@ -1,6 +1,7 @@
 import './ContextMenu.css'
 
 type Action = {
+  icon: string;
   label: string;
   onClick: () => void;
 };
@@ -18,7 +19,7 @@ export default function ContextMenu({ actions }: ContextMenuProps) {
             action.onClick();
           }}
         >
-          {action.label}
+          <div className='action-icon'>{action.icon}</div> {action.label}
         </button>
       ))}
     </div>

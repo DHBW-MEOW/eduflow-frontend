@@ -5,6 +5,12 @@
 }
 
 .home-container h2 {
+    color: var(--color-heading);
+    width: fit-content;
+    margin-bottom: 0.5rem;
+}
+
+.home-container h3 {
     color: var(--color-text);
     width: fit-content;
 }

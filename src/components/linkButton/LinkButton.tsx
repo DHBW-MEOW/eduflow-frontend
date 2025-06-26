@@ -12,7 +12,7 @@ const LinkButton: React.FC<LinkButtonProps> = ({text, icon, link }) => {
     <NavLink to={link} className={({ isActive }) => 
         isActive ? "linkButton active" : "linkButton"}>
       <img src={"/" + icon} alt={text} />
-      <div className="buttonText">{text}</div>
+      <p className="buttonText">{text}</p>
     </NavLink>
   )
 }
