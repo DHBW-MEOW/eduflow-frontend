@@ -4,7 +4,7 @@ import Navbar from "../components/navbar/Navbar.tsx"
 import HeaderContext from "../app/HeaderContext.tsx"
 import "../styles.css"
 
-import {use, useEffect, useState} from 'react'
+import {use, useEffect, useState, createContext} from 'react'
 
 import { useAuth } from "./AuthContext.tsx";
 

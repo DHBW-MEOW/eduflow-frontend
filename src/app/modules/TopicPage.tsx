@@ -10,6 +10,7 @@ function TopicPage(): JSX.Element {
     const navigate = useNavigate();
     const [ topics, setTopics] = useState<BoxData[]>([]);
     const [ exams, setExams] = useState<BoxData[]>([]);
+    const headerSetter = useContext(HeaderContext);
 
     const { fetchFromBackend } = useAuth();
     
@@ -49,6 +50,7 @@ function TopicPage(): JSX.Element {
 
     const handleClickExam = (id: number) => {
         if (!id) return;
+        headerSetter?.setLeftButtonState({on: true, text: "", icon: "circle-arrow-left-solid.svg", link: `/modules/${moduleId}`});
         navigate(`/modules/${moduleId}/exams/${id}`);
     };
 
@@ -99,6 +101,7 @@ function TopicPage(): JSX.Element {
 
     const handleClickTopic = (id: number) => {
         if (!id) return;
+        headerSetter?.setLeftButtonState({on: true, text: "", icon: "circle-arrow-left-solid.svg", link: `/modules/${moduleId}`});
         navigate(`/modules/${moduleId}/topics/${id}`);
     };
 
@@ -141,6 +144,7 @@ function TopicPage(): JSX.Element {
             }
         };    
       loadData();
+
     }, [fetchFromBackend]);
 
     return (
