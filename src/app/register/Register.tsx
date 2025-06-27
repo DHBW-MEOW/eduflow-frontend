@@ -1,5 +1,6 @@
 import InputField from "../../components/popUpCreate/inputOptions/InputField";
 import OptionButton from "../../components/optionButtons/OptionButton";
+import LinkButton from "../../components/linkButton/LinkButton";
 import "./Register.css";
 import { useEffect, useState } from "react";
 //import { useAuth } from "../../app/AuthContext";
@@ -100,7 +101,12 @@ export default function Register() {
 
   return (
     <div className="registerPage">
+      <div className="register-linkbutton">
+          <LinkButton link={'/'} text={''} icon={'circle-arrow-left-solid.svg'}/>
+      </div>
+      
       <h1>Registrierung</h1>
+
       { !successfullyRegistered &&
         <form className="register-form" onSubmit={(e) => {
           console.log("Form submitted");
