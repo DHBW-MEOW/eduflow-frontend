@@ -61,10 +61,12 @@ function Studyplan() {
                 <div className='studyplan-createButtons'>
                     <OptionButton
                         label= '+ Lernziel erstellen'
+                        isHighlighted={true}
                         onClick={() => handleOpenPopup("StudyGoal")}
                     />
                     <OptionButton
                         label= '+ Prüfungsleistung hinzufügen'
+                        isHighlighted={true}
                         onClick={() => handleOpenPopup("Exam")}
                     />
                 </div>

@@ -26,7 +26,7 @@ export default function Profile() {
       <div className="profile-button">
         <OptionButton
           label="&#9211; Abmelden"
-          buttonType="optionButton"
+          isHighlighted={true}
           onClick={logoutHandel}
         />
       </div>

@@ -148,7 +148,7 @@ export default function Register() {
           <div className="register-submit">
               <OptionButton
                 label="Registrieren"
-                buttonType="optionButton"
+                isHighlighted={true}
                 onClick={() => {} /*handleRegister(username, password) */}
               />
           </div>
@@ -161,7 +161,6 @@ export default function Register() {
           <div> Sie haben sich erfolgreich registriert! Bitte melden Sie sich an. </div>
           <OptionButton
             label="Zum Login"
-            buttonType="optionButton"
             onClick={handleNavigation}
           />
         </div>
