@@ -19,7 +19,6 @@ interface LearningPlanProps {
 }
 
 const LearningPlan = forwardRef<LearningPlanHandles, LearningPlanProps>(({ initialData, moduleOptions, topicOptions, onModuleChange, onValidationChange }, ref) => {
-    const [errors, setErrors] = useState<Partial<Record<keyof LearningPlanData, string>>>({});
     const [formData, setFormData] = useState<LearningPlanData>({
         date: initialData?.date || '',
         topic: initialData?.topic || '',
@@ -27,6 +26,7 @@ const LearningPlan = forwardRef<LearningPlanHandles, LearningPlanProps>(({ initi
         details: initialData?.details || '',
     });
 
+    const [errors, setErrors] = useState<Partial<Record<keyof LearningPlanData, string>>>({});
     const [hasAttemptedSubmit, setHasAttemptedSubmit] = useState(false);
       
     const getErrors = useCallback((data: LearningPlanData) => {
@@ -35,15 +35,17 @@ const LearningPlan = forwardRef<LearningPlanHandles, LearningPlanProps>(({ initi
         const moduleError = validateModul(data.module);
         if (moduleError) 
             newErrors.module = moduleError;
+
         const topicError = validateTopic(data.topic);
         if (topicError)
             newErrors.topic = topicError;
+
         const dateError = validateDate(data.date);
         if (dateError) 
             newErrors.date = dateError;
 
         return newErrors;
-    },[topicOptions]);
+    },[]);
 
     useEffect(() => {
         if (onModuleChange) {
@@ -68,37 +70,15 @@ const LearningPlan = forwardRef<LearningPlanHandles, LearningPlanProps>(({ initi
         }
     }, [formData, getErrors, onValidationChange]);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         setFormData(prevData => {
             const newData = {
                 ...prevData,
                 [name]: value,
             };
-            
-            if (name === "module" && (prevData.module !== value)) {
-                newData.topic = '';
-            }
             return newData;
         });
-
-        if (hasAttemptedSubmit) {
-            const newErrors = getErrors({ ...formData, [name]: value } as LearningPlanData);
-            if (newErrors[name as keyof LearningPlanData] !== errors[name as keyof LearningPlanData]) {
-                setErrors(prevErrors => ({
-                    ...prevErrors,
-                    [name as keyof LearningPlanData]: newErrors[name as keyof LearningPlanData]
-                }));
-            }
-        }
-    };
-
-    const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        const { name, value } = e.target;
-        setFormData(prevData => ({
-            ...prevData,
-            [name]: value,
-        }));
 
         if (hasAttemptedSubmit) {
             const newErrors = getErrors({ ...formData, [name]: value } as LearningPlanData);
@@ -124,7 +104,7 @@ const LearningPlan = forwardRef<LearningPlanHandles, LearningPlanProps>(({ initi
                 isValid: isValid,
             };
         },
-    }), [formData, getErrors]);
+    }));
 
     return (
         <div className="popup-form">
@@ -133,7 +113,7 @@ const LearningPlan = forwardRef<LearningPlanHandles, LearningPlanProps>(({ initi
                 name="module"
                 value={formData.module}
                 options={moduleOptions || []}
-                isInvalid={hasAttemptedSubmit && !!errors.module}
+                isInvalid={!!errors.module}
                 errorMessage={errors.module}
                 onChange={handleChange}
             />
@@ -142,7 +122,7 @@ const LearningPlan = forwardRef<LearningPlanHandles, LearningPlanProps>(({ initi
                 name="topic"
                 value={formData.topic}
                 options={topicOptions || []}
-                isInvalid={hasAttemptedSubmit && !!errors.module}
+                isInvalid={!!errors.topic}
                 errorMessage={errors.topic}
                 onChange={handleChange}
             />
@@ -150,7 +130,7 @@ const LearningPlan = forwardRef<LearningPlanHandles, LearningPlanProps>(({ initi
                 label="Deadline"
                 name="date"
                 value={formData.date}
-                isInvalid={hasAttemptedSubmit && !!errors.module}
+                isInvalid={!!errors.date}
                 errorMessage={errors.date}
                 onChange={handleChange}
             />
@@ -158,7 +138,7 @@ const LearningPlan = forwardRef<LearningPlanHandles, LearningPlanProps>(({ initi
                 label="Details"
                 name="details"
                 value={formData.details}
-                onChange={handleTextareaChange}
+                onChange={handleChange}
                 placeholder="Füge hier deine Inhalte ein..."
             />
         </div>
