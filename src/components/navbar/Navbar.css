@@ -9,6 +9,7 @@
 
 .navbar .linkButton {
   width: 100%;
+  max-height: 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -36,6 +37,7 @@
     align-items: center;
     gap: 8px;
     padding: 20px 8px;
+    padding-top: 2px;
     width: 70px;
     border-top: none;
     border-right: 1px solid var(--color-border-light);
@@ -54,6 +56,7 @@
   .navbar {
     width: 70px;
     padding: 24px 12px;
+    padding-top: 3px;
     gap: 12px;
   }
 
