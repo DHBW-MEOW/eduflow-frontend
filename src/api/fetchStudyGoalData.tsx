@@ -1,7 +1,7 @@
 import type { ItemData, StudyGoalData, CourseData, TopicData } from "../app/studyplan/types";
-import { fetchFromBackend } from "../fetchBackend";
+import type { FetchFromBackendType } from "./createFetcher";
 
-export const fetchStudyGoalData = async () => {
+export const fetchStudyGoalData = async (fetchFromBackend: FetchFromBackendType) => {
     try {
         const studygoals: StudyGoalData[] = await fetchFromBackend<{ id: number; topic_id: number; deadline: string }[]>({
             method: "GET",

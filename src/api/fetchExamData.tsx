@@ -1,7 +1,7 @@
 import type { ExamDateData } from "../app/studyplan/types";
-import { fetchFromBackend } from "../fetchBackend";
+import type { FetchFromBackendType } from "./createFetcher";
 
-export const fetchExamData = async () => {
+export const fetchExamData = async (fetchFromBackend: FetchFromBackendType) => {
     try {
         const allExams: ExamDateData[] = await fetchFromBackend<{ id: number; date: string }[]>({
             method: "GET",

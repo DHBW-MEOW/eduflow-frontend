@@ -1,7 +1,7 @@
 import type { CourseData } from "../app/studyplan/types";
-import { fetchFromBackend } from "../fetchBackend";
+import type { FetchFromBackendType } from "./createFetcher";
 
-export const fetchCourses = async () => {
+export const fetchCourses = async (fetchFromBackend: FetchFromBackendType) => {
     try {
         const allCourses: CourseData[] = await fetchFromBackend<{ id: number; name: string }[]>({
             method: "GET",

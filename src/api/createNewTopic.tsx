@@ -1,10 +1,10 @@
-import { fetchFromBackend } from "../fetchBackend";
+import type { FetchFromBackendType } from "./createFetcher";
 
 interface NewTopicResponse {
     id: number;
 }
 
-export const createNewTopic = async (course_id: number, name: string, details: string): Promise<number> => {
+export const createNewTopic = async (course_id: number, name: string, details: string, fetchFromBackend: FetchFromBackendType): Promise<number> => {
     try {
             const response = await fetchFromBackend<NewTopicResponse>({
                 method: "POST",
