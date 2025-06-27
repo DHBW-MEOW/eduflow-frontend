@@ -3,14 +3,14 @@ import './../../colors.css'
 
 interface OptionButtonProps {
     label: string;
-    buttonType: 'optionButton' | 'createDataButton'
     isDisabled?: boolean;
+    isHighlighted?: boolean
     onClick: () => void;
 }
 
-const OptionButton: React.FC<OptionButtonProps> = ({label, buttonType, isDisabled, onClick}) => {
+const OptionButton: React.FC<OptionButtonProps> = ({label, isDisabled, isHighlighted, onClick}) => {
     return (
-        <button className={buttonType} onClick={onClick} disabled={isDisabled}>
+        <button className={isHighlighted ? 'highlight-button' : 'default-button'} onClick={onClick} disabled={isDisabled}>
             {label}
         </button>
     );
