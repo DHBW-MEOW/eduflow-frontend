@@ -125,6 +125,7 @@ export default function Register() {
                 label="Kennwort"
                 name="passwordOne"
                 value={passwordOne}
+                isPassword={true}
                 isInvalid={!passwordValidity.valid}
                 errorMessage={passwordValidity.message}
                 onChange={(e) => setPasswordOne(e.target.value)}
@@ -133,6 +134,7 @@ export default function Register() {
                 label="Kennwort wiederholen"
                 name="passwordTwo"
                 value={passwordTwo}
+                isPassword={true}
                 isInvalid={!passwordValidity.valid}
                 errorMessage={passwordValidity.message}
                 onChange={(e) => setPasswordTwo(e.target.value)}
