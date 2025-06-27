@@ -42,11 +42,11 @@ function AppLayout() {
       setTextState("Hello " + username +  "!");
     }
     if(location.pathname === "/studyplan") {
-      setLeftButtonState({on: false, text: "", icon: "Logo.svg", link: "/home"});
+      setLeftButtonState({on: true, text: "", icon: "Logo.svg", link: "/home"});
       setTextState("Lernplan");
     }
     if(location.pathname === "/modules") {
-      setLeftButtonState({on: false, text: "", icon: "Logo.svg", link: "/home"});
+      setLeftButtonState({on: true, text: "", icon: "Logo.svg", link: "/home"});
       setTextState("Module");
     }
     if(location.pathname === "/profile") {
