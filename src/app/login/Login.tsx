@@ -1,5 +1,6 @@
 import OptionButton from "../../components/optionButtons/OptionButton";
 import InputField from "../../components/popUpCreate/inputOptions/InputField";
+import LinkButton from "../../components/linkButton/LinkButton";
 import "./Login.css";
 import "../../components/popUpCreate/inputOptions/InputStyle.css";
 import { useState } from "react";
@@ -51,7 +52,11 @@ export default function Login() {
 
   return (
     <div className="loginPage">
+      <div className="login-linkbutton">
+          <LinkButton link={'/'} text={''} icon={'circle-arrow-left-solid.svg'}/>
+      </div>
       <h1>Login</h1>
+      
       <form className="login-form" onSubmit={(e) => {
         // Prevent default form submission reloading the page
         e.preventDefault();

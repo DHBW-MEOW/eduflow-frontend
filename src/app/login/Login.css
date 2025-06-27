@@ -39,8 +39,34 @@
     gap: 1rem;
 }
 
+.login-linkbutton {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.login-linkbutton .linkButton {
+    padding: 0;
+}
+
+.login-linkbutton .linkButton img{
+  width: 44px;
+  height: 44px;
+}
+
 @media (min-width: 480px) {
     .login-inputfields {
         width: 22rem;
+    }
+
+    .login-linkbutton .linkButton img{
+        width: 48px;
+        height: 48px;
+    }
+}
+
+@media (min-width: 768px) {
+    .login-linkbutton .linkButton {
+        padding-left: 15%;
     }
 }
