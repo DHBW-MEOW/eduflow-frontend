@@ -51,7 +51,8 @@ export default function Login() {
 
   return (
     <div className="loginPage">
-      <form onSubmit={(e) => {
+      <h1>Login</h1>
+      <form className="login-form" onSubmit={(e) => {
         // Prevent default form submission reloading the page
         e.preventDefault();
         if (!(localUsername) && !(password)) {
@@ -74,29 +75,35 @@ export default function Login() {
         }
       }
       }>
-        <InputField
-          label="Benutzername"
-          name="username"
-          value={localUsername}
-          isInvalid={(!usernameValidity.valid) || isInvalid}
-          errorMessage={usernameValidity.message}
-          onChange={(e) => setLocalUsername(e.target.value)}
-        />
-        <InputField
-          label="Kennwort"
-          name="password"
-          value={password} 
-          isPassword={true}
-          isInvalid={(!passwordValidity.valid) || isInvalid}
-          errorMessage={passwordValidity.message}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <div className="login-inputfields">
+            <InputField
+              label="Benutzername"
+              name="username"
+              value={localUsername}
+              isInvalid={(!usernameValidity.valid) || isInvalid}
+              errorMessage={usernameValidity.message}
+              onChange={(e) => setLocalUsername(e.target.value)}
+          />
+          <InputField
+              label="Kennwort"
+              name="password"
+              value={password} 
+              isPassword={true}
+              isInvalid={(!passwordValidity.valid) || isInvalid}
+              errorMessage={passwordValidity.message}
+              onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        
         {isInvalid && <p className="error-message">Benutzername oder Kennwort ungültig</p>}
-        <OptionButton
-          label="Anmelden"
-          buttonType="optionButton"
-          onClick={() => {}}
-        />
+
+        <div className="login-submit">
+          <OptionButton
+            label="Anmelden"
+            buttonType="optionButton"
+            onClick={() => {}}
+          />
+        </div>
       </form>
       <div className="registerLink">
         <span>Sie haben noch keinen Account? </span>
