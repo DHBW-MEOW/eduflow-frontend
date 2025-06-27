@@ -21,8 +21,8 @@ export default function NotFoundPage() {
 
         <div className="homeButton">
           <OptionButton 
-            buttonType="optionButton"
-            label="Zurück zum Flow" 
+            label="Zurück zum Flow"
+            isHighlighted={true}
             onClick={handleClick} 
           />
         </div>

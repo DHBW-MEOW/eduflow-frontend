@@ -100,7 +100,7 @@ export default function Login() {
         <div className="login-submit">
           <OptionButton
             label="Anmelden"
-            buttonType="optionButton"
+            isHighlighted={true}
             onClick={() => {}}
           />
         </div>
