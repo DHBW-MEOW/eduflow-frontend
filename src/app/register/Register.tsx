@@ -100,9 +100,9 @@ export default function Register() {
 
   return (
     <div className="registerPage">
-      <h2>Registrierung</h2>
+      <h1>Registrierung</h1>
       { !successfullyRegistered &&
-        <form onSubmit={(e) => {
+        <form className="register-form" onSubmit={(e) => {
           console.log("Form submitted");
           // Prevent default form submission reloading the page
           e.preventDefault();
@@ -112,38 +112,45 @@ export default function Register() {
           }
         }
         }>
-          <InputField
-            label="Benutzername"
-            name="username"
-            value={localUsername}
-            isInvalid={!usernameValidity.valid}
-            errorMessage={usernameValidity.message}
-            onChange={(e) => setLocalUsername(e.target.value)}
-          />
-          <InputField
-            label="Kennwort"
-            name="passwordOne"
-            value={passwordOne}
-            isInvalid={!passwordValidity.valid}
-            errorMessage={passwordValidity.message}
-            onChange={(e) => setPasswordOne(e.target.value)}
-          />
-          <InputField
-            label="Kennwort wiederholen"
-            name="passwordTwo"
-            value={passwordTwo}
-            isInvalid={!passwordValidity.valid}
-            errorMessage={passwordValidity.message}
-            onChange={(e) => setPasswordTwo(e.target.value)}
-          />
+          <div className="register-inputfields">
+              <InputField
+                label="Benutzername"
+                name="username"
+                value={localUsername}
+                isInvalid={!usernameValidity.valid}
+                errorMessage={usernameValidity.message}
+                onChange={(e) => setLocalUsername(e.target.value)}
+              />
+              <InputField
+                label="Kennwort"
+                name="passwordOne"
+                value={passwordOne}
+                isInvalid={!passwordValidity.valid}
+                errorMessage={passwordValidity.message}
+                onChange={(e) => setPasswordOne(e.target.value)}
+              />
+              <InputField
+                label="Kennwort wiederholen"
+                name="passwordTwo"
+                value={passwordTwo}
+                isInvalid={!passwordValidity.valid}
+                errorMessage={passwordValidity.message}
+                onChange={(e) => setPasswordTwo(e.target.value)}
+              />
+          </div>
+          
           {
             userTaken && <div className="error-message">Dieser Benutzername ist leider schon vergeben.</div>
           }
-          <OptionButton
-            label="Registrieren"
-            buttonType="optionButton"
-            onClick={() => {} /*handleRegister(username, password) */}
-          />
+
+          <div className="register-submit">
+              <OptionButton
+                label="Registrieren"
+                buttonType="optionButton"
+                onClick={() => {} /*handleRegister(username, password) */}
+              />
+          </div>
+          
         </form>
       }
       {
