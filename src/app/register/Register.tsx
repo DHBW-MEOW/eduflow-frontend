@@ -9,7 +9,7 @@ import { useAuth } from "../../app/AuthContext";
 export default function Register() {
   const navigate = useNavigate();
 
-  const [username, setUsername] = useState("");
+  const [localUsername, setLocalUsername] = useState("");
   const [passwordOne, setPasswordOne] = useState("");
   const [passwordTwo, setPasswordTwo] = useState("");
   const [passwordValidity, setPasswordValidity] = useState({ valid: true, message: "" });
@@ -17,7 +17,7 @@ export default function Register() {
   const [userTaken, setUserTaken] = useState(false);  
   const [successfullyRegistered, setSuccessfullyRegistered] = useState(false);
 
-  const { token, setToken, setIsAuthenticated, fetchFromBackend, unsafeFetchFromBackend} = useAuth();
+  const { token, setToken, setIsAuthenticated, fetchFromBackend, unsafeFetchFromBackend, setUsername} = useAuth();
 
   //useEffect(() => {
   //  const verifyToken = async () => {
@@ -58,6 +58,7 @@ export default function Register() {
       setIsAuthenticated(true);
       localStorage.setItem("token", registerToken);
       localStorage.setItem("username", username);
+      setUsername(username);
       setToken(registerToken)
       console.log("New state token" + token);
       navigate("/home");
@@ -105,19 +106,19 @@ export default function Register() {
           console.log("Form submitted");
           // Prevent default form submission reloading the page
           e.preventDefault();
-          if (validateData(username, passwordOne, passwordTwo)) { 
+          if (validateData(localUsername, passwordOne, passwordTwo)) { 
             console.log("Data is valid, proceeding with registration");
-            handleRegister(username, passwordOne);
+            handleRegister(localUsername, passwordOne);
           }
         }
         }>
           <InputField
             label="Benutzername"
             name="username"
-            value={username}
+            value={localUsername}
             isInvalid={!usernameValidity.valid}
             errorMessage={usernameValidity.message}
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={(e) => setLocalUsername(e.target.value)}
           />
           <InputField
             label="Kennwort"
