@@ -16,6 +16,10 @@ const PopUpCreate: React.FC<PopUpProps> = ({isOpen, label, children, modulOption
     return (
         <div className="popup-overlay" onClick={onClickDiscard}>
             <div className="popup-container" onClick={(e) => e.stopPropagation()}>
+                <button className="popup-close-button" onClick={onClickDiscard}>
+                    &times;
+                </button>
+
                 <div className="popup-header">{label}</div>
                 {childrenWithProps}
                 <div className="popup-buttons">

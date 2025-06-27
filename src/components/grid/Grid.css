@@ -1,6 +1,13 @@
 .grid-container {
-  display: flex;
-  justify-content: start;
-  align-items: stretch;
-  flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+@media (min-width: 480px) {
+    .grid-container {
+        justify-content: start;
+    }
 }

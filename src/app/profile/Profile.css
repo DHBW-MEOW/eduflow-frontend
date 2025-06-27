@@ -6,13 +6,15 @@
     border-radius: 8px;
     border: 1px solid var(--color-border);
 
-    box-shadow: 2px 2px 5px var(--color-black);
+    box-sizing: border-box;
     background-color: var(--color-bg-2);
 
-    max-width: 800px;
-    width: 85%;
-    margin: 3%;
+    max-width: 500px;
+    width: 96%;
     padding: 2%;
+
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .profile-component hr {
@@ -31,6 +33,7 @@
     color: var(--color-text);
 
     width: 100%;
+    margin: 1%;
 }
 
 .user-div span:first-child {
@@ -40,5 +43,23 @@
 
 .user-div span:last-child {
     text-align: right;
-    flex-grow: 1;
+}
+
+.profile-button {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 100px;
+    max-width: 200px;
+    width: 20%;
+}
+
+@media (min-width: 768px) {
+    .profile-component {
+        min-width: 80%;
+    }
+
+    .user-div {
+        margin: 0;
+    }
 }

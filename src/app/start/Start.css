@@ -3,6 +3,7 @@
     align-items: center;
     justify-content: center;
     height: 100%;
+    margin-top: -3%;
 }
 
 .parent-container {
@@ -19,6 +20,7 @@
     flex-direction: column;
     gap: 1em;
     font-size: 2vh;
+    margin-bottom: 3%;
 }
 
 .heading-desktop {
@@ -64,6 +66,10 @@
         width: 30%;
     }
 
+    .button-container {
+        margin-bottom: 2%;
+    }
+
     .heading-desktop {
         display: block;
     }
@@ -81,5 +87,9 @@
 @media (min-width: 768px) {
     .div-image img {
         width: 15%;
+    }
+
+    .button-container {
+        margin-bottom: 0;
     }
 }

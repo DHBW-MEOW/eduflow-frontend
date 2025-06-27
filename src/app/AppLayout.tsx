@@ -50,7 +50,7 @@ function AppLayout() {
       setTextState("Module");
     }
     if(location.pathname === "/profile") {
-      setLeftButtonState({on: true, text: "", icon: "Logo.svg", link: "/home"});
+      setLeftButtonState({on: true, text: "", icon: "circle-arrow-left-solid.svg", link: "/home"});
       setTextState("Profil");
     }
   }, [location.pathname, username,]);

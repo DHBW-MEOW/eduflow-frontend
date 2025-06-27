@@ -37,8 +37,9 @@ export default function Home() {
       <div className='home-left-items'>
         <h2>Meine Lernziele</h2>
         <div className="home-studygoals">
-          <StudyGoals items={items} />
+          <StudyGoals items={items} limit={4}/>
         </div>
+        <a className='home-more' href="/studyplan">Weitere Lernziele...</a>
       </div>
 
       <div className='home-right-items'>

@@ -1,62 +1,73 @@
 :root{
-  --navbar-width: 6vw;
-  --navbar-min-width: 80px;
-  --header-height: 5vh;
-  --header-min-height: 80px;
+    --navbar-width: 120px;
+    --navbar-min-width: 100px;
+    --header-height: 5vh;
+    --header-min-height: 80px;
 
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 html, body{
-  height: 100%;
-  padding: 0;
-  margin: 0;
+    height: 100%;
+    padding: 0;
+    margin: 0;
 }
 
 .startLayout{
-  display: grid;
-  grid-template-rows: minmax(var(--header-min-height), var(--header-height)) 1fr;
-  grid-template-columns: 1fr;
-  min-height: 100vh;
-  height: 100vh;
+    display: grid;
+    grid-template-rows: minmax(var(--header-min-height), var(--header-height)) 1fr;
+    grid-template-columns: 1fr;
+    min-height: 100vh;
+    height: 100vh;
 }
 .startPage{
-  grid-row: 2;
-  overflow: auto;
+    grid-row: 2;
+    overflow: auto;
+
+    padding: 5%;
 }
 
 .appLayout{
-  display: grid;
-  grid-template-rows: minmax(var(--header-min-height), var(--header-height)) 1fr auto;
-  grid-template-columns: 1fr;
-  min-height: 100vh;
-  height: 100vh;
+    display: grid;
+    grid-template-rows: minmax(var(--header-min-height), var(--header-height)) 1fr auto;
+    grid-template-columns: 1fr;
+    min-height: 100vh;
+    height: 100vh;
 }
 .appPage{
-  grid-row: 2;
-  overflow: auto;
+    grid-row: 2;
+    overflow: auto;
+
+    padding: 5%;
 }
+
 @media (min-width: 480px) {
-  .startLayout{
-    display: grid;
-    grid-template-rows: minmax(var(--header-min-height), var(--header-height)) auto;
-  }
-  .startPage{
-    overflow: auto;
-    grid-column: 1;
-    grid-row: 2;
-  }
+    .startLayout{
+        display: grid;
+        grid-template-rows: minmax(var(--header-min-height), var(--header-height)) auto;
+    }
+    .startPage{
+        grid-column: 1;
+        grid-row: 2;
+    }
 
-  .appLayout{
-    display: grid;
-    grid-template-rows: minmax(var(--header-min-height), var(--header-height)) auto;
-    grid-template-columns: minmax(var(--navbar-min-width), var(--navbar-width)) auto;
-    min-height: 100vh;
-  }
-  .appPage{
-    overflow: auto;
-    grid-column: 2 / span 1;
-    grid-row: 2;
-  }
+    .appLayout{
+        display: grid;
+        grid-template-rows: minmax(var(--header-min-height), var(--header-height)) 1fr;
+        grid-template-columns: auto 1fr;
+        min-height: 100vh;
+        height: 100vh;
+        gap: 0;
+    }
+    .appPage{
+        grid-column: 2;
+        grid-row: 2;
+    }
 
+}
+
+@media (min-width: 768px) {
+    .appPage {
+        padding: 3%;
+    }
 }

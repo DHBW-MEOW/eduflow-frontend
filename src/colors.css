@@ -8,6 +8,7 @@
 
   /* === Background Colors (Light Theme) === */
   --color-bg-1: #f9f9f9;   /* Haupt-Hintergrund */
+  --color-bg-1-transparent: rgba(170, 170, 170, 0.6);
   --color-bg-2: #f8f8f8;   /* Sekundär (z. B. Panels, Cards) */
   --color-surface: #ebebeb; /* Boxen, Modale Fenster */
 
@@ -56,18 +57,11 @@
   --color-muted: #9ca3af;
 }
 
-*{
-  color: var(--color-text);
-}
-
-h1, h2, h3{
-  color: var(--color-heading);
-}
-
 @media (prefers-color-scheme: dark) {
   :root {
   /* === Background Colors (Dark Theme) === */
   --color-bg-1: #1e1e2f;   /* Haupt-Hintergrund */
+  --color-bg-1-transparent: rgba(30, 30, 47, 0.6);
   --color-bg-2: #2d2d3e;   /* Sekundär (z. B. Panels, Cards) */
   --color-surface: #3b3b4b; /* Boxen, Modale Fenster */
 

@@ -23,9 +23,9 @@ export default function Profile() {
         <span>{username}</span>
       </div>
       <hr />
-      <div>
+      <div className="profile-button">
         <OptionButton
-          label="Abmelden"
+          label="&#9211; Abmelden"
           buttonType="optionButton"
           onClick={logoutHandel}
         />

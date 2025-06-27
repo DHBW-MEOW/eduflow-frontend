@@ -1,20 +1,71 @@
 .navbar {
   display: flex;
   justify-content: space-around;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  align-items: center;
+  padding: 12px 8px;
   background-color: var(--color-bars);
+  border-top: 1px solid var(--color-border-light);
+}
+
+.navbar .linkButton {
+  width: 100%;
+  max-height: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 4px;
+  border-radius: 8px;
+}
+
+.navbar .linkButton:hover {
+  background-color: var(--color-hover);
+}
+
+.navbar .linkButton.active {
+  background-color: var(--color-primary-dark);
+}
+
+.navbar .buttonText {
+  text-align: center;
 }
 
 @media (min-width: 480px) {
-  .navbar{
-    text-align: center;
-    gap: 3%; /* Gap of the flex inside (not the css grid it is in) */
-    justify-content: flex-start;
+  .navbar {
     flex-direction: column;
-    padding-top: 25px;
-
-    /* === Grid Properties === */
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+    padding: 20px 8px;
+    padding-top: 2px;
+    width: 70px;
+    border-top: none;
+    border-right: 1px solid var(--color-border-light);
+    
     grid-row: 1 / span 2;
+  }
+
+  .navbar .linkButton img {
+    width: 28px;
+    height: 28px;
+    margin-bottom: 4px;
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar {
+    width: 70px;
+    padding: 24px 12px;
+    padding-top: 3px;
+    gap: 12px;
+  }
+
+  .navbar .linkButton {
+    padding: 10px 5px;
+  }
+
+  .navbar .linkButton img {
+    width: 40px;
+    height: 40px;
   }
 }

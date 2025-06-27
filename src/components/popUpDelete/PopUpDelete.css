@@ -9,7 +9,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: var(--color-bg-1);
+  background-color: var(--color-bg-1-transparent);
   backdrop-filter: blur(5px);
   display: flex;
   justify-content: center;

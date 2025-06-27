@@ -5,6 +5,12 @@
 }
 
 .home-container h2 {
+    color: var(--color-heading);
+    width: fit-content;
+    margin-bottom: 0.5rem;
+}
+
+.home-container h3 {
     color: var(--color-text);
     width: fit-content;
 }
@@ -13,7 +19,11 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: var(--color-surface);
+
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-bg-2);
+
     margin: 0;
     margin-bottom: 5%;
     padding: 0% 2%;
@@ -24,15 +34,31 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: var(--color-surface);
+
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-bg-2);
+
     padding: 0% 2%;
     padding-bottom: 15px;
 }
 
 .home-studygoals {
     border-radius: 8px;
-    overflow-y: scroll;
+    overflow: auto;
     max-height: 40vh;
+}
+
+.home-more {
+    text-align: center;
+    margin-bottom: 2%;
+}
+
+a:hover,
+a:visited,
+a:active,
+a:visited:active {
+    color: var(--color-link);
 }
 
 @media (min-width: 480px) {
@@ -59,6 +85,7 @@
 
     .home-right-items {
         width: 50%;
+        height: fit-content;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -73,7 +100,7 @@
 
         width: 95%;
 
-        overflow-y: scroll;
+        overflow: auto;
         min-height: 0;
         max-height: none;
     }

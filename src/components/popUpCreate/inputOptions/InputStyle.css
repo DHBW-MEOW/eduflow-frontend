@@ -10,7 +10,7 @@
 
 .input-group label {
   font-weight: 500;
-  color: var(--color-surface);
+  color: var(--color-black);
   font-size: 0.9rem;
   align-self: flex-start;
 }
@@ -27,7 +27,7 @@
   border: 1px solid var(--color-border-light);
   border-radius: 4px;
   font-size: 1rem;
-  color: var(--color-text-input-field);
+  color: var(--color-black);
   width: 100%;
   box-sizing: border-box;
   transition: border-color 0.2s ease;
@@ -49,7 +49,6 @@
 .input-textarea {
   resize: vertical;
   min-height: 80px;
-  font-family: inherit;
 }
 
 /* Specific Styling for wrong input */
