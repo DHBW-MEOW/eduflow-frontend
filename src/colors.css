@@ -8,7 +8,7 @@
 
     /* === Background Colors (Light Theme) === */
     --color-bg-1: #fbfbfe;                                            /* Main Background */
-    --color-bg-1-transparent: rgb(from var(--color-bg-1) r g b / 0.6);  /* Transparent Background for PopUps (supported since July 24, hope it works in all Browsers) */
+    --color-bg-transparent: rgb(from var(--color-bg-2) r g b / 0.6);    /* Transparent Background for PopUps (supported since July 24, hope it works in all Browsers) */
     --color-bg-2: #ebebeb;                                            /* Secondary Background (Panels, Cards,...) */
     --color-surface: #dddddd;                                         /* Boxes, Windows */
 
@@ -53,7 +53,7 @@
     :root {
         /* === Background Colors (Dark Theme) === */
         --color-bg-1: #1e1e2f;
-        --color-bg-1-transparent: rgb(from var(--color-bg-1) r g b / 0.6);
+        --color-bg-transparent: rgb(from var(--color-bg-1) r g b / 0.6);
         --color-bg-2: #2d2d3e;
         --color-surface: #3b3b4b;
 
