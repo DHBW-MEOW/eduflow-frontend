@@ -1,94 +1,99 @@
 :root {
-  /* === Base === */
-  --color-black: #1f1f1f;
-  --color-white: #f0f0f0;
+    /* === Base === */
+    --color-black: #1f1f1f;
+    --color-white: #f0f0f0;
 
-  /* === Header/ Footer === */
-  --color-bars: #859ced;
+    /* === Header/ Footer === */
+    --color-bars: #cad6ff;
 
-  /* === Background Colors (Light Theme) === */
-  --color-bg-1: #f9f9f9;   /* Haupt-Hintergrund */
-  --color-bg-1-transparent: rgb(from var(--color-bg-1) r g b / 0.6);
-  --color-bg-2: #f8f8f8;   /* Sekundär (z. B. Panels, Cards) */
-  --color-surface: #ebebeb; /* Boxen, Modale Fenster */
+    /* === Background Colors (Light Theme) === */
+    --color-bg-1: #fbfbfe;                                            /* Main Background */
+    --color-bg-1-transparent: rgb(from var(--color-bg-1) r g b / 0.6);  /* Transparent Background for PopUps (supported since July 24, hope it works in all Browsers) */
+    --color-bg-2: #ebebeb;                                            /* Secondary Background (Panels, Cards,...) */
+    --color-surface: #dddddd;                                         /* Boxes, Windows */
 
-  /* === Primary Colors (Blue Accent) === */
-  --color-primary: #3b82f6;        /* Blau – Hauptakzent (bleibt gleich) */
-  --color-primary-dark: #2563eb;   /* Für Hover oder aktiven Zustand (bleibt gleich) */
+    /* === Primary Colors === */
+    --color-primary: #639fff;
+    --color-primary-dark: #4678c9;
 
-  /* === Foreground / Text Colors === */
-  --color-text: #374151;                  /* Primärer Text (dunkel) */
-  --color-text-popup: var(--color-text);
+    /* === Secondary Colors === */
+    --color-secondary: #ccc9f9;
+    --color-secondary-dark: #8985FF;
 
-  /* === Link Color === */
-  --color-link: #4c4cff;
-  --color-link-visited: var( --color-link);
-  --color-link-hover: var(--color-hover);
-  --color-link-active: var(--color-focus);
+    /* === Foreground / Text Colors === */
+    --color-text: #242a36;
+    --color-text-popup: var(--color-text);
 
-  /* === Border / Divider === */
-  --color-border: #d1d5db;
+    /* === Link Color === */
+    --color-link: var(--color-secondary-dark);
+    --color-link-visited: var( --color-link);
+    --color-link-hover: var(--color-hover);
+    --color-link-active: var(--color-focus);
 
-  /* === Hover, Focus & Status === */
-  --color-hover: #dee4f9;          /* Hover-Hintergrund (heller) */
-  --color-focus: #60a5fa;          /* Fokus-Ring (bleibt gleich) */
-  --color-shadow: #007bff1a;       /* Weniger intensive Schatten */
-  
-  --color-error: #ef4444;          /* Rot – Fehlermeldung (bleibt gleich) */
-  --color-warning: #fbe14e;        /* Gelb – Warnung */
+    /* === Border / Divider === */
+    --color-border: #d1d5db;
 
-  /* === Icons === */
-  --filter-icon: brightness(0.12);
-  --filter-icon-hover: invert(96%) sepia(20%) saturate(6000%) hue-rotate(180deg) brightness(100%) contrast(100%);
+    /* === Hover, Focus & Status === */
+    --color-hover: #dee4f9;
+    --color-focus: #60a5fa;
+    --color-shadow: #007bff1a;
+    --color-error: #ef4444;
 
-  /* === Others === */
-  --color-muted: #9ca3af;
+    --color-exam: #fe0d0d;
+    --color-deadline: #ffee00;
+
+    /* === Icons === */
+    --filter-icon: brightness(0) saturate(100%) invert(13%) sepia(9%) saturate(1768%) hue-rotate(182deg) brightness(96%) contrast(90%);
+    --filter-icon-hover: brightness(0) saturate(100%) invert(48%) sepia(86%) saturate(409%) hue-rotate(203deg) brightness(100%) contrast(103%);
 }
 
 
 
 @media (prefers-color-scheme: dark) {
-  :root {
-  /* === Background Colors (Dark Theme) === */
-  --color-bg-1: #1e1e2f;   /* Haupt-Hintergrund */
-  --color-bg-1-transparent: rgb(from var(--color-bg-1) r g b / 0.6);
-  --color-bg-2: #2d2d3e;   /* Sekundär (z. B. Panels, Cards) */
-  --color-surface: #3b3b4b; /* Boxen, Modale Fenster */
+    :root {
+        /* === Background Colors (Dark Theme) === */
+        --color-bg-1: #1e1e2f;
+        --color-bg-1-transparent: rgb(from var(--color-bg-1) r g b / 0.6);
+        --color-bg-2: #2d2d3e;
+        --color-surface: #3b3b4b;
 
-  /* === Header/ Footer === */
-  --color-bars: #3a3c55;
+        /* === Header/ Footer === */
+        --color-bars: #3a3c55;
 
 
-  /* === Primary Colors (Blue Accent) === */
-  --color-primary: #3b82f6;        /* Blau – Hauptakzent */
-  --color-primary-dark: #2563eb;   /* Für Hover oder aktiven Zustand */
+        /* === Primary Colors (Blue Accent) === */
+        --color-primary: #3b82f6;
+        --color-primary-dark: #2563eb;
 
-  /* === Foreground / Text Colors === */
-  --color-text: #e5e7eb;           /* Primärer Text (hell) */
-  --color-text-popup: #374151;
+        /* === Secondary Colors === */
+        --color-secondary: #8985FF;
+        --color-secondary-dark: #706dca;
 
-  /* === Link Color === */
-  --color-link: #6161f1;
-  --color-link-visited: var( --color-link);
-  --color-link-hover: var(--color-hover);
-  --color-link-active: #1d4cb1;
+        /* === Foreground / Text Colors === */
+        --color-text: #e5e7eb;
+        --color-text-popup: #374151;
 
-  /* === Border / Divider === */
-  --color-border: #4b5563;
+        /* === Link Color === */
+        --color-link: var(--color-secondary);
+        --color-link-visited: var( --color-link);
+        --color-link-hover: var(--color-hover);
+        --color-link-active: #1d4cb1;
 
-  /* === Hover, Focus & Status === */
-  --color-hover: #374151;          /* Hover-Hintergrund */
-  --color-focus: #60a5fa;          /* Fokus-Ring */
-  --color-shadow: #007bff40;       /* Weniger intensive Schatten */
-  
-  --color-error: #ef4444;          /* Rot – Fehlermeldung */
-  --color-warning: #f59e0b;        /* Gelb – Warnung */
+        /* === Border / Divider === */
+        --color-border: #4b5563;
 
-  /* === Icons === */
-  --filter-icon: invert(100%) brightness(0.94) contrast(0.98);
-  --filter-icon-hover: invert(24%) sepia(8%) saturate(1067%) hue-rotate(190deg) brightness(97%) contrast(90%);
+        /* === Hover, Focus & Status === */
+        --color-hover: #3d4756;
+        --color-focus: #60a5fa;
+        --color-shadow: #007bff40;
+        
+        --color-error: #ef4444;
 
-  /* === Others === */
-  --color-muted: #6b7280;
-  }
+        --color-exam: #fe0d0d;
+        --color-deadline: #ffee00;
+
+        /* === Icons === */
+        --filter-icon: brightness(0) saturate(100%) invert(97%) sepia(3%) saturate(200%) hue-rotate(183deg) brightness(99%) contrast(87%);
+        --filter-icon-hover: brightness(0) saturate(100%) invert(54%) sepia(95%) saturate(2123%) hue-rotate(212deg) brightness(100%) contrast(104%);
+    }
 }
