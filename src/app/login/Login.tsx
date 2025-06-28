@@ -100,8 +100,10 @@ export default function Login() {
           />
         </div>
         
-        {isInvalid && <p className="error-message">Benutzername oder Kennwort ungültig</p>}
-
+        <div className="error-message-placeholder">
+          {isInvalid && <p className="error-message">Benutzername oder Kennwort ungültig</p>}
+        </div>
+        
         <div className="login-submit">
           <OptionButton
             label="Anmelden"
