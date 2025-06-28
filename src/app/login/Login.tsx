@@ -101,7 +101,7 @@ export default function Login() {
         </div>
         
         <div className="error-message-placeholder">
-          {isInvalid && <p className="error-message">Benutzername oder Kennwort ungültig</p>}
+          {isInvalid && <span className="error-message">Benutzername oder Kennwort ungültig</span>}
         </div>
         
         <div className="login-submit">
