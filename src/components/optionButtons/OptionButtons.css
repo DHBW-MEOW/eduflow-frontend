@@ -24,10 +24,14 @@ button:focus-visible {
 }
 
 
-.optionButton {
+.default-button {
   background-color: var(--color-button);
 }
 
-.createDataButton {
-  background-color: var(--color-button-light);
+.highlight-button {
+  background-color: var(--color-primary);
+}
+
+.highlight-button:hover {
+  background-color: var(--color-primary-dark);
 }

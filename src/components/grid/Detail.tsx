@@ -40,7 +40,7 @@ export function Detail<T extends DetailBaseData>({ data, onEdit, editable = true
           <div className='detail-edit'>
             <OptionButton
               label='Bearbeiten'
-              buttonType='optionButton'
+              isHighlighted={true}
               onClick={openPopUp}
             />
           </div>
