@@ -25,7 +25,9 @@ const InputDate: React.FC<InputDateProps> = ({label, name, value, isInvalid, err
              onChange={onChange}
              className={inputClass}
             />
-            {isInvalid && errorMessage && <span className="error-message">{errorMessage}</span>}
+            <div className="error-message-placeholder">
+                {isInvalid && errorMessage && <span className="error-message">{errorMessage}</span>}
+            </div>
         </div>
     );
 }

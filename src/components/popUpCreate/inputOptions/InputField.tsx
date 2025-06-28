@@ -27,7 +27,9 @@ const InputField: React.FC<InputFieldProps> = ({label, name, value, isPassword, 
              className={inputClass}
              maxLength={25}
             />
-            {isInvalid && errorMessage && <span className="error-message">{errorMessage}</span>}
+            <div className="error-message-placeholder">
+                {isInvalid && errorMessage && <span className="error-message">{errorMessage}</span>}
+            </div>
         </div>
     );
 }

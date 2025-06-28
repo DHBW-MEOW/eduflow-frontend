@@ -38,7 +38,9 @@ const InputCombobox: React.FC<InputComboboxProps> = ({label, name, value, option
                 </datalist>
             )}
             
-            {isInvalid && errorMessage && <span className="error-message">{errorMessage}</span>}
+            <div className="error-message-placeholder">
+                {isInvalid && errorMessage && <span className="error-message">{errorMessage}</span>}
+            </div>
         </div>
     );
 }
