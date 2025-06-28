@@ -23,7 +23,7 @@
 
 .box:hover {
   background-color: var(--color-hover);
-  border-color: var(--color-border-light);
+  border-color: var(--color-border);
 }
 
 .box:focus-visible {

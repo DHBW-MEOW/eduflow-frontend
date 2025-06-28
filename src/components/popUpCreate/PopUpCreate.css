@@ -58,7 +58,7 @@
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  color: var(--color-icon-close);
+  color: var(--color-text-popup);
   transition: color 0.2s ease;
 }
 
