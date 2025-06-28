@@ -1,10 +1,11 @@
 import InputField from "../../components/popUpCreate/inputOptions/InputField";
 import OptionButton from "../../components/optionButtons/OptionButton";
-import "./Register.css";
+import LinkButton from "../../components/linkButton/LinkButton";
 import { useEffect, useState } from "react";
 //import { useAuth } from "../../app/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../app/AuthContext";
+import "./Register.css";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -100,7 +101,12 @@ export default function Register() {
 
   return (
     <div className="registerPage">
+      <div className="register-linkbutton">
+          <LinkButton link={'/'} text={''} icon={'circle-arrow-left-solid.svg'}/>
+      </div>
+      
       <h1>Registrierung</h1>
+
       { !successfullyRegistered &&
         <form className="register-form" onSubmit={(e) => {
           console.log("Form submitted");
@@ -141,10 +147,10 @@ export default function Register() {
               />
           </div>
           
-          {
-            userTaken && <div className="error-message">Dieser Benutzername ist leider schon vergeben.</div>
-          }
-
+          <div className="error-message-placeholder">
+              {userTaken && <span className="error-message">Dieser Benutzername ist leider schon vergeben.</span>}
+          </div>
+          
           <div className="register-submit">
               <OptionButton
                 label="Registrieren"

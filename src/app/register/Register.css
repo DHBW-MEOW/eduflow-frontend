@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
 }
 
 .register-form {
@@ -28,13 +27,44 @@
     flex-direction: column;
     
     width: 100%;
-    margin-top: 2rem;
+    margin-top: 0.2rem;
 }
 
 .register-inputfields {
     display: flex;
     flex-direction: column;
 
-    min-width: 350px;
-    gap: 1rem;
+    width: 16rem;
+}
+
+.register-linkbutton {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.register-linkbutton .linkButton {
+    padding: 0;
+}
+
+.register-linkbutton .linkButton img{
+  width: 44px;
+  height: 44px;
+}
+
+@media (min-width: 480px) {
+    .register-inputfields {
+        width: 22rem;
+    }
+
+    .register-linkbutton .linkButton img{
+        width: 48px;
+        height: 48px;
+    }
+}
+
+@media (min-width: 768px) {
+    .register-linkbutton .linkButton {
+        padding-left: 15%;
+    }
 }

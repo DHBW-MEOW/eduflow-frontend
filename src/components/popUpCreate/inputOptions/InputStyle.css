@@ -5,7 +5,6 @@
 .input-group {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
 }
 
 .input-group label {
@@ -63,10 +62,14 @@
   box-shadow: 0 0 0 2px rgba(var(--color-error-rgb), 0.2);
 }
 
+.error-message-placeholder {
+  min-height: 1.5rem;
+  margin-top: 0.2rem;
+}
+
 .error-message {
   color: var(--color-error);
   font-size: 0.75rem;
-  margin-top: 0.2rem;
   align-self: flex-start;
 }
 
