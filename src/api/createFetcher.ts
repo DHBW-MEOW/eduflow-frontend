@@ -19,6 +19,7 @@ export const createFetcher = (isLoaded: boolean, isAuthenticated: boolean, token
     async function fetchFromBackend<T>({ method, endpoint, body }: FetchOptions): Promise<T> {
         if(!isLoaded || !isAuthenticated){
           console.log("stopping fecht because it is not loaded")
+          console.log("isLoaded: ", isLoaded, " isAuthenticated: ", isAuthenticated)
           return Promise.resolve([] as T);
         }
         const api = await fetchAPIURL();
