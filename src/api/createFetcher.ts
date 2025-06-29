@@ -28,7 +28,8 @@ export const createFetcher = (isLoaded: boolean, token: string | null, navigate:
            body: body ? JSON.stringify(body) : undefined,
          });
          if(response.status == 401 && !isLoaded){
-          return Promise.reject();
+          console.log("My special case has happend!!!!")
+          return Promise.resolve(undefined as unknown as T);
          }else if (!response.ok) {
            throw new Error(`Error when calling (${method} ${endpoint}): ${response.status}`);
          }
