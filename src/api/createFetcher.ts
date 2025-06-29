@@ -15,10 +15,14 @@ async function fetchAPIURL(): Promise<string> {
 
 export type FetchFromBackendType = ReturnType<typeof createFetcher>["fetchFromBackend"];
 
-export const createFetcher = (isLoaded: boolean, token: string | null, navigate: NavigateFunction) => {
+export const createFetcher = (isLoaded: boolean, isAuthenticated: boolean, token: string | null, navigate: NavigateFunction) => {
     async function fetchFromBackend<T>({ method, endpoint, body }: FetchOptions): Promise<T> {
+        if(!isLoaded || !isAuthenticated){
+          console.log("stopping fecht because it is not loaded")
+          return Promise.resolve([] as T);
+        }
         const api = await fetchAPIURL();
-        
+        console.log("Starting Fetch")
         const response = await fetch(`${api}/${endpoint}`, {
             method,
             headers: {
@@ -29,11 +33,13 @@ export const createFetcher = (isLoaded: boolean, token: string | null, navigate:
          });
          if(response.status == 401 && !isLoaded){
           console.log("My special case has happend!!!!")
-          return Promise.resolve(undefined as unknown as T);
+          console.log(Promise.resolve([] as T));
+          return Promise.resolve([] as T);
          }else if (!response.ok) {
            throw new Error(`Error when calling (${method} ${endpoint}): ${response.status}`);
          }
-
+         
+         //console.log("Answer: ", response.json());
          return response.json();
     }
     async function unsafeFetchFromBackend({ method, endpoint, body }: FetchOptions): Promise<T> {
