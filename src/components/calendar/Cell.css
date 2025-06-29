@@ -5,7 +5,7 @@
     align-items: center;
 
     border-radius: 8px;
-    background-color: var(--color-muted);
+    background-color: var(--color-secondary);
 
     min-height: 40px;
     width: 100%;
@@ -41,11 +41,11 @@
 }
 
 .event-dot.deadline {
-    background-color: #ffd700;
+    background-color: var(--color-deadline);
 }
 
 .event-dot.exam {
-    background-color: #ff4444;
+    background-color: var(--color-exam);
 }
 
 .event-plus {

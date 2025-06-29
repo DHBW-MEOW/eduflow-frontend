@@ -9,7 +9,7 @@
     border-radius: 8px;
     border-color: var(--color-border);
 
-    background-color: var(--color-muted);
+    background-color: var(--color-secondary);
     color: var(--color-text);
 }
 
