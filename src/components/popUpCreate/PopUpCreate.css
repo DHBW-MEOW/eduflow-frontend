@@ -68,7 +68,8 @@
     * not sure if this is needed
     */
 .popup-close-button:hover {
-  color: var(--color-hover);
+  color: var(--color-text-popup);
+  background-color: var(--color-hover);
   
 }
 
