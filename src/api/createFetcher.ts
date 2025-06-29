@@ -16,7 +16,7 @@ async function fetchAPIURL(): Promise<string> {
 export type FetchFromBackendType = ReturnType<typeof createFetcher>["fetchFromBackend"];
 
 export const createFetcher = (token: string | null, navigate: NavigateFunction) => {
-    async function fetchFromBackend<T>({ method, endpoint, body }: FetchOptions): Promise<T> {
+    async function fetchFromBackend<T>({ method, endpoint, body }: FetchOptions, isLoaded: boolean): Promise<T> {
         const api = await fetchAPIURL();
         
         const response = await fetch(`${api}/${endpoint}`, {
