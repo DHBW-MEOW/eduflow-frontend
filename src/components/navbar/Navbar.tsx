@@ -7,7 +7,6 @@ function Navbar() {
       <LinkButton link="/home" text="Home" icon="house-solid.svg"/>
       <LinkButton link="/studyplan" text="Lernplan" icon="graduation-cap-solid.svg"/>
       <LinkButton link="/modules" text="Module" icon="book-open-reader-solid.svg"/>
-      <LinkButton link="/todo" text="ToDo" icon="circle-check-regular.svg"/>
     </div>
   )
 }
