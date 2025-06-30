@@ -20,7 +20,8 @@ export const createFetcher = (isLoaded: boolean, isAuthenticated: boolean | null
         if(!isLoaded || !isAuthenticated){
           console.log("stopping fecht because it is not loaded")
           console.log("isLoaded: ", isLoaded, " isAuthenticated: ", isAuthenticated)
-          return Promise.resolve([] as T);
+          return Promise.resolve(["notAllowedToFetch"
+          ] as T);
         }
         const api = await fetchAPIURL();
         console.log("Starting Fetch")
@@ -34,7 +35,7 @@ export const createFetcher = (isLoaded: boolean, isAuthenticated: boolean | null
          });
          if(response.status == 401 && !isLoaded){
           console.log("My special case has happend!!!!")
-          console.log(Promise.resolve([] as T));
+          console.log(Promise.resolve(["dickhead", "dickhead"] as T));
           return Promise.resolve([] as T);
          }else if (!response.ok) {
            throw new Error(`Error when calling (${method} ${endpoint}): ${response.status}`);
