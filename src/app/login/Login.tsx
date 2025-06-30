@@ -16,7 +16,7 @@ export default function Login() {
   const [usernameValidity, setUsernameValidity] = useState({ valid: true, message: "" });
 
   const navigate = useNavigate();
-  const { unsafeFetchFromBackend, setToken, setUsername } = useAuth()
+  const { setIsAuthenticated, unsafeFetchFromBackend, setToken, setUsername } = useAuth()
 
   const handleLogin = async (username: string, password: string) => {
     console.log("Login button clicked");
@@ -39,7 +39,7 @@ export default function Login() {
       setToken(loginToken);
       setUsername(username);
       console.log("New state token" + loginToken);
-      navigate("/home");
+      setIsAuthenticated(true);
     }else if(response.status === 401){
       setIsInvalid(true);
       console.error("Login failed: Invalid credentials");
