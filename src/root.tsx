@@ -1,8 +1,5 @@
-import { StrictMode, useContext, useState, createContext, useEffect } from 'react'
-// import { createRoot } from 'react-dom/client'
+import { useState, createContext, useEffect } from 'react'
 import './index.css'
-import App from './app/App.tsx'
-import ReactDOM from 'react-dom/client';
 import { Outlet } from "react-router"
 import { fetchFromBackend } from './fetchBackend.tsx';
 import { useNavigate } from 'react-router-dom';

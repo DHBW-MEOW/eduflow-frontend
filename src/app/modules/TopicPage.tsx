@@ -1,6 +1,6 @@
 import { useEffect, useState, type JSX, useContext } from "react";
 import HeaderContext from "../../app/HeaderContext";
-import { data, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Grid } from "../../components/grid/Grid";
 import { useAuth } from "../../app/AuthContext";
 import type { BoxData } from "../../components/grid/Box";

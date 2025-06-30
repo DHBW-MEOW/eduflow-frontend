@@ -4,7 +4,6 @@ import LinkButton from "../../components/linkButton/LinkButton";
 import "./Login.css";
 import "../../components/popUpCreate/inputOptions/InputStyle.css";
 import { useState } from "react";
-import { useNavigate } from "react-router"; 
 import { useAuth } from "../../app/AuthContext";
 
 
@@ -15,7 +14,6 @@ export default function Login() {
   const [passwordValidity, setPasswordValidity] = useState({ valid: true, message: "" });
   const [usernameValidity, setUsernameValidity] = useState({ valid: true, message: "" });
 
-  const navigate = useNavigate();
   const { setIsAuthenticated, unsafeFetchFromBackend, setToken, setUsername } = useAuth()
 
   const handleLogin = async (username: string, password: string) => {

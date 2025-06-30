@@ -1,16 +1,15 @@
-import { useMatch, useLocation, useNavigate, Outlet, createCookie } from "react-router-dom"
+import { useLocation, Outlet } from "react-router-dom"
 import Header from "../components/header/Header.tsx"
 import Navbar from "../components/navbar/Navbar.tsx"
 import HeaderContext from "../app/HeaderContext.tsx"
 import "../styles.css"
 
-import {use, useEffect, useState, createContext} from 'react'
+import { useEffect, useState } from 'react'
 
 import { useAuth } from "./AuthContext.tsx";
 
 
 function AppLayout() {
-  const navigate = useNavigate();
   const { token, username, isAuthenticated, checkAuthentication, isLoaded} = useAuth();
   const [rightButtonState, setRightButtonState] = useState({on: true, text:"", icon:"user-regular.svg", link:"/profile"});
   const [leftButtonState, setLeftButtonState] = useState({on: true, text: "", icon: "Logo.svg", link: "/home"})

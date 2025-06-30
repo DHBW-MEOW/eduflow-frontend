@@ -1,12 +1,11 @@
-import { Outlet, useNavigate } from "react-router-dom"
+import { Outlet } from "react-router-dom"
 import Header from "../components/header/Header.tsx"
 import "../styles.css"
 
-import {useState, useEffect, use} from 'react'
+import { useState } from 'react'
 import { useAuth } from "./AuthContext.tsx";
 
 function StartLayout() {
-  const navigate = useNavigate();
   const {isAuthenticated, checkAuthentication, isLoaded} = useAuth();
   const [leftButtonState, setLeftButtonState] = useState({on: true, text: "", icon: "Logo.svg", link: "/"})
   const [textState, setTextState] = useState("EduFlow")

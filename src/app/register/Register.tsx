@@ -1,7 +1,7 @@
 import InputField from "../../components/popUpCreate/inputOptions/InputField";
 import OptionButton from "../../components/optionButtons/OptionButton";
 import LinkButton from "../../components/linkButton/LinkButton";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 //import { useAuth } from "../../app/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../app/AuthContext";
