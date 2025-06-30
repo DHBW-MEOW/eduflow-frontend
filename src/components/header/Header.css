@@ -16,6 +16,10 @@
   width: 80%;
 }
 
+.headerLeft h1 {
+  font-size: 1.17em;
+}
+
 .headerRight {
   display: inline-flex;
   justify-content: right;
