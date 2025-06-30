@@ -32,7 +32,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const [isAuthenticated, setIsAuthenticated] = React.useState<boolean | null>(null);
     
 
-    const {fetchFromBackend, unsafeFetchFromBackend} = useMemo(() => createFetcher(isLoaded, isAuthenticated, token, navigate), [token, navigate])
+    const {fetchFromBackend, unsafeFetchFromBackend} = useMemo(() => createFetcher(isLoaded, isAuthenticated, token, navigate), [token, navigate, isAuthenticated])
     
     const checkAuthentication = () => {
         console.log("Token:", token);
