@@ -34,23 +34,18 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const {fetchFromBackend, unsafeFetchFromBackend} = useMemo(() => createFetcher(token, navigate), [token, navigate])
     
     const checkAuthentication = () => {
-        console.log("Token:", token);
         if (token === null) {
-            console.log("No token available, user is not authenticated");
             setIsAuthenticated(false);
             return;
         }
-        console.log("Checking authentication with token:", token);
         unsafeFetchFromBackend({
             method: "GET",
             endpoint: "auth/verify-token",
         })
             .then((response) => {
                 if(response.status === 200){
-                    console.log("Authentication was verified sucessfully");
                     setIsAuthenticated(true);
                 }else if(response.status === 401){
-                    console.log("User is not authenticated");
                     setIsAuthenticated(false);
                 }else{
                     throw new Error("Unexpected error when verifying authentification; status: " + response.status + " Message: " + response.message) 
@@ -64,24 +59,20 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             const storedUsername = localStorage.getItem("username");
 
             if (storedToken) {
-                console.log("Setting token from storage:", storedToken);
                 setToken(storedToken);
             }
 
             if (storedUsername) {
-                console.log("Setting username from storage:", storedUsername);
                 setUsername(storedUsername);
             }
 
             setIsLoaded(true); // Ladezustand immer setzen
-            console.log("Loading complete");
         };
         initializeAuth();
     }, []); // Läuft nur einmal
 
     useEffect(() => {
         if (isLoaded){
-            console.log("Token and Username are set, checking authentication");
             checkAuthentication();
         }
     }, [location.pathname, isLoaded]) // maybe add token here
@@ -89,29 +80,21 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     //ROUTING LOGIK
     useEffect(() => {
         if (!isLoaded) {
-            console.log("AuthProvider is not loaded yet, skipping navigation.");
             return;
         }
 
         if (isAuthenticated === null) {
-            console.log("isAuthenticated is null, skipping navigation.");
             return;
         }
 
         const currenPath = location.pathname;
-        console.log("Current path:", currenPath);
-        console.log("Is authenticated:", isAuthenticated);
 
         if (isAuthenticated) {
-            console.log("User is authenticated");
             if (currenPath === "/" || currenPath === "/login" || currenPath === "/register") {
-                console.log("User is authenticated and currently on start area, navigating to home page");
                 navigate("/home");
             }
         } else {
-            console.log("User is not authenticated");
             if (currenPath !== "/" && currenPath !== "/login" && currenPath !== "/register") {
-                console.log("User is not authenticated and currently not on start area, navigating to start page");
                 navigate("/");
             }
         }
