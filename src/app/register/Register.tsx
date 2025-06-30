@@ -2,7 +2,6 @@ import InputField from "../../components/popUpCreate/inputOptions/InputField";
 import OptionButton from "../../components/optionButtons/OptionButton";
 import LinkButton from "../../components/linkButton/LinkButton";
 import { useState } from "react";
-//import { useAuth } from "../../app/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../app/AuthContext";
 import "./Register.css";
@@ -19,21 +18,6 @@ export default function Register() {
   const [successfullyRegistered, setSuccessfullyRegistered] = useState(false);
 
   const { token, setToken, setIsAuthenticated, fetchFromBackend, unsafeFetchFromBackend, setUsername} = useAuth();
-
-  //useEffect(() => {
-  //  const verifyToken = async () => {
-  //      const response = await unsafeFetchFromBackend({
-  //        method: "GET",
-  //        endpoint: "auth/verify-token",
-  //      });
-  //      if(response.status === 200) {
-  //        console.log("User is authenticated and cant register");
-  //        setIsAuthenticated(true);
-  //        navigate("/home");
-  //      }
-  //  }
-  //  verifyToken();
-  //}, [navigate]);
 
   const handleNavigation = ()   =>{
     console.log("Navigating to login page");

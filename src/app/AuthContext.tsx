@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, createContext } from "react";
-//import { useAuth } from "../../app/AuthContext";
 import { useNavigate, useLocation } from "react-router";
 import { createFetcher } from "../api/createFetcher";
 
@@ -52,9 +51,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
                     setIsAuthenticated(true);
                 }else if(response.status === 401){
                     console.log("User is not authenticated");
-                    //navigate("/");
-                    //setToken(null);
-                    //setUsername(null);
                     setIsAuthenticated(false);
                 }else{
                     throw new Error("Unexpected error when verifying authentification; status: " + response.status + " Message: " + response.message) 
