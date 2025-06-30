@@ -15,7 +15,7 @@ async function fetchAPIURL(): Promise<string> {
 
 export type FetchFromBackendType = ReturnType<typeof createFetcher>["fetchFromBackend"];
 
-export const createFetcher = (isLoaded: boolean, isAuthenticated: boolean, token: string | null, navigate: NavigateFunction) => {
+export const createFetcher = (isLoaded: boolean, isAuthenticated: boolean | null, token: string | null, navigate: NavigateFunction) => {
     async function fetchFromBackend<T>({ method, endpoint, body }: FetchOptions): Promise<T> {
         if(!isLoaded || !isAuthenticated){
           console.log("stopping fecht because it is not loaded")
