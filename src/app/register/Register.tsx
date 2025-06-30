@@ -20,14 +20,10 @@ export default function Register() {
   const { token, setToken, setIsAuthenticated, fetchFromBackend, unsafeFetchFromBackend, setUsername} = useAuth();
 
   const handleNavigation = ()   =>{
-    console.log("Navigating to login page");
     navigate("/login"  );
   }
 
   const handleRegister = async (username: string, password: string) => {
-    console.log("Register button clicked");
-    console.log("Uesrname:", username, "Password:", password);
-
     const response = await unsafeFetchFromBackend({
       method: "POST",
       endpoint: "auth/register",
@@ -36,7 +32,6 @@ export default function Register() {
         password: password 
       }
     })
-    console.log("Response:", response); 
     if (response.status === 200){
       const data = await response.json();
       const registerToken = data.token;
@@ -45,7 +40,6 @@ export default function Register() {
       localStorage.setItem("username", username);
       setUsername(username);
       setToken(registerToken)
-      console.log("New state token" + token);
       navigate("/home");
     }else if (response.status === 409) {
       console.error("Username already taken");
@@ -93,11 +87,9 @@ export default function Register() {
 
       { !successfullyRegistered &&
         <form className="register-form" onSubmit={(e) => {
-          console.log("Form submitted");
           // Prevent default form submission reloading the page
           e.preventDefault();
           if (validateData(localUsername, passwordOne, passwordTwo)) { 
-            console.log("Data is valid, proceeding with registration");
             handleRegister(localUsername, passwordOne);
           }
         }

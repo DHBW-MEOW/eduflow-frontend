@@ -17,7 +17,6 @@ function AppLayout() {
 
   const location = useLocation();
   useEffect(() => {
-    console.log("Location changed to: ", location.pathname);
     if(location.pathname === "/home") {
       setLeftButtonState({on: true, text: "", icon: "Logo.svg", link: "/home"});
       setTextState("Hello " + username +  "!");

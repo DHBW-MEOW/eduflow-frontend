@@ -25,19 +25,15 @@ export default function Root() {
   // Runs when the component mounts to the dom
   useEffect(() => {
     if(token !== undefined) {
-      console.log("Token is set, user is authenticated");
       checkAuthentication();
       return;
     }
-    console.log("Root component mounted; Running getting local storage value for authentication");
     const localToken = localStorage.getItem('token'); 
     if (localToken === null || localToken === undefined || localToken === "" ){
-      console.log("No token found in local storage, user is not authenticated");
       setAuthenticated(false);
       setToken("");
       navigation("/");
     } else {
-      console.log("Token found in local storage");
       setToken(localToken);
       checkAuthentication();
     }
