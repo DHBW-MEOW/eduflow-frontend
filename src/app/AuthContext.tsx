@@ -53,7 +53,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
                 }else if(response.status === 401){
                     console.log("User is not authenticated");
                     //navigate("/");
-                    //setToken(null);
+                    setToken(null);
                     //setUsername(null);
                     setIsAuthenticated(false);
                 }else{
