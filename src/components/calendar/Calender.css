@@ -85,11 +85,11 @@
 }
 
 .legend-item .event-dot.deadline {
-    background-color: #ffd700;
+    background-color: var(--color-deadline);
 }
 
 .legend-item .event-dot.exam {
-    background-color: #ff4444;
+    background-color: var(--color-exam);
 }
 
 @media (min-width: 480px) {
