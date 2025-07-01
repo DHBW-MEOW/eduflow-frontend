@@ -20,6 +20,10 @@ function DetailExamPage() {
             method: "GET",
             endpoint: `data/exam?id=${examId}&course_id=${moduleId}`,
           })
+          if(data.length===1 && typeof data[0] === "string"){
+              console.log("Fetch wasnt allwed detected")
+              return;
+          }
           if (data.length > 0) {
             setExam({
               id: data[0].id,
