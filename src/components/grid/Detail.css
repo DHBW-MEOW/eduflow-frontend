@@ -9,9 +9,9 @@
 .detail-edit {
   display: flex;
   flex-direction: column;
+  justify-content: center;
 
   width: 30%;
-  margin-top: 0.75em;
 }
 
 .detail-header {
