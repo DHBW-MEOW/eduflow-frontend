@@ -17,3 +17,7 @@ Start the container (make sure a data directory exists):
 `podman run -p 8080:80 eduflow-frontend`
 
 This will start a http webserver at port 8080.
+
+## Design
+The Design is shown in a Figma Project. It's accessible through the following Link:
+https://www.figma.com/design/klul6yENeFLSB248jxyyHV/EduFlow?node-id=0-1&t=KGJc33sKniy9wvGU-1
