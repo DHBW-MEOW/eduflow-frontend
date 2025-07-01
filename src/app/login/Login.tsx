@@ -4,7 +4,6 @@ import LinkButton from "../../components/linkButton/LinkButton";
 import "./Login.css";
 import "../../components/popUpCreate/inputOptions/InputStyle.css";
 import { useState } from "react";
-import { useNavigate } from "react-router"; 
 import { useAuth } from "../../app/AuthContext";
 
 
@@ -15,12 +14,9 @@ export default function Login() {
   const [passwordValidity, setPasswordValidity] = useState({ valid: true, message: "" });
   const [usernameValidity, setUsernameValidity] = useState({ valid: true, message: "" });
 
-  const navigate = useNavigate();
   const { setIsAuthenticated, unsafeFetchFromBackend, setToken, setUsername } = useAuth()
 
   const handleLogin = async (username: string, password: string) => {
-    console.log("Login button clicked");
-    console.log("Username:", username, "Password:", password);
 
    const response = await unsafeFetchFromBackend({
       method: "POST",
@@ -30,7 +26,6 @@ export default function Login() {
         password: password
       }
     });
-    console.log("Response:", response);
     if (response.status === 200) {
       const data = await response.json();
       const loginToken = data.token;
@@ -38,11 +33,9 @@ export default function Login() {
       localStorage.setItem("username", username);
       setToken(loginToken);
       setUsername(username);
-      console.log("New state token" + loginToken);
       setIsAuthenticated(true);
     }else if(response.status === 401){
       setIsInvalid(true);
-      console.error("Login failed: Invalid credentials");
       username = "";
       password = "";
     }else {

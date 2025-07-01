@@ -10,10 +10,6 @@ function ModulPage() {
 
     const { fetchFromBackend } = useAuth();
 
-    const addItem = (newElement: BoxData) => {
-        setItems(oldItems => [...oldItems, newElement]);
-    };
-
     const handleRename = async (id: number, newTitle: string) => {
         try {
             await fetchFromBackend<void>({
