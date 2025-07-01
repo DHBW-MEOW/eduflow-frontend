@@ -15,7 +15,7 @@ export default function NotFoundPage() {
       </NavLink>
 
       <div className="errorText">
-        <h2 className="errorNumber">404 Error</h2>
+        <h1 className="errorNumber">404 Error</h1>
 
         <p>Ups... Sorry, irgendwas stört deinen Flow.</p>
 
