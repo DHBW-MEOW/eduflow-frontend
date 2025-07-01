@@ -15,10 +15,16 @@ async function fetchAPIURL(): Promise<string> {
 
 export type FetchFromBackendType = ReturnType<typeof createFetcher>["fetchFromBackend"];
 
-export const createFetcher = (token: string | null, navigate: NavigateFunction) => {
+export const createFetcher = (isLoaded: boolean, isAuthenticated: boolean | null, token: string | null, navigate: NavigateFunction) => {
     async function fetchFromBackend<T>({ method, endpoint, body }: FetchOptions): Promise<T> {
+        if(!isLoaded || !isAuthenticated){
+          console.log("stopping fecht because it is not loaded")
+          console.log("isLoaded: ", isLoaded, " isAuthenticated: ", isAuthenticated)
+          return Promise.resolve(["notAllowedToFetch"
+          ] as T);
+        }
         const api = await fetchAPIURL();
-        
+        console.log("Starting Fetch")
         const response = await fetch(`${api}/${endpoint}`, {
             method,
             headers: {
@@ -27,10 +33,15 @@ export const createFetcher = (token: string | null, navigate: NavigateFunction) 
            },
            body: body ? JSON.stringify(body) : undefined,
          });
-         if (!response.ok) {
+         if(response.status == 401 && !isLoaded){
+          console.log("My special case has happend!!!!")
+          console.log(Promise.resolve(["dickhead", "dickhead"] as T));
+          return Promise.resolve([] as T);
+         }else if (!response.ok) {
            throw new Error(`Error when calling (${method} ${endpoint}): ${response.status}`);
          }
-
+         
+         //console.log("Answer: ", response.json());
          return response.json();
     }
     async function unsafeFetchFromBackend({ method, endpoint, body }: FetchOptions): Promise<T> {
