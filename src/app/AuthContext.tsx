@@ -31,7 +31,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const [isAuthenticated, setIsAuthenticated] = React.useState<boolean | null>(null);
     
 
-    const {fetchFromBackend, unsafeFetchFromBackend} = useMemo(() => createFetcher(token, navigate), [token, navigate])
+    const {fetchFromBackend, unsafeFetchFromBackend} = useMemo(() => createFetcher(isLoaded, isAuthenticated, token, navigate), [token, navigate, isAuthenticated]) // Maybe add isLoaded but prob. not needed because it only changes when token also changes from null to some value
     
     const checkAuthentication = () => {
         if (token === null) {
@@ -46,6 +46,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
                 if(response.status === 200){
                     setIsAuthenticated(true);
                 }else if(response.status === 401){
+                    setToken(null);
                     setIsAuthenticated(false);
                 }else{
                     throw new Error("Unexpected error when verifying authentification; status: " + response.status + " Message: " + response.message) 

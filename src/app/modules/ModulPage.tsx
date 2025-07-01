@@ -88,16 +88,20 @@ function ModulPage() {
     useEffect(() => {
         const loadData = async () => {
             try {
-                const data = await fetchFromBackend<{ id: number; name: string; details: string }[]>({
+                const data = await fetchFromBackend<({ id: number; name: string; details: string }| string)[]>({
                     method: "GET",
                     endpoint: "data/course",
                 });
+                if(data.length===1 && typeof data[0] === "string"){
+                    console.log("Fetch wasnt allwed detected")
+                    return;
+                }
                 setItems(data);
             } catch (err) {
                 console.error("Error while loading the Courses:", err);
             }
         };    
-      loadData();
+        loadData();
     }, [fetchFromBackend]);
 
     return (

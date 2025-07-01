@@ -12,7 +12,7 @@ function TopicPage(): JSX.Element {
     const [ exams, setExams] = useState<BoxData[]>([]);
     const headerSetter = useContext(HeaderContext);
 
-    const { fetchFromBackend } = useAuth();
+    const { fetchFromBackend, isLoaded } = useAuth();
     
     const handleRenameExam = async (id: number, newTitle: string) => {
         const item = exams.find(item => item.id === id);
@@ -107,7 +107,7 @@ function TopicPage(): JSX.Element {
         const loadData = async () => {
             try {
                 const [dataTopics, dataExams, dataModule] = await Promise.all([
-                    fetchFromBackend<{ id: number; name: string; details: string }[]>({
+                    fetchFromBackend<({ id: number; name: string; details: string } | string)[] >({
                         method: "GET",
                         endpoint: `data/topic?course_id=${moduleId}`
                     }),
@@ -115,13 +115,28 @@ function TopicPage(): JSX.Element {
                         method: "GET",
                         endpoint: `data/exam?course_id=${moduleId}`
                     }),
-                    fetchFromBackend<{ id: number; name: string; }[]>({
+                    fetchFromBackend<({ id: number; name: string; }|string)[]>({
                         method: "GET",
                         endpoint: `data/course?id=${moduleId}`
                     })
                 ]);
+                if(dataModule.length===1 && typeof dataModule[0] === "string"){
+                    console.log("Fetch wasnt allwed detected")
+                    return;
+                }
+                if(dataExams.length===1 && typeof dataExams[0] === "string"){
+                    console.log("Fetch wasnt allwed detected")
+                    return;
+                }
+                if(dataTopics.length===1 && typeof dataTopics[0] === "string"){
+                    console.log("Fetch wasnt allwed detected")
+                    return;
+                }
 
-                if (dataModule.length === 0) {
+                if (dataModule.length === 0 && isLoaded) {
+                    console.log("blablabla")
+                    console.log(dataModule);
+                    console.log(isLoaded)
                     navigate("/404", { replace: true });
                     return;
                 }
