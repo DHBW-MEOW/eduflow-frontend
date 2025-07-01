@@ -11,16 +11,6 @@ export interface LearningPlanHandles {
   getFormData: () => FormDataAndValidity<LearningPlanData>;
 }
 
-export interface ToDoData {
-  title: string;
-  date: string;
-  details: string;
-}
-
-export interface ToDoHandles {
-  getFormData: () => FormDataAndValidity<ToDoData>;
-}
-
 export interface ExamData {
   module: string;
   title: string;
