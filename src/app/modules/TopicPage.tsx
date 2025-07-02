@@ -121,22 +121,16 @@ function TopicPage(): JSX.Element {
                     })
                 ]);
                 if(dataModule.length===1 && typeof dataModule[0] === "string"){
-                    console.log("Fetch wasnt allwed detected")
                     return;
                 }
                 if(dataExams.length===1 && typeof dataExams[0] === "string"){
-                    console.log("Fetch wasnt allwed detected")
                     return;
                 }
                 if(dataTopics.length===1 && typeof dataTopics[0] === "string"){
-                    console.log("Fetch wasnt allwed detected")
                     return;
                 }
 
                 if (dataModule.length === 0 && isLoaded) {
-                    console.log("blablabla")
-                    console.log(dataModule);
-                    console.log(isLoaded)
                     navigate("/404", { replace: true });
                     return;
                 }

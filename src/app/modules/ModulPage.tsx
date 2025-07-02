@@ -93,7 +93,6 @@ function ModulPage() {
                     endpoint: "data/course",
                 });
                 if(data.length===1 && typeof data[0] === "string"){
-                    console.log("Fetch wasnt allwed detected")
                     return;
                 }
                 setItems(data);

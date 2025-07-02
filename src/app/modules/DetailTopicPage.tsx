@@ -21,7 +21,6 @@ function DetailTopicPage() {
           endpoint: `data/topic?id=${topicId}&course_id=${moduleId}`,
         })
         if(data.length===1 && typeof data[0] === "string"){
-            console.log("Fetch wasnt allwed detected")
             return;
         }
         if (data.length > 0) {
