@@ -1,9 +1,9 @@
-import './Home.css'
+import "./Home.css";
 import { useCallback, useEffect, useState } from "react";
 import { fetchStudyGoalData } from "../../api/fetchStudyGoalData.tsx";
 import StudyGoals from "../../components/studyGoals/StudyGoals.tsx";
 import type { ItemData } from "../studyplan/types.tsx";
-import Quicklinks from '../../components/quicklinks/Quicklinks.tsx';
+import Quicklinks from "../../components/quicklinks/Quicklinks.tsx";
 import { useAuth } from "../../app/AuthContext.tsx";
 
 export async function clientLoader() {
@@ -29,25 +29,27 @@ export default function Home() {
   }, [fetchFromBackend]);
 
   useEffect(() => {
-      loadPageData();
-  }, [loadPageData, fetchFromBackend])
+    loadPageData();
+  }, [loadPageData, fetchFromBackend]);
 
   return (
     <div className="home-container">
-      <div className='home-left-items'>
-        <h2 id='studygoals-headline-home'>Meine Lernziele</h2>
+      <div className="home-left-items">
+        <h2 id="studygoals-headline-home">Meine Lernziele</h2>
         <div className="home-studygoals">
-          <StudyGoals items={items} limit={4}/>
+          <StudyGoals items={items} limit={4} />
         </div>
-        <a className='home-more' href="/studyplan">Weitere Lernziele...</a>
+        <a className="home-more" href="/studyplan">
+          Weitere Lernziele...
+        </a>
       </div>
 
-      <div className='home-right-items'>
-        <h2 id='quicklinks-headline'>Quicklinks</h2>
-        <div className='home-quicklinks'>
+      <div className="home-right-items">
+        <h2 id="quicklinks-headline">Quicklinks</h2>
+        <div className="home-quicklinks">
           <Quicklinks></Quicklinks>
         </div>
       </div>
     </div>
-  )
+  );
 }

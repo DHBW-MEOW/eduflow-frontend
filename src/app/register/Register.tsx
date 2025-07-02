@@ -12,16 +12,29 @@ export default function Register() {
   const [localUsername, setLocalUsername] = useState("");
   const [passwordOne, setPasswordOne] = useState("");
   const [passwordTwo, setPasswordTwo] = useState("");
-  const [passwordValidity, setPasswordValidity] = useState({ valid: true, message: "" });
-  const [usernameValidity, setUsernameValidity] = useState({ valid: true, message: "" });
-  const [userTaken, setUserTaken] = useState(false);  
+  const [passwordValidity, setPasswordValidity] = useState({
+    valid: true,
+    message: "",
+  });
+  const [usernameValidity, setUsernameValidity] = useState({
+    valid: true,
+    message: "",
+  });
+  const [userTaken, setUserTaken] = useState(false);
   const [successfullyRegistered, setSuccessfullyRegistered] = useState(false);
 
-  const { token, setToken, setIsAuthenticated, fetchFromBackend, unsafeFetchFromBackend, setUsername} = useAuth();
+  const {
+    token,
+    setToken,
+    setIsAuthenticated,
+    fetchFromBackend,
+    unsafeFetchFromBackend,
+    setUsername,
+  } = useAuth();
 
-  const handleNavigation = ()   =>{
-    navigate("/login"  );
-  }
+  const handleNavigation = () => {
+    navigate("/login");
+  };
 
   const handleRegister = async (username: string, password: string) => {
     const response = await unsafeFetchFromBackend({
@@ -29,124 +42,144 @@ export default function Register() {
       endpoint: "auth/register",
       body: {
         username: username,
-        password: password 
-      }
-    })
-    if (response.status === 200){
+        password: password,
+      },
+    });
+    if (response.status === 200) {
       const data = await response.json();
       const registerToken = data.token;
       setIsAuthenticated(true);
       localStorage.setItem("token", registerToken);
       localStorage.setItem("username", username);
       setUsername(username);
-      setToken(registerToken)
+      setToken(registerToken);
       navigate("/home");
-    }else if (response.status === 409) {
+    } else if (response.status === 409) {
       console.error("Username already taken");
       setUserTaken(true);
-    }else {
-      throw new Error(`Error when calling (POST auth/register): ${response.status}`);
+    } else {
+      throw new Error(
+        `Error when calling (POST auth/register): ${response.status}`,
+      );
     }
   };
 
-  const validateData = (username: string, passwordOne: string, passwordTwo: string): boolean => {
+  const validateData = (
+    username: string,
+    passwordOne: string,
+    passwordTwo: string,
+  ): boolean => {
     let valid = true;
     if (!username) {
-      setUsernameValidity({ valid: false, message: "Benutzername darf nicht leer sein" });
+      setUsernameValidity({
+        valid: false,
+        message: "Benutzername darf nicht leer sein",
+      });
       valid = false;
-    }else{
+    } else {
       setUsernameValidity({ valid: true, message: "" });
     }
-    
+
     const password = passwordOne;
     if (passwordOne !== passwordTwo) {
-      setPasswordValidity({ valid: false, message: "Kennwörter müssen übereinstimmen" });
+      setPasswordValidity({
+        valid: false,
+        message: "Kennwörter müssen übereinstimmen",
+      });
       valid = false;
-    }
-    else if(!password) {
-      setPasswordValidity({ valid: false, message: "Kennwort darf nicht leer sein" });
+    } else if (!password) {
+      setPasswordValidity({
+        valid: false,
+        message: "Kennwort darf nicht leer sein",
+      });
       valid = false;
-    }
-    else if (password.length < 8) { 
-      setPasswordValidity({ valid: false, message: "Das Kennwort muss mindestens 8 Zeichen lang sein" });
+    } else if (password.length < 8) {
+      setPasswordValidity({
+        valid: false,
+        message: "Das Kennwort muss mindestens 8 Zeichen lang sein",
+      });
       valid = false;
-    }
-    else {
+    } else {
       setPasswordValidity({ valid: true, message: "" });
     }
     return valid;
-  }
+  };
 
   return (
     <div className="registerPage">
       <div className="register-linkbutton">
-          <LinkButton link={'/'} text={''} icon={'circle-arrow-left-solid.svg'}/>
+        <LinkButton link={"/"} text={""} icon={"circle-arrow-left-solid.svg"} />
       </div>
-      
+
       <h1 id="register-headline">Registrierung</h1>
 
-      { !successfullyRegistered &&
-        <form className="register-form" onSubmit={(e) => {
-          // Prevent default form submission reloading the page
-          e.preventDefault();
-          if (validateData(localUsername, passwordOne, passwordTwo)) { 
-            handleRegister(localUsername, passwordOne);
-          }
-        }
-        }>
+      {!successfullyRegistered && (
+        <form
+          className="register-form"
+          onSubmit={(e) => {
+            // Prevent default form submission reloading the page
+            e.preventDefault();
+            if (validateData(localUsername, passwordOne, passwordTwo)) {
+              handleRegister(localUsername, passwordOne);
+            }
+          }}
+        >
           <div className="register-inputfields">
-              <InputField
-                label="Benutzername"
-                name="username"
-                value={localUsername}
-                isInvalid={!usernameValidity.valid}
-                errorMessage={usernameValidity.message}
-                onChange={(e) => setLocalUsername(e.target.value)}
-              />
-              <InputField
-                label="Kennwort"
-                name="passwordOne"
-                value={passwordOne}
-                isPassword={true}
-                isInvalid={!passwordValidity.valid}
-                errorMessage={passwordValidity.message}
-                onChange={(e) => setPasswordOne(e.target.value)}
-              />
-              <InputField
-                label="Kennwort wiederholen"
-                name="passwordTwo"
-                value={passwordTwo}
-                isPassword={true}
-                isInvalid={!passwordValidity.valid}
-                errorMessage={passwordValidity.message}
-                onChange={(e) => setPasswordTwo(e.target.value)}
-              />
+            <InputField
+              label="Benutzername"
+              name="username"
+              value={localUsername}
+              isInvalid={!usernameValidity.valid}
+              errorMessage={usernameValidity.message}
+              onChange={(e) => setLocalUsername(e.target.value)}
+            />
+            <InputField
+              label="Kennwort"
+              name="passwordOne"
+              value={passwordOne}
+              isPassword={true}
+              isInvalid={!passwordValidity.valid}
+              errorMessage={passwordValidity.message}
+              onChange={(e) => setPasswordOne(e.target.value)}
+            />
+            <InputField
+              label="Kennwort wiederholen"
+              name="passwordTwo"
+              value={passwordTwo}
+              isPassword={true}
+              isInvalid={!passwordValidity.valid}
+              errorMessage={passwordValidity.message}
+              onChange={(e) => setPasswordTwo(e.target.value)}
+            />
           </div>
-          
+
           <div className="error-message-placeholder">
-              {userTaken && <span className="error-message">Dieser Benutzername ist leider schon vergeben.</span>}
+            {userTaken && (
+              <span className="error-message">
+                Dieser Benutzername ist leider schon vergeben.
+              </span>
+            )}
           </div>
-          
+
           <div className="register-submit">
-              <OptionButton
-                label="Registrieren"
-                isHighlighted={true}
-                onClick={() => {} /*handleRegister(username, password) */}
-              />
+            <OptionButton
+              label="Registrieren"
+              isHighlighted={true}
+              onClick={() => {} /*handleRegister(username, password) */}
+            />
           </div>
-          
         </form>
-      }
-      {
-        successfullyRegistered && 
+      )}
+      {successfullyRegistered && (
         <div className="success-message">
-          <div> Sie haben sich erfolgreich registriert! Bitte melden Sie sich an. </div>
-          <OptionButton
-            label="Zum Login"
-            onClick={handleNavigation}
-          />
+          <div>
+            {" "}
+            Sie haben sich erfolgreich registriert! Bitte melden Sie sich
+            an.{" "}
+          </div>
+          <OptionButton label="Zum Login" onClick={handleNavigation} />
         </div>
-      }
+      )}
     </div>
-  )
+  );
 }

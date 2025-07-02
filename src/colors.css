@@ -1,99 +1,102 @@
 :root {
-    /* === Base === */
-    --color-black: #1f1f1f;
-    --color-white: #f0f0f0;
+  /* === Base === */
+  --color-black: #1f1f1f;
+  --color-white: #f0f0f0;
+
+  /* === Header/ Footer === */
+  --color-bars: #cad6ff;
+
+  /* === Background Colors (Light Theme) === */
+  --color-bg-1: #fbfbfe; /* Main Background */
+  --color-bg-transparent: rgb(
+    from var(--color-bg-2) r g b / 0.6
+  ); /* Transparent Background for PopUps (supported since July 24, hope it works in all Browsers) */
+  --color-bg-2: #ebebeb; /* Secondary Background (Panels, Cards,...) */
+  --color-surface: #dddddd; /* Boxes, Windows */
+
+  /* === Primary Colors === */
+  --color-primary: #639fff;
+  --color-primary-dark: #6595e3;
+
+  /* === Secondary Colors === */
+  --color-secondary: #ccc9f9;
+  --color-secondary-dark: #8985ff;
+
+  /* === Foreground / Text Colors === */
+  --color-text: #242a36;
+  --color-text-popup: var(--color-text);
+
+  /* === Link Color === */
+  --color-link: var(--color-secondary-dark);
+  --color-link-visited: var(--color-link);
+  --color-link-hover: var(--color-hover);
+  --color-link-active: var(--color-focus);
+
+  /* === Border / Divider === */
+  --color-border: #d1d5db;
+
+  /* === Hover, Focus & Status === */
+  --color-hover: #dee4f9;
+  --color-focus: #60a5fa;
+  --color-shadow: #007bff1a;
+  --color-error: #ef4444;
+
+  --color-exam: #fe0d0d;
+  --color-deadline: #ffee00;
+
+  /* === Icons === */
+  --filter-icon: brightness(0) saturate(100%) invert(13%) sepia(9%)
+    saturate(1768%) hue-rotate(182deg) brightness(96%) contrast(90%);
+  --filter-icon-hover: brightness(0) saturate(100%) invert(48%) sepia(86%)
+    saturate(409%) hue-rotate(203deg) brightness(100%) contrast(103%);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* === Background Colors (Dark Theme) === */
+    --color-bg-1: #1e1e2f;
+    --color-bg-transparent: rgb(from var(--color-bg-1) r g b / 0.6);
+    --color-bg-2: #2d2d3e;
+    --color-surface: #3b3b4b;
 
     /* === Header/ Footer === */
-    --color-bars: #cad6ff;
+    --color-bars: #3a3c55;
 
-    /* === Background Colors (Light Theme) === */
-    --color-bg-1: #fbfbfe;                                            /* Main Background */
-    --color-bg-transparent: rgb(from var(--color-bg-2) r g b / 0.6);    /* Transparent Background for PopUps (supported since July 24, hope it works in all Browsers) */
-    --color-bg-2: #ebebeb;                                            /* Secondary Background (Panels, Cards,...) */
-    --color-surface: #dddddd;                                         /* Boxes, Windows */
-
-    /* === Primary Colors === */
-    --color-primary: #639fff;
-    --color-primary-dark: #6595e3;
+    /* === Primary Colors (Blue Accent) === */
+    --color-primary: #3b82f6;
+    --color-primary-dark: #2563eb;
 
     /* === Secondary Colors === */
-    --color-secondary: #ccc9f9;
-    --color-secondary-dark: #8985FF;
+    --color-secondary: #8985ff;
+    --color-secondary-dark: #706dca;
 
     /* === Foreground / Text Colors === */
-    --color-text: #242a36;
-    --color-text-popup: var(--color-text);
+    --color-text: #e5e7eb;
+    --color-text-popup: #374151;
 
     /* === Link Color === */
-    --color-link: var(--color-secondary-dark);
-    --color-link-visited: var( --color-link);
+    --color-link: var(--color-secondary);
+    --color-link-visited: var(--color-link);
     --color-link-hover: var(--color-hover);
-    --color-link-active: var(--color-focus);
+    --color-link-active: #1d4cb1;
 
     /* === Border / Divider === */
-    --color-border: #d1d5db;
+    --color-border: #4b5563;
 
     /* === Hover, Focus & Status === */
-    --color-hover: #dee4f9;
+    --color-hover: #3d4756;
     --color-focus: #60a5fa;
-    --color-shadow: #007bff1a;
+    --color-shadow: #007bff40;
+
     --color-error: #ef4444;
 
     --color-exam: #fe0d0d;
     --color-deadline: #ffee00;
 
     /* === Icons === */
-    --filter-icon: brightness(0) saturate(100%) invert(13%) sepia(9%) saturate(1768%) hue-rotate(182deg) brightness(96%) contrast(90%);
-    --filter-icon-hover: brightness(0) saturate(100%) invert(48%) sepia(86%) saturate(409%) hue-rotate(203deg) brightness(100%) contrast(103%);
-}
-
-
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        /* === Background Colors (Dark Theme) === */
-        --color-bg-1: #1e1e2f;
-        --color-bg-transparent: rgb(from var(--color-bg-1) r g b / 0.6);
-        --color-bg-2: #2d2d3e;
-        --color-surface: #3b3b4b;
-
-        /* === Header/ Footer === */
-        --color-bars: #3a3c55;
-
-
-        /* === Primary Colors (Blue Accent) === */
-        --color-primary: #3b82f6;
-        --color-primary-dark: #2563eb;
-
-        /* === Secondary Colors === */
-        --color-secondary: #8985FF;
-        --color-secondary-dark: #706dca;
-
-        /* === Foreground / Text Colors === */
-        --color-text: #e5e7eb;
-        --color-text-popup: #374151;
-
-        /* === Link Color === */
-        --color-link: var(--color-secondary);
-        --color-link-visited: var( --color-link);
-        --color-link-hover: var(--color-hover);
-        --color-link-active: #1d4cb1;
-
-        /* === Border / Divider === */
-        --color-border: #4b5563;
-
-        /* === Hover, Focus & Status === */
-        --color-hover: #3d4756;
-        --color-focus: #60a5fa;
-        --color-shadow: #007bff40;
-        
-        --color-error: #ef4444;
-
-        --color-exam: #fe0d0d;
-        --color-deadline: #ffee00;
-
-        /* === Icons === */
-        --filter-icon: brightness(0) saturate(100%) invert(97%) sepia(3%) saturate(200%) hue-rotate(183deg) brightness(99%) contrast(87%);
-        --filter-icon-hover: brightness(0) saturate(100%) invert(54%) sepia(95%) saturate(2123%) hue-rotate(212deg) brightness(100%) contrast(104%);
-    }
+    --filter-icon: brightness(0) saturate(100%) invert(97%) sepia(3%)
+      saturate(200%) hue-rotate(183deg) brightness(99%) contrast(87%);
+    --filter-icon-hover: brightness(0) saturate(100%) invert(54%) sepia(95%)
+      saturate(2123%) hue-rotate(212deg) brightness(100%) contrast(104%);
+  }
 }

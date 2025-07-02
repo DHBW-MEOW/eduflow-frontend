@@ -36,7 +36,7 @@
 }
 
 @media (max-width: 480px) {
-  .context-menu{
+  .context-menu {
     left: 40%;
   }
 }

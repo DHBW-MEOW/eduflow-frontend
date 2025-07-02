@@ -38,23 +38,23 @@ export interface EditHandles {
 }
 
 export type PopUpProps = {
-    isOpen: boolean
-    label: string;
-    children: React.ReactElement;
-    modulOptions?: string[];
-    topicOptions?: string[];
-    isAddButtonDisabled?: boolean;
-    onClickDiscard: () => void;
-    onClickAdd: () => void;
-}
+  isOpen: boolean;
+  label: string;
+  children: React.ReactElement;
+  modulOptions?: string[];
+  topicOptions?: string[];
+  isAddButtonDisabled?: boolean;
+  onClickDiscard: () => void;
+  onClickAdd: () => void;
+};
 
 export interface FormComponentProps<T> {
-    initialData?: Partial<T>;
-    onValidityChange: (isValid: boolean) => void;
+  initialData?: Partial<T>;
+  onValidityChange: (isValid: boolean) => void;
 }
 
 export interface FormDataAndValidity<T> {
-    data: T;
-    errors: Partial<Record<keyof T, string>>;
-    isValid: boolean;
+  data: T;
+  errors: Partial<Record<keyof T, string>>;
+  isValid: boolean;
 }

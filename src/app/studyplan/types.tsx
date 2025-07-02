@@ -1,52 +1,52 @@
 export type StudyGoalData = {
-    id: number;
-    topic_id: number;
-    deadline: string;
+  id: number;
+  topic_id: number;
+  deadline: string;
 };
 
 export interface StudyGoalsProps {
-    studygoals: StudyGoalData[];
-};
+  studygoals: StudyGoalData[];
+}
 
 export type CourseData = {
-    id: number;
-    name: string;
+  id: number;
+  name: string;
 };
 
 export type TopicData = {
-    id: number;
-    course_id: number;
-    name: string;
+  id: number;
+  course_id: number;
+  name: string;
 };
 
 export type ItemData = {
-    key: number;
-    course: string;
-    topic: string;
-    deadline: string;
+  key: number;
+  course: string;
+  topic: string;
+  deadline: string;
 };
 
 export interface ItemProps {
-    items: ItemData[];
-    limit?: number;
-};
+  items: ItemData[];
+  limit?: number;
+}
 
 export type ExamDateData = {
-    id: number;
-    date: string;
+  id: number;
+  date: string;
 };
 
 export interface ExamDateProps {
-    exams: ExamDateData[];
-};
+  exams: ExamDateData[];
+}
 
 export interface CalendarProps {
-    studygoals: StudyGoalsProps;
-    exams: ExamDateProps;
+  studygoals: StudyGoalsProps;
+  exams: ExamDateProps;
 }
 
 export interface StudyplanButtonProps {
-    popUpType: 'StudyGoal' | 'Exam' | null;
-    onClose: () => void;
-    onDataAdded: () => void;
+  popUpType: "StudyGoal" | "Exam" | null;
+  onClose: () => void;
+  onDataAdded: () => void;
 }

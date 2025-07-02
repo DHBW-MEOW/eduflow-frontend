@@ -1,4 +1,4 @@
-import "./LinkButton.css"
+import "./LinkButton.css";
 import { NavLink } from "react-router-dom";
 
 export interface LinkButtonProps {
@@ -7,14 +7,18 @@ export interface LinkButtonProps {
   link: string;
 }
 
-const LinkButton: React.FC<LinkButtonProps> = ({text, icon, link }) => {
+const LinkButton: React.FC<LinkButtonProps> = ({ text, icon, link }) => {
   return (
-    <NavLink to={link} className={({ isActive }) => 
-        isActive ? "linkButton active" : "linkButton"}>
+    <NavLink
+      to={link}
+      className={({ isActive }) =>
+        isActive ? "linkButton active" : "linkButton"
+      }
+    >
       <img src={"/" + icon} alt={text} />
       <p className="buttonText">{text}</p>
     </NavLink>
-  )
-}
+  );
+};
 
 export default LinkButton;

@@ -1,4 +1,4 @@
-import './ContextMenu.css'
+import "./ContextMenu.css";
 
 type Action = {
   icon: string;
@@ -14,12 +14,14 @@ export default function ContextMenu({ actions }: ContextMenuProps) {
   return (
     <div className="context-menu">
       {actions.map((action, i) => (
-        <button key={i} onClick={(event) => {
-            event.stopPropagation(); 
+        <button
+          key={i}
+          onClick={(event) => {
+            event.stopPropagation();
             action.onClick();
           }}
         >
-          <div className='action-icon'>{action.icon}</div> {action.label}
+          <div className="action-icon">{action.icon}</div> {action.label}
         </button>
       ))}
     </div>

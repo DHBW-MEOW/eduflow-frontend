@@ -10,11 +10,16 @@ type GridProps = {
   onClick: (id: number) => void;
 };
 
-export function Grid({ items, setItems, onRename, onDelete, onClick }: GridProps) {
-
+export function Grid({
+  items,
+  setItems,
+  onRename,
+  onDelete,
+  onClick,
+}: GridProps) {
   const handleRename = (id: number, newTitle: string) => {
     setItems((prev) =>
-      prev.map((item) => (item.id === id ? { ...item, name: newTitle } : item))
+      prev.map((item) => (item.id === id ? { ...item, name: newTitle } : item)),
     );
     onRename(id, newTitle);
   };
@@ -35,8 +40,8 @@ export function Grid({ items, setItems, onRename, onDelete, onClick }: GridProps
           key={item.id}
           data={item}
           onDelete={handleDelete}
-          onRename={handleRename} 
-          onClick={handleClick}        
+          onRename={handleRename}
+          onClick={handleClick}
         />
       ))}
     </div>
