@@ -24,7 +24,6 @@ export const createFetcher = (isLoaded: boolean, isAuthenticated: boolean | null
           ] as T);
         }
         const api = await fetchAPIURL();
-        console.log("Starting Fetch")
         const response = await fetch(`${api}/${endpoint}`, {
             method,
             headers: {

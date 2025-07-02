@@ -5,7 +5,7 @@ function Quicklinks() {
     return (
         <div className='quicklinks-container'>
             <div className='learning-container'>
-                <h3>Materialien</h3>
+                <h3 id='materials-headline'>Materialien</h3>
                 <a href="https://www.studysmarter.de/">StudySmarter</a>
                 <a href="https://app.simpleclub.com/">SimpleClub</a>
                 <a href="https://studyflix.de/">StudyFlix</a>
@@ -15,7 +15,7 @@ function Quicklinks() {
                 <a href="https://apps.ankiweb.net/">Anki</a>
             </div>
             <div className='dhbw-container'>
-                <h3>DHBW</h3>
+                <h3 id='dhbw-headline'>DHBW</h3>
                 <a href="https://www.karlsruhe.dhbw.de/inf/studieninhalte-profil.html">Studieninhalte</a>
                 <a href="https://moodle.dhbw.de/">Moodle</a>
                 <a href="https://dualis.dhbw.de/">Dualis</a>

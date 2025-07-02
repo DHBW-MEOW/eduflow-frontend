@@ -57,7 +57,7 @@ function Studyplan() {
     <div className="studyplan-container">
         <div className='studyplan-left-items'>
             <div className='studyplan-header'>
-                <h2>Kalender</h2>
+                <h2 id='calendar-headline'>Kalender</h2>
                 <div className='studyplan-createButtons'>
                     <OptionButton
                         label= '+ Lernziel erstellen'
@@ -78,7 +78,7 @@ function Studyplan() {
         </div>
         
         <div className='studyplan-right-items'>
-            <h2>Meine Lernziele</h2>
+            <h2 id='studygoals-headline'>Meine Lernziele</h2>
             <div className="studyplan-studygoals">
                 <StudyGoals items={items}/>
             </div>

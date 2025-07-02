@@ -83,7 +83,7 @@ export function Box({ data, onDelete, onRename, onClick }: BoxProps) {
     <div className="box" onClick={handleClick} ref={boxRef}>
       <div>
         <div className="header-container">
-            <h3 className="header-child">{data.name}</h3>
+            <h3 id={data.name + '-headline'} className="header-child">{data.name}</h3>
         </div>
         <button className="menu-button" onClick={(event) => {
             event.stopPropagation();

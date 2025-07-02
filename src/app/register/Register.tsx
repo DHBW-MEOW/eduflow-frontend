@@ -83,7 +83,7 @@ export default function Register() {
           <LinkButton link={'/'} text={''} icon={'circle-arrow-left-solid.svg'}/>
       </div>
       
-      <h1>Registrierung</h1>
+      <h1 id="register-headline">Registrierung</h1>
 
       { !successfullyRegistered &&
         <form className="register-form" onSubmit={(e) => {
