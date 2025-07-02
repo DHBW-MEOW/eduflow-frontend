@@ -35,7 +35,7 @@ export default function Home() {
   return (
     <div className="home-container">
       <div className='home-left-items'>
-        <h2>Meine Lernziele</h2>
+        <h2 id='studygoals-headline-home'>Meine Lernziele</h2>
         <div className="home-studygoals">
           <StudyGoals items={items} limit={4}/>
         </div>
@@ -43,7 +43,7 @@ export default function Home() {
       </div>
 
       <div className='home-right-items'>
-        <h2>Quicklinks</h2>
+        <h2 id='quicklinks-headline'>Quicklinks</h2>
         <div className='home-quicklinks'>
           <Quicklinks></Quicklinks>
         </div>

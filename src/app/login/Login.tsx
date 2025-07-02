@@ -48,7 +48,7 @@ export default function Login() {
       <div className="login-linkbutton">
           <LinkButton link={'/'} text={''} icon={'circle-arrow-left-solid.svg'}/>
       </div>
-      <h1>Login</h1>
+      <h1 id="login-headline">Login</h1>
       
       <form className="login-form" onSubmit={(e) => {
         // Prevent default form submission reloading the page

@@ -25,7 +25,7 @@ function Header({
     <div className="header">
       <div className="headerLeft">
         {leftButton.on && <LinkButton link={leftButton.link} text={leftButton.text} icon={leftButton.icon}/>}
-        <h1>{text}</h1>
+        <h1 id={text + '-headline'}>{text}</h1>
       </div>
       <div className="headerRight">
         {rightButton.on && <LinkButton link={rightButton.link} text={rightButton.text} icon={rightButton.icon}/>}
