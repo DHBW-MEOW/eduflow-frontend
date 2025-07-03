@@ -23,7 +23,7 @@ function AppLayout() {
     icon: "Logo.svg",
     link: "/home",
   });
-  const [textState, setTextState] = useState("Hello User!");
+  const [textState, setTextState] = useState("Hallo User!");
 
   const location = useLocation();
   useEffect(() => {
@@ -34,7 +34,7 @@ function AppLayout() {
         icon: "Logo.svg",
         link: "/home",
       });
-      setTextState("Hello " + username + "!");
+      setTextState("Hallo " + username + "!");
     }
     if (location.pathname === "/studyplan") {
       setLeftButtonState({
