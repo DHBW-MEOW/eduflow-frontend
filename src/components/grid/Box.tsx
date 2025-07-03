@@ -1,10 +1,14 @@
-import { useEffect, useRef, useState } from 'react';
-import ContextMenu from '../contextMenu/ContextMenu';
-import PopUpDelete from '../popUpDelete/PopUpDelete';
-import PopUpCreate from '../popUpCreate/PopUpCreate';
-import Rename from '../popUpCreate/popUpTypes/Rename';
-import type { FormDataAndValidity, RenameData, RenameHandles } from '../popUpCreate/types';
-import './Box.css'
+import { useEffect, useRef, useState } from "react";
+import ContextMenu from "../contextMenu/ContextMenu";
+import PopUpDelete from "../popUpDelete/PopUpDelete";
+import PopUpCreate from "../popUpCreate/PopUpCreate";
+import Rename from "../popUpCreate/popUpTypes/Rename";
+import type {
+  FormDataAndValidity,
+  RenameData,
+  RenameHandles,
+} from "../popUpCreate/types";
+import "./Box.css";
 
 export type BoxData = {
   id: number;
@@ -27,7 +31,8 @@ export function Box({ data, onDelete, onRename, onClick }: BoxProps) {
 
   const handleRename = () => {
     if (renameRef.current) {
-      const result: FormDataAndValidity<RenameData> = renameRef.current.getFormData(); 
+      const result: FormDataAndValidity<RenameData> =
+        renameRef.current.getFormData();
       if (result.isValid) {
         onRename(data.id, result.data.title);
         closePopupRename();
@@ -71,11 +76,11 @@ export function Box({ data, onDelete, onRename, onClick }: BoxProps) {
     }
 
     if (menuOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener("mousedown", handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [menuOpen]);
 
@@ -83,13 +88,19 @@ export function Box({ data, onDelete, onRename, onClick }: BoxProps) {
     <div className="box" onClick={handleClick} ref={boxRef}>
       <div>
         <div className="header-container">
-            <h3 id={data.name + '-headline'} className="header-child">{data.name}</h3>
+          <h3 id={data.name + "-headline"} className="header-child">
+            {data.name}
+          </h3>
         </div>
-        <button className="menu-button" onClick={(event) => {
+        <button
+          className="menu-button"
+          onClick={(event) => {
             event.stopPropagation();
             setMenuOpen(!menuOpen);
           }}
-        >⋮</button>
+        >
+          ⋮
+        </button>
       </div>
 
       {menuOpen && (
@@ -106,7 +117,8 @@ export function Box({ data, onDelete, onRename, onClick }: BoxProps) {
           isOpen={popupDeleteOpen}
           content={
             <>
-              Möchten Sie das Element "{data.name}" wirklich löschen?<br />
+              Möchten Sie das Element "{data.name}" wirklich löschen?
+              <br />
               Diese Aktion kann nicht mehr rückgängig gemacht werden.
             </>
           }
@@ -115,9 +127,9 @@ export function Box({ data, onDelete, onRename, onClick }: BoxProps) {
         />
       }
       {
-        <PopUpCreate 
-          isOpen={popupRenameOpen} 
-          label={"\"" + data.name + "\" umbenennen"} 
+        <PopUpCreate
+          isOpen={popupRenameOpen}
+          label={'"' + data.name + '" umbenennen'}
           onClickDiscard={closePopupRename}
           onClickAdd={handleRename}
         >

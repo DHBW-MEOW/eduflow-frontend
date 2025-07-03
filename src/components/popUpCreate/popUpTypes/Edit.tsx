@@ -1,30 +1,30 @@
 import React, { useState, useImperativeHandle, forwardRef } from "react";
 import type { EditData, EditHandles } from "../types";
 import InputDetails from "../inputOptions/InputDetails";
-import './popUpTypes.css';
+import "./popUpTypes.css";
 
 interface EditProps {
-  initialData?: EditData
+  initialData?: EditData;
 }
 
 const Edit = forwardRef<EditHandles, EditProps>(({ initialData }, ref) => {
   const [formData, setFormData] = useState<EditData>({
-    details: initialData?.details || '',
+    details: initialData?.details || "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData(prevData => ({
+    setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
   };
 
   useImperativeHandle(ref, () => ({
-      getFormData: () => {
+    getFormData: () => {
       return formData;
     },
-    }));
+  }));
 
   return (
     <div className="popup-form">

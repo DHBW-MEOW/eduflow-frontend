@@ -1,4 +1,4 @@
-.notFoundPage{
+.notFoundPage {
   display: flex;
   flex: content;
   flex-direction: column;
@@ -6,7 +6,7 @@
   align-items: center;
   height: 100%;
 }
-.errorText{
+.errorText {
   color: var(--color-text);
   padding: 5vw;
   font-size: clamp(2px, 5vh, 50px);
@@ -22,7 +22,7 @@
   text-align: center;
 }
 
-.errorNumber{
+.errorNumber {
   margin: 0;
 }
 .errorImage {
@@ -35,21 +35,21 @@
   filter: var(--filter-icon-hover);
 }
 
-.homeButton{
+.homeButton {
   min-width: 44px;
   min-height: 44px;
 }
 @media (min-width: 480px) {
-  .errorText{
+  .errorText {
     text-align: center;
   }
-  .homeButton{
-    transform-origin:left;
+  .homeButton {
+    transform-origin: left;
   }
-  .notFoundPage{
+  .notFoundPage {
     flex-direction: row;
   }
-  .errorImage{
+  .errorImage {
     width: 30vw;
   }
 }

@@ -1,65 +1,65 @@
 .profile-component {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 
-    border-radius: 8px;
-    border: 1px solid var(--color-border);
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
 
-    box-sizing: border-box;
-    background-color: var(--color-bg-2);
+  box-sizing: border-box;
+  background-color: var(--color-bg-2);
 
-    max-width: 500px;
-    width: 96%;
-    padding: 2%;
+  max-width: 500px;
+  width: 96%;
+  padding: 2%;
 
-    margin-left: auto;
-    margin-right: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .profile-component hr {
-    color: var(--color-text);
+  color: var(--color-text);
 
-    width: 99%;
-    margin-top: 2%;
-    margin-bottom: 3%;
+  width: 99%;
+  margin-top: 2%;
+  margin-bottom: 3%;
 }
 
 .user-div {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
 
-    color: var(--color-text);
+  color: var(--color-text);
 
-    width: 100%;
-    margin: 1%;
+  width: 100%;
+  margin: 1%;
 }
 
 .user-div span:first-child {
-    margin-right: 10px;
-    white-space: nowrap;
+  margin-right: 10px;
+  white-space: nowrap;
 }
 
 .user-div span:last-child {
-    text-align: right;
+  text-align: right;
 }
 
 .profile-button {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    min-width: 100px;
-    max-width: 200px;
-    width: 20%;
+  min-width: 100px;
+  max-width: 200px;
+  width: 20%;
 }
 
 @media (min-width: 768px) {
-    .profile-component {
-        min-width: 80%;
-    }
+  .profile-component {
+    min-width: 80%;
+  }
 
-    .user-div {
-        margin: 0;
-    }
+  .user-div {
+    margin: 0;
+  }
 }

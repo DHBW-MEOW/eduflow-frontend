@@ -70,7 +70,6 @@
 .popup-close-button:hover {
   color: var(--color-text);
   background-color: var(--color-hover);
-  
 }
 
 .popup-buttons {

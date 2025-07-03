@@ -1,9 +1,9 @@
-import { useRef, useState } from 'react';
-import PopUpCreate from '../popUpCreate/PopUpCreate';
-import Edit from '../popUpCreate/popUpTypes/Edit';
-import type { EditData, EditHandles } from '../popUpCreate/types';
-import './Detail.css'
-import OptionButton from '../optionButtons/OptionButton';
+import { useRef, useState } from "react";
+import PopUpCreate from "../popUpCreate/PopUpCreate";
+import Edit from "../popUpCreate/popUpTypes/Edit";
+import type { EditData, EditHandles } from "../popUpCreate/types";
+import "./Detail.css";
+import OptionButton from "../optionButtons/OptionButton";
 
 export interface DetailBaseData<T = any> {
   id: number;
@@ -17,7 +17,11 @@ export type DetailProps<T extends DetailBaseData> = {
   editable?: boolean;
 };
 
-export function Detail<T extends DetailBaseData>({ data, onEdit, editable = true }: DetailProps<T>) {
+export function Detail<T extends DetailBaseData>({
+  data,
+  onEdit,
+  editable = true,
+}: DetailProps<T>) {
   const [popupOpen, setPopupOpen] = useState(false);
   const renameRef = useRef<EditHandles>(null);
 
@@ -34,33 +38,30 @@ export function Detail<T extends DetailBaseData>({ data, onEdit, editable = true
 
   return (
     <div className="detail">
-      <div className='detail-header'>
-        <h2 id={data.name+'-headline'}>{data.name}</h2>
-        {editable == true &&
-          <div className='detail-edit'>
+      <div className="detail-header">
+        <h2 id={data.name + "-headline"}>{data.name}</h2>
+        {editable == true && (
+          <div className="detail-edit">
             <OptionButton
-              label='Bearbeiten'
+              label="Bearbeiten"
               isHighlighted={true}
               onClick={openPopUp}
             />
           </div>
-          
-        }
+        )}
       </div>
-      <div className='detail-content'>
-        {
-          data.value.split('\n').map((line: string, index: string) => (
-            <span key={index}>
-              {line}
-              <br />
-            </span>
-          ))
-        }
+      <div className="detail-content">
+        {data.value.split("\n").map((line: string, index: string) => (
+          <span key={index}>
+            {line}
+            <br />
+          </span>
+        ))}
       </div>
 
-      <PopUpCreate 
-        isOpen={popupOpen} 
-        label={"\"" + data.name + "\" editieren"} 
+      <PopUpCreate
+        isOpen={popupOpen}
+        label={'"' + data.name + '" editieren'}
         onClickDiscard={closePopup}
         onClickAdd={handleEdit}
       >

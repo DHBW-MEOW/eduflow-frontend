@@ -1,51 +1,58 @@
-import React, { useState, useImperativeHandle, forwardRef, useEffect } from "react";
+import React, {
+  useState,
+  useImperativeHandle,
+  forwardRef,
+  useEffect,
+} from "react";
 import type { RenameData, RenameHandles } from "../types";
-import InputField from '../inputOptions/InputField';
+import InputField from "../inputOptions/InputField";
 import { validateTitle } from "../utils/validateTitle";
-import './popUpTypes.css';
+import "./popUpTypes.css";
 
 interface RenameProps {
-  initialData?: RenameData
+  initialData?: RenameData;
 }
 
-const Rename = forwardRef<RenameHandles, RenameProps>(({ initialData }, ref) => {
-  const [formData, setFormData] = useState<RenameData>({
-    title: initialData?.title || '',
-  });
+const Rename = forwardRef<RenameHandles, RenameProps>(
+  ({ initialData }, ref) => {
+    const [formData, setFormData] = useState<RenameData>({
+      title: initialData?.title || "",
+    });
 
-  const [errors, setErrors] = useState<Partial<Record<keyof RenameData, string>>>({});
-  const [hasAttemptedSubmit, setHasAttemptedSubmit] = useState(false);
-  
-  const validate = (data: RenameData) => {
-    let newErrors: Partial<Record<keyof RenameData, string>> = {};
+    const [errors, setErrors] = useState<
+      Partial<Record<keyof RenameData, string>>
+    >({});
+    const [hasAttemptedSubmit, setHasAttemptedSubmit] = useState(false);
 
-    const titleError = validateTitle(data.title);
-    if (titleError) 
-      newErrors.title = titleError;
+    const validate = (data: RenameData) => {
+      let newErrors: Partial<Record<keyof RenameData, string>> = {};
 
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;;
-  };
-  
-  useEffect(() => {
+      const titleError = validateTitle(data.title);
+      if (titleError) newErrors.title = titleError;
+
+      setErrors(newErrors);
+      return Object.keys(newErrors).length === 0;
+    };
+
+    useEffect(() => {
       if (hasAttemptedSubmit) {
-          validate(formData);
+        validate(formData);
       }
-  }, [formData, hasAttemptedSubmit]);
+    }, [formData, hasAttemptedSubmit]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData(prevData => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = e.target;
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    };
 
-  useImperativeHandle(ref, () => ({
+    useImperativeHandle(ref, () => ({
       getFormData: () => {
         setHasAttemptedSubmit(true);
         const isValid = validate(formData);
-  
+
         return {
           data: formData,
           errors: errors,
@@ -54,18 +61,19 @@ const Rename = forwardRef<RenameHandles, RenameProps>(({ initialData }, ref) => 
       },
     }));
 
-  return (
-    <div className="popup-form">
-      <InputField
-        label="Umbenennen"
-        name="title"
-        value={formData.title}
-        isInvalid={!!errors.title}
-        errorMessage={errors.title}
-        onChange={handleChange}
-      />
-    </div>
-  );
-});
+    return (
+      <div className="popup-form">
+        <InputField
+          label="Umbenennen"
+          name="title"
+          value={formData.title}
+          isInvalid={!!errors.title}
+          errorMessage={errors.title}
+          onChange={handleChange}
+        />
+      </div>
+    );
+  },
+);
 
 export default Rename;

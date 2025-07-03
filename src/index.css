@@ -1,34 +1,41 @@
 @font-face {
-  font-family: 'SourceSans3';
-  src: local('SourceSans3'), url(fonts/SourceSans3-VariableFont_wght.ttf) format('truetype');
+  font-family: "SourceSans3";
+  src:
+    local("SourceSans3"),
+    url(fonts/SourceSans3-VariableFont_wght.ttf) format("truetype");
 }
 
 :root {
-    background-color: var(--color-bg-1);
+  background-color: var(--color-bg-1);
 }
 
-*{
-    color: var(--color-text);
-    font-family: 'SourceSans3', sans-serif;
+* {
+  color: var(--color-text);
+  font-family: "SourceSans3", sans-serif;
 }
 
-h1, h2, h3, h4, h4, h6{
-    color: var(--color-text);
+h1,
+h2,
+h3,
+h4,
+h4,
+h6 {
+  color: var(--color-text);
 }
 
 a:link {
-    color: var(--color-link);
+  color: var(--color-link);
 }
 
 a:visited {
-    color: var(--color-link-visited);
+  color: var(--color-link-visited);
 }
 
 a:hover {
-    color: var(--color-link-hover);
+  color: var(--color-link-hover);
 }
 
 a:active,
 a:visited:active {
-    color: var(--color-link-active);
+  color: var(--color-link-active);
 }

@@ -6,25 +6,30 @@ import "../../components/popUpCreate/inputOptions/InputStyle.css";
 import { useState } from "react";
 import { useAuth } from "../../app/AuthContext";
 
-
 export default function Login() {
   const [localUsername, setLocalUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isInvalid, setIsInvalid] = useState(false);
-  const [passwordValidity, setPasswordValidity] = useState({ valid: true, message: "" });
-  const [usernameValidity, setUsernameValidity] = useState({ valid: true, message: "" });
+  const [passwordValidity, setPasswordValidity] = useState({
+    valid: true,
+    message: "",
+  });
+  const [usernameValidity, setUsernameValidity] = useState({
+    valid: true,
+    message: "",
+  });
 
-  const { setIsAuthenticated, unsafeFetchFromBackend, setToken, setUsername } = useAuth()
+  const { setIsAuthenticated, unsafeFetchFromBackend, setToken, setUsername } =
+    useAuth();
 
   const handleLogin = async (username: string, password: string) => {
-
-   const response = await unsafeFetchFromBackend({
+    const response = await unsafeFetchFromBackend({
       method: "POST",
       endpoint: "auth/login",
       body: {
         username: username,
-        password: password
-      }
+        password: password,
+      },
     });
     if (response.status === 200) {
       const data = await response.json();
@@ -34,69 +39,89 @@ export default function Login() {
       setToken(loginToken);
       setUsername(username);
       setIsAuthenticated(true);
-    }else if(response.status === 401){
+    } else if (response.status === 401) {
       setIsInvalid(true);
       username = "";
       password = "";
-    }else {
-      throw new Error(`Error when calling (POST auth/login): ${response.status}`);
+    } else {
+      throw new Error(
+        `Error when calling (POST auth/login): ${response.status}`,
+      );
     }
   };
 
   return (
     <div className="loginPage">
       <div className="login-linkbutton">
-          <LinkButton link={'/'} text={''} icon={'circle-arrow-left-solid.svg'}/>
+        <LinkButton link={"/"} text={""} icon={"circle-arrow-left-solid.svg"} />
       </div>
       <h1 id="login-headline">Login</h1>
-      
-      <form className="login-form" onSubmit={(e) => {
-        // Prevent default form submission reloading the page
-        e.preventDefault();
-        if (!(localUsername) && !(password)) {
-          setUsernameValidity({ valid: false, message: "Bitte geben Sie einen Benutzernamen ein." });
-          setPasswordValidity({ valid: false, message: "Bitte geben Sie ein Kennwort ein." });
-          setIsInvalid(false);
-        } else if(!(localUsername) && password) {
-          setUsernameValidity({ valid: false, message: "Bitte geben Sie einen Benutzernamen ein." });
-          setPasswordValidity({ valid: true, message: "" });
-          setIsInvalid(false);
-        } else if(localUsername && !(password)) {
-          setUsernameValidity({ valid: true, message: "" });
-          setPasswordValidity({ valid: false, message: "Bitte geben Sie ein Kennwort ein." });
-          setIsInvalid(false);
-        } else {
-          setUsernameValidity({ valid: true, message: "" });
-          setPasswordValidity({ valid: true, message: "" });
-          setIsInvalid(false);
-          handleLogin(localUsername, password);
-        }
-      }
-      }>
+
+      <form
+        className="login-form"
+        onSubmit={(e) => {
+          // Prevent default form submission reloading the page
+          e.preventDefault();
+          if (!localUsername && !password) {
+            setUsernameValidity({
+              valid: false,
+              message: "Bitte geben Sie einen Benutzernamen ein.",
+            });
+            setPasswordValidity({
+              valid: false,
+              message: "Bitte geben Sie ein Kennwort ein.",
+            });
+            setIsInvalid(false);
+          } else if (!localUsername && password) {
+            setUsernameValidity({
+              valid: false,
+              message: "Bitte geben Sie einen Benutzernamen ein.",
+            });
+            setPasswordValidity({ valid: true, message: "" });
+            setIsInvalid(false);
+          } else if (localUsername && !password) {
+            setUsernameValidity({ valid: true, message: "" });
+            setPasswordValidity({
+              valid: false,
+              message: "Bitte geben Sie ein Kennwort ein.",
+            });
+            setIsInvalid(false);
+          } else {
+            setUsernameValidity({ valid: true, message: "" });
+            setPasswordValidity({ valid: true, message: "" });
+            setIsInvalid(false);
+            handleLogin(localUsername, password);
+          }
+        }}
+      >
         <div className="login-inputfields">
-            <InputField
-              label="Benutzername"
-              name="username"
-              value={localUsername}
-              isInvalid={(!usernameValidity.valid) || isInvalid}
-              errorMessage={usernameValidity.message}
-              onChange={(e) => setLocalUsername(e.target.value)}
+          <InputField
+            label="Benutzername"
+            name="username"
+            value={localUsername}
+            isInvalid={!usernameValidity.valid || isInvalid}
+            errorMessage={usernameValidity.message}
+            onChange={(e) => setLocalUsername(e.target.value)}
           />
           <InputField
-              label="Kennwort"
-              name="password"
-              value={password} 
-              isPassword={true}
-              isInvalid={(!passwordValidity.valid) || isInvalid}
-              errorMessage={passwordValidity.message}
-              onChange={(e) => setPassword(e.target.value)}
+            label="Kennwort"
+            name="password"
+            value={password}
+            isPassword={true}
+            isInvalid={!passwordValidity.valid || isInvalid}
+            errorMessage={passwordValidity.message}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        
+
         <div className="error-message-placeholder">
-          {isInvalid && <span className="error-message">Benutzername oder Kennwort ungültig</span>}
+          {isInvalid && (
+            <span className="error-message">
+              Benutzername oder Kennwort ungültig
+            </span>
+          )}
         </div>
-        
+
         <div className="login-submit">
           <OptionButton
             label="Anmelden"
@@ -107,8 +132,8 @@ export default function Login() {
       </form>
       <div className="registerLink">
         <span>Sie haben noch keinen Account? </span>
-        <a href="/register">Registrieren</a>  
+        <a href="/register">Registrieren</a>
       </div>
     </div>
-  )
+  );
 }

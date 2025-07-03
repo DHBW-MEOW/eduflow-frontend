@@ -1,4 +1,4 @@
-button{
+button {
   min-width: 44px;
   min-height: 44px;
 
@@ -22,7 +22,6 @@ button:focus,
 button:focus-visible {
   outline: 4px auto var(--color-focus);
 }
-
 
 .default-button {
   background-color: var(--color-bg-2);

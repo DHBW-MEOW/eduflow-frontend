@@ -41,7 +41,7 @@
     width: 70px;
     border-top: none;
     border-right: 1px solid var(--color-border);
-    
+
     grid-row: 1 / span 2;
   }
 

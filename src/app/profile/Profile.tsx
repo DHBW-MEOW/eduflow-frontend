@@ -2,19 +2,25 @@ import { useNavigate } from "react-router-dom";
 import { logout } from "../../api/logout";
 import { useAuth } from "../../app/AuthContext";
 import OptionButton from "../../components/optionButtons/OptionButton";
-import './Profile.css'
+import "./Profile.css";
 
 export default function Profile() {
   const navigate = useNavigate();
-  const { unsafeFetchFromBackend, setIsAuthenticated, setToken, username, setUsername } = useAuth();
+  const {
+    unsafeFetchFromBackend,
+    setIsAuthenticated,
+    setToken,
+    username,
+    setUsername,
+  } = useAuth();
 
   const logoutHandel = () => {
     logout(unsafeFetchFromBackend);
     setToken(null);
     setUsername("");
     setIsAuthenticated(false);
-    navigate('/');
-  }
+    navigate("/");
+  };
 
   return (
     <div className="profile-component">
@@ -31,5 +37,5 @@ export default function Profile() {
         />
       </div>
     </div>
-  )
+  );
 }
