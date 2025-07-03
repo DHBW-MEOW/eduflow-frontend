@@ -108,7 +108,7 @@ function TopicPage(): JSX.Element {
       try {
         const [dataTopics, dataExams, dataModule] = await Promise.all([
           fetchFromBackend<
-            ({ id: number; name: string; details: string } | string)[]
+            { id: number; name: string; details: string }[]
           >({
             method: "GET",
             endpoint: `data/topic?course_id=${moduleId}`,
@@ -117,7 +117,7 @@ function TopicPage(): JSX.Element {
             method: "GET",
             endpoint: `data/exam?course_id=${moduleId}`,
           }),
-          fetchFromBackend<({ id: number; name: string } | string)[]>({
+          fetchFromBackend<{ id: number; name: string }[]>({
             method: "GET",
             endpoint: `data/course?id=${moduleId}`,
           }),

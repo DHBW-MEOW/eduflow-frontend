@@ -1,5 +1,3 @@
-import type { NavigateFunction } from "react-router";
-
 interface FetchOptions {
   method: "GET" | "POST" | "DELETE";
   endpoint: string;
@@ -20,7 +18,6 @@ export const createFetcher = (
   isLoaded: boolean,
   isAuthenticated: boolean | null,
   token: string | null,
-  navigate: NavigateFunction,
 ) => {
   async function fetchFromBackend<T>({
     method,
@@ -53,7 +50,7 @@ export const createFetcher = (
     method,
     endpoint,
     body,
-  }: FetchOptions): Promise<T> {
+  }: FetchOptions): Promise<any> {
     const api = await fetchAPIURL();
 
     const response = await fetch(`${api}/${endpoint}`, {

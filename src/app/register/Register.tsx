@@ -21,13 +21,11 @@ export default function Register() {
     message: "",
   });
   const [userTaken, setUserTaken] = useState(false);
-  const [successfullyRegistered, setSuccessfullyRegistered] = useState(false);
+  const [successfullyRegistered] = useState(false);
 
   const {
-    token,
     setToken,
     setIsAuthenticated,
-    fetchFromBackend,
     unsafeFetchFromBackend,
     setUsername,
   } = useAuth();

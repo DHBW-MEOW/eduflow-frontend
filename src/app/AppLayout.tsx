@@ -9,9 +9,9 @@ import { useEffect, useState } from "react";
 import { useAuth } from "./AuthContext.tsx";
 
 function AppLayout() {
-  const { token, username, isAuthenticated, checkAuthentication, isLoaded } =
+  const { username } =
     useAuth();
-  const [rightButtonState, setRightButtonState] = useState({
+  const [rightButtonState] = useState({
     on: true,
     text: "",
     icon: "user-regular.svg",

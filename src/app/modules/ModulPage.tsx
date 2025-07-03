@@ -89,7 +89,7 @@ function ModulPage() {
     const loadData = async () => {
       try {
         const data = await fetchFromBackend<
-          ({ id: number; name: string; details: string } | string)[]
+          { id: number; name: string; details: string }[]
         >({
           method: "GET",
           endpoint: "data/course",

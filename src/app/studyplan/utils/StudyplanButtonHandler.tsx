@@ -38,7 +38,7 @@ export const StudyplanButtonHandler = ({
   );
   const [topics, setTopics] = useState<TopicData[]>([]);
   const [selectedModule, setSelectedModule] = useState<string | null>(null);
-  const [isFormValid, setIsFormValid] = useState(false);
+  const [, setIsFormValid] = useState(false);
   const [isDisabled, setIsDisbled] = useState(false);
 
   const isLearningPlanPopUpOpen = popUpType === "StudyGoal";

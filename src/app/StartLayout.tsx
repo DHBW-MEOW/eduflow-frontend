@@ -3,17 +3,15 @@ import Header from "../components/header/Header.tsx";
 import "../styles.css";
 
 import { useState } from "react";
-import { useAuth } from "./AuthContext.tsx";
 
 function StartLayout() {
-  const { isAuthenticated, checkAuthentication, isLoaded } = useAuth();
-  const [leftButtonState, setLeftButtonState] = useState({
+  const [leftButtonState] = useState({
     on: true,
     text: "",
     icon: "Logo.svg",
     link: "/",
   });
-  const [textState, setTextState] = useState("EduFlow");
+  const [textState] = useState("EduFlow");
 
   return (
     <div className="startLayout">

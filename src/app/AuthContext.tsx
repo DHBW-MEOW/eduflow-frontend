@@ -39,7 +39,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   );
 
   const { fetchFromBackend, unsafeFetchFromBackend } = useMemo(
-    () => createFetcher(isLoaded, isAuthenticated, token, navigate),
+    () => createFetcher(isLoaded, isAuthenticated, token),
     [token, navigate, isAuthenticated],
   ); // Maybe add isLoaded but prob. not needed because it only changes when token also changes from null to some value
 
